@@ -1,0 +1,44 @@
+version: "3.1"
+    
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - repeat_phone
+  - phone
+
+entities:
+  - number
+
+slots:
+  phone:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_ask_phone:
+  - text: "can i get your phone number please?"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+actions:
+  - action_say_phone
