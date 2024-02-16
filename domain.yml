@@ -8,14 +8,25 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
-  - repeat_phone
-  - phone
+  - saluer
+  - au_revoir
+  - affirmer
+  - nier
+  - humeur_super
+  - humeur_pas_contente
+  - défi_du_bot
+  - Reference 
+  - Fournisseur
+  - Date
+  - Montant
+  - Etat
+  - Facture
 
 entities:
   - number
 
 slots:
-  phone:
+  Montant:
     type: text
     influence_conversation: true
     mappings:
@@ -26,8 +37,17 @@ responses:
   utter_greet:
   - text: "Hey! How are you?"
 
-  utter_ask_phone:
-  - text: "can i get your phone number please?"
+
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
 
   utter_goodbye:
   - text: "Bye"
@@ -36,9 +56,37 @@ responses:
   - text: "I am a bot, powered by Rasa."
 
 
+  utter_saluer:
+  - text: "Salut ! Comment vas-tu ?"
+
+  utter_remonter_moral:
+  - text: "Voici quelque chose pour te remonter le moral :"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_est_ce_que_ca_aidé:
+  - text: "Est-ce que cela t'a aidé ?"
+
+  utter_heureux:
+  - text: "Super, continue comme ça !"
+
+  utter_au_revoir:
+  - text: "Au revoir"
+
+  utter_bot:
+  - text: "Je suis un bot, alimenté par Rasa."
+
+  utter_Reference:
+  - text: "la reference pour le fornisseur {Fournisseur} est {Reference}."
+  - text: "le code du fournisseur pour cette facture est {Facture}."
+  - text: "le numero de reference pour cette facture est {Facture}."
+  - text: "le numero de Fournisseur pour cette facture est {Facture}."
+
+  utter_montant:
+  - text: "Le montant de la facture {facture} est de {montant}."
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 
 actions:
-  - action_say_phone
+  - action_obtenir_montant

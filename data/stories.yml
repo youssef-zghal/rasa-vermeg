@@ -1,16 +1,14 @@
-
+version: "3.1"
 
 stories:
 - story: happy path
   steps:
-  - intent: greet
-  - action: utter_ask_phone
-  - intent: phone
+  - intent: Montant
     entities:
     - number: 7896541230
   - slot_was_set:
-    - phone: 9874561230
-  - action: action_say_phone
+    - Montant: 9874561230
+  - action: action_obtenir_montant
 
 
 

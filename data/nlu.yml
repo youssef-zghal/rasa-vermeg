@@ -1,5 +1,5 @@
+version: "3.1"
 
- 
 nlu:
 - intent: greet
   examples: |
@@ -90,12 +90,217 @@ nlu:
     - am I talking to a bot?
     - am I talking to a human?
 
-- intent: phone
+- intent: saluer
   examples: |
-    - [7559854598](number)
-    - this is my number [2365894561](number)
-    - here you go [9874562159](number)
-    - my phone number is [1234569870](number)
+    - salut
+    - bonjour
+    - coucou
+    - bonjour là
+    - bon matin
+    - bonsoir
+    - moin
+    - salut toi
+    - allons-y
+    - salut mec
+    - bonmatin
+    - bonsoir
+    - bon après-midi
+
+- intent: au_revoir
+  examples: |
+    - à plus
+    - au revoir
+    - à bientôt
+    - bonne nuit
+    - bye
+    - goodbye
+    - passe une bonne journée
+    - à la prochaine
+    - bye bye
+    - à plus tard
+
+- intent: affirmer
+  examples: |
+    - oui
+    - ouais
+    - en effet
+    - bien sûr
+    - ça me semble bien
+    - correct
+
+- intent: nier
+  examples: |
+    - non
+    - jamais
+    - je ne pense pas
+    - je n'aime pas ça
+    - pas du tout
+    - aucune chance
+
+- intent: humeur_super
+  examples: |
+    - parfait
+    - super
+    - incroyable
+    - je me sens comme un roi
+    - merveilleux
+    - je me sens très bien
+    - je vais bien
+    - je suis incroyable
+    - je vais sauver le monde
+    - super enthousiaste
+    - extrêmement bien
+    - tellement parfait
+    - si bon
+    - si parfait
+
+- intent: humeur_pas_contente
+  examples: |
+    - ma journée était horrible
+    - je suis triste
+    - je ne me sens pas très bien
+    - je suis déçu
+    - super triste
+    - je suis tellement triste
+    - triste
+    - très triste
+    - malheureux
+    - pas bien
+    - pas très bien
+    - extrêmement triste
+
+- intent: défi_du_bot
+  examples: |
+    - es-tu un bot ?
+    - es-tu humain ?
+    - est-ce que je parle à un bot ?
+    - est-ce que je parle à un humain ?
+
+- intent: Reference
+  examples: |
+    - Quelle est la référence du fournisseur pour cette facture ?
+    - Pouvez-vous me donner le code du fournisseur pour cette facture ?
+    - Quel est le numéro de référence du fournisseur pour cette facture ?
+    - Pourrais-je obtenir le numéro de fournisseur pour cette commande facture ?
+    - Avez-vous le code du fournisseur pour cette facture ?
+    - Quel est le numéro de référence du fournisseur pour cette facture ?
+    - Est-ce que vous pouvez me donner l'identifiant du fournisseur pour cette facture ?
+    - Comment puis-je obtenir le numéro de fournisseur pour cette facture ?
+    - Est-ce que le numéro de fournisseur pour cette facture est disponible ?
+    - Quelle est la référence du fournisseur pour une facture émise {Date} pour des produits de {type} et d'un {Montant} ?
+    - Pouvez-vous me donner la référence du fournisseur pour une facture de {Montant} datée du {Date} et concernant des produits de type {Type} ?
+
+- intent: Fournisseur
+  examples: |
+    - Pourriez-vous me dire quel est le fournisseur de ce type ?
+    - Quelle entreprise fournit généralement des produits de ce type ?
+    - Pouvez-vous trouver le fournisseur de ce montant d'achat ?
+    - À quelle entreprise pouvons-nous attribuer ce montant spécifique ?
+    - Quel est le fournisseur habituel pour ce montant de transaction ?
+    - Pourriez-vous me dire qui est le fournisseur associé à cette date d'achat ?
+    - De quelle entreprise provient généralement un achat effectué à cette date ?
+    - Quel est le fournisseur pour cette référence particulière ?
+    - À quelle entreprise cette référence est-elle généralement associée ?
+    - Qui est le fournisseur pour cette facture spécifique ?
+    - De quelle entreprise cette facture provient-elle habituellement ?
+    - Quel est le fournisseur pour cet Etat ?
+    - À quelle entreprise associeriez-vous cet Etat ?
+    - Quel est le fournisseur pour la facture portant la référence [Ref], d'un montant de {Montant}, émise {Date} ?
+    - Pouvez-vous me donner le fournisseur pour une facture d'un montant de {Montant} pour une le {Date} ?
+    - Quel fournisseur est associé à une facture concernant des produits de type {Type}, d'un montant de {Montant}, datée du {Date} ?
+    - Pour une facture émise le{Date}, pouvez-vous me donner le fournisseur ?
+    - Quel est le fournisseur pour une facture d'un montant de {Montant}, pour une date {Date}, concernant des produits de type {type} ?
+    - Pouvez-vous me donner le fournisseur pour une facture de {Montant}, le {Date} ?
+    - Quel est le fournisseur pour la facture pour cette Reference ?
+
+- intent: Facture
+  examples: |
+    - Pourriez-vous me donner la facture d'un type, par exemple une facture de vente ?
+    - Quelle est la facture d'un montant de {Montant} ?
+    - Pouvez-vous me montrer la facture d'un montant supérieur à {Montant} ?
+    - Pourriez-vous afficher la facture d'un montant inférieur à {Montant} ?
+    - Avez-vous une facture datée du {Date} ?
+    - Avez-vous une facture pour {Date} ?
+    - Quelles sont les factures émises en {Date} ?
+    - Affichez-moi la facture {Facture} donner par le fournisseur {Fournisseur}.
+    - Pouvez-vous trouver la facture associée à la référence {Reference} ?
+    - Montrez-moi la facture avec le numéro de référence {reference}.
+    - Quel est le statut de la facture portant la référence {Reference} ?
+    - Affichez la facture qui est prête pour le paiement.
+    - Montrez-moi toutes les factures qui ont été validées.
+    - Pouvez-vous trouver la facture qui doit être payée ?
+    - Affichez la facture qui est en attente de validation.
+    - Montrez-moi la facture dont l'état est "en cours de traitement".
+    - Quelle est la référence de la facture pour le fournisseur {Fournisseur} le {Date} pour un montant de {Montant} ?
+    - Pouvez-vous me donner le montant de la facture numéro {Facture} datée du {Date} ?
+    - Quel est le fournisseur de la facture d'un montant de {Montant} émise le {Date} ?
+    - À quelle date a été émise la facture d'un montant de {Montant} pour des produits de type {Type} par le fournisseur {Fournisseur} ?
+    - Quelle est la derniere enregistrement dans Base de donnée ?
+    - Quel est le montant de la facture du fournisseur [Fournisseur] ?
+    - Combien ai-je payé pour la facture du 1{Date} ?
+    - Quel est le montant total des factures ce mois-ci ?
+    - Quel est le montant le plus élevé des factures ?
+    - Quel est le montant total des factures impayées ?
+    - Qui est le fournisseur de la facture {Facture} ?
+    - Quels sont les fournisseurs avec lesquels nous avons travaillé le mois dernier ?
+    - Quel fournisseur a émis la facture du {Date} ?
+    - Combien de factures avons-nous reçues du fournisseur {Fournissseur} ?
+    - Quelle est la référence de la facture du fournisseur {Fournissseur} ?
+
+
+
+- intent: Date
+  examples: |
+    - Quelle est la {date} de livraison prévue pour cette commande ?
+    - Pouvez-vous me dire quand cette transaction a eu lieu {Date} ?
+    - À quelle date cette facture a-t-elle été émise ?
+    - Quand est-ce que ce produit a été acheté auprès du fournisseur ?
+    - À quelle date cette référence a-t-elle été enregistrée dans le système ?
+    - Pouvez-vous me donner la date de validation de cette commande ?
+    - Quand est-ce que ce montant a été facturé ?
+    - À quel moment cette commande a-t-elle été marquée comme prête pour le paiement ?
+    - Quand est-ce que ce fournisseur a été ajouté à notre base de données ?
+    - Pouvez-vous me dire à quelle date cette transaction a été validée ?
+    - Quand est-ce que cette facture doit être payée ?
+    - À quelle date cette référence a-t-elle été mise à jour pour la dernière fois ?
+    - Quand est-ce que ce montant a été enregistré dans le système ?
+    - À quel moment cette commande a-t-elle été marquée comme validée ?
+    - Quand est-ce que ce paiement est prévu ?
+    - À quelle date cette référence a-t-elle été modifiée pour la dernière fois ?
+    - Quand est-ce que ce montant a été prélevé sur le compte ?
+    - À quel moment cette commande a-t-elle été marquée comme prête à être expédiée ?
+    - Pouvez-vous me dire la date de création de cette facture ?
+
+
+- intent: Etat
+  examples: |
+    - Quels sont les Fournisseur dans une Etat Prét pour paiement ?
+    - Quels sont les Fournisseur dans une Etat Validé ?
+    - Quels sont les Fournisseur dans une Etat non valide ?
+    - Quel est l'état actuel de ce type ?
+    - Quel est l'état actuel de ce Fourisseur ?
+    - Est-ce que le type d'activite est prêt pour le paiement ou déjà validé ?
+    - Pouvez-vous me dire si le type de document est actuellement validé ?
+    - Comment puis-je vérifier si le type du Fournisseur est prêt pour le paiement ?
+    - Est-ce que la date indiqué pour {Fournisseur} est actuellement validée ?
+    - Quel est l'état actuel de la facture pour {Fournisseur} ?
+    - Quelles sont les facture est prête pour le paiement ou déjà validée ?
+    - La facture {Facture} est-elle déjà validée ?
+    - Pouvez-vous me dire si la facture {Facture} est actuellement prête pour le paiement ?
+    - Pouvez-vous me confirmer si le fournisseur est prêt pour le paiement ?
+    - Est-ce que la référence est prête pour le paiement ou déjà validée ?
+    - Quelle est l'Etat de ce montant ?
+    - Pouvez-vous me confirmer si le montant est actuellement prêt pour le paiement ou valide ?
+
+
+
+- intent: Montant
+  examples: |
+    - quel est le montant de la facture [7559854598](number) ?
+    - Combien faut-il payer pour cette [9874562159](number) ?
+    - Pouvez-vous me donner le montant du [2365894561](number)?
+
+
 
 - intent: repeat_phone
   examples: |
