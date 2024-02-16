@@ -83,12 +83,7 @@ nlu:
     - so saad
     - so sad
 
-- intent: bot_challenge
-  examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+
 
 - intent: saluer
   examples: |
@@ -169,12 +164,6 @@ nlu:
     - pas très bien
     - extrêmement triste
 
-- intent: défi_du_bot
-  examples: |
-    - es-tu un bot ?
-    - es-tu humain ?
-    - est-ce que je parle à un bot ?
-    - est-ce que je parle à un humain ?
 
 - intent: Reference
   examples: |
@@ -296,19 +285,10 @@ nlu:
 
 - intent: Montant
   examples: |
-    - quel est le montant de la facture [7559854598](number) ?
+    - quel est le montant de la facture qui a une reference [7559854598](number) ?
     - Combien faut-il payer pour cette [9874562159](number) ?
     - Pouvez-vous me donner le montant du [2365894561](number)?
 
-
-
-- intent: repeat_phone
-  examples: |
-    - what is my phone number
-    - tell me my phone number
-    - repeat my phone number
-    - can you repeat my phone number
-    - my phone number is ?
 
 
 
