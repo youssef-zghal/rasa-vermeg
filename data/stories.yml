@@ -1,7 +1,7 @@
 version: "3.1"
 
 stories:
-- story: happy path
+- story: obtenir montant
   steps:
   - intent: Montant
     entities:
@@ -10,6 +10,21 @@ stories:
     - Montant: 9874561230
   - action: action_obtenir_montant
 
+- story: montant sup
+  steps:
+  - intent: Montant_sup
+    entities:
+    - number: 7896541230
+  - slot_was_set:
+    - Montant: 9874561230
+  - action: action_obtenir_montant_sup
 
 
-
+- story: montant inf
+  steps:
+  - intent: Montant_inf
+    entities:
+    - number: 7896541230
+  - slot_was_set:
+    - Montant: 9874561230
+  - action: action_obtenir_montant_inf

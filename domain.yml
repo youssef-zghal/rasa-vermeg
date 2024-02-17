@@ -18,6 +18,8 @@ intents:
   - Date
   - Montant
   - Etat
+  - Montant_sup
+  - Montant_inf
   - Facture
 
 entities:
@@ -76,9 +78,14 @@ responses:
   utter_montant:
   - text: "Le montant de la facture qui a une reference {Référence} est de {montant}."
 
+  utter_details_facture:
+  - text: "info:  {reference} {fournisseur} {facture} {date} {montant} {etat}"
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 
 actions:
   - action_obtenir_montant
+  - action_obtenir_montant_sup
+  - action_obtenir_montant_inf

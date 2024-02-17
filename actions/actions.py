@@ -80,7 +80,6 @@ class ActionObtenirMontant(Action):
         ref_entity = tracker.get_slot("Montant")
         if ref_entity:
             ref = int(ref_entity)
-            dispatcher.utter_message(text=f"Je recherche le montant pour la facture numéro {ref}...")
             # Se connecter à la base de données
             conn = se_connecter_a_ssms()  # Vous devez implémenter ces fonctions
 
@@ -91,7 +90,7 @@ class ActionObtenirMontant(Action):
 
                 if results:
                     montant = results[0][0]
-                    dispatcher.utter_message(template="utter_montant", montant=montant, facture=ref)  # Assurez-vous que la valeur du slot montant est fournie
+                    dispatcher.utter_message(template="utter_montant", montant=montant, Référence=ref)  # Assurez-vous que la valeur du slot montant est fournie
                 else:
                     dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver le montant pour cette Reference.")
             else:
@@ -100,3 +99,101 @@ class ActionObtenirMontant(Action):
             dispatcher.utter_message(text="Désolé, je n'ai pas pu extraire le numéro de Reference.")
         
         return []
+# -----------------------------------------------------------------------------------------------------------------   
+    
+from datetime import datetime
+
+class ActionObtenirMontantInf(Action):
+    def name(self) -> Text:
+        return "action_obtenir_montant_inf"
+
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[Dict[Text, Any]]:
+        
+        # Récupérer l'entité montant du tracker
+        ref_entity = tracker.get_slot("Montant")
+        if ref_entity:
+            montant = int(ref_entity)
+            # Se connecter à la base de données
+            conn = se_connecter_a_ssms()  # Vous devez implémenter ces fonctions
+
+            if conn:
+                # Exécuter la requête SQL pour obtenir les détails des factures avec un montant supérieur
+                query = f"SELECT Référence, Fournisseur, Facture, Date, Montant, Etat, type FROM dbo.source WHERE Montant < {montant}"
+                results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
+
+                if results:
+                    for result in results:
+                        # Récupérer les détails de chaque facture
+                        reference, fournisseur, facture, date, montant, etat, type_facture = result
+                        date_str = date.strftime("%Y-%m-%d")
+                        dispatcher.utter_message(template="utter_details_facture", 
+                                                 reference=reference, 
+                                                 fournisseur=fournisseur, 
+                                                 facture=facture, 
+                                                 date=date_str, 
+                                                 montant=montant, 
+                                                 etat=etat, 
+                                                 type_facture=type_facture)
+                else:
+                    dispatcher.utter_message(
+                        text="Désolé, je n'ai pas pu trouver de factures avec un montant inférieur à celui spécifié."
+                    )
+            else:
+                dispatcher.utter_message(
+                    text="Désolé, je n'ai pas pu me connecter à la base de données."
+                )
+        else:
+            dispatcher.utter_message(
+                text="Désolé, je n'ai pas pu extraire le montant spécifié."
+            )
+
+        return []
+ 
+# ------------------------------------------------------------------------------------------------------------------
+from datetime import datetime
+
+class ActionObtenirMontantSup(Action):
+    def name(self) -> Text:
+        return "action_obtenir_montant_sup"
+
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[Dict[Text, Any]]:
+        
+        # Récupérer l'entité montant du tracker
+        ref_entity = tracker.get_slot("Montant")
+        if ref_entity:
+            montant = int(ref_entity)
+            # Se connecter à la base de données
+            conn = se_connecter_a_ssms()  # Vous devez implémenter ces fonctions
+
+            if conn:
+                # Exécuter la requête SQL pour obtenir les détails des factures avec un montant supérieur
+                query = f"SELECT Référence, Fournisseur, Facture, Date, Montant, Etat, type FROM dbo.source WHERE Montant > {montant}"
+                results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
+
+                if results:
+                    for result in results:
+                        # Récupérer les détails de chaque facture
+                        reference, fournisseur, facture, date, montant, etat, type_facture = result
+                        date_str = date.strftime("%Y-%m-%d")
+                        dispatcher.utter_message(template="utter_details_facture", 
+                                                 reference=reference, 
+                                                 fournisseur=fournisseur, 
+                                                 facture=facture, 
+                                                 date=date_str, 
+                                                 montant=montant, 
+                                                 etat=etat, 
+                                                 type_facture=type_facture)
+                else:
+                    dispatcher.utter_message(text="Aucune facture trouvée avec un montant supérieur à celui spécifié.")
+            else:
+                dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
+        else:
+            dispatcher.utter_message(text="Désolé, je n'ai pas pu extraire le montant spécifié.")
+        
+        return []
+
+# ------------------------------------------------------------------------------------------------------------------

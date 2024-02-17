@@ -282,7 +282,6 @@ nlu:
     - Pouvez-vous me confirmer si le montant est actuellement prêt pour le paiement ou valide ?
 
 
-
 - intent: Montant
   examples: |
     - quel est le montant de la facture qui a une reference [7559854598](number) ?
@@ -290,8 +289,15 @@ nlu:
     - Pouvez-vous me donner le montant du [2365894561](number)?
 
 
+- intent: Montant_sup
+  examples: |
+    - donne moi les details de la facture ayant un montant superieur à [7559854598](number) ?
+    - montant superieur à [7559854598](number) ?
 
 
-
+- intent: Montant_inf
+  examples: |
+    - donne moi les details de la facture ayant un montant inférieur à [7559854598](number) ?
+    - montant inférieur à [7559854598](number) ?
 
 
