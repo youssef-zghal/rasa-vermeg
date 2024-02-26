@@ -1,5 +1,4 @@
 version: "3.1"
-
 nlu:
 - intent: greet
   examples: |
@@ -16,7 +15,6 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
 - intent: goodbye
   examples: |
     - cu
@@ -29,7 +27,6 @@ nlu:
     - see you around
     - bye bye
     - see you later
-
 - intent: affirm
   examples: |
     - yes
@@ -38,7 +35,6 @@ nlu:
     - of course
     - that sounds good
     - correct
-
 - intent: deny
   examples: |
     - no
@@ -48,7 +44,6 @@ nlu:
     - don't like that
     - no way
     - not really
-
 - intent: mood_great
   examples: |
     - perfect
@@ -65,7 +60,6 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -82,9 +76,6 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
-
-
 - intent: saluer
   examples: |
     - salut
@@ -98,9 +89,7 @@ nlu:
     - allons-y
     - salut mec
     - bonmatin
-    - bonsoir
     - bon après-midi
-
 - intent: au_revoir
   examples: |
     - à plus
@@ -113,7 +102,6 @@ nlu:
     - à la prochaine
     - bye bye
     - à plus tard
-
 - intent: affirmer
   examples: |
     - oui
@@ -122,7 +110,6 @@ nlu:
     - bien sûr
     - ça me semble bien
     - correct
-
 - intent: nier
   examples: |
     - non
@@ -131,7 +118,6 @@ nlu:
     - je n'aime pas ça
     - pas du tout
     - aucune chance
-
 - intent: humeur_super
   examples: |
     - parfait
@@ -148,7 +134,6 @@ nlu:
     - tellement parfait
     - si bon
     - si parfait
-
 - intent: humeur_pas_contente
   examples: |
     - ma journée était horrible
@@ -163,8 +148,6 @@ nlu:
     - pas bien
     - pas très bien
     - extrêmement triste
-
-
 - intent: Reference
   examples: |
     - Quelle est la référence du fournisseur pour cette facture ?
@@ -172,13 +155,11 @@ nlu:
     - Quel est le numéro de référence du fournisseur pour cette facture ?
     - Pourrais-je obtenir le numéro de fournisseur pour cette commande facture ?
     - Avez-vous le code du fournisseur pour cette facture ?
-    - Quel est le numéro de référence du fournisseur pour cette facture ?
     - Est-ce que vous pouvez me donner l'identifiant du fournisseur pour cette facture ?
     - Comment puis-je obtenir le numéro de fournisseur pour cette facture ?
     - Est-ce que le numéro de fournisseur pour cette facture est disponible ?
     - Quelle est la référence du fournisseur pour une facture émise {Date} pour des produits de {type} et d'un {Montant} ?
     - Pouvez-vous me donner la référence du fournisseur pour une facture de {Montant} datée du {Date} et concernant des produits de type {Type} ?
-
 - intent: Fournisseur
   examples: |
     - Pourriez-vous me dire quel est le fournisseur de ce type ?
@@ -201,7 +182,6 @@ nlu:
     - Quel est le fournisseur pour une facture d'un montant de {Montant}, pour une date {Date}, concernant des produits de type {type} ?
     - Pouvez-vous me donner le fournisseur pour une facture de {Montant}, le {Date} ?
     - Quel est le fournisseur pour la facture pour cette Reference ?
-
 - intent: Facture
   examples: |
     - Pourriez-vous me donner la facture d'un type, par exemple une facture de vente ?
@@ -235,9 +215,6 @@ nlu:
     - Quel fournisseur a émis la facture du {Date} ?
     - Combien de factures avons-nous reçues du fournisseur {Fournissseur} ?
     - Quelle est la référence de la facture du fournisseur {Fournissseur} ?
-
-
-
 - intent: Date
   examples: |
     - Quelle est la {date} de livraison prévue pour cette commande ?
@@ -259,8 +236,6 @@ nlu:
     - Quand est-ce que ce montant a été prélevé sur le compte ?
     - À quel moment cette commande a-t-elle été marquée comme prête à être expédiée ?
     - Pouvez-vous me dire la date de création de cette facture ?
-
-
 - intent: Etat
   examples: |
     - Quels sont les Fournisseur dans une Etat Prét pour paiement ?
@@ -280,24 +255,47 @@ nlu:
     - Est-ce que la référence est prête pour le paiement ou déjà validée ?
     - Quelle est l'Etat de ce montant ?
     - Pouvez-vous me confirmer si le montant est actuellement prêt pour le paiement ou valide ?
-
-
 - intent: Montant
   examples: |
-    - quel est le montant de la facture qui a une reference [7559854598](number) ?
+    - donne moi le montant pour la facture qui a une reference [7559854598](number) ?
     - Combien faut-il payer pour cette [9874562159](number) ?
     - Pouvez-vous me donner le montant du [2365894561](number)?
-
-
+- intent: montant_par_date
+  examples: |
+    - Quel est le montant pour la date [2023-01-14](date) ?
+    - Combien coûte le [2023-01-14](date) ?
+    - Pouvez-vous me dire le montant le [2023-01-14](date) ?
 - intent: Montant_sup
   examples: |
     - donne moi les details de la facture ayant un montant superieur à [7559854598](number) ?
     - montant superieur à [7559854598](number) ?
-
-
-- intent: Montant_inf
+- intent: Montant_inf 
   examples: |
     - donne moi les details de la facture ayant un montant inférieur à [7559854598](number) ?
     - montant inférieur à [7559854598](number) ?
-
-
+    - donne moi les details de la facture ayant un montant inférieur à [100](number)
+- intent: Montant_egal 
+  examples: |
+    - donne moi les details de la facture ayant un montant égal à [7559854598](number) ?
+    - montant égal à [7559854598](number) ?
+- intent: Montant_total_fournisseur 
+  examples: |
+    - Quel est le montant total pour tous les fournisseurs ?
+    - combien les fournisseurs doivent nous t-il au total ?
+    - le montant total pour tous les fournisseurs ?
+    - je veux le montant total pour les fournisseurs existants ?
+- intent: demande_etat 
+  examples: |
+    - Que sont les montants pour tous les états ?
+    - Pouvez-vous me dire les montants pour tous les états ?
+    - Quelle est la situation financière ?
+- intent: informer_etat
+  examples: |
+    - validé
+    - Créé
+    - Prêt pour paiement
+- intent: ask_type_by_amount
+  examples: |
+    - Quel est le type pour le montant [1000](montant) ?
+    - Je voudrais connaître le type pour le montant [50](montant) .
+    - Peux-tu me dire le type pour le montant [300](montant) s'il te plaît ?

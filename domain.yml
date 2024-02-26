@@ -1,91 +1,109 @@
-version: "3.1"
-    
+version: '3.1'
 intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - saluer
-  - au_revoir
-  - affirmer
-  - nier
-  - humeur_super
-  - humeur_pas_contente
-  - Reference 
-  - Fournisseur
-  - Date
-  - Montant
-  - Etat
-  - Montant_sup
-  - Montant_inf
-  - Facture
-
+- Date
+- Etat
+- Facture
+- Fournisseur
+- Montant
+- Montant_egal
+- Montant_inf
+- Montant_sup
+- Montant_total_fournisseur
+- Reference
+- affirm
+- affirmer
+- ask_type_by_amount
+- au_revoir
+- demande_etat
+- deny
+- goodbye
+- greet
+- humeur_pas_contente
+- humeur_super
+- inform
+- montant_par_date
+- mood_great
+- mood_unhappy
+- nier
+- saluer
+- informer_etat
 entities:
-  - number
-
+- number
+- text
+- Fournisseur
+- date
+- etat
 slots:
+  Etat:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: etat
   Montant:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
       entity: number
-
+  Date:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: date
+  Fournisseur:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: Fournisseur
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
-
-
-
+  - text: Hey! How are you?
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
   utter_did_that_help:
-  - text: "Did that help you?"
-
+  - text: Did that help you?
   utter_happy:
-  - text: "Great, carry on!"
-
+  - text: Great, carry on!
   utter_goodbye:
-  - text: "Bye"
-
+  - text: Bye
   utter_saluer:
-  - text: "Salut ! Comment vas-tu ?"
-
+  - text: Salut ! Comment vas-tu ?
   utter_remonter_moral:
-  - text: "Voici quelque chose pour te remonter le moral :"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
+  - text: 'Voici quelque chose pour te remonter le moral :'
+    image: https://i.imgur.com/nGF1K8f.jpg
   utter_est_ce_que_ca_aidé:
-  - text: "Est-ce que cela t'a aidé ?"
-
+  - text: Est-ce que cela t'a aidé ?
   utter_heureux:
-  - text: "Super, continue comme ça !"
-
+  - text: Super, continue comme ça !
   utter_au_revoir:
-  - text: "Au revoir"
-
-
+  - text: Au revoir
   utter_Reference:
-  - text: "la reference pour le fornisseur {Fournisseur} est {Reference}."
-  - text: "le code du fournisseur pour cette facture est {Facture}."
-  - text: "le numero de reference pour cette facture est {Facture}."
-  - text: "le numero de Fournisseur pour cette facture est {Facture}."
-
+  - text: la reference pour le fornisseur {Fournisseur} est {Reference}.
+  - text: le code du fournisseur pour cette facture est {Facture}.
+  - text: le numero de reference pour cette facture est {Facture}.
+  - text: le numero de Fournisseur pour cette facture est {Facture}.
   utter_montant:
-  - text: "Le montant de la facture qui a une reference {Référence} est de {montant}."
-
+  - text: Le montant de la facture qui a une reference {Référence} est de {montant}.
   utter_details_facture:
-  - text: "info:  {reference} {fournisseur} {facture} {date} {montant} {etat}"
-
+  - text: 'info:  {reference} {fournisseur} {facture} {date} {montant} {etat}'
+  utter_ask_date:
+  - text: Quelle est la date pour laquelle vous souhaitez connaître le montant?
+  utter_next_Montant_Total_Par_Etat:
+  - text: Voudriez afficher ceux qui sont d'état validé/Créé ou Prêt pour paiement
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
 actions:
-  - action_obtenir_montant
-  - action_obtenir_montant_sup
-  - action_obtenir_montant_inf
+- action_obtenir_montant_inf
+- action_obtenir_Fournisseur_montant
+- action_obtenir_montant_Date
+- action_obtenir_montant_sup
+- action_obtenir_montant_egal
+- action_montant_total_fournisseurs
+- action_get_type_by_amount
+- Montant_Total_Par_Etat
+- action_afficher_montants_etat

@@ -1,14 +1,24 @@
 version: "3.1"
 
 stories:
-- story: obtenir montant
+- story: obtenir montant fournisseur
   steps:
   - intent: Montant
     entities:
     - number: 7896541230
   - slot_was_set:
     - Montant: 9874561230
-  - action: action_obtenir_montant
+  - action: action_obtenir_Fournisseur_montant
+
+
+- story: montant par date
+  steps:
+  - intent: montant_par_date
+    entities:
+    - date
+  - slot_was_set:
+    - Date: date
+  - action: action_obtenir_montant_Date
 
 - story: montant sup
   steps:
@@ -27,4 +37,45 @@ stories:
     - number: 7896541230
   - slot_was_set:
     - Montant: 9874561230
+  - action: action_obtenir_montant_inf
+
+- story: Montant egal
+  steps:
+    - intent: Montant_egal
+      entities:
+        - number: 7896541230
+    - slot_was_set:
+        - Montant: 9874561230
+    - action: action_obtenir_montant_egal
+
+- story: Montant total fournisseur
+  steps:
+    - intent: Montant_total_fournisseur
+    - action: action_montant_total_fournisseurs
+
+- story: Demande de les montants en fonction des états
+  steps:
+  - intent: demande_etat
+  - action: Montant_Total_Par_Etat
+  - action: utter_next_Montant_Total_Par_Etat
+  - intent: informer_etat
+    entities:
+    - etat
+  - slot_was_set:
+    - Etat: etat
+  - action: action_afficher_montants_etat
+
+
+- story: ask type by amount
+  steps:
+  - intent: ask_type_by_amount
+  - action: action_get_type_by_amount
+
+- story: interactive_story_1
+  steps:
+  - intent: Montant_inf 
+    entities:
+    - number: 100
+  - slot_was_set:
+    - Montant: 100
   - action: action_obtenir_montant_inf
