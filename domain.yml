@@ -27,12 +27,14 @@ intents:
 - nier
 - saluer
 - informer_etat
+- ask_type
 entities:
 - number
 - text
 - Fournisseur
 - date
 - etat
+- type
 slots:
   Etat:
     type: text
@@ -40,6 +42,12 @@ slots:
     mappings:
     - type: from_entity
       entity: etat
+  Type:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: type    
   Montant:
     type: text
     influence_conversation: true
@@ -107,3 +115,4 @@ actions:
 - action_get_type_by_amount
 - Montant_Total_Par_Etat
 - action_afficher_montants_etat
+- Montant_Total_Par_Type

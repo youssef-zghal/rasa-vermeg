@@ -79,3 +79,9 @@ stories:
   - slot_was_set:
     - Montant: 100
   - action: action_obtenir_montant_inf
+
+- story: Demande de les montants en fonction des type
+  steps:
+  - intent: ask_type
+  - action: Montant_Total_Par_Type
+  

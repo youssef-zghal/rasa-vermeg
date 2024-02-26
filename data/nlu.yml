@@ -299,3 +299,9 @@ nlu:
     - Quel est le type pour le montant [1000](montant) ?
     - Je voudrais connaître le type pour le montant [50](montant) .
     - Peux-tu me dire le type pour le montant [300](montant) s'il te plaît ?
+
+- intent: ask_type
+  examples: |
+    - Que sont les montants pour tous les types ?
+    - Pouvez-vous me dire les montants pour tous les Types ?
+    - Peux-tu me dire le montant total pour les types s'il te plaît ?

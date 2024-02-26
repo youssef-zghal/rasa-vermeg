@@ -63,7 +63,7 @@ conn = se_connecter_a_ssms()
 
 
 
-from typing import Any, Text, Dict, List
+from typing import Type, Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 import pyodbc
@@ -400,9 +400,38 @@ class ActionGetTypeByAmount(Action):
 
         return []
 
+# -----------------------------------------------------------------------------------------------------------------
 
+import re
 
+class MontantTotalParType(Action):
+    def name(self) -> Text:
+        return "Montant_Total_Par_Type"
 
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[Dict[Text, Any]]:
+        # Se connecter à la base de données
+        conn = se_connecter_a_ssms()  # Assurez-vous d'avoir cette fonction implémentée
+
+        if conn:
+            # Exécuter la requête SQL pour obtenir les montants dus par fournisseur
+            query = "SELECT type, SUM(Montant) AS MontantTotal FROM dbo.source GROUP BY type"
+            results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
+
+            if results:
+                for row in results:
+                    type = row[0]
+                    montant_total = row[1]
+                    dispatcher.utter_message(
+                        text=f"Type' {type} -> {montant_total}."
+                    )
+            else:
+                dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver les informations sur les montants dus par type.")
+        else:
+            dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
+
+        return []
 
 
 
