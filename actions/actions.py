@@ -373,57 +373,106 @@ class MontantTotalParEtat(Action):
 
 # -----------------------------------------------------------------------------------------------------------------
      
-class ActionAfficherMontantsEtat(Action):#fonctionne pass!!
+class ActionAfficherMontantsEtatValidees(Action):
     def name(self) -> Text:
-        return "action_afficher_montants_etat"
-
-    def normalize_etat(self, etat: Text) -> Text:
-        # Normalisation de l'état pour rendre la comparaison insensible à la casse et aux espaces
-        return etat.strip().lower()
+        return "action_afficher_montants_etat_validees"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        # Obtention de l'état de la requête de l'utilisateur
-        etat_raw = tracker.get_slot('Etat')
-         
-         
-        if etat_raw is None:
-            dispatcher.utter_message(text="Je suis désolé, je n'ai pas compris l'état que vous avez fourni.")
-            return []
-        
-        etat = self.normalize_etat(etat_raw)
-        
+
         # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
         cursor = conn.cursor()
-        # Requête SQL pour obtenir tous les montants correspondant à l'état
+        # Requête SQL pour obtenir tous les montants correspondant à l'état Validé
         query = """SELECT Fournisseur.Fournisseur , Facture.Référence , Facture.Facture , Date.Date , f.Montant , Facture.Etat , Fournisseur.type
                     FROM dbo.fait f 
                     JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
                     JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
-                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey WHERE facture.État = ?"""
-        cursor.execute(query, (etat,))
-        rows = cursor.fetchall()
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey WHERE facture.etat = 'Validé'"""
         
-        if rows:
-            message = "Voici les montants pour l'état {} :".format(etat)
-            for row in rows:
-                reference, fournisseur, facture, date, montant, type = row
-                message += f"\nRéférence: {reference}, Fournisseur: {fournisseur}, Facture: {facture}, Date: {date}, Montant: {montant}, Type: {type}"
-            dispatcher.utter_message(text=message)
+        results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
 
-            # Demander à l'utilisateur s'il souhaite afficher tous les montants
-            dispatcher.utter_message(text="Souhaitez-vous afficher tous les montants pour d'autres états?")
-
+        if results:
+            for result in results:
+                # Récupérer les détails de chaque facture
+                fournisseur,reference, facture, date, montant, etat,type = result
+                date_str = date.strftime("%Y-%m-%d")
+                dispatcher.utter_message(
+                        text=f"La référence {reference}, fournisseur {fournisseur}, facture {facture}, date {date_str} doit un montant total de {montant} avec un état {etat}."
+                    )
         else:
-            # Aucun montant trouvé pour cet état
-            dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état '{etat_raw}'.")
-            # Demander à l'utilisateur de fournir un autre état ou de continuer
-            dispatcher.utter_message(text="Veuillez fournir un autre état ou indiquer si vous souhaitez continuer.")
+            # Aucun montant trouvé pour l'état Validé
+            dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Validé'.")
 
         return []
 
+# -----------------------------------------------------------------------------------------------------------------
+         
+class ActionAfficherMontantsEtatCree(Action):
+    def name(self) -> Text:
+        return "action_afficher_montants_etat_crees"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
+        cursor = conn.cursor()
+        # Requête SQL pour obtenir tous les montants correspondant à l'état Cree
+        query = """SELECT Fournisseur.Fournisseur , Facture.Référence , Facture.Facture , Date.Date , f.Montant , Facture.Etat , Fournisseur.type
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey WHERE facture.etat = 'Créé'"""
+        results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
+
+        if results:
+            for result in results:
+                # Récupérer les détails de chaque facture
+                fournisseur,reference, facture, date, montant, etat,type = result
+                date_str = date.strftime("%Y-%m-%d")
+                dispatcher.utter_message(
+                        text=f"La référence {reference}, fournisseur {fournisseur}, facture {facture}, date {date_str} doit un montant total de {montant} avec un état {etat}."
+                    )
+        else:
+            # Aucun montant trouvé pour l'état Cree
+            dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Créé'.")
+
+        return []
+# -----------------------------------------------------------------------------------------------------------------
+         
+class ActionAfficherMontantsEtatCree(Action):
+    def name(self) -> Text:
+        return "action_afficher_montants_etat_prets"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
+        cursor = conn.cursor()
+        # Requête SQL pour obtenir tous les montants correspondant à l'état Pret
+        query = """SELECT Fournisseur.Fournisseur , Facture.Référence , Facture.Facture , Date.Date , f.Montant , Facture.Etat , Fournisseur.type
+            FROM dbo.fait f 
+            JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+            JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+            JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey WHERE facture.etat = 'Prét pour paiement'"""
+
+        results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
+
+        if results:
+            for result in results:
+                # Récupérer les détails de chaque facture
+                fournisseur,reference, facture, date, montant, etat,type = result
+                date_str = date.strftime("%Y-%m-%d")
+                dispatcher.utter_message(
+                        text=f"La référence {reference}, fournisseur {fournisseur}, facture {facture}, date {date_str} doit un montant total de {montant} avec un état {etat}."
+                    )
+        else:
+            # Aucun montant trouvé pour l'état Pret
+            dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Pret'.")
+
+        return []
 
 
 

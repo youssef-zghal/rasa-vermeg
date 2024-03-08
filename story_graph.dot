@@ -4,12 +4,14 @@ digraph  {
 1 [class=active, fontsize=12, label=action_session_start];
 2 [class=active, fontsize=12, label=Montant_Total_Par_Etat];
 3 [class=active, fontsize=12, label=utter_next_Montant_Total_Par_Etat];
-4 [class="intent dashed active", label="  ?  ", shape=rect];
+4 [class="dashed active", fontsize=12, label=action_montant_total_fournisseurs];
 5 [class="intent active", fillcolor=lightblue, label="/demande_etat", shape=rect, style=filled];
+6 [class="intent active", fillcolor=lightblue, label="/informer_etat", shape=rect, style=filled];
 0 -> "-1"  [class="", key=NONE, label=""];
 0 -> 1  [class=active, key=NONE, label=""];
 1 -> 5  [class=active, key=0];
 2 -> 3  [class=active, key=NONE, label=""];
-3 -> 4  [class=active, key=NONE, label=""];
+3 -> 6  [class=active, key=0];
 5 -> 2  [class=active, key=0];
+6 -> 4  [class=active, key=0];
 }

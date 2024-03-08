@@ -39,6 +39,12 @@ stories:
     - Montant: 9874561230
   - action: action_obtenir_montant_inf
 
+
+- story: Montant total fournisseur
+  steps:
+    - intent: Montant_total_fournisseur
+    - action: action_montant_total_fournisseurs
+
 - story: Montant egal
   steps:
     - intent: Montant_egal
@@ -48,19 +54,30 @@ stories:
         - Montant: 9874561230
     - action: action_obtenir_montant_egal
 
-- story: Montant total fournisseur
-  steps:
-    - intent: Montant_total_fournisseur
-    - action: action_montant_total_fournisseurs
-
-
-- story: Demande de les montants en fonction des états
+- story: Demande de les montants en fonction des états validées
   steps:
   - intent: demande_etat
   - action: Montant_Total_Par_Etat
   - action: utter_next_Montant_Total_Par_Etat
-  - intent: informer_etat
-  - action: action_afficher_montants_etat
+  - intent: informer_etat_validé
+  - action: action_afficher_montants_etat_validees
+
+- story: Demande de les montants en fonction des états Créés
+  steps:
+  - intent: demande_etat
+  - action: Montant_Total_Par_Etat
+  - action: utter_next_Montant_Total_Par_Etat
+  - intent: informer_etat_créé
+  - action: action_afficher_montants_etat_crees
+
+- story: Demande de les montants en fonction des états Prêts
+  steps:
+  - intent: demande_etat
+  - action: Montant_Total_Par_Etat
+  - action: utter_next_Montant_Total_Par_Etat
+  - intent: informer_etat_prêt_pour_paiement
+  - action: action_afficher_montants_etat_prets
+
 
 - story: ask type by amount
   steps:

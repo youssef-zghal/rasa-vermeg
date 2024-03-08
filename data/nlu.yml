@@ -290,11 +290,25 @@ nlu:
     - Que sont les montants pour tous les états ?
     - Pouvez-vous me dire les montants pour tous les états ?
     - Quelle est la situation financière ?
-- intent: informer_etat
+    
+- intent: informer_etat_validé
   examples: |
-    - Validé     # Etat: validé
-    - Créé       # Etat: créé
-    - Prêt pour paiement  # Etat: prêt pour paiement
+    - Validé    
+    - ceux qui sont valide
+    - les factures qui sont validées
+
+- intent: informer_etat_créé
+  examples: |
+    - Créé    
+    - ceux qui sont crées
+    - les factures qui sont crees
+
+- intent: informer_etat_prêt_pour_paiement
+  examples: |
+    - Prêt pour paiement  
+    - pret
+    - ceux qui sont pret
+    - les factures qui sont prets pour le paiement
 
   
 
