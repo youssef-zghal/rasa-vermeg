@@ -85,7 +85,13 @@ class ActionObtenirFournisseurMontant(Action):
 
             if conn:
                 # Exécuter la requête SQL pour obtenir le montant de la facture
-                query = f"SELECT montant FROM dbo.source WHERE Référence = '{ref}'"
+                query = f"""
+                    SELECT f.montant 
+                    FROM dbo.fait f
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = Pk_fournisseur
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = PK_facture
+                    WHERE facture.Référence = '{ref}'
+                """
                 results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
 
                 if results:
@@ -99,6 +105,7 @@ class ActionObtenirFournisseurMontant(Action):
             dispatcher.utter_message(text="Désolé, je n'ai pas pu extraire le numéro de Reference.")
         
         return []
+
 # -----------------------------------------------------------------------------------------------------------------   
     
 from datetime import datetime
@@ -120,7 +127,14 @@ class ActionObtenirMontantInf(Action):
 
             if conn:
                 # Exécuter la requête SQL pour obtenir les détails des factures avec un montant supérieur
-                query = f"SELECT Référence, Fournisseur, Facture, Date, Montant, Etat, type FROM dbo.source WHERE Montant < {montant}"
+                query = f"""
+                    SELECT Fournisseur.Fournisseur , Facture.Référence , Facture.Facture , Date.Date , f.Montant , Facture.Etat , Fournisseur.type
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey
+                    WHERE f.Montant < {montant}
+                """
                 results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
 
                 if results:
@@ -150,6 +164,7 @@ class ActionObtenirMontantInf(Action):
             )
 
         return []
+
  
 # ------------------------------------------------------------------------------------------------------------------
 from datetime import datetime
@@ -171,7 +186,14 @@ class ActionObtenirMontantSup(Action):
 
             if conn:
                 # Exécuter la requête SQL pour obtenir les détails des factures avec un montant supérieur
-                query = f"SELECT Référence, Fournisseur, Facture, Date, Montant, Etat, type FROM dbo.source WHERE Montant > {montant}"
+                query = f"""
+                    SELECT Fournisseur.Fournisseur , Facture.Référence , Facture.Facture , Date.Date , f.Montant , Facture.Etat , Fournisseur.type
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey
+                    WHERE f.Montant > {montant}
+                """
                 results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
 
                 if results:
@@ -216,7 +238,14 @@ class ActionObtenirMontantegal(Action):
 
             if conn:
                 # Exécuter la requête SQL pour obtenir les détails des factures avec un montant supérieur
-                query = f"SELECT Référence, Fournisseur, Facture, Date, Montant, Etat, type FROM dbo.source WHERE Montant = {montant}"
+                query = f"""
+                    SELECT Fournisseur.Fournisseur , Facture.Référence , Facture.Facture , Date.Date , f.Montant , Facture.Etat , Fournisseur.type
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey
+                    WHERE f.Montant = {montant}
+                """
                 results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
 
                 if results:
@@ -255,7 +284,12 @@ class ActionMontantTotalFournisseurs(Action):
 
         if conn:
             # Exécuter la requête SQL pour obtenir les montants dus par fournisseur
-            query = "SELECT Fournisseur, SUM(Montant) AS MontantTotal FROM dbo.source GROUP BY Fournisseur"
+            query = f"""
+            SELECT Fournisseur.Fournisseur , SUM(f.Montant) AS MontantTotal 
+            FROM dbo.fait f 
+            JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+            GROUP BY Fournisseur
+            """  
             results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
 
             if results:
@@ -287,7 +321,7 @@ class ActionObtenirMontantDate(Action):
         
         # Requête SQL pour obtenir tous les montants correspondant à la date
         cursor = conn.cursor()
-        cursor.execute("SELECT montant FROM dbo.source WHERE date = ?", (date,))
+        cursor.execute("SELECT f.montant FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey  WHERE date.date = ?", (date,))
         rows = cursor.fetchall()
         
         if rows:
@@ -315,7 +349,11 @@ class MontantTotalParEtat(Action):
 
         if conn:
             # Exécuter la requête SQL pour obtenir les montants dus par fournisseur
-            query = "SELECT Etat, SUM(Montant) AS MontantTotal FROM dbo.source GROUP BY Etat"
+            query = """SELECT facture.Etat, SUM(f.Montant) AS MontantTotal 
+            FROM dbo.fait f 
+            JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+            GROUP BY facture.Etat
+            """
             results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
 
             if results:
@@ -331,34 +369,62 @@ class MontantTotalParEtat(Action):
             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
 
         return []
-# -----------------------------------------------------------------------------------------------------------------
 
-class ActionAfficherMontantsEtat(Action):
+
+# -----------------------------------------------------------------------------------------------------------------
+     
+class ActionAfficherMontantsEtat(Action):#fonctionne pass!!
     def name(self) -> Text:
         return "action_afficher_montants_etat"
+
+    def normalize_etat(self, etat: Text) -> Text:
+        # Normalisation de l'état pour rendre la comparaison insensible à la casse et aux espaces
+        return etat.strip().lower()
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-        # Obtenir l'état de la requête de l'utilisateur
-        etat = tracker.get_slot('Etat')
+        # Obtention de l'état de la requête de l'utilisateur
+        etat_raw = tracker.get_slot('Etat')
+         
+         
+        if etat_raw is None:
+            dispatcher.utter_message(text="Je suis désolé, je n'ai pas compris l'état que vous avez fourni.")
+            return []
         
-        # Requête SQL pour obtenir tous les montants correspondant à l'état
+        etat = self.normalize_etat(etat_raw)
+        
+        # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
         cursor = conn.cursor()
-        cursor.execute("SELECT Référence, Fournisseur, Facture, Date, Montant, Etat, type FROM dbo.source WHERE Etat = ?", (etat,))
+        # Requête SQL pour obtenir tous les montants correspondant à l'état
+        query = """SELECT Fournisseur.Fournisseur , Facture.Référence , Facture.Facture , Date.Date , f.Montant , Facture.Etat , Fournisseur.type
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey WHERE facture.État = ?"""
+        cursor.execute(query, (etat,))
         rows = cursor.fetchall()
         
         if rows:
             message = "Voici les montants pour l'état {} :".format(etat)
             for row in rows:
-                reference, fournisseur, facture, date, montant, etat, type = row
-                message += f"\nRéférence: {reference}, Fournisseur: {fournisseur}, Facture: {facture}, Date: {date}, Montant: {montant}, État: {etat}, Type: {type}"
+                reference, fournisseur, facture, date, montant, type = row
+                message += f"\nRéférence: {reference}, Fournisseur: {fournisseur}, Facture: {facture}, Date: {date}, Montant: {montant}, Type: {type}"
             dispatcher.utter_message(text=message)
+
+            # Demander à l'utilisateur s'il souhaite afficher tous les montants
+            dispatcher.utter_message(text="Souhaitez-vous afficher tous les montants pour d'autres états?")
+
         else:
-            dispatcher.utter_message(text="Aucun montant trouvé pour cet état.")
-        
+            # Aucun montant trouvé pour cet état
+            dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état '{etat_raw}'.")
+            # Demander à l'utilisateur de fournir un autre état ou de continuer
+            dispatcher.utter_message(text="Veuillez fournir un autre état ou indiquer si vous souhaitez continuer.")
+
         return []
+
+
 
 
 # -----------------------------------------------------------------------------------------------------------------
@@ -388,7 +454,7 @@ class ActionGetTypeByAmount(Action):
 
         # Interagir avec la base de données pour obtenir le type correspondant au montant
         cursor = conn.cursor()
-        cursor.execute("SELECT type FROM dbo.source WHERE Montant = ?", (amount,))
+        cursor.execute("SELECT founrisseur.type FROM dbo.fait f JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur WHERE f.Montant = ?", (amount,))
         result = cursor.fetchone()
         conn.close()
 
