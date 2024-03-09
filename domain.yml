@@ -30,6 +30,8 @@ intents:
 - informer_etat_créé
 - informer_etat_validé
 - ask_type
+- demande_montant_type
+- next_Montant_Total_Par_Type
 
 entities:
 - number
@@ -51,7 +53,7 @@ slots:
       - type: from_entity
         entity: Etat
 
-  Type:
+  type:
     type: text
     influence_conversation: true
     mappings:
@@ -113,6 +115,9 @@ responses:
   - text: Quelle est la date pour laquelle vous souhaitez connaître le montant?
   utter_next_Montant_Total_Par_Etat:
   - text: Voudriez afficher ceux qui sont d'état validé/Créé ou Prêt pour paiement
+  utter_next_Montant_Total_Par_Type:
+  - text: Quel type voudriez-vous détailler davantage?
+
 
 session_config:
   session_expiration_time: 60
@@ -131,3 +136,4 @@ actions:
 - action_afficher_montants_etat_prets
 - action_afficher_montants_etat_crees
 - action_afficher_montants_etat_validees
+- Montant_Par_Type

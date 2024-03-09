@@ -324,3 +324,35 @@ nlu:
     - Pouvez-vous me dire les montants pour tous les Types ?
     - Peux-tu me dire le montant total pour les types s'il te plaît ?
 
+- intent: demande_montant_type 
+  examples: |
+    - Peux-tu me dire les dépenses pour le type [ des cartes et systèmes électroniques](type) ?
+    - Je choisis de savoir sur le type [agence de communication](type) ?
+    - detaille moi [agence de voyage](type)
+    - [assurance](type)
+    - Combien a-t-on dépensé pour le type [Assurance/Consulting](type) ?
+    - je voudrais savoir sur [automobile](type) ?
+    - detaille moi [avocat](type)
+    - Quel est le montant pour le type [banque/assurance](type) ?
+    - detaille moi [bureautique](type)
+    - [centre dappele](type)
+    - [consulting](type)
+    - affiche moi les details sur [decoration](type)
+    - [domaine electricite](type)
+    - J'aimerais connaître les montants pour le type [equipement](type) ?
+    - [equipement Electriques](type)
+    - J'aimerais connaître les montants pour le type [équipement pour le bâtiment](type) ?
+    - Quel est le montant pour le type [expertise](type) ?
+    - Peux-tu me dire les dépenses pour le type [formattion](type) ?
+    - J'aimerais connaître les montants pour le type [industrie](type) ?
+    - [informatique](type)
+    - Quel est le montant pour le type [kiosque](type) ?
+    - Peux-tu me dire les dépenses pour le type [laboratoire](type) ?
+    - je voudrais savoir sur [mecanique](type) ?
+    - Peux-tu me dire les dépenses pour le type [medical](type) ?
+    - Je choisis de savoir sur le type [meubles](type) ?
+    - Peux-tu me dire les dépenses pour le type [société](type) ?
+    - je voudrais savoir sur [societe de livraison](type) ?
+    - affiche moi les details sur [societe de vetements](type)
+    - Peux-tu me dire les dépenses pour le type [transit](type) ?
+    - Peux-tu me dire les dépenses pour le type [vente different produit](type) ?

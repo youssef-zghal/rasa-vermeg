@@ -2,6 +2,20 @@
 from tkinter import EventType
 import pyodbc
 
+def executer_autre_fichier():
+    try:
+        # Chemin vers le fichier Python à exécuter
+        chemin_fichier = '/data/Retrieval.py'
+
+        # Exécute le fichier Python
+        with open(chemin_fichier, 'r') as fichier:
+            code = fichier.read()
+            exec(code)
+
+    except FileNotFoundError:
+        print("Le fichier spécifié est introuvable.")
+executer_autre_fichier()
+
 def se_connecter_a_ssms():
     try:
         # Remplacez les valeurs ci-dessous par vos propres informations de connexion
@@ -14,7 +28,6 @@ def se_connecter_a_ssms():
 
         # Se connecter à la base de données
         conn = pyodbc.connect(connection_string)
-
         # Retourner la connexion
         return conn
 
@@ -536,7 +549,7 @@ class MontantTotalParType(Action):
                     type = row[0]
                     montant_total = row[1]
                     dispatcher.utter_message(
-                        text=f"Type' {type} -> {montant_total}."
+                        text=f"Type: {type} -> {montant_total}."
                     )
             else:
                 dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver les informations sur les montants dus par type.")
@@ -548,7 +561,43 @@ class MontantTotalParType(Action):
 # -----------------------------------------------------------------------------------------------------------------
 
 
+class MontantParType(Action):
+    def name(self) -> Text:
+        return "Montant_Par_Type"
 
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+        # Récupérer la valeur du slot 'type' de l'objet tracker
+        requested_type = tracker.get_slot("type")
+        
+        if requested_type is None:
+            dispatcher.utter_message(text="Désolé, je n'ai pas compris le type demandé.")
+            return []
 
+        # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
+        cursor = conn.cursor()
+        # Requête SQL pour obtenir tous les montants correspondant à un type donné
+        query = """SELECT Fournisseur.Fournisseur, f.Montant, Fournisseur.type
+                   FROM dbo.fait f 
+                   JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                   WHERE Fournisseur.type = ?"""
+
+        # Exécuter la requête SQL avec le type en tant que paramètre sécurisé
+        cursor.execute(query, (requested_type,))
+        results = cursor.fetchall()
+
+        if results:
+            for result in results:
+                # Récupérer les détails de chaque facture
+                fournisseur, montant, type = result
+                dispatcher.utter_message(
+                    text=f"Le fournisseur {fournisseur} a un montant de {montant} pour le type {type}."
+                )
+        else:
+            # Aucun montant trouvé pour le type demandé
+            dispatcher.utter_message(text=f"Aucun montant trouvé pour le type demandé.")
+
+        return []
 

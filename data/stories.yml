@@ -97,3 +97,12 @@ stories:
   steps:
   - intent: ask_type
   - action: Montant_Total_Par_Type
+  - action: utter_next_Montant_Total_Par_Type
+  - intent: demande_montant_type
+  - action: Montant_Par_Type
+
+- story: Obtenir le montant par type
+  steps:
+  - intent: demande_montant_type
+  - action: Montant_Par_Type
+
