@@ -97,4 +97,3 @@ stories:
   steps:
   - intent: ask_type
   - action: Montant_Total_Par_Type
-  

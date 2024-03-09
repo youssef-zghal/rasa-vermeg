@@ -482,7 +482,6 @@ import re
 class ActionGetTypeByAmount(Action):
     def name(self) -> Text:
         return "action_get_type_by_amount"
-
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
@@ -493,20 +492,16 @@ class ActionGetTypeByAmount(Action):
         # Extraire le montant à partir du texte du message en utilisant une expression régulière
         matches = re.findall(r'\d+', message)
         amount = int(matches[0]) if matches else None
-
         if not amount:
             dispatcher.utter_message("Je n'ai pas compris le montant.")
             return []
-
         # Connexion à la base de données
         conn = se_connecter_a_ssms() 
-
         # Interagir avec la base de données pour obtenir le type correspondant au montant
         cursor = conn.cursor()
-        cursor.execute("SELECT founrisseur.type FROM dbo.fait f JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur WHERE f.Montant = ?", (amount,))
+        cursor.execute("SELECT fournisseur.type FROM dbo.fait f JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur WHERE f.Montant = ?", (amount,))
         result = cursor.fetchone()
         conn.close()
-
         if result:
             type = result[0]
             dispatcher.utter_message(f"Le type pour le montant {amount} est {type}.")
@@ -514,7 +509,6 @@ class ActionGetTypeByAmount(Action):
             dispatcher.utter_message("Je n'ai pas trouvé de type pour ce montant.")
 
         return []
-
 # -----------------------------------------------------------------------------------------------------------------
 
 import re
@@ -531,7 +525,10 @@ class MontantTotalParType(Action):
 
         if conn:
             # Exécuter la requête SQL pour obtenir les montants dus par fournisseur
-            query = "SELECT type, SUM(Montant) AS MontantTotal FROM dbo.source GROUP BY type"
+            query = f""" SELECT Fournisseur.type , SUM(f.Montant) AS MontantTotal 
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                    GROUP BY type """  
             results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
 
             if results:
@@ -547,6 +544,8 @@ class MontantTotalParType(Action):
             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
 
         return []
+
+# -----------------------------------------------------------------------------------------------------------------
 
 
 

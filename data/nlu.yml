@@ -278,6 +278,7 @@ nlu:
   examples: |
     - donne moi les details de la facture ayant un montant égal à [7559854598](number) ?
     - montant égal à [7559854598](number) ?
+
 - intent: Montant_total_fournisseur  
   examples: |
     - Quel est le montant total pour tous les fournisseurs ?
@@ -290,7 +291,7 @@ nlu:
     - Que sont les montants pour tous les états ?
     - Pouvez-vous me dire les montants pour tous les états ?
     - Quelle est la situation financière ?
-    
+
 - intent: informer_etat_validé
   examples: |
     - Validé    
@@ -310,10 +311,16 @@ nlu:
     - ceux qui sont pret
     - les factures qui sont prets pour le paiement
 
-  
+- intent: ask_type_by_amount
+  examples: |
+    - Quel est le type pour [500](amount) ?
+    - Pour ce montant de [1000](amount), quel est le type ?
+    - Type correspondant à [300](amount) ?
+    - Le type pour [500](amount) ?
 
 - intent: ask_type
   examples: |
     - Que sont les montants pour tous les types ?
     - Pouvez-vous me dire les montants pour tous les Types ?
     - Peux-tu me dire le montant total pour les types s'il te plaît ?
+
