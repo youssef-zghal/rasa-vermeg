@@ -601,3 +601,48 @@ class MontantParType(Action):
 
         return []
 
+
+# -----------------------------------------------------------------------------------------------------------------
+
+class MontantParFournisseur(Action):
+    def name(self) -> Text:
+        return "Montant_Par_Fournisseur"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Récupérer la valeur du slot 'Fournisseur' de l'objet tracker
+        requested_fournisseur = tracker.get_slot("Fournisseur")
+        
+        if requested_fournisseur is None:
+            dispatcher.utter_message(text="Désolé, je n'ai pas compris le fournisseur demandé.")
+            return []
+
+
+            # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
+        cursor = conn.cursor()
+            
+            # Requête SQL pour obtenir les montants correspondant à un fournisseur donné
+        query = """SELECT Fournisseur.Fournisseur, f.Montant, Fournisseur.Type
+                    FROM dbo.Fait f 
+                    JOIN dbo.[Dimension Fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_Fournisseur
+                    WHERE Fournisseur.Fournisseur = ?"""
+
+            # Exécuter la requête SQL avec le fournisseur en tant que paramètre sécurisé
+        cursor.execute(query, (requested_fournisseur,))
+        results = cursor.fetchall()
+
+        if results:
+            for result in results:
+                    # Récupérer les détails de chaque facture
+                fournisseur, montant, type = result
+                dispatcher.utter_message(
+                    text=f"Le fournisseur {fournisseur} a un montant de {montant} pour le type {type}."
+                )
+        else:
+                # Aucun montant trouvé pour le fournisseur demandé
+            dispatcher.utter_message(text=f"Aucun montant trouvé pour le fournisseur demandé.")
+
+
+        return []

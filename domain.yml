@@ -32,6 +32,7 @@ intents:
 - ask_type
 - demande_montant_type
 - next_Montant_Total_Par_Type
+- demande_montant_fournisseur
 
 entities:
 - number
@@ -137,3 +138,4 @@ actions:
 - action_afficher_montants_etat_crees
 - action_afficher_montants_etat_validees
 - Montant_Par_Type
+- Montant_Par_Fournisseur

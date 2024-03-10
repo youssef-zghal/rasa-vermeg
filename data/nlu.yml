@@ -327,32 +327,171 @@ nlu:
 - intent: demande_montant_type 
   examples: |
     - Peux-tu me dire les dépenses pour le type [ des cartes et systèmes électroniques](type) ?
-    - Je choisis de savoir sur le type [agence de communication](type) ?
-    - detaille moi [agence de voyage](type)
-    - [assurance](type)
-    - Combien a-t-on dépensé pour le type [Assurance/Consulting](type) ?
-    - je voudrais savoir sur [automobile](type) ?
+    - Quel est le montant pour le type [agence de communication](type) ?
+    - Je choisis de savoir sur le type [agence de voyage](type) ?
+    - J'aimerais connaître les montants pour le type [assurance](type) ?
+    - affiche moi les details sur [Assurance/Consulting](type)
+    - Je choisis de savoir sur le type [automobile](type) ?
     - detaille moi [avocat](type)
     - Quel est le montant pour le type [banque/assurance](type) ?
-    - detaille moi [bureautique](type)
-    - [centre dappele](type)
-    - [consulting](type)
-    - affiche moi les details sur [decoration](type)
-    - [domaine electricite](type)
-    - J'aimerais connaître les montants pour le type [equipement](type) ?
-    - [equipement Electriques](type)
+    - J'aimerais connaître les montants pour le type [bureautique](type) ?
+    - detaille moi [centre dappele](type)
+    - je voudrais savoir sur [consulting](type) ?
+    - je voudrais savoir sur [decoration](type) ?
+    - Peux-tu me dire les dépenses pour le type [domaine electricite](type) ?
+    - detaille moi [equipement](type)
+    - Combien a-t-on dépensé pour le type [equipement Electriques](type) ?
     - J'aimerais connaître les montants pour le type [équipement pour le bâtiment](type) ?
-    - Quel est le montant pour le type [expertise](type) ?
-    - Peux-tu me dire les dépenses pour le type [formattion](type) ?
-    - J'aimerais connaître les montants pour le type [industrie](type) ?
-    - [informatique](type)
-    - Quel est le montant pour le type [kiosque](type) ?
+    - je voudrais savoir sur [expertise](type) ?
+    - J'aimerais connaître les montants pour le type [formattion](type) ?
+    - affiche moi les details sur [industrie](type)
+    - detaille moi [informatique](type)
+    - J'aimerais connaître les montants pour le type [kiosque](type) ?
     - Peux-tu me dire les dépenses pour le type [laboratoire](type) ?
-    - je voudrais savoir sur [mecanique](type) ?
-    - Peux-tu me dire les dépenses pour le type [medical](type) ?
-    - Je choisis de savoir sur le type [meubles](type) ?
-    - Peux-tu me dire les dépenses pour le type [société](type) ?
-    - je voudrais savoir sur [societe de livraison](type) ?
-    - affiche moi les details sur [societe de vetements](type)
-    - Peux-tu me dire les dépenses pour le type [transit](type) ?
-    - Peux-tu me dire les dépenses pour le type [vente different produit](type) ?
+    - Combien a-t-on dépensé pour le type [mecanique](type) ?
+    - [medical](type)
+    - [meubles](type)
+    - detaille moi [société](type)
+    - detaille moi [societe de livraison](type)
+    - Quel est le montant pour le type [societe de vetements](type) ?
+    - Je choisis de savoir sur le type [transit](type) ?
+    - [vente different produit](type)
+- intent: demande_montant_fournisseur 
+  examples: |
+    - [ADHECOM SARL](Fournisseur)
+    - Combien [AIRCO](Fournisseur) a-t-il facturé ?
+    - [AL MAADEN](Fournisseur)
+    - Combien [AMM](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [ARC BUREAUTIQUE](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [ARCHIDOC](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [ASSAD INDUSTRIAL](Fournisseur) ?
+    - [AST AVENIR SERVICE TRANSPORT](Fournisseur)
+    - [ATR CORPORATE ET CONSULTING](Fournisseur)
+    - Pouvez-vous me donner le montant pour [Avocat Hatem Kourda](Fournisseur) ?
+    - Combien [BAIEXPRESS](Fournisseur) a-t-il facturé ?
+    - Combien [BECHIR FAKHFAKH](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [BEST CAR](Fournisseur) ?
+    - [BOUDRANT](Fournisseur)
+    - Quel est le montant pour le fournisseur [BTP-EQUIPEMENT](Fournisseur) ?
+    - Combien [CABINET BEN CHEIKH HENDA](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [CAR PRO](Fournisseur) ?
+    - Combien [Cash&Carry](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [CDTPR](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [Chiffon d’Essuyage Tunisienne](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [CMG](Fournisseur) ?
+    - Combien [CMVI](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [COMET](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [COREME](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [CREATIVE AD. SCHOOL](Fournisseur) ?
+    - [DELLMANN](Fournisseur)
+    - Pouvez-vous me donner le montant pour [DELOITTE](Fournisseur) ?
+    - Combien [DIESEL ENERGY](Fournisseur) a-t-il facturé ?
+    - [Dr. Jamel Darragi](Fournisseur)
+    - Combien [EDT](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [ELECSA-TN](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [ELECTROCNIC DESIGN SERVICE  *EDS](Fournisseur) ?
+    - Combien [ELWIFEK FLEXIBLES ](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [EQUIPEMENT MODERNE AUTOMOTIVE](Fournisseur) ?
+    - Combien [EQUIPEMENT MODERNE HARDWARE](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [EQUIPEMENTS SOUSSI](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [ETS BEN YOUSSEF](Fournisseur) ?
+    - [ETS BERRAIES](Fournisseur)
+    - Pouvez-vous me donner le montant pour [EURO PARTS](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [EXCELLIA CREANCE](Fournisseur) ?
+    - [GAM](Fournisseur)
+    - [GARAGE DU NORD BOURAOUI ZARDI](Fournisseur)
+    - Pouvez-vous me donner le montant pour [GAS](Fournisseur) ?
+    - Combien [GATTOUSSI MECANIQUE GENERALE](Fournisseur) a-t-il facturé ?
+    - [GEELEC](Fournisseur)
+    - [GEISER](Fournisseur)
+    - Quel est le montant pour le fournisseur [GENERAL RADIATORS](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [GENERAL TRANSPORT INTERNATIONAL   (GTI)](Fournisseur) ?
+    - [GLAMIVER](Fournisseur)
+    - Quel est le montant pour le fournisseur [GLOBAL RECOUVREMENT](Fournisseur) ?
+    - [ICAR SA](Fournisseur)
+    - Pouvez-vous me donner le montant pour [IDEAL ORAGANISATION SERVICES](Fournisseur) ?
+    - Combien [IDEALE AUTO NEGOCE](Fournisseur) a-t-il facturé ?
+    - Combien [Industrial Technical Services  ](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [Innovation mécanique industrielle](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [INTERNATIONAL TRANSIT](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [IRES](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [J.M.S PLUS](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [JOUINI ELECTRIQUE INDUSTRIEL](Fournisseur) ?
+    - Combien [KAIS DORGHAM MECANIQUE AUTO](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [LA BATTERIE ](Fournisseur) ?
+    - Combien [La BATTERIE INDUSTRIELLE](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [LA PRECISION T.M.T](Fournisseur) ?
+    - Combien [LE MOTEUR DIESEL](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [LE PROFESSIONNEL](Fournisseur) ?
+    - Combien [Loogik Interactive](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [LOURD DEPANN](Fournisseur) ?
+    - [MAC BUREAU](Fournisseur)
+    - Pouvez-vous me donner le montant pour [Maitre Yahyaoui Mustapha](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [MARE](Fournisseur) ?
+    - Combien [MECANICA DIVISION GROS](Fournisseur) a-t-il facturé ?
+    - [MEGA NUMERIQUE](Fournisseur)
+    - Pouvez-vous me donner le montant pour [MEZGHANI PLUS MEUBLES](Fournisseur) ?
+    - Combien [MMSE ](Fournisseur) a-t-il facturé ?
+    - [MONDIAL ELECTRIC](Fournisseur)
+    - [PEARTECH](Fournisseur)
+    - Quel est le montant pour le fournisseur [PIMA](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [POLYCARGO](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [QUEEN FORMATION](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [RAPID POSTE](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [ROYALTYRE](Fournisseur) ?
+    - Combien [SBIKA PROTECTION](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [SCCM BF](Fournisseur) ?
+    - [SELECT TRAVEL ET TOURS](Fournisseur)
+    - Pouvez-vous me donner le montant pour [SHOPEX ](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [SHYK AUTO](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [SIMEC](Fournisseur) ?
+    - Combien [SINPAR](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [SMART ELECTRIC](Fournisseur) ?
+    - [SMART TACHY](Fournisseur)
+    - [SOCAGE](Fournisseur)
+    - Quel est le montant pour le fournisseur [SOCIETE BEN MESSAOUD FRERES](Fournisseur) ?
+    - [SOCIETE DE MANUTENSION HELALI SARL](Fournisseur)
+    - Quel est le montant pour le fournisseur [SOCIETE ELBEZ DISTRIBUTION](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [SOCIETE IMPRIMERIE DU CENTRE](Fournisseur) ?
+    - Combien [SOCIETE KACEM ET FILS](Fournisseur) a-t-il facturé ?
+    - Combien [SOCIETE PIECES ET MATERIELS  SPM](Fournisseur) a-t-il facturé ?
+    - [SODICA](Fournisseur)
+    - Quel est le montant pour le fournisseur [SOGEMAQ](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [SOREM](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [SOTUFLEX](Fournisseur) ?
+    - [SPAIE](Fournisseur)
+    - [SPIT ENGINS](Fournisseur)
+    - Pouvez-vous me donner le montant pour [SSG SOCIETE SADRABAAL DE GARDIENNAGE](Fournisseur) ?
+    - Combien [SSTM](Fournisseur) a-t-il facturé ?
+    - Combien [STAFIM](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [STAR EQUIPEMENTS](Fournisseur) ?
+    - [STATION PNEU CHOUCHA (SPC)](Fournisseur)
+    - Combien [STE ALLO SERVICE REMORQUAGE](Fournisseur) a-t-il facturé ?
+    - Combien [STE BRAVO DES SERVICES](Fournisseur) a-t-il facturé ?
+    - Combien [STE BSA](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [STE COSTA RENT A CAR](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [STE EMEM DU CAPBON](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [STE GHAMMAM NEGOCE](Fournisseur) ?
+    - Combien [STE JOMAA SA](Fournisseur) a-t-il facturé ?
+    - [STE LE MOTEUR HOUSE](Fournisseur)
+    - Quel est le montant pour le fournisseur [STE OTOKAR ](Fournisseur) ?
+    - Combien [STE POLY ELECTRIC AKOUDA](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [STE POWER PROFESSIONEL TRANSPORT](Fournisseur) ?
+    - Combien [STE T.D.S](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [STE ZOUHAIR KARRAY SECURITE](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [STPR](Fournisseur) ?
+    - [Stratégie Digitale](Fournisseur)
+    - Combien [STRPA](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [SUD METAL](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [TASNIME VOYAGE ET TOURISME](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [Téchnique informatique et bureautique](Fournisseur) ?
+    - [TECHNOMACHINE](Fournisseur)
+    - Quel est le montant pour le fournisseur [TOOFAST TECHNIC SERVICE PNEUS](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [TOTAL TUNISIE](Fournisseur) ?
+    - Combien [TOUDECORS SARL](Fournisseur) a-t-il facturé ?
+    - Combien [TPS](Fournisseur) a-t-il facturé ?
+    - [UHD](Fournisseur)
+    - Pouvez-vous me donner le montant pour [USP](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [VALORIA S.A](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [VOGUE DISTRIBUTION](Fournisseur) ?
+    - Combien [ZRIBI MAJDI ARCHITECTE ET EXPERT BATIMENT](Fournisseur) a-t-il facturé ?

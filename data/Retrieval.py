@@ -62,13 +62,23 @@ def main():
             for row in results:
                 etats.append(row.Etat)
         return etats
+    
+    def obtenir_Fournisseur(conn):
+        Fournisseur = []
+        sql_query = "SELECT DISTINCT Fournisseur FROM dbo.[Dimension Fournisseur]"
+        results = executer_requete(conn, sql_query)
+        if results:
+            for row in results:
+                Fournisseur.append(row.Fournisseur)
+        return Fournisseur
 
     def inserer_dans_dictionnaire(file_name, data):
         with open(file_name, "w", encoding="utf-8") as file:
             file.write("# Nouveaux éléments\n")
             file.write("data = [\n")
             for item in data:
-                file.write(f"    '{item}',\n")
+                escaped_item = item.replace("'", "\\'")  # Échapper les apostrophes
+                file.write(f"    '{escaped_item}',\n")
             file.write("]\n")
 
     import re
@@ -90,7 +100,7 @@ def main():
     # Fonction pour générer le contenu du fichier nlu.yml
     import random
 
-    def generate_nlu_content(elements):
+    def generate_nlu_contentType(elements):
         formulations = [
             "Quel est le montant pour le type [{element}](type) ?",
             "Combien a-t-on dépensé pour le type [{element}](type) ?",
@@ -108,6 +118,22 @@ def main():
             formulation = random.choice(formulations)
             content += f"    - {formulation}\n".format(element=element)
         return content
+
+    def generate_nlu_contentFournisseur(elements):
+        formulations = [
+            "Quel est le montant pour le fournisseur [{element}](Fournisseur) ?",
+            "Pouvez-vous me donner le montant pour [{element}](Fournisseur) ?",
+            "Combien [{element}](Fournisseur) a-t-il facturé ?",
+            "[{element}](Fournisseur)",
+
+        ]
+        
+        content = "- intent: demande_montant_fournisseur \n  examples: |\n"
+        for element in elements:
+            formulation = random.choice(formulations)
+            content += f"    - {formulation}\n".format(element=element)
+        return content
+
 
     # --
 
@@ -138,25 +164,66 @@ def main():
                     continue
 
         # print("Le code a été détecté et effacé avec succès.")
+                
+    def effacerFournisseur():
+        # Lecture du contenu du fichier nlu.yml
+        with open('data/nlu.yml', 'r') as file:
+            lines = file.readlines()
+
+        # Ouverture du fichier en mode écriture pour y écrire les lignes filtrées
+        with open('data/nlu.yml', 'w') as file:
+            # Variable pour suivre si nous sommes à l'intérieur du bloc à supprimer
+            inside_block = False
+            for line in lines:
+                # Si nous sommes à l'intérieur du bloc et que nous trouvons une ligne vide, le bloc est terminé
+                if inside_block and line.strip() == "":
+                    inside_block = False
+                    continue
+
+                # Si nous ne sommes pas dans le bloc, écrivons la ligne
+                if not inside_block:
+                    # Vérifions si la ligne correspond au début du bloc à supprimer
+                    if line.strip().startswith('- intent: demande_montant_fournisseur'):
+                        inside_block = True
+                    else:
+                        file.write(line)
+                # Si nous sommes à l'intérieur du bloc, passons à la ligne suivante sans écrire
+                else:
+                    continue
 
     conn = se_connecter_a_ssms1()
     if conn:
         types = obtenir_types(conn)
         etats = obtenir_etats(conn)
+        Fournisseur = obtenir_Fournisseur(conn)
         inserer_dans_dictionnaire("dictionnaire_Types.py", types)
         inserer_dans_dictionnaire("dictionnaire_Etats.py", etats)
+        inserer_dans_dictionnaire("dictionnaire_Fournisseur.py", Fournisseur)
         # print("Types et états insérés avec succès dans les fichiers.")
         effacerType()
+        effacerFournisseur()
+
 # Chemin vers le fichier dictionnaire_Etats.py
-        file_path = "data/dictionnaire_Types.py"
+        file_path = "dictionnaire_Types.py"
 # Extraction des éléments
         elements = extract_elements(file_path)
 # Génération du contenu du fichier nlu.yml
-        nlu_content = generate_nlu_content(elements)
+        nlu_content = generate_nlu_contentType(elements)
 # Écriture du contenu dans le fichier nlu.yml
         with open("data/nlu.yml", "a", encoding="utf-8") as nlu_file:
             nlu_file.write(nlu_content)
-        # print("Le fichier nlu.yml a été généré avec succès.")
+# print("Le fichier nlu.yml a été généré avec succès.")
+            
+# Chemin vers le fichier dictionnaire_Fournisseur.py
+        file_path2 = "dictionnaire_Fournisseur.py"
+# Extraction des éléments
+        elements2 = extract_elements(file_path2)
+# Génération du contenu du fichier nlu.yml
+        nlu_content2 = generate_nlu_contentFournisseur(elements2)
+# Écriture du contenu dans le fichier nlu.yml
+        with open("data/nlu.yml", "a", encoding="utf-8") as nlu_file2:
+            nlu_file2.write(nlu_content2)
+# print("Le fichier nlu.yml a été généré avec succès.")
         conn.close()
 
 if __name__ == "__main__":

@@ -106,3 +106,7 @@ stories:
   - intent: demande_montant_type
   - action: Montant_Par_Type
 
+- story: Demande de montant pour un fournisseur
+  steps:
+  - intent: demande_montant_fournisseur
+  - action: Montant_Par_Fournisseur
