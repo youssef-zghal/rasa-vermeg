@@ -334,7 +334,7 @@ class ActionObtenirMontantDate(Action):
         
         # Requête SQL pour obtenir tous les montants correspondant à la date
         cursor = conn.cursor()
-        cursor.execute("SELECT f.montant FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey  WHERE date.date = ?", (date,))
+        cursor.execute("SELECT DISTINCT f.montant FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey  WHERE date.date = ?", (date,))
         rows = cursor.fetchall()
         
         if rows:
@@ -706,18 +706,14 @@ class ActionRecupererMontantParDate(Action):
 
         # Exécuter la requête SQL pour récupérer les montants à payer
         cursor = conn.cursor()
-        query = "SELECT f.montant FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey WHERE date.date BETWEEN ? AND ?"
+        query = "SELECT DISTINCT f.montant FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey WHERE date.date BETWEEN ? AND ?"
         cursor.execute(query, (start_date, end_date))
         rows = cursor.fetchall()
-
-        # Fermer la connexion à la base de données
-        conn.close()
 
         # Rassembler les montants récupérés
         montants = [row[0] for row in rows]
 
         # Envoyer les montants récupérés au dispatcher
-        montants = list(set(montants)) 
         dispatcher.utter_message(f"Les montants à payer sont : {', '.join(map(str, montants))}")
 
         return []

@@ -350,9 +350,10 @@ nlu:
 
 - intent: intervalle_par_date
   examples: |
-    - Quels sont les montants à payer entre [2024-01-01](start_date) et [2024-01-31](end_date) ?
     - Combien devons-nous payer pour la période allant du [2024-01-01](start_date) au [2024-01-31](end_date) ?
-    - Donne-moi les montants à payer du [2024-01-01](start_date) au [2024-01-31](end_date).
+    - le montant a payée entre [2024-01-01](start_date) et [2024-01-31](end_date).
+    - [2024-01-01](start_date) et [2024-01-31](end_date)
+    - quelle sont les payement reste a payée entre [2024-01-01](start_date) et [2024-01-31](end_date) ?
 
 - intent: demande_montant_type 
   examples: |
