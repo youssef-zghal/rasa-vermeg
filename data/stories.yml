@@ -10,6 +10,10 @@ stories:
     - Montant: 9874561230
   - action: action_obtenir_Fournisseur_montant
 
+- story: Demande de intervalle par date
+  steps:
+  - intent: intervalle_par_date
+  - action: action_Recuperer_Montant_Par_Date
 
 - story: montant par date
   steps:
@@ -44,6 +48,9 @@ stories:
   steps:
     - intent: Montant_total_fournisseur
     - action: action_montant_total_fournisseurs
+    - action: utter_next_Montant_Total_Par_Fournisseur
+    - intent: demande_montant_fournisseur
+    - action: Montant_Par_Fournisseur
 
 - story: Montant egal
   steps:
@@ -110,3 +117,18 @@ stories:
   steps:
   - intent: demande_montant_fournisseur
   - action: Montant_Par_Fournisseur
+
+- story: demande nombre de fournisseur
+  steps:
+  - intent: inform_fournisseur_count
+  - action: action_count_Fournisseur
+
+- story: demande nombre de Type
+  steps:
+  - intent: inform_Type_count
+  - action: action_count_Type
+
+- story: demande nombre de Facture
+  steps:
+  - intent: inform_facture_count
+  - action: action_count_Facture

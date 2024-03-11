@@ -646,3 +646,80 @@ class MontantParFournisseur(Action):
 
 
         return []
+
+# -----------------------------------------------------------------------------------------------------------------
+
+class ActionCountFournisseur(Action):
+    def name(self):
+        return "action_count_Fournisseur"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        try:            
+            # Exécutez la requête pour compter les fournisseurs
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM dbo.[Dimension Fournisseur]")
+            count = cursor.fetchone()[0]  # Obtenez le nombre de fournisseurs
+
+            # Envoyez la réponse au dispatcher pour la réponse de l'assistant
+            dispatcher.utter_message(text=f"Vous avez {count} fournisseurs dans votre base de données.")
+        except Exception as e:
+            # En cas d'erreur, affichez un message d'erreur
+            dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
+
+        return []
+    
+
+# -----------------------------------------------------------------------------------------------------------------
+
+class ActionCountType(Action):
+    def name(self):
+        return "action_count_Type"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        try:            
+            # Exécutez la requête pour compter les fournisseurs
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(distinct(Type)) FROM dbo.[Dimension Fournisseur]")
+            count = cursor.fetchone()[0]  # Obtenez le nombre de fournisseurs
+
+            # Envoyez la réponse au dispatcher pour la réponse de l'assistant
+            dispatcher.utter_message(text=f"Vous avez {count} Types dans votre base de données.")
+        except Exception as e:
+            # En cas d'erreur, affichez un message d'erreur
+            dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
+
+        return []
+    
+# -----------------------------------------------------------------------------------------------------------------
+
+class ActionRecupererMontantParDate(Action):
+    def name(self):
+        return "action_Recuperer_Montant_Par_Date"
+
+    def run(self, dispatcher, tracker, domain):
+        # Extraire les slots de date du tracker
+        start_date = tracker.get_slot("start_date")
+        end_date = tracker.get_slot("end_date")
+
+        # Se connecter à la base de données
+        conn = se_connecter_a_ssms()
+
+        # Exécuter la requête SQL pour récupérer les montants à payer
+        cursor = conn.cursor()
+        query = "SELECT f.montant FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey WHERE date.date BETWEEN ? AND ?"
+        cursor.execute(query, (start_date, end_date))
+        rows = cursor.fetchall()
+
+        # Fermer la connexion à la base de données
+        conn.close()
+
+        # Rassembler les montants récupérés
+        montants = [row[0] for row in rows]
+
+        # Envoyer les montants récupérés au dispatcher
+        montants = list(set(montants)) 
+        dispatcher.utter_message(f"Les montants à payer sont : {', '.join(map(str, montants))}")
+
+        return []
+
+    

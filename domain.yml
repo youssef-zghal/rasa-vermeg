@@ -33,6 +33,11 @@ intents:
 - demande_montant_type
 - next_Montant_Total_Par_Type
 - demande_montant_fournisseur
+- inform_fournisseur_count
+- inform_Type_count
+- inform_facture_count
+- intervalle_par_date
+
 
 entities:
 - number
@@ -41,8 +46,23 @@ entities:
 - date
 - Etat
 - type
+- start_date
+- end_date
 
 slots:
+
+  start_date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: start_date
+
+  end_date:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: end_date
+
   Etat:
     type: categorical
     influence_conversation: true
@@ -118,6 +138,8 @@ responses:
   - text: Voudriez afficher ceux qui sont d'état validé/Créé ou Prêt pour paiement
   utter_next_Montant_Total_Par_Type:
   - text: Quel type voudriez-vous détailler davantage?
+  utter_next_Montant_Total_Par_Fournisseur:
+  - text: Quel est le Fournisseur voudriez-vous détailler davantage?
 
 
 session_config:
@@ -139,3 +161,7 @@ actions:
 - action_afficher_montants_etat_validees
 - Montant_Par_Type
 - Montant_Par_Fournisseur
+- action_count_Fournisseur
+- action_count_Type
+- action_count_Facture
+- action_Recuperer_Montant_Par_Date
