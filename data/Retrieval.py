@@ -72,6 +72,15 @@ def main():
                 Fournisseur.append(row.Fournisseur)
         return Fournisseur
 
+    def obtenir_Facture(conn):
+        Facture = []
+        sql_query = "SELECT DISTINCT Facture FROM dbo.[Dimensions Facture]"
+        results = executer_requete(conn, sql_query)
+        if results:
+            for row in results:
+                Facture.append(row.Facture)
+        return Facture
+    
     def inserer_dans_dictionnaire(file_name, data):
         with open(file_name, "w", encoding="utf-8") as file:
             file.write("# Nouveaux éléments\n")
@@ -134,6 +143,21 @@ def main():
             content += f"    - {formulation}\n".format(element=element)
         return content
 
+    def generate_nlu_contentFacture(elements):
+        formulations = [
+            "pour quelle fournisseur cette facture [{element}](Facture) ?",
+            "Pouvez-vous me donner la facture [{element}](Facture) ?",
+            "cette facture [{element}](Facture) pour quelle fournisseur",
+            "[{element}](Facture)",
+
+        ]
+        
+        content = "- intent: demande_Facture \n  examples: |\n"
+        for element in elements:
+            formulation = random.choice(formulations)
+            content += f"    - {formulation}\n".format(element=element)
+        return content
+
 
     # --
 
@@ -191,17 +215,46 @@ def main():
                 else:
                     continue
 
+    def effacerFacture():
+        # Lecture du contenu du fichier nlu.yml
+        with open('data/nlu.yml', 'r') as file:
+            lines = file.readlines()
+
+        # Ouverture du fichier en mode écriture pour y écrire les lignes filtrées
+        with open('data/nlu.yml', 'w') as file:
+            # Variable pour suivre si nous sommes à l'intérieur du bloc à supprimer
+            inside_block = False
+            for line in lines:
+                # Si nous sommes à l'intérieur du bloc et que nous trouvons une ligne vide, le bloc est terminé
+                if inside_block and line.strip() == "":
+                    inside_block = False
+                    continue
+
+                # Si nous ne sommes pas dans le bloc, écrivons la ligne
+                if not inside_block:
+                    # Vérifions si la ligne correspond au début du bloc à supprimer
+                    if line.strip().startswith('- intent: demande_Facture'):
+                        inside_block = True
+                    else:
+                        file.write(line)
+                # Si nous sommes à l'intérieur du bloc, passons à la ligne suivante sans écrire
+                else:
+                    continue
+
     conn = se_connecter_a_ssms1()
     if conn:
         types = obtenir_types(conn)
         etats = obtenir_etats(conn)
+        Facture = obtenir_Facture(conn)
         Fournisseur = obtenir_Fournisseur(conn)
         inserer_dans_dictionnaire("dictionnaire_Types.py", types)
         inserer_dans_dictionnaire("dictionnaire_Etats.py", etats)
         inserer_dans_dictionnaire("dictionnaire_Fournisseur.py", Fournisseur)
+        inserer_dans_dictionnaire("dictionnaire_Facture.py", Facture)
         # print("Types et états insérés avec succès dans les fichiers.")
         effacerType()
         effacerFournisseur()
+        effacerFacture()
 
 # Chemin vers le fichier dictionnaire_Etats.py
         file_path = "dictionnaire_Types.py"
@@ -223,6 +276,16 @@ def main():
 # Écriture du contenu dans le fichier nlu.yml
         with open("data/nlu.yml", "a", encoding="utf-8") as nlu_file2:
             nlu_file2.write(nlu_content2)
+
+# Chemin vers le fichier dictionnaire_Facture.py
+        file_path3 = "dictionnaire_Facture.py"
+# Extraction des éléments
+        elements3 = extract_elements(file_path3)
+# Génération du contenu du fichier nlu.yml
+        nlu_content3 = generate_nlu_contentFacture(elements3)
+# Écriture du contenu dans le fichier nlu.yml
+        with open("data/nlu.yml", "a", encoding="utf-8") as nlu_file3:
+            nlu_file3.write(nlu_content3)
 # print("Le fichier nlu.yml a été généré avec succès.")
         conn.close()
 

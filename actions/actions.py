@@ -718,4 +718,68 @@ class ActionRecupererMontantParDate(Action):
 
         return []
 
+    # -------------------------------------------------------------------------------------------
+class ActionObtenirFactureMontant(Action):
+    def name(self) -> Text:
+        return "action_obtenir_Facture_montant"
+
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[Dict[Text, Any]]:
+        
+        # Récupérer l'entité montant du tracker
+        Facture = tracker.get_slot("Facture")  # Ajout de facture_entity pour utiliser plus tard
+        
+        # Se connecter à la base de données
+        conn = se_connecter_a_ssms()  # Vous devez implémenter cette fonction
+
+        if conn:
+            # Exécuter la requête SQL pour obtenir le montant de la facture
+                cursor = conn.cursor()
+                query = f"""
+                    SELECT f.montant,facture.facture,fournisseur.fournisseur,date.date
+                    FROM dbo.fait f
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension Fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_Fournisseur
+                    WHERE facture.facture = ?
+                """
+                cursor.execute(query, (Facture,)) 
+                results = cursor.fetchall()
+
+                if results:
+                    for result in results:
+                    # Récupérer les détails de chaque facture
+                        montant,Facture,Fournisseur,Date = result
+                        dispatcher.utter_message(
+                        text=f"La facture {Facture} est établie au nom du {Fournisseur}, d'un montant de {montant}, et datée du {Date}."
+                )
+                else:
+                    dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
+        
+        return []
+
+# -------------------------------------------------------------------------------------------
+    
+class ActionCountFacture(Action):
+    def name(self):
+        return "action_count_Facture"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        try:            
+            # Exécutez la requête pour compter les Facture
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(Facture) FROM dbo.[Dimensions facture]")
+            count = cursor.fetchone()[0]  # Obtenez le nombre de facture
+
+            # Envoyez la réponse au dispatcher pour la réponse de l'assistant
+            dispatcher.utter_message(text=f"Vous avez {count} facture dans votre base de données.")
+        except Exception as e:
+            # En cas d'erreur, affichez un message d'erreur
+            dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
+
+        return []
+
+
+ # -------------------------------------------------------------------------------------------
     

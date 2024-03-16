@@ -1,6 +1,17 @@
 version: "3.1"
 
 stories:
+
+- story: salutation
+  steps:
+  - intent: salutation
+  - action: utter_salutation
+
+- story: bye
+  steps:
+  - intent: bye
+  - action: utter_bye 
+
 - story: obtenir montant fournisseur
   steps:
   - intent: Montant
@@ -132,3 +143,8 @@ stories:
   steps:
   - intent: inform_facture_count
   - action: action_count_Facture
+
+- story: Demande de montant pour un facture
+  steps:
+  - intent: demande_Facture
+  - action: action_obtenir_Facture_montant

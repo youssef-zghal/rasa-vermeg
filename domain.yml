@@ -1,5 +1,7 @@
 version: '3.1'
 intents:
+- salutation
+- bye
 - Date
 - Etat
 - Facture
@@ -37,6 +39,7 @@ intents:
 - inform_Type_count
 - inform_facture_count
 - intervalle_par_date
+- demande_Facture
 
 
 entities:
@@ -48,6 +51,7 @@ entities:
 - type
 - start_date
 - end_date
+- Facture
 
 slots:
 
@@ -99,26 +103,18 @@ slots:
     mappings:
     - type: from_entity
       entity: Fournisseur
+  Facture:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: Facture
 
 responses:
-  utter_greet:
-  - text: Hey! How are you?
-  utter_cheer_up:
-  - text: 'Here is something to cheer you up:'
-    image: https://i.imgur.com/nGF1K8f.jpg
-  utter_did_that_help:
-  - text: Did that help you?
-  utter_happy:
-  - text: Great, carry on!
-  utter_goodbye:
-  - text: Bye
-  utter_saluer:
-  - text: Salut ! Comment vas-tu ?
-  utter_remonter_moral:
-  - text: 'Voici quelque chose pour te remonter le moral :'
-    image: https://i.imgur.com/nGF1K8f.jpg
-  utter_est_ce_que_ca_aidé:
-  - text: Est-ce que cela t'a aidé ?
+  utter_salutation:
+  - text: "Bonjour Je suis InvoiceBOT powered by Vermeg.\n\nje suis prêt à vous aider!"
+  utter_bye:
+  - text: "Au revoir, content de vous avoir aidé! "
   utter_heureux:
   - text: Super, continue comme ça !
   utter_au_revoir:
@@ -140,7 +136,8 @@ responses:
   - text: Quel type voudriez-vous détailler davantage?
   utter_next_Montant_Total_Par_Fournisseur:
   - text: Quel est le Fournisseur voudriez-vous détailler davantage?
-
+  utter_default:
+  - text: "Pardon, pourriez-vous poser la question autrement ?"
 
 session_config:
   session_expiration_time: 60
@@ -165,3 +162,4 @@ actions:
 - action_count_Type
 - action_count_Facture
 - action_Recuperer_Montant_Par_Date
+- action_obtenir_Facture_montant

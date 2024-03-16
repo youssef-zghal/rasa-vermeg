@@ -1,0 +1,1 @@
+python .\..\Dashboard\Dashboard.py

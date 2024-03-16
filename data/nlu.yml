@@ -1,107 +1,50 @@
 version: "3.1"
 nlu:
-- intent: greet
+#-------------------------------- partie anglais--------------------------------------------
+- intent: salutation
   examples: |
-    - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
-- intent: goodbye
-  examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
-- intent: affirm
-  examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
-- intent: deny
-  examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
-- intent: mood_great
-  examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
-- intent: saluer
-  examples: |
+    - bjr 
+    - bonj
+    - slt
     - salut
-    - bonjour
+    - bonsoir Invoicebot
     - coucou
-    - bonjour là
-    - bon matin
-    - bonsoir
-    - moin
-    - salut toi
-    - allons-y
-    - salut mec
-    - bonmatin
-    - bon après-midi
-- intent: au_revoir
+    - allo  
+    - salut 
+    - allo   
+    - alo
+    - Salut, ça roule  
+    - Salut à toi !
+    - Salutations 
+    - cc
+    - hey
+    - Allô
+    - Bonne journée 
+    - Bonne soirée
+    - ciao
+    - alloha
+    - bjr 
+    - bonj 
+    - slt 
+    - salut 
+    - bonjour 
+    - coucou 
+    - allo 
+    - !
+    - Salutations 
+- intent: bye
   examples: |
-    - à plus
     - au revoir
-    - à bientôt
+    - à toute à l'heure 
+    - bientôt
+    - bonne soirée  
     - bonne nuit
-    - bye
-    - goodbye
-    - passe une bonne journée
+    - à plus
+    - prenez soin de vous
     - à la prochaine
-    - bye bye
-    - à plus tard
+    - bye
+    - plus tard
+    - bonne journée
 - intent: affirmer
   examples: |
     - oui
@@ -148,6 +91,9 @@ nlu:
     - pas bien
     - pas très bien
     - extrêmement triste
+      
+# --------------------------------------------------------------------------------------------------- 
+
 - intent: Reference
   examples: |
     - Quelle est la référence du fournisseur pour cette facture ?
@@ -357,172 +303,1317 @@ nlu:
 
 - intent: demande_montant_type 
   examples: |
-    - detaille moi [ des cartes et systèmes électroniques](type)
-    - Combien a-t-on dépensé pour le type [agence de communication](type) ?
-    - affiche moi les details sur [agence de voyage](type)
-    - detaille moi [assurance](type)
-    - J'aimerais connaître les montants pour le type [Assurance/Consulting](type) ?
-    - [automobile](type)
+    - Combien a-t-on dépensé pour le type [ des cartes et systèmes électroniques](type) ?
+    - J'aimerais connaître les montants pour le type [agence de communication](type) ?
+    - detaille moi [agence de voyage](type)
+    - Peux-tu me dire les dépenses pour le type [assurance](type) ?
+    - Combien a-t-on dépensé pour le type [Assurance/Consulting](type) ?
+    - Combien a-t-on dépensé pour le type [automobile](type) ?
     - Peux-tu me dire les dépenses pour le type [avocat](type) ?
-    - Combien a-t-on dépensé pour le type [banque/assurance](type) ?
-    - J'aimerais connaître les montants pour le type [bureautique](type) ?
-    - affiche moi les details sur [centre dappele](type)
-    - Je choisis de savoir sur le type [consulting](type) ?
-    - detaille moi [decoration](type)
-    - [domaine electricite](type)
-    - Je choisis de savoir sur le type [equipement](type) ?
+    - detaille moi [banque/assurance](type)
+    - Quel est le montant pour le type [bureautique](type) ?
+    - Quel est le montant pour le type [centre dappele](type) ?
+    - Combien a-t-on dépensé pour le type [consulting](type) ?
+    - Peux-tu me dire les dépenses pour le type [decoration](type) ?
+    - detaille moi [domaine electricite](type)
+    - Peux-tu me dire les dépenses pour le type [equipement](type) ?
     - Je choisis de savoir sur le type [equipement Electriques](type) ?
     - Combien a-t-on dépensé pour le type [équipement pour le bâtiment](type) ?
-    - Quel est le montant pour le type [expertise](type) ?
-    - Combien a-t-on dépensé pour le type [formattion](type) ?
-    - Quel est le montant pour le type [industrie](type) ?
+    - je voudrais savoir sur [expertise](type) ?
+    - [formattion](type)
+    - je voudrais savoir sur [industrie](type) ?
     - Combien a-t-on dépensé pour le type [informatique](type) ?
-    - affiche moi les details sur [kiosque](type)
+    - [kiosque](type)
     - [laboratoire](type)
-    - Quel est le montant pour le type [mecanique](type) ?
-    - [medical](type)
-    - J'aimerais connaître les montants pour le type [meubles](type) ?
-    - Peux-tu me dire les dépenses pour le type [société](type) ?
+    - affiche moi les details sur [mecanique](type)
+    - Quel est le montant pour le type [medical](type) ?
+    - affiche moi les details sur [meubles](type)
+    - J'aimerais connaître les montants pour le type [société](type) ?
     - [societe de livraison](type)
     - Quel est le montant pour le type [societe de vetements](type) ?
-    - [transit](type)
-    - [vente different produit](type)
+    - detaille moi [transit](type)
+    - Je choisis de savoir sur le type [vente different produit](type) ?
 - intent: demande_montant_fournisseur 
   examples: |
-    - Combien [ADHECOM SARL](Fournisseur) a-t-il facturé ?
+    - [ADHECOM SARL](Fournisseur)
     - Combien [AIRCO](Fournisseur) a-t-il facturé ?
-    - [AL MAADEN](Fournisseur)
-    - Pouvez-vous me donner le montant pour [AMM](Fournisseur) ?
-    - Quel est le montant pour le fournisseur [ARC BUREAUTIQUE](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [AL MAADEN](Fournisseur) ?
+    - Combien [AMM](Fournisseur) a-t-il facturé ?
+    - Combien [ARC BUREAUTIQUE](Fournisseur) a-t-il facturé ?
     - Pouvez-vous me donner le montant pour [ARCHIDOC](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [ASSAD INDUSTRIAL](Fournisseur) ?
-    - Combien [AST AVENIR SERVICE TRANSPORT](Fournisseur) a-t-il facturé ?
-    - Combien [ATR CORPORATE ET CONSULTING](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [Avocat Hatem Kourda](Fournisseur) ?
-    - Combien [BAIEXPRESS](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [ASSAD INDUSTRIAL](Fournisseur) ?
+    - [AST AVENIR SERVICE TRANSPORT](Fournisseur)
+    - Quel est le montant pour le fournisseur [ATR CORPORATE ET CONSULTING](Fournisseur) ?
+    - Combien [Avocat Hatem Kourda](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [BAIEXPRESS](Fournisseur) ?
     - Combien [BECHIR FAKHFAKH](Fournisseur) a-t-il facturé ?
     - Combien [BEST CAR](Fournisseur) a-t-il facturé ?
     - Quel est le montant pour le fournisseur [BOUDRANT](Fournisseur) ?
     - Quel est le montant pour le fournisseur [BTP-EQUIPEMENT](Fournisseur) ?
-    - Quel est le montant pour le fournisseur [CABINET BEN CHEIKH HENDA](Fournisseur) ?
-    - Combien [CAR PRO](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [Cash&Carry](Fournisseur) ?
+    - [CABINET BEN CHEIKH HENDA](Fournisseur)
+    - [CAR PRO](Fournisseur)
+    - Pouvez-vous me donner le montant pour [Cash&Carry](Fournisseur) ?
     - Combien [CDTPR](Fournisseur) a-t-il facturé ?
     - Pouvez-vous me donner le montant pour [Chiffon d’Essuyage Tunisienne](Fournisseur) ?
     - [CMG](Fournisseur)
-    - [CMVI](Fournisseur)
-    - Combien [COMET](Fournisseur) a-t-il facturé ?
-    - Combien [COREME](Fournisseur) a-t-il facturé ?
+    - Combien [CMVI](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [COMET](Fournisseur) ?
+    - [COREME](Fournisseur)
     - Combien [CREATIVE AD. SCHOOL](Fournisseur) a-t-il facturé ?
-    - Pouvez-vous me donner le montant pour [DELLMANN](Fournisseur) ?
+    - Combien [DELLMANN](Fournisseur) a-t-il facturé ?
     - Quel est le montant pour le fournisseur [DELOITTE](Fournisseur) ?
     - Quel est le montant pour le fournisseur [DIESEL ENERGY](Fournisseur) ?
     - Pouvez-vous me donner le montant pour [Dr. Jamel Darragi](Fournisseur) ?
-    - Quel est le montant pour le fournisseur [EDT](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [EDT](Fournisseur) ?
     - [ELECSA-TN](Fournisseur)
-    - Combien [ELECTROCNIC DESIGN SERVICE  *EDS](Fournisseur) a-t-il facturé ?
-    - Combien [ELWIFEK FLEXIBLES ](Fournisseur) a-t-il facturé ?
-    - [EQUIPEMENT MODERNE AUTOMOTIVE](Fournisseur)
-    - Combien [EQUIPEMENT MODERNE HARDWARE](Fournisseur) a-t-il facturé ?
-    - Combien [EQUIPEMENTS SOUSSI](Fournisseur) a-t-il facturé ?
-    - Combien [ETS BEN YOUSSEF](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [ELECTROCNIC DESIGN SERVICE  *EDS](Fournisseur) ?
+    - [ELWIFEK FLEXIBLES ](Fournisseur)
+    - Combien [EQUIPEMENT MODERNE AUTOMOTIVE](Fournisseur) a-t-il facturé ?
+    - [EQUIPEMENT MODERNE HARDWARE](Fournisseur)
+    - Quel est le montant pour le fournisseur [EQUIPEMENTS SOUSSI](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [ETS BEN YOUSSEF](Fournisseur) ?
     - Pouvez-vous me donner le montant pour [ETS BERRAIES](Fournisseur) ?
-    - Quel est le montant pour le fournisseur [EURO PARTS](Fournisseur) ?
-    - Combien [EXCELLIA CREANCE](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [GAM](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [GARAGE DU NORD BOURAOUI ZARDI](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [GAS](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [GATTOUSSI MECANIQUE GENERALE](Fournisseur) ?
-    - [GEELEC](Fournisseur)
-    - Quel est le montant pour le fournisseur [GEISER](Fournisseur) ?
-    - [GENERAL RADIATORS](Fournisseur)
-    - Combien [GENERAL TRANSPORT INTERNATIONAL   (GTI)](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [GLAMIVER](Fournisseur) ?
-    - Quel est le montant pour le fournisseur [GLOBAL RECOUVREMENT](Fournisseur) ?
+    - [EURO PARTS](Fournisseur)
+    - Pouvez-vous me donner le montant pour [EXCELLIA CREANCE](Fournisseur) ?
+    - Combien [GAM](Fournisseur) a-t-il facturé ?
+    - Combien [GARAGE DU NORD BOURAOUI ZARDI](Fournisseur) a-t-il facturé ?
+    - Combien [GAS](Fournisseur) a-t-il facturé ?
+    - [GATTOUSSI MECANIQUE GENERALE](Fournisseur)
+    - Quel est le montant pour le fournisseur [GEELEC](Fournisseur) ?
+    - [GEISER](Fournisseur)
+    - Quel est le montant pour le fournisseur [GENERAL RADIATORS](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [GENERAL TRANSPORT INTERNATIONAL   (GTI)](Fournisseur) ?
+    - Combien [GLAMIVER](Fournisseur) a-t-il facturé ?
+    - [GLOBAL RECOUVREMENT](Fournisseur)
     - [ICAR SA](Fournisseur)
     - Pouvez-vous me donner le montant pour [IDEAL ORAGANISATION SERVICES](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [IDEALE AUTO NEGOCE](Fournisseur) ?
+    - Combien [IDEALE AUTO NEGOCE](Fournisseur) a-t-il facturé ?
     - Combien [Industrial Technical Services  ](Fournisseur) a-t-il facturé ?
-    - Combien [Innovation mécanique industrielle](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [Innovation mécanique industrielle](Fournisseur) ?
     - [INTERNATIONAL TRANSIT](Fournisseur)
     - Pouvez-vous me donner le montant pour [IRES](Fournisseur) ?
-    - [J.M.S PLUS](Fournisseur)
+    - Quel est le montant pour le fournisseur [J.M.S PLUS](Fournisseur) ?
     - [JOUINI ELECTRIQUE INDUSTRIEL](Fournisseur)
-    - Quel est le montant pour le fournisseur [KAIS DORGHAM MECANIQUE AUTO](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [LA BATTERIE ](Fournisseur) ?
+    - Combien [KAIS DORGHAM MECANIQUE AUTO](Fournisseur) a-t-il facturé ?
+    - Combien [LA BATTERIE ](Fournisseur) a-t-il facturé ?
     - Quel est le montant pour le fournisseur [La BATTERIE INDUSTRIELLE](Fournisseur) ?
     - [LA PRECISION T.M.T](Fournisseur)
-    - [LE MOTEUR DIESEL](Fournisseur)
-    - Combien [LE PROFESSIONNEL](Fournisseur) a-t-il facturé ?
-    - Pouvez-vous me donner le montant pour [Loogik Interactive](Fournisseur) ?
-    - Combien [LOURD DEPANN](Fournisseur) a-t-il facturé ?
-    - Combien [MAC BUREAU](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [Maitre Yahyaoui Mustapha](Fournisseur) ?
-    - [MARE](Fournisseur)
-    - Combien [MECANICA DIVISION GROS](Fournisseur) a-t-il facturé ?
-    - [MEGA NUMERIQUE](Fournisseur)
+    - Combien [LE MOTEUR DIESEL](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [LE PROFESSIONNEL](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [Loogik Interactive](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [LOURD DEPANN](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [MAC BUREAU](Fournisseur) ?
+    - [Maitre Yahyaoui Mustapha](Fournisseur)
+    - Pouvez-vous me donner le montant pour [MARE](Fournisseur) ?
+    - [MECANICA DIVISION GROS](Fournisseur)
+    - Quel est le montant pour le fournisseur [MEGA NUMERIQUE](Fournisseur) ?
     - Quel est le montant pour le fournisseur [MEZGHANI PLUS MEUBLES](Fournisseur) ?
     - Combien [MMSE ](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [MONDIAL ELECTRIC](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [PEARTECH](Fournisseur) ?
-    - Combien [PIMA](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [POLYCARGO](Fournisseur) ?
-    - Quel est le montant pour le fournisseur [QUEEN FORMATION](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [RAPID POSTE](Fournisseur) ?
-    - [ROYALTYRE](Fournisseur)
-    - Combien [SBIKA PROTECTION](Fournisseur) a-t-il facturé ?
-    - Pouvez-vous me donner le montant pour [SCCM BF](Fournisseur) ?
-    - Quel est le montant pour le fournisseur [SELECT TRAVEL ET TOURS](Fournisseur) ?
-    - [SHOPEX ](Fournisseur)
+    - [MONDIAL ELECTRIC](Fournisseur)
+    - [PEARTECH](Fournisseur)
+    - Quel est le montant pour le fournisseur [PIMA](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [POLYCARGO](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [QUEEN FORMATION](Fournisseur) ?
+    - [RAPID POSTE](Fournisseur)
+    - Quel est le montant pour le fournisseur [ROYALTYRE](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [SBIKA PROTECTION](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [SCCM BF](Fournisseur) ?
+    - Combien [SELECT TRAVEL ET TOURS](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [SHOPEX ](Fournisseur) ?
     - Combien [SHYK AUTO](Fournisseur) a-t-il facturé ?
     - Quel est le montant pour le fournisseur [SIMEC](Fournisseur) ?
-    - Quel est le montant pour le fournisseur [SINPAR](Fournisseur) ?
-    - Combien [SMART ELECTRIC](Fournisseur) a-t-il facturé ?
-    - [SMART TACHY](Fournisseur)
-    - [SOCAGE](Fournisseur)
-    - Combien [SOCIETE BEN MESSAOUD FRERES](Fournisseur) a-t-il facturé ?
-    - Pouvez-vous me donner le montant pour [SOCIETE DE MANUTENSION HELALI SARL](Fournisseur) ?
-    - Combien [SOCIETE ELBEZ DISTRIBUTION](Fournisseur) a-t-il facturé ?
-    - Combien [SOCIETE IMPRIMERIE DU CENTRE](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [SOCIETE KACEM ET FILS](Fournisseur) ?
+    - [SINPAR](Fournisseur)
+    - [SMART ELECTRIC](Fournisseur)
+    - Pouvez-vous me donner le montant pour [SMART TACHY](Fournisseur) ?
+    - Combien [SOCAGE](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [SOCIETE BEN MESSAOUD FRERES](Fournisseur) ?
+    - [SOCIETE DE MANUTENSION HELALI SARL](Fournisseur)
+    - Quel est le montant pour le fournisseur [SOCIETE ELBEZ DISTRIBUTION](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [SOCIETE IMPRIMERIE DU CENTRE](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [SOCIETE KACEM ET FILS](Fournisseur) ?
     - [SOCIETE PIECES ET MATERIELS  SPM](Fournisseur)
-    - [SODICA](Fournisseur)
-    - Combien [SOGEMAQ](Fournisseur) a-t-il facturé ?
-    - [SOREM](Fournisseur)
-    - Combien [SOTUFLEX](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [SPAIE](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [SODICA](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [SOGEMAQ](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [SOREM](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [SOTUFLEX](Fournisseur) ?
+    - Combien [SPAIE](Fournisseur) a-t-il facturé ?
     - [SPIT ENGINS](Fournisseur)
-    - Quel est le montant pour le fournisseur [SSG SOCIETE SADRABAAL DE GARDIENNAGE](Fournisseur) ?
+    - Combien [SSG SOCIETE SADRABAAL DE GARDIENNAGE](Fournisseur) a-t-il facturé ?
     - Pouvez-vous me donner le montant pour [SSTM](Fournisseur) ?
     - Combien [STAFIM](Fournisseur) a-t-il facturé ?
-    - [STAR EQUIPEMENTS](Fournisseur)
+    - Pouvez-vous me donner le montant pour [STAR EQUIPEMENTS](Fournisseur) ?
     - [STATION PNEU CHOUCHA (SPC)](Fournisseur)
     - Pouvez-vous me donner le montant pour [STE ALLO SERVICE REMORQUAGE](Fournisseur) ?
-    - [STE BRAVO DES SERVICES](Fournisseur)
-    - Quel est le montant pour le fournisseur [STE BSA](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [STE BRAVO DES SERVICES](Fournisseur) ?
+    - [STE BSA](Fournisseur)
     - Pouvez-vous me donner le montant pour [STE COSTA RENT A CAR](Fournisseur) ?
-    - [STE EMEM DU CAPBON](Fournisseur)
+    - Quel est le montant pour le fournisseur [STE EMEM DU CAPBON](Fournisseur) ?
     - Pouvez-vous me donner le montant pour [STE GHAMMAM NEGOCE](Fournisseur) ?
     - Combien [STE JOMAA SA](Fournisseur) a-t-il facturé ?
-    - Quel est le montant pour le fournisseur [STE LE MOTEUR HOUSE](Fournisseur) ?
-    - [STE OTOKAR ](Fournisseur)
+    - Combien [STE LE MOTEUR HOUSE](Fournisseur) a-t-il facturé ?
+    - Pouvez-vous me donner le montant pour [STE OTOKAR ](Fournisseur) ?
     - [STE POLY ELECTRIC AKOUDA](Fournisseur)
-    - Quel est le montant pour le fournisseur [STE POWER PROFESSIONEL TRANSPORT](Fournisseur) ?
+    - [STE POWER PROFESSIONEL TRANSPORT](Fournisseur)
     - Pouvez-vous me donner le montant pour [STE T.D.S](Fournisseur) ?
-    - Combien [STE ZOUHAIR KARRAY SECURITE](Fournisseur) a-t-il facturé ?
-    - Combien [STPR](Fournisseur) a-t-il facturé ?
-    - Pouvez-vous me donner le montant pour [Stratégie Digitale](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [STRPA](Fournisseur) ?
-    - Quel est le montant pour le fournisseur [SUD METAL](Fournisseur) ?
+    - [STE ZOUHAIR KARRAY SECURITE](Fournisseur)
+    - Pouvez-vous me donner le montant pour [STPR](Fournisseur) ?
+    - Combien [Stratégie Digitale](Fournisseur) a-t-il facturé ?
+    - Combien [STRPA](Fournisseur) a-t-il facturé ?
+    - Combien [SUD METAL](Fournisseur) a-t-il facturé ?
     - Pouvez-vous me donner le montant pour [TASNIME VOYAGE ET TOURISME](Fournisseur) ?
-    - [Téchnique informatique et bureautique](Fournisseur)
+    - Combien [Téchnique informatique et bureautique](Fournisseur) a-t-il facturé ?
     - [TECHNOMACHINE](Fournisseur)
     - Combien [TOOFAST TECHNIC SERVICE PNEUS](Fournisseur) a-t-il facturé ?
     - Pouvez-vous me donner le montant pour [TOTAL TUNISIE](Fournisseur) ?
-    - Pouvez-vous me donner le montant pour [TOUDECORS SARL](Fournisseur) ?
-    - Combien [TPS](Fournisseur) a-t-il facturé ?
+    - Quel est le montant pour le fournisseur [TOUDECORS SARL](Fournisseur) ?
+    - Pouvez-vous me donner le montant pour [TPS](Fournisseur) ?
     - Quel est le montant pour le fournisseur [UHD](Fournisseur) ?
-    - [USP](Fournisseur)
+    - Quel est le montant pour le fournisseur [USP](Fournisseur) ?
     - Quel est le montant pour le fournisseur [VALORIA S.A](Fournisseur) ?
     - [VOGUE DISTRIBUTION](Fournisseur)
-    - Pouvez-vous me donner le montant pour [ZRIBI MAJDI ARCHITECTE ET EXPERT BATIMENT](Fournisseur) ?
+    - Quel est le montant pour le fournisseur [ZRIBI MAJDI ARCHITECTE ET EXPERT BATIMENT](Fournisseur) ?
+- intent: demande_Facture 
+  examples: |
+    - pour quelle fournisseur cette facture [000126-23](Facture) ?
+    - cette facture [000267/23](Facture) pour quelle fournisseur
+    - [000455/23](Facture)
+    - [000484/23](Facture)
+    - cette facture [000555/23](Facture) pour quelle fournisseur
+    - [000594/22](Facture)
+    - cette facture [000706-23](Facture) pour quelle fournisseur
+    - cette facture [000713/23](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [000734/23](Facture) ?
+    - Pouvez-vous me donner la facture [000925/23](Facture) ?
+    - pour quelle fournisseur cette facture [000994/23](Facture) ?
+    - pour quelle fournisseur cette facture [001038/22](Facture) ?
+    - [001065/23](Facture)
+    - cette facture [001079/23](Facture) pour quelle fournisseur
+    - [001143/23](Facture)
+    - cette facture [001440-23](Facture) pour quelle fournisseur
+    - cette facture [001546/22](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [001563/22](Facture) ?
+    - [001674/22](Facture)
+    - cette facture [001674/22  10/10](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [001674/22  2/10](Facture) ?
+    - pour quelle fournisseur cette facture [001674/22  3/10](Facture) ?
+    - Pouvez-vous me donner la facture [001674/22  4/10](Facture) ?
+    - pour quelle fournisseur cette facture [001674/22  6/10](Facture) ?
+    - cette facture [001674/22  7/10](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [001674/22  8/10](Facture) ?
+    - [001674/22  9/10](Facture)
+    - Pouvez-vous me donner la facture [001674/22 1/10](Facture) ?
+    - pour quelle fournisseur cette facture [0017/2023](Facture) ?
+    - pour quelle fournisseur cette facture [0024/2023](Facture) ?
+    - cette facture [0081/2023](Facture) pour quelle fournisseur
+    - [0085_2022](Facture)
+    - [009/2023](Facture)
+    - pour quelle fournisseur cette facture [01/006773](Facture) ?
+    - cette facture [01/006796](Facture) pour quelle fournisseur
+    - cette facture [01/006822](Facture) pour quelle fournisseur
+    - cette facture [010-23](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [0132/2023](Facture) ?
+    - pour quelle fournisseur cette facture [0158/2023](Facture) ?
+    - [019/2023](Facture)
+    - [019379/23](Facture)
+    - [019458/23](Facture)
+    - cette facture [019517/23](Facture) pour quelle fournisseur
+    - [021/2023](Facture)
+    - [023-23](Facture)
+    - cette facture [026/2022](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [02872  4/1](Facture) ?
+    - Pouvez-vous me donner la facture [02872  4/2](Facture) ?
+    - pour quelle fournisseur cette facture [02872  4/3](Facture) ?
+    - cette facture [02872  4/4](Facture) pour quelle fournisseur
+    - cette facture [029/2023](Facture) pour quelle fournisseur
+    - [032 2023](Facture)
+    - [0325/2023](Facture)
+    - [0327/2023](Facture)
+    - pour quelle fournisseur cette facture [036 2023](Facture) ?
+    - Pouvez-vous me donner la facture [0376/2023](Facture) ?
+    - cette facture [038/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [039 2023](Facture) ?
+    - pour quelle fournisseur cette facture [039-23](Facture) ?
+    - pour quelle fournisseur cette facture [04/2022 du 01/12/2022](Facture) ?
+    - [0438/2022](Facture)
+    - [045_2023](Facture)
+    - cette facture [052/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [052-23](Facture) ?
+    - cette facture [053-2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [0558/2023](Facture) ?
+    - [058/2023](Facture)
+    - Pouvez-vous me donner la facture [058_2023](Facture) ?
+    - Pouvez-vous me donner la facture [073/2023](Facture) ?
+    - pour quelle fournisseur cette facture [073_2023](Facture) ?
+    - cette facture [082-2023](Facture) pour quelle fournisseur
+    - cette facture [083/2023](Facture) pour quelle fournisseur
+    - [088/2023](Facture)
+    - Pouvez-vous me donner la facture [091/2023](Facture) ?
+    - cette facture [099-23](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [-1](Facture) ?
+    - cette facture [-1-](Facture) pour quelle fournisseur
+    - cette facture [102](Facture) pour quelle fournisseur
+    - [102/2023](Facture)
+    - Pouvez-vous me donner la facture [105/2023](Facture) ?
+    - pour quelle fournisseur cette facture [1052](Facture) ?
+    - pour quelle fournisseur cette facture [113-23](Facture) ?
+    - Pouvez-vous me donner la facture [116/2023](Facture) ?
+    - Pouvez-vous me donner la facture [1165](Facture) ?
+    - pour quelle fournisseur cette facture [119/2023](Facture) ?
+    - Pouvez-vous me donner la facture [1197](Facture) ?
+    - cette facture [12/157/23](Facture) pour quelle fournisseur
+    - [12/222/23](Facture)
+    - pour quelle fournisseur cette facture [12/275/23](Facture) ?
+    - cette facture [12/300/23](Facture) pour quelle fournisseur
+    - cette facture [12/301/23](Facture) pour quelle fournisseur
+    - [12/728/22](Facture)
+    - cette facture [12309315](Facture) pour quelle fournisseur
+    - cette facture [12309317](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [12309901](Facture) ?
+    - pour quelle fournisseur cette facture [12310545](Facture) ?
+    - [12310547](Facture)
+    - pour quelle fournisseur cette facture [12310970](Facture) ?
+    - Pouvez-vous me donner la facture [12310972](Facture) ?
+    - cette facture [12311507](Facture) pour quelle fournisseur
+    - [12312108](Facture)
+    - pour quelle fournisseur cette facture [12312281](Facture) ?
+    - Pouvez-vous me donner la facture [12312282](Facture) ?
+    - pour quelle fournisseur cette facture [12312617](Facture) ?
+    - cette facture [12312783](Facture) pour quelle fournisseur
+    - cette facture [12313222](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [12313805](Facture) ?
+    - pour quelle fournisseur cette facture [12313975](Facture) ?
+    - pour quelle fournisseur cette facture [12314039](Facture) ?
+    - pour quelle fournisseur cette facture [12314275](Facture) ?
+    - pour quelle fournisseur cette facture [1259](Facture) ?
+    - Pouvez-vous me donner la facture [127/2023](Facture) ?
+    - pour quelle fournisseur cette facture [1273](Facture) ?
+    - pour quelle fournisseur cette facture [12877-A](Facture) ?
+    - Pouvez-vous me donner la facture [12899-A](Facture) ?
+    - Pouvez-vous me donner la facture [1300](Facture) ?
+    - Pouvez-vous me donner la facture [13021](Facture) ?
+    - [13024](Facture)
+    - cette facture [13058](Facture) pour quelle fournisseur
+    - [13070](Facture)
+    - [1310](Facture)
+    - [132023](Facture)
+    - pour quelle fournisseur cette facture [1323](Facture) ?
+    - pour quelle fournisseur cette facture [1335](Facture) ?
+    - pour quelle fournisseur cette facture [135/2023](Facture) ?
+    - [1351](Facture)
+    - cette facture [1363](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [138/2023](Facture) ?
+    - cette facture [140/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [1427](Facture) ?
+    - cette facture [143/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [1452/2023](Facture) ?
+    - pour quelle fournisseur cette facture [146/2023](Facture) ?
+    - cette facture [15/2023](Facture) pour quelle fournisseur
+    - cette facture [1507](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [1508](Facture) ?
+    - pour quelle fournisseur cette facture [153-23](Facture) ?
+    - [1538](Facture)
+    - [154/2023](Facture)
+    - pour quelle fournisseur cette facture [155/2023](Facture) ?
+    - cette facture [158/2023](Facture) pour quelle fournisseur
+    - cette facture [159/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [165/2023](Facture) ?
+    - pour quelle fournisseur cette facture [1666](Facture) ?
+    - [1667/2022](Facture)
+    - [168/2023](Facture)
+    - pour quelle fournisseur cette facture [1765](Facture) ?
+    - [1807](Facture)
+    - pour quelle fournisseur cette facture [184/11/04/2023](Facture) ?
+    - cette facture [185](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [185/2023](Facture) ?
+    - pour quelle fournisseur cette facture [1859](Facture) ?
+    - pour quelle fournisseur cette facture [185DU2023](Facture) ?
+    - Pouvez-vous me donner la facture [187](Facture) ?
+    - Pouvez-vous me donner la facture [1888](Facture) ?
+    - pour quelle fournisseur cette facture [19/28/02/2023](Facture) ?
+    - cette facture [19-2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [1929](Facture) ?
+    - [1930](Facture)
+    - Pouvez-vous me donner la facture [1946](Facture) ?
+    - [1952](Facture)
+    - pour quelle fournisseur cette facture [196-23](Facture) ?
+    - Pouvez-vous me donner la facture [197/2023](Facture) ?
+    - [199-23](Facture)
+    - [200/2022](Facture)
+    - cette facture [200-23](Facture) pour quelle fournisseur
+    - [201/2022](Facture)
+    - cette facture [201234](Facture) pour quelle fournisseur
+    - [201237](Facture)
+    - [201238](Facture)
+    - pour quelle fournisseur cette facture [201239](Facture) ?
+    - [201240](Facture)
+    - Pouvez-vous me donner la facture [202/2022](Facture) ?
+    - [20201389](Facture)
+    - Pouvez-vous me donner la facture [20-2023](Facture) ?
+    - Pouvez-vous me donner la facture [20212062](Facture) ?
+    - cette facture [20212063](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2022/0132](Facture) ?
+    - [2022/2240](Facture)
+    - Pouvez-vous me donner la facture [2022/3472](Facture) ?
+    - cette facture [2022/3477](Facture) pour quelle fournisseur
+    - [202200671](Facture)
+    - pour quelle fournisseur cette facture [202200833](Facture) ?
+    - pour quelle fournisseur cette facture [20220115](Facture) ?
+    - Pouvez-vous me donner la facture [20220120](Facture) ?
+    - pour quelle fournisseur cette facture [20220121](Facture) ?
+    - cette facture [2022016874](Facture) pour quelle fournisseur
+    - cette facture [2022017282](Facture) pour quelle fournisseur
+    - [2022017476](Facture)
+    - [202202732](Facture)
+    - pour quelle fournisseur cette facture [20220576](Facture) ?
+    - pour quelle fournisseur cette facture [20222243](Facture) ?
+    - Pouvez-vous me donner la facture [2023/0002](Facture) ?
+    - Pouvez-vous me donner la facture [2023/0012](Facture) ?
+    - cette facture [2023/0022](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [2023/0040](Facture) ?
+    - pour quelle fournisseur cette facture [2023/0049](Facture) ?
+    - Pouvez-vous me donner la facture [2023/0053](Facture) ?
+    - cette facture [2023/0061](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [2023/0079](Facture) ?
+    - pour quelle fournisseur cette facture [2023/0080](Facture) ?
+    - Pouvez-vous me donner la facture [2023/0090](Facture) ?
+    - cette facture [2023/0094](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [2023/0095](Facture) ?
+    - cette facture [2023/0104](Facture) pour quelle fournisseur
+    - cette facture [2023/0106](Facture) pour quelle fournisseur
+    - [2023/0122](Facture)
+    - cette facture [2023/0129](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2023/0150](Facture) ?
+    - pour quelle fournisseur cette facture [2023/0190](Facture) ?
+    - cette facture [2023/0200](Facture) pour quelle fournisseur
+    - cette facture [2023/0216](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [2023/0323](Facture) ?
+    - cette facture [2023/0537](Facture) pour quelle fournisseur
+    - cette facture [2023/0567](Facture) pour quelle fournisseur
+    - [2023/0626](Facture)
+    - cette facture [2023/0627](Facture) pour quelle fournisseur
+    - [2023/0642](Facture)
+    - Pouvez-vous me donner la facture [2023/0914](Facture) ?
+    - pour quelle fournisseur cette facture [2023/1028](Facture) ?
+    - [2023/1029](Facture)
+    - cette facture [2023/1276](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2023/12884](Facture) ?
+    - Pouvez-vous me donner la facture [2023/1317](Facture) ?
+    - Pouvez-vous me donner la facture [2023/1446](Facture) ?
+    - [2023/1658](Facture)
+    - Pouvez-vous me donner la facture [2023/1810](Facture) ?
+    - [2023/2020](Facture)
+    - cette facture [2023/2060](Facture) pour quelle fournisseur
+    - [2023/2091](Facture)
+    - Pouvez-vous me donner la facture [2023/2092](Facture) ?
+    - Pouvez-vous me donner la facture [2023/2166](Facture) ?
+    - cette facture [2023/2167](Facture) pour quelle fournisseur
+    - [2023/2414](Facture)
+    - [2023/2583](Facture)
+    - pour quelle fournisseur cette facture [2023/2666](Facture) ?
+    - pour quelle fournisseur cette facture [2023/2738](Facture) ?
+    - cette facture [2023/2864](Facture) pour quelle fournisseur
+    - [2023/2865](Facture)
+    - pour quelle fournisseur cette facture [2023/2972](Facture) ?
+    - Pouvez-vous me donner la facture [2023/3074](Facture) ?
+    - [2023/3126](Facture)
+    - cette facture [2023/3266](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [2023/3327](Facture) ?
+    - cette facture [2023/3394](Facture) pour quelle fournisseur
+    - [2023/3448](Facture)
+    - cette facture [2023/3525](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2023/3733](Facture) ?
+    - Pouvez-vous me donner la facture [2023000160](Facture) ?
+    - Pouvez-vous me donner la facture [2023-000164](Facture) ?
+    - [2023-000273](Facture)
+    - [2023-000353](Facture)
+    - Pouvez-vous me donner la facture [2023000496](Facture) ?
+    - cette facture [2023000718](Facture) pour quelle fournisseur
+    - [202300106](Facture)
+    - pour quelle fournisseur cette facture [20230020](Facture) ?
+    - cette facture [20230021](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [20230022](Facture) ?
+    - pour quelle fournisseur cette facture [20230031](Facture) ?
+    - pour quelle fournisseur cette facture [20230032](Facture) ?
+    - pour quelle fournisseur cette facture [202300384](Facture) ?
+    - pour quelle fournisseur cette facture [202300389](Facture) ?
+    - cette facture [202300626](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [202300649](Facture) ?
+    - cette facture [202300763](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [202301204](Facture) ?
+    - [20230148](Facture)
+    - [202301821](Facture)
+    - cette facture [20230183](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [202301929](Facture) ?
+    - Pouvez-vous me donner la facture [202302023](Facture) ?
+    - cette facture [2023021](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [202302234](Facture) ?
+    - pour quelle fournisseur cette facture [202302372](Facture) ?
+    - [2023024](Facture)
+    - cette facture [20230301](Facture) pour quelle fournisseur
+    - cette facture [20230302](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [20230356](Facture) ?
+    - Pouvez-vous me donner la facture [20230430](Facture) ?
+    - pour quelle fournisseur cette facture [2023047](Facture) ?
+    - Pouvez-vous me donner la facture [2023048](Facture) ?
+    - cette facture [2023049](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [20230495](Facture) ?
+    - cette facture [20230536](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2023054](Facture) ?
+    - pour quelle fournisseur cette facture [202306-01](Facture) ?
+    - pour quelle fournisseur cette facture [20230611](Facture) ?
+    - cette facture [2023071](Facture) pour quelle fournisseur
+    - [2023072](Facture)
+    - Pouvez-vous me donner la facture [2023073](Facture) ?
+    - [2023092](Facture)
+    - Pouvez-vous me donner la facture [2023107](Facture) ?
+    - cette facture [2023114](Facture) pour quelle fournisseur
+    - cette facture [2023118](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2023119](Facture) ?
+    - Pouvez-vous me donner la facture [20231478](Facture) ?
+    - cette facture [20231658](Facture) pour quelle fournisseur
+    - [2023169](Facture)
+    - cette facture [2023174](Facture) pour quelle fournisseur
+    - [20231886](Facture)
+    - pour quelle fournisseur cette facture [20232973](Facture) ?
+    - Pouvez-vous me donner la facture [20233205](Facture) ?
+    - pour quelle fournisseur cette facture [20248/23](Facture) ?
+    - cette facture [2031605](Facture) pour quelle fournisseur
+    - [2057](Facture)
+    - cette facture [20684](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [208/2023](Facture) ?
+    - cette facture [21135/22](Facture) pour quelle fournisseur
+    - cette facture [21-2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [213/2023](Facture) ?
+    - Pouvez-vous me donner la facture [216](Facture) ?
+    - [217](Facture)
+    - Pouvez-vous me donner la facture [219](Facture) ?
+    - [22/00351](Facture)
+    - [22/006653](Facture)
+    - Pouvez-vous me donner la facture [22/006654](Facture) ?
+    - [22/006815](Facture)
+    - cette facture [22/006908](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [220](Facture) ?
+    - pour quelle fournisseur cette facture [2200982](Facture) ?
+    - [2200994](Facture)
+    - pour quelle fournisseur cette facture [2200996](Facture) ?
+    - pour quelle fournisseur cette facture [2201014](Facture) ?
+    - Pouvez-vous me donner la facture [220178](Facture) ?
+    - cette facture [220185](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [220188](Facture) ?
+    - cette facture [220612/23](Facture) pour quelle fournisseur
+    - cette facture [221134/22](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [221136/22](Facture) ?
+    - [221137/22](Facture)
+    - Pouvez-vous me donner la facture [221137/22 2/2](Facture) ?
+    - Pouvez-vous me donner la facture [221138/22](Facture) ?
+    - pour quelle fournisseur cette facture [221139/22](Facture) ?
+    - pour quelle fournisseur cette facture [221140/22](Facture) ?
+    - Pouvez-vous me donner la facture [221141/22](Facture) ?
+    - pour quelle fournisseur cette facture [221142/22](Facture) ?
+    - [221143/22](Facture)
+    - cette facture [221144/22](Facture) pour quelle fournisseur
+    - [221145/22](Facture)
+    - pour quelle fournisseur cette facture [221150/22](Facture) ?
+    - pour quelle fournisseur cette facture [221151/22](Facture) ?
+    - pour quelle fournisseur cette facture [221152/22](Facture) ?
+    - cette facture [221153/22](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [221154/22](Facture) ?
+    - [221155/22](Facture)
+    - pour quelle fournisseur cette facture [221156/23](Facture) ?
+    - [221162/23](Facture)
+    - pour quelle fournisseur cette facture [221163/23](Facture) ?
+    - cette facture [221164/23](Facture) pour quelle fournisseur
+    - cette facture [221165/23](Facture) pour quelle fournisseur
+    - cette facture [221166/23](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [221167/23](Facture) ?
+    - pour quelle fournisseur cette facture [221168/23](Facture) ?
+    - pour quelle fournisseur cette facture [221169/23](Facture) ?
+    - [221170/23](Facture)
+    - cette facture [221186/23](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [221187/23](Facture) ?
+    - [221188/23](Facture)
+    - Pouvez-vous me donner la facture [221189/23](Facture) ?
+    - Pouvez-vous me donner la facture [221190/23](Facture) ?
+    - Pouvez-vous me donner la facture [221208/23](Facture) ?
+    - [221210/23](Facture)
+    - pour quelle fournisseur cette facture [221211/23](Facture) ?
+    - pour quelle fournisseur cette facture [221212/23](Facture) ?
+    - Pouvez-vous me donner la facture [221286/23](Facture) ?
+    - cette facture [221287/23](Facture) pour quelle fournisseur
+    - cette facture [221288/23](Facture) pour quelle fournisseur
+    - [221289/23](Facture)
+    - pour quelle fournisseur cette facture [221290/23](Facture) ?
+    - cette facture [221291/23](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [221305/23](Facture) ?
+    - cette facture [221306/23](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [221307/23](Facture) ?
+    - pour quelle fournisseur cette facture [221308/23](Facture) ?
+    - Pouvez-vous me donner la facture [221309/23](Facture) ?
+    - cette facture [221312/23](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [221313/23](Facture) ?
+    - cette facture [221321/23](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [22-2023](Facture) ?
+    - cette facture [2230195](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [223646](Facture) ?
+    - pour quelle fournisseur cette facture [226/2022](Facture) ?
+    - pour quelle fournisseur cette facture [227/2022](Facture) ?
+    - Pouvez-vous me donner la facture [2281](Facture) ?
+    - pour quelle fournisseur cette facture [2292](Facture) ?
+    - pour quelle fournisseur cette facture [22FA0665](Facture) ?
+    - [22-FC50879](Facture)
+    - pour quelle fournisseur cette facture [22-FCC41573](Facture) ?
+    - [22-FCC41574](Facture)
+    - pour quelle fournisseur cette facture [22-FCC41575](Facture) ?
+    - pour quelle fournisseur cette facture [22-FCC42593](Facture) ?
+    - cette facture [22-FCC42840](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [22-FCC42841](Facture) ?
+    - [22-FCC50044](Facture)
+    - Pouvez-vous me donner la facture [22-FCC50046](Facture) ?
+    - Pouvez-vous me donner la facture [22-FCC51964](Facture) ?
+    - Pouvez-vous me donner la facture [22-FCC51965](Facture) ?
+    - [22-FCC51967](Facture)
+    - Pouvez-vous me donner la facture [22-FCC51968](Facture) ?
+    - [22-FCC51969](Facture)
+    - Pouvez-vous me donner la facture [22-FCC51995](Facture) ?
+    - pour quelle fournisseur cette facture [22-FCC52133](Facture) ?
+    - [22-FCC52134](Facture)
+    - cette facture [22-FCC52137](Facture) pour quelle fournisseur
+    - cette facture [22-FCC52215](Facture) pour quelle fournisseur
+    - cette facture [22-FCC52216](Facture) pour quelle fournisseur
+    - [22-FCC52406](Facture)
+    - cette facture [22-FCC52409](Facture) pour quelle fournisseur
+    - cette facture [22-FCC52415](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [22MEG03566](Facture) ?
+    - [22MMEG02634](Facture)
+    - cette facture [23/000631](Facture) pour quelle fournisseur
+    - cette facture [23/000653](Facture) pour quelle fournisseur
+    - cette facture [23/000722](Facture) pour quelle fournisseur
+    - cette facture [23/000965](Facture) pour quelle fournisseur
+    - cette facture [23/001004](Facture) pour quelle fournisseur
+    - [23/001419](Facture)
+    - cette facture [23/001831](Facture) pour quelle fournisseur
+    - [23/002194](Facture)
+    - cette facture [23/002544](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [23/002769](Facture) ?
+    - Pouvez-vous me donner la facture [23/002771](Facture) ?
+    - [23/002821](Facture)
+    - pour quelle fournisseur cette facture [23/002949](Facture) ?
+    - cette facture [23/003484](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [23/004456](Facture) ?
+    - [23/004655](Facture)
+    - [23/0165](Facture)
+    - Pouvez-vous me donner la facture [23/0308](Facture) ?
+    - cette facture [23/0309](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [23/0379](Facture) ?
+    - [23/0380](Facture)
+    - pour quelle fournisseur cette facture [23/0381](Facture) ?
+    - pour quelle fournisseur cette facture [23+FVG006875](Facture) ?
+    - [23+FVGS002623](Facture)
+    - Pouvez-vous me donner la facture [23+FVGS004412](Facture) ?
+    - pour quelle fournisseur cette facture [23+FVGS005037](Facture) ?
+    - Pouvez-vous me donner la facture [23+FVGS005038](Facture) ?
+    - pour quelle fournisseur cette facture [23+FVGS005606](Facture) ?
+    - Pouvez-vous me donner la facture [23+FVGS006843](Facture) ?
+    - [23+FVGS006873](Facture)
+    - pour quelle fournisseur cette facture [23+FVGS006874](Facture) ?
+    - Pouvez-vous me donner la facture [23+FVGS008055](Facture) ?
+    - [23+FVGS008058](Facture)
+    - cette facture [23+FVGS008123](Facture) pour quelle fournisseur
+    - cette facture [2300042](Facture) pour quelle fournisseur
+    - cette facture [230006](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [230010](Facture) ?
+    - pour quelle fournisseur cette facture [230011](Facture) ?
+    - [2300112](Facture)
+    - [230023](Facture)
+    - [230038](Facture)
+    - pour quelle fournisseur cette facture [230039](Facture) ?
+    - cette facture [230054](Facture) pour quelle fournisseur
+    - cette facture [2300676](Facture) pour quelle fournisseur
+    - [230074](Facture)
+    - pour quelle fournisseur cette facture [230075](Facture) ?
+    - cette facture [230076](Facture) pour quelle fournisseur
+    - cette facture [2300781](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [2300783](Facture) ?
+    - cette facture [230084](Facture) pour quelle fournisseur
+    - [2301142](Facture)
+    - Pouvez-vous me donner la facture [230131](Facture) ?
+    - Pouvez-vous me donner la facture [230143](Facture) ?
+    - pour quelle fournisseur cette facture [230177](Facture) ?
+    - [230183](Facture)
+    - [230184](Facture)
+    - [230245](Facture)
+    - [2302715](Facture)
+    - Pouvez-vous me donner la facture [230579](Facture) ?
+    - [230623](Facture)
+    - [230880](Facture)
+    - pour quelle fournisseur cette facture [231204](Facture) ?
+    - cette facture [231205](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [231352](Facture) ?
+    - cette facture [231353](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [231577](Facture) ?
+    - pour quelle fournisseur cette facture [231787](Facture) ?
+    - cette facture [231833](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [232](Facture) ?
+    - Pouvez-vous me donner la facture [232477](Facture) ?
+    - pour quelle fournisseur cette facture [234403](Facture) ?
+    - cette facture [234519](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [234528](Facture) ?
+    - Pouvez-vous me donner la facture [235059](Facture) ?
+    - pour quelle fournisseur cette facture [238.951](Facture) ?
+    - [23FA0055](Facture)
+    - pour quelle fournisseur cette facture [23FA0139](Facture) ?
+    - cette facture [23FA0226](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [23FA0519](Facture) ?
+    - Pouvez-vous me donner la facture [23FA0615](Facture) ?
+    - Pouvez-vous me donner la facture [23FA0685](Facture) ?
+    - cette facture [23-FCC55166](Facture) pour quelle fournisseur
+    - cette facture [23-FCC55168](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [23-FCC55444](Facture) ?
+    - cette facture [23-FCC56640](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [23-FCC56641](Facture) ?
+    - [23-FCC56642](Facture)
+    - [23-FCC56643](Facture)
+    - [23-FCC69566](Facture)
+    - pour quelle fournisseur cette facture [23-FCC69580](Facture) ?
+    - Pouvez-vous me donner la facture [23-FCC69594](Facture) ?
+    - Pouvez-vous me donner la facture [23-FCC69595](Facture) ?
+    - pour quelle fournisseur cette facture [23-FCC69763](Facture) ?
+    - [23-FCC69764](Facture)
+    - [23-FCC70848](Facture)
+    - pour quelle fournisseur cette facture [23FCC70883](Facture) ?
+    - Pouvez-vous me donner la facture [23-FCC70885](Facture) ?
+    - pour quelle fournisseur cette facture [23-FCC70886](Facture) ?
+    - cette facture [23-FCC70887](Facture) pour quelle fournisseur
+    - [23-FCC70900](Facture)
+    - [23-FCC70940](Facture)
+    - [23-FCC70941](Facture)
+    - cette facture [23-FCC70945](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [23-FCC70993](Facture) ?
+    - Pouvez-vous me donner la facture [23-FCC71229](Facture) ?
+    - pour quelle fournisseur cette facture [23-FCC71230](Facture) ?
+    - Pouvez-vous me donner la facture [23-FCC71231](Facture) ?
+    - pour quelle fournisseur cette facture [23-FCC71269](Facture) ?
+    - Pouvez-vous me donner la facture [23-FCC71271](Facture) ?
+    - [23-FCC71476](Facture)
+    - pour quelle fournisseur cette facture [23-FCC71477](Facture) ?
+    - Pouvez-vous me donner la facture [23-FCC71515](Facture) ?
+    - pour quelle fournisseur cette facture [23-FVGS007149](Facture) ?
+    - [23-FVPR000984](Facture)
+    - [23MEG00376](Facture)
+    - [23MEG00486](Facture)
+    - pour quelle fournisseur cette facture [23MEG00744](Facture) ?
+    - [23MEG02370](Facture)
+    - pour quelle fournisseur cette facture [23MEG02493](Facture) ?
+    - [23MEG02776](Facture)
+    - [23MEG03656](Facture)
+    - cette facture [23MEG03734](Facture) pour quelle fournisseur
+    - [23TSP00087](Facture)
+    - pour quelle fournisseur cette facture [23TSP00119](Facture) ?
+    - cette facture [246/05/06/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [247/2022](Facture) ?
+    - Pouvez-vous me donner la facture [248/2023](Facture) ?
+    - [2517](Facture)
+    - Pouvez-vous me donner la facture [2559](Facture) ?
+    - [272023](Facture)
+    - [2761](Facture)
+    - [2762](Facture)
+    - pour quelle fournisseur cette facture [2766](Facture) ?
+    - cette facture [2769](Facture) pour quelle fournisseur
+    - cette facture [2774](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2775](Facture) ?
+    - cette facture [2776](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2780](Facture) ?
+    - [2786](Facture)
+    - Pouvez-vous me donner la facture [2787](Facture) ?
+    - cette facture [2789](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [2790](Facture) ?
+    - Pouvez-vous me donner la facture [2805](Facture) ?
+    - cette facture [2806](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2807](Facture) ?
+    - [2809](Facture)
+    - [2810](Facture)
+    - pour quelle fournisseur cette facture [2814](Facture) ?
+    - pour quelle fournisseur cette facture [2816](Facture) ?
+    - Pouvez-vous me donner la facture [2827](Facture) ?
+    - pour quelle fournisseur cette facture [2828](Facture) ?
+    - pour quelle fournisseur cette facture [2829](Facture) ?
+    - Pouvez-vous me donner la facture [2834](Facture) ?
+    - [2840](Facture)
+    - Pouvez-vous me donner la facture [29/ 2023](Facture) ?
+    - cette facture [29/2023](Facture) pour quelle fournisseur
+    - cette facture [29/2023 -](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [2921](Facture) ?
+    - Pouvez-vous me donner la facture [3000](Facture) ?
+    - [3023](Facture)
+    - pour quelle fournisseur cette facture [30392](Facture) ?
+    - pour quelle fournisseur cette facture [304/2023](Facture) ?
+    - pour quelle fournisseur cette facture [322/2023](Facture) ?
+    - cette facture [328](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [331/2023](Facture) ?
+    - [3376](Facture)
+    - pour quelle fournisseur cette facture [3387](Facture) ?
+    - [3408](Facture)
+    - pour quelle fournisseur cette facture [3425](Facture) ?
+    - [3447](Facture)
+    - cette facture [3465](Facture) pour quelle fournisseur
+    - [3470](Facture)
+    - [3480](Facture)
+    - Pouvez-vous me donner la facture [35/2023](Facture) ?
+    - [350](Facture)
+    - [3503](Facture)
+    - [3508](Facture)
+    - [3523](Facture)
+    - cette facture [3528](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [3537](Facture) ?
+    - pour quelle fournisseur cette facture [354](Facture) ?
+    - [354/](Facture)
+    - [3549](Facture)
+    - Pouvez-vous me donner la facture [355](Facture) ?
+    - [36/2022](Facture)
+    - Pouvez-vous me donner la facture [36/2022 (2/2)](Facture) ?
+    - [364](Facture)
+    - [365](Facture)
+    - pour quelle fournisseur cette facture [366](Facture) ?
+    - [37/2023](Facture)
+    - Pouvez-vous me donner la facture [374](Facture) ?
+    - cette facture [377](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [383/2023](Facture) ?
+    - cette facture [391/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [393](Facture) ?
+    - pour quelle fournisseur cette facture [393/2023](Facture) ?
+    - pour quelle fournisseur cette facture [395/2023](Facture) ?
+    - cette facture [4](Facture) pour quelle fournisseur
+    - cette facture [40](Facture) pour quelle fournisseur
+    - cette facture [40/2023](Facture) pour quelle fournisseur
+    - [4005897589](Facture)
+    - cette facture [4005898980](Facture) pour quelle fournisseur
+    - cette facture [4005902305](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [4005906201](Facture) ?
+    - Pouvez-vous me donner la facture [4005916537](Facture) ?
+    - [4005922644](Facture)
+    - pour quelle fournisseur cette facture [4005925724](Facture) ?
+    - [4005930417](Facture)
+    - pour quelle fournisseur cette facture [4005931059](Facture) ?
+    - pour quelle fournisseur cette facture [4005931060](Facture) ?
+    - cette facture [4005931441](Facture) pour quelle fournisseur
+    - [4005938019](Facture)
+    - cette facture [4005939383](Facture) pour quelle fournisseur
+    - cette facture [4005940113](Facture) pour quelle fournisseur
+    - cette facture [4005941590](Facture) pour quelle fournisseur
+    - cette facture [4005945996](Facture) pour quelle fournisseur
+    - [4005952355](Facture)
+    - cette facture [4005955095](Facture) pour quelle fournisseur
+    - cette facture [40462](Facture) pour quelle fournisseur
+    - cette facture [41](Facture) pour quelle fournisseur
+    - cette facture [43](Facture) pour quelle fournisseur
+    - [437/2023](Facture)
+    - pour quelle fournisseur cette facture [438/2023](Facture) ?
+    - pour quelle fournisseur cette facture [439/2023](Facture) ?
+    - cette facture [448/2023](Facture) pour quelle fournisseur
+    - cette facture [44927](Facture) pour quelle fournisseur
+    - cette facture [44958](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [45078](Facture) ?
+    - cette facture [477/2023](Facture) pour quelle fournisseur
+    - cette facture [5](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [50](Facture) ?
+    - [50416](Facture)
+    - [505](Facture)
+    - cette facture [50744](Facture) pour quelle fournisseur
+    - [51165](Facture)
+    - pour quelle fournisseur cette facture [51501](Facture) ?
+    - Pouvez-vous me donner la facture [5297/2023](Facture) ?
+    - pour quelle fournisseur cette facture [54/2023](Facture) ?
+    - [55/2023](Facture)
+    - cette facture [559](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [56/2023](Facture) ?
+    - pour quelle fournisseur cette facture [57/2023](Facture) ?
+    - cette facture [6](Facture) pour quelle fournisseur
+    - [63/2023](Facture)
+    - pour quelle fournisseur cette facture [641428/2023/000852](Facture) ?
+    - pour quelle fournisseur cette facture [647083/2022/000852](Facture) ?
+    - pour quelle fournisseur cette facture [649](Facture) ?
+    - cette facture [66/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [670](Facture) ?
+    - [68](Facture)
+    - cette facture [69/12/09/2023](Facture) pour quelle fournisseur
+    - [694](Facture)
+    - [696750/2023/0000852](Facture)
+    - pour quelle fournisseur cette facture [70/2023](Facture) ?
+    - pour quelle fournisseur cette facture [7002023](Facture) ?
+    - [704](Facture)
+    - cette facture [7052023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [7092023](Facture) ?
+    - cette facture [73/2023](Facture) pour quelle fournisseur
+    - [737](Facture)
+    - cette facture [739](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [755](Facture) ?
+    - pour quelle fournisseur cette facture [768](Facture) ?
+    - cette facture [77/2023](Facture) pour quelle fournisseur
+    - cette facture [783](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [81/2023](Facture) ?
+    - Pouvez-vous me donner la facture [846](Facture) ?
+    - Pouvez-vous me donner la facture [847](Facture) ?
+    - Pouvez-vous me donner la facture [848](Facture) ?
+    - Pouvez-vous me donner la facture [849](Facture) ?
+    - Pouvez-vous me donner la facture [85/2023](Facture) ?
+    - [850](Facture)
+    - cette facture [850/2023](Facture) pour quelle fournisseur
+    - [872](Facture)
+    - cette facture [88](Facture) pour quelle fournisseur
+    - [893](Facture)
+    - cette facture [898](Facture) pour quelle fournisseur
+    - [900](Facture)
+    - cette facture [9102302292](Facture) pour quelle fournisseur
+    - [9102303480](Facture)
+    - cette facture [9201001308](Facture) pour quelle fournisseur
+    - cette facture [9201001385](Facture) pour quelle fournisseur
+    - [9201001446](Facture)
+    - pour quelle fournisseur cette facture [9201001570](Facture) ?
+    - pour quelle fournisseur cette facture [9201001661](Facture) ?
+    - Pouvez-vous me donner la facture [9201002111](Facture) ?
+    - pour quelle fournisseur cette facture [9201002202](Facture) ?
+    - [94/2023](Facture)
+    - pour quelle fournisseur cette facture [9401001219](Facture) ?
+    - Pouvez-vous me donner la facture [9401001344](Facture) ?
+    - pour quelle fournisseur cette facture [9401001389](Facture) ?
+    - [9401001851](Facture)
+    - pour quelle fournisseur cette facture [941001769](Facture) ?
+    - cette facture [958](Facture) pour quelle fournisseur
+    - cette facture [959](Facture) pour quelle fournisseur
+    - cette facture [A202203948](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [A202300397](Facture) ?
+    - Pouvez-vous me donner la facture [A202300397 2/3](Facture) ?
+    - pour quelle fournisseur cette facture [A202300397 3/3](Facture) ?
+    - Pouvez-vous me donner la facture [A202300399A](Facture) ?
+    - pour quelle fournisseur cette facture [A202301420](Facture) ?
+    - Pouvez-vous me donner la facture [A202301421](Facture) ?
+    - [A202302356](Facture)
+    - [A202302701](Facture)
+    - pour quelle fournisseur cette facture [AVRIL 2023](Facture) ?
+    - [BL1020360](Facture)
+    - Pouvez-vous me donner la facture [EDT-23-FCC69596](Facture) ?
+    - cette facture [ELS-22FAC1001](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [F TN000628/23](Facture) ?
+    - [F00853](Facture)
+    - pour quelle fournisseur cette facture [F0191/2023](Facture) ?
+    - pour quelle fournisseur cette facture [F20225908](Facture) ?
+    - [F20231441](Facture)
+    - Pouvez-vous me donner la facture [F20231856](Facture) ?
+    - pour quelle fournisseur cette facture [F20232448](Facture) ?
+    - cette facture [F20232968](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [F20233339](Facture) ?
+    - [F20233977](Facture)
+    - cette facture [F20234506](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [F20234993](Facture) ?
+    - [F2225382](Facture)
+    - cette facture [F2300023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [F230134](Facture) ?
+    - cette facture [F2307-00418](Facture) pour quelle fournisseur
+    - cette facture [F231007](Facture) pour quelle fournisseur
+    - [FA000378](Facture)
+    - cette facture [FA000380](Facture) pour quelle fournisseur
+    - cette facture [FA000384](Facture) pour quelle fournisseur
+    - [FA000398](Facture)
+    - pour quelle fournisseur cette facture [FA000399](Facture) ?
+    - [FA000400](Facture)
+    - Pouvez-vous me donner la facture [FA000402](Facture) ?
+    - cette facture [FA000404](Facture) pour quelle fournisseur
+    - cette facture [FA000405](Facture) pour quelle fournisseur
+    - [FA000406](Facture)
+    - pour quelle fournisseur cette facture [FA000410](Facture) ?
+    - [FA000431](Facture)
+    - [FA000439](Facture)
+    - [FA000443](Facture)
+    - [FA000450](Facture)
+    - [FA000454](Facture)
+    - cette facture [FA0010546](Facture) pour quelle fournisseur
+    - cette facture [FA0010608](Facture) pour quelle fournisseur
+    - [FA105601](Facture)
+    - pour quelle fournisseur cette facture [FA105602](Facture) ?
+    - [FA105637](Facture)
+    - pour quelle fournisseur cette facture [FA105644](Facture) ?
+    - Pouvez-vous me donner la facture [FA202239](Facture) ?
+    - cette facture [FA2023024](Facture) pour quelle fournisseur
+    - [FA22023](Facture)
+    - pour quelle fournisseur cette facture [FA221513](Facture) ?
+    - cette facture [FA221668](Facture) pour quelle fournisseur
+    - [FA23/0191](Facture)
+    - [FA230315](Facture)
+    - cette facture [FA230430](Facture) pour quelle fournisseur
+    - [FA230841](Facture)
+    - cette facture [FAB004338](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FAB004468](Facture) ?
+    - [FAC/2022/1617](Facture)
+    - [FAC/2022/1873](Facture)
+    - Pouvez-vous me donner la facture [FAC/2022/2086](Facture) ?
+    - pour quelle fournisseur cette facture [FAC/2023/0124](Facture) ?
+    - cette facture [FAC/2023/0285](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [FAC/2023/1006](Facture) ?
+    - [FAC/2023/1164](Facture)
+    - cette facture [FAC/2023/1333](Facture) pour quelle fournisseur
+    - [FAC02934](Facture)
+    - pour quelle fournisseur cette facture [FAC230099](Facture) ?
+    - [FACBA23-01373](Facture)
+    - Pouvez-vous me donner la facture [FACT-2023/000131](Facture) ?
+    - pour quelle fournisseur cette facture [FACT-2023/000169](Facture) ?
+    - [FACT-2023/000170](Facture)
+    - Pouvez-vous me donner la facture [FACT-2023/000188](Facture) ?
+    - pour quelle fournisseur cette facture [FC220328/22](Facture) ?
+    - [FC232199](Facture)
+    - pour quelle fournisseur cette facture [FC4  008](Facture) ?
+    - [FC4 009](Facture)
+    - Pouvez-vous me donner la facture [FCC44088](Facture) ?
+    - [FCC44089](Facture)
+    - [FCC44090](Facture)
+    - [FCC45499](Facture)
+    - [FCC45500](Facture)
+    - [FCC45501](Facture)
+    - Pouvez-vous me donner la facture [FCC50047](Facture) ?
+    - Pouvez-vous me donner la facture [FCC50049](Facture) ?
+    - Pouvez-vous me donner la facture [FCC50050](Facture) ?
+    - cette facture [FCC50051](Facture) pour quelle fournisseur
+    - [FCC50052](Facture)
+    - Pouvez-vous me donner la facture [FCC50055](Facture) ?
+    - [FCC50056](Facture)
+    - cette facture [FCC50579](Facture) pour quelle fournisseur
+    - [FCC50580](Facture)
+    - cette facture [FCC50581](Facture) pour quelle fournisseur
+    - cette facture [FCC50662](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [FCC51587](Facture) ?
+    - Pouvez-vous me donner la facture [FCC52497](Facture) ?
+    - cette facture [FCC53444](Facture) pour quelle fournisseur
+    - [FCC53544](Facture)
+    - Pouvez-vous me donner la facture [FCC53619](Facture) ?
+    - cette facture [FCC53623](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [FCC53654](Facture) ?
+    - pour quelle fournisseur cette facture [FCC53655](Facture) ?
+    - cette facture [FCC53656](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FCC53739](Facture) ?
+    - Pouvez-vous me donner la facture [FCC53984](Facture) ?
+    - [FCC53985](Facture)
+    - Pouvez-vous me donner la facture [FCC54006](Facture) ?
+    - [FCC54141](Facture)
+    - cette facture [FCC54142](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FCC69565](Facture) ?
+    - pour quelle fournisseur cette facture [FCV2300174](Facture) ?
+    - Pouvez-vous me donner la facture [FCV2300661](Facture) ?
+    - pour quelle fournisseur cette facture [FEVRIER 2023](Facture) ?
+    - pour quelle fournisseur cette facture [FT/00024/2023](Facture) ?
+    - Pouvez-vous me donner la facture [FT/00107/2023](Facture) ?
+    - cette facture [FT/00192/2023](Facture) pour quelle fournisseur
+    - [FT/00546/2023](Facture)
+    - pour quelle fournisseur cette facture [FT/00641/2023](Facture) ?
+    - [FT/00685/2022](Facture)
+    - pour quelle fournisseur cette facture [FT/00748/2022   3/1](Facture) ?
+    - [FT/00748/2022  3/2](Facture)
+    - Pouvez-vous me donner la facture [FT/00748/2022  3/3](Facture) ?
+    - [FT000349](Facture)
+    - pour quelle fournisseur cette facture [FT000372](Facture) ?
+    - pour quelle fournisseur cette facture [FT000388](Facture) ?
+    - pour quelle fournisseur cette facture [FT000449](Facture) ?
+    - cette facture [FT000460](Facture) pour quelle fournisseur
+    - cette facture [FT000461](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [FT000462](Facture) ?
+    - cette facture [FT23/02477](Facture) pour quelle fournisseur
+    - [FT23/02663](Facture)
+    - Pouvez-vous me donner la facture [FT2300437](Facture) ?
+    - pour quelle fournisseur cette facture [FT2300597](Facture) ?
+    - [FT230386](Facture)
+    - cette facture [FTN 000631/23](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [FTN000173/22](Facture) ?
+    - [FTN000194/23](Facture)
+    - Pouvez-vous me donner la facture [FTN000480/23](Facture) ?
+    - [FTN000635/23](Facture)
+    - Pouvez-vous me donner la facture [FV/2300409](Facture) ?
+    - pour quelle fournisseur cette facture [FV1972023](Facture) ?
+    - cette facture [FV210413](Facture) pour quelle fournisseur
+    - [FV22/00308](Facture)
+    - [FV22/00319](Facture)
+    - [FV220867](Facture)
+    - Pouvez-vous me donner la facture [FV220893](Facture) ?
+    - [FV220912](Facture)
+    - Pouvez-vous me donner la facture [FV220927](Facture) ?
+    - pour quelle fournisseur cette facture [FV220939](Facture) ?
+    - Pouvez-vous me donner la facture [FV23/00003](Facture) ?
+    - [FV23/00004](Facture)
+    - Pouvez-vous me donner la facture [FV23/00005](Facture) ?
+    - pour quelle fournisseur cette facture [FV23/00011](Facture) ?
+    - [FV23/00013](Facture)
+    - cette facture [FV23/00034](Facture) pour quelle fournisseur
+    - [FV23/00060](Facture)
+    - cette facture [FV23/00106](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FV23/00166](Facture) ?
+    - cette facture [FV23/00191](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FV23/00192](Facture) ?
+    - cette facture [FV23/00193](Facture) pour quelle fournisseur
+    - [FV23/00207](Facture)
+    - [FV23/00216](Facture)
+    - cette facture [FV23/00221](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FV23/00228](Facture) ?
+    - pour quelle fournisseur cette facture [FV23/00267](Facture) ?
+    - [FV23/00280](Facture)
+    - Pouvez-vous me donner la facture [FV23/00281](Facture) ?
+    - Pouvez-vous me donner la facture [FV23/00325](Facture) ?
+    - [FV23/00327](Facture)
+    - [FV23/00332](Facture)
+    - cette facture [FV23/00333](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [FV230012](Facture) ?
+    - [FV230022](Facture)
+    - cette facture [FV230035](Facture) pour quelle fournisseur
+    - cette facture [FV230050](Facture) pour quelle fournisseur
+    - cette facture [FV230085](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [FV230100](Facture) ?
+    - pour quelle fournisseur cette facture [FV230113](Facture) ?
+    - pour quelle fournisseur cette facture [FV230231](Facture) ?
+    - Pouvez-vous me donner la facture [FV230237](Facture) ?
+    - [FV230275](Facture)
+    - cette facture [FV230350](Facture) pour quelle fournisseur
+    - cette facture [FV230357](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [FV230411](Facture) ?
+    - pour quelle fournisseur cette facture [FV230420](Facture) ?
+    - pour quelle fournisseur cette facture [FV230457](Facture) ?
+    - [FV230459](Facture)
+    - Pouvez-vous me donner la facture [FV230560](Facture) ?
+    - pour quelle fournisseur cette facture [FV230564](Facture) ?
+    - [FV230589](Facture)
+    - Pouvez-vous me donner la facture [FV230652](Facture) ?
+    - pour quelle fournisseur cette facture [FV230665](Facture) ?
+    - Pouvez-vous me donner la facture [FV230674](Facture) ?
+    - Pouvez-vous me donner la facture [FV230703](Facture) ?
+    - [FV230730](Facture)
+    - pour quelle fournisseur cette facture [FV230762](Facture) ?
+    - pour quelle fournisseur cette facture [FV230778](Facture) ?
+    - cette facture [FV230779](Facture) pour quelle fournisseur
+    - [FV230780](Facture)
+    - cette facture [FV230800](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FV230818](Facture) ?
+    - pour quelle fournisseur cette facture [FV230824](Facture) ?
+    - [FV230828](Facture)
+    - [FV230847](Facture)
+    - Pouvez-vous me donner la facture [FVAV378695](Facture) ?
+    - pour quelle fournisseur cette facture [FVG013597](Facture) ?
+    - [FVG013598](Facture)
+    - Pouvez-vous me donner la facture [FVG013599](Facture) ?
+    - Pouvez-vous me donner la facture [FVG01360 2/2](Facture) ?
+    - pour quelle fournisseur cette facture [FVG013600](Facture) ?
+    - Pouvez-vous me donner la facture [FVG013600 (2/2)](Facture) ?
+    - pour quelle fournisseur cette facture [FVG013609](Facture) ?
+    - pour quelle fournisseur cette facture [FVG013661](Facture) ?
+    - [FVG013662](Facture)
+    - cette facture [FVG013710](Facture) pour quelle fournisseur
+    - [FVG013710 (2/2)](Facture)
+    - cette facture [FVG013711](Facture) pour quelle fournisseur
+    - [FVG013712](Facture)
+    - Pouvez-vous me donner la facture [FVG014776](Facture) ?
+    - pour quelle fournisseur cette facture [FVG014789](Facture) ?
+    - pour quelle fournisseur cette facture [FVG014858](Facture) ?
+    - pour quelle fournisseur cette facture [FVG014968](Facture) ?
+    - [FVG014969](Facture)
+    - cette facture [FVG014970](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FVG015243](Facture) ?
+    - pour quelle fournisseur cette facture [FVG015365](Facture) ?
+    - Pouvez-vous me donner la facture [FVG015366](Facture) ?
+    - Pouvez-vous me donner la facture [FVG015367](Facture) ?
+    - pour quelle fournisseur cette facture [FVGS000236](Facture) ?
+    - [FVGS000255](Facture)
+    - cette facture [FVGS000554](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FVGS000702](Facture) ?
+    - Pouvez-vous me donner la facture [FVGS001211](Facture) ?
+    - cette facture [FVGS001383](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [FVGS001592](Facture) ?
+    - [FVGS001597](Facture)
+    - [FVGS001598](Facture)
+    - cette facture [FVGS007704](Facture) pour quelle fournisseur
+    - cette facture [FVGS007716](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [FVGS007925](Facture) ?
+    - [FVGS00886](Facture)
+    - pour quelle fournisseur cette facture [FVPR000063](Facture) ?
+    - Pouvez-vous me donner la facture [LD04/2023](Facture) ?
+    - [LD05/2023](Facture)
+    - cette facture [LD1005/2022](Facture) pour quelle fournisseur
+    - [LD1007/2022](Facture)
+    - cette facture [LD1008/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [LD1015/2023](Facture) ?
+    - [LD1017/2022](Facture)
+    - Pouvez-vous me donner la facture [LD1020/2022](Facture) ?
+    - pour quelle fournisseur cette facture [LD1021/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD1025/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD1027/2023](Facture) ?
+    - cette facture [LD1029/2022](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD1030/2022](Facture) ?
+    - pour quelle fournisseur cette facture [LD1033/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD1037](Facture) ?
+    - pour quelle fournisseur cette facture [LD1040/2022](Facture) ?
+    - pour quelle fournisseur cette facture [LD1044/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD1050/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD1052/2022](Facture) ?
+    - [LD1064/2022](Facture)
+    - [LD1083/2022](Facture)
+    - [LD1114/2022](Facture)
+    - pour quelle fournisseur cette facture [LD1119/2022](Facture) ?
+    - [LD112/2023](Facture)
+    - pour quelle fournisseur cette facture [LD1120/2022](Facture) ?
+    - [LD1129/2022](Facture)
+    - pour quelle fournisseur cette facture [LD1139/2022](Facture) ?
+    - cette facture [LD1153/2022](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD1154/2022](Facture) ?
+    - [LD116/2023](Facture)
+    - Pouvez-vous me donner la facture [LD1170/2022](Facture) ?
+    - pour quelle fournisseur cette facture [LD1172/2022](Facture) ?
+    - Pouvez-vous me donner la facture [LD119/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD12/2023](Facture) ?
+    - [LD122/2023](Facture)
+    - Pouvez-vous me donner la facture [LD123/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD125/2023](Facture) ?
+    - cette facture [LD13/2023](Facture) pour quelle fournisseur
+    - [LD142/2023](Facture)
+    - pour quelle fournisseur cette facture [LD16/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD170/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD176/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD182/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD187/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD197/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD206/2023](Facture) ?
+    - cette facture [LD216/2023](Facture) pour quelle fournisseur
+    - cette facture [LD233/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [LD256/2023](Facture) ?
+    - cette facture [LD270/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD280/2023](Facture) ?
+    - cette facture [LD283/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD294/2023](Facture) ?
+    - cette facture [LD30/2023](Facture) pour quelle fournisseur
+    - cette facture [LD301/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD313/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD331/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD341/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD342/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD345/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD357/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD375/2023](Facture) ?
+    - cette facture [LD376/2023](Facture) pour quelle fournisseur
+    - [LD397/2023](Facture)
+    - cette facture [LD399/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [LD40/2023](Facture) ?
+    - [LD414/2023](Facture)
+    - Pouvez-vous me donner la facture [LD420/2023](Facture) ?
+    - cette facture [LD43/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD433/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD44/2023](Facture) ?
+    - cette facture [LD441/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD450/2023](Facture) ?
+    - cette facture [LD451/2023](Facture) pour quelle fournisseur
+    - cette facture [LD459/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [LD47/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD475/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD483/2023](Facture) ?
+    - cette facture [LD486/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [LD488/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD489/2023](Facture) ?
+    - [LD497/2023](Facture)
+    - cette facture [LD504/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [LD525/2023](Facture) ?
+    - cette facture [LD53/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD542/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD544/2023](Facture) ?
+    - [LD547/2023](Facture)
+    - pour quelle fournisseur cette facture [LD548/2023](Facture) ?
+    - cette facture [LD55/2023](Facture) pour quelle fournisseur
+    - [LD579/2023](Facture)
+    - pour quelle fournisseur cette facture [LD58/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD607/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD640/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD678/2023](Facture) ?
+    - cette facture [LD683/2023](Facture) pour quelle fournisseur
+    - cette facture [LD688/2023](Facture) pour quelle fournisseur
+    - cette facture [LD71/2023](Facture) pour quelle fournisseur
+    - cette facture [LD714/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD716/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD727/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD737/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD752/2023](Facture) ?
+    - cette facture [LD771/2023](Facture) pour quelle fournisseur
+    - [LD830/2023](Facture)
+    - Pouvez-vous me donner la facture [LD862/2023](Facture) ?
+    - Pouvez-vous me donner la facture [LD868/2023](Facture) ?
+    - cette facture [LD871/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD887/2023](Facture) ?
+    - pour quelle fournisseur cette facture [LD896/2023](Facture) ?
+    - [LD903/2023](Facture)
+    - [LD941/2023](Facture)
+    - cette facture [LD966/2023](Facture) pour quelle fournisseur
+    - cette facture [LD969/2023](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [LD985/2023](Facture) ?
+    - cette facture [LD987/2023](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [LD998/2023](Facture) ?
+    - Pouvez-vous me donner la facture [lLD750/2023](Facture) ?
+    - [MAIS 2023](Facture)
+    - pour quelle fournisseur cette facture [MB-23+FVGS000487](Facture) ?
+    - pour quelle fournisseur cette facture [MB-23+FVGS003871](Facture) ?
+    - [MB-23+FVGS005176](Facture)
+    - pour quelle fournisseur cette facture [MB-23+FVGS005585](Facture) ?
+    - pour quelle fournisseur cette facture [MB-23+FVGS006480²](Facture) ?
+    - cette facture [MB-23+FVGS006844](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [MB-23+FVGS006845](Facture) ?
+    - pour quelle fournisseur cette facture [ME/17/8576  1/3](Facture) ?
+    - [ME/17/8576  2/3](Facture)
+    - pour quelle fournisseur cette facture [ME/17/8576  3/3](Facture) ?
+    - pour quelle fournisseur cette facture [ME/18/0098 2/1](Facture) ?
+    - pour quelle fournisseur cette facture [ME/18/0098 2/2](Facture) ?
+    - pour quelle fournisseur cette facture [ME/18/0345  1/2](Facture) ?
+    - cette facture [ME/18/0345  2/2](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [ME/18/0649](Facture) ?
+    - Pouvez-vous me donner la facture [ME/18/0892](Facture) ?
+    - pour quelle fournisseur cette facture [ME/18/1206](Facture) ?
+    - [ME/18/2395](Facture)
+    - pour quelle fournisseur cette facture [ME/18/2477](Facture) ?
+    - cette facture [MOIS DE MARS](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [NA-23+FVGSAV00719](Facture) ?
+    - cette facture [NOTE DE DEBIT N°03/2022](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [REL ](Facture) ?
+    - Pouvez-vous me donner la facture [SF230007](Facture) ?
+    - cette facture [SF230063](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [SF230752](Facture) ?
+    - pour quelle fournisseur cette facture [SF230851](Facture) ?
+    - [SF230981](Facture)
+    - Pouvez-vous me donner la facture [SMFAC+22/3683](Facture) ?
+    - Pouvez-vous me donner la facture [SMFAC+22/3774](Facture) ?
+    - cette facture [SMFAC+22/3776](Facture) pour quelle fournisseur
+    - cette facture [SMFAC+22/3869](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [SMFAC+22/3870](Facture) ?
+    - [SMFAC+22/3948](Facture)
+    - [SMFAC+22/3961](Facture)
+    - cette facture [SMFAC+22/4026](Facture) pour quelle fournisseur
+    - cette facture [SMFAC+22/4027](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [SMFAC+22/4157](Facture) ?
+    - Pouvez-vous me donner la facture [SMFAC+22/4188](Facture) ?
+    - pour quelle fournisseur cette facture [SMFAC+22/4191](Facture) ?
+    - [SMFAC+22/4752](Facture)
+    - Pouvez-vous me donner la facture [SMFAC+22/4838](Facture) ?
+    - [SMFAC+22/4900](Facture)
+    - pour quelle fournisseur cette facture [SMFAC+22/4901](Facture) ?
+    - pour quelle fournisseur cette facture [SMFAC+22/4902](Facture) ?
+    - [SMFAC+22/4933](Facture)
+    - Pouvez-vous me donner la facture [SMFAC+22/4934](Facture) ?
+    - pour quelle fournisseur cette facture [SMFAC+22/4935](Facture) ?
+    - [SMFAC+22/4936](Facture)
+    - pour quelle fournisseur cette facture [SMFAC+22/4961](Facture) ?
+    - [SMFAC+22/5046](Facture)
+    - [SMFAC+22/5058](Facture)
+    - cette facture [SMFAC+22/5093](Facture) pour quelle fournisseur
+    - cette facture [SMFAC+23/0115](Facture) pour quelle fournisseur
+    - Pouvez-vous me donner la facture [SMFAC+23/0202](Facture) ?
+    - [SMFAC+23/0211](Facture)
+    - cette facture [SMFAC+23/0322](Facture) pour quelle fournisseur
+    - [SMFAC+23/0325](Facture)
+    - pour quelle fournisseur cette facture [SMFAC+23/0488](Facture) ?
+    - Pouvez-vous me donner la facture [SMFAC+23/0591](Facture) ?
+    - pour quelle fournisseur cette facture [SMFAC+23/0592](Facture) ?
+    - pour quelle fournisseur cette facture [SMFAC+23/2734](Facture) ?
+    - cette facture [SMFAC+23/2828](Facture) pour quelle fournisseur
+    - [SMFAC+23/3363](Facture)
+    - Pouvez-vous me donner la facture [SMFAC+23/3530](Facture) ?
+    - cette facture [SMFAC+23/3632](Facture) pour quelle fournisseur
+    - pour quelle fournisseur cette facture [SYS-2023](Facture) ?
+    - pour quelle fournisseur cette facture [USP-23-FCC55167](Facture) ?
+    - cette facture [V+FACT22/0440](Facture) pour quelle fournisseur
+    - cette facture [V+FACT22/0441](Facture) pour quelle fournisseur
