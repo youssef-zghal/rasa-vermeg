@@ -1,0 +1,43 @@
+(this["webpackJsonp@esprit/front-office"] = this["webpackJsonp@esprit/front-office"] || []).push([[87],{
+
+/***/ "./src/components/layout/ScrollUp.js":
+/*!*******************************************!*\
+  !*** ./src/components/layout/ScrollUp.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ScrollUpBtn; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_scroll_up_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-scroll-up-button */ "./node_modules/react-scroll-up-button/dist/react-scroll-up-button.js");
+/* harmony import */ var react_scroll_up_button__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_scroll_up_button__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "/home/ftp-esprit/EspritSite/dev_esprit_tn/frontend-client/src/components/layout/ScrollUp.js";
+
+
+function ScrollUpBtn() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_scroll_up_button__WEBPACK_IMPORTED_MODULE_1__["CircleArrow"], {
+    style: {
+      padding: 8,
+      width: 40,
+      backgroundColor: "transparent",
+      height: 40,
+      border: "2px solid black",
+      outline: 0,
+      zIndex: 9999
+    },
+    __self: this,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 6,
+      columnNumber: 5
+    }
+  });
+}
+
+/***/ })
+
+}]);
+//# sourceMappingURL=87.chunk.js.map

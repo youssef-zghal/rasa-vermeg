@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/1zwaro/3zqfJi62MGz//pDF9U+j1k8gktpw5j4" crossorigin="anonymous">
+
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  <meta content="utf-8" http-equiv="encoding" />
+
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Raleway:500&display=swap" rel="stylesheet" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" />
+
+  <!--Import Font Awesome Icon Font-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+  <!--Import materialize.css-->
+  <link rel="stylesheet" type="text/css" href="static/css/materialize.min.css" />
+
+  <!--Main css-->
+  <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>InvoiceBOT By VERMEG</title>
+  </head>
+<body>
+  <div class="dashboard">
+    <iframe src="http://localhost:8053" width="1550" height="600" frameborder="0"></iframe>
+
+  </div>
+  
+  <div class="container">
+    <!--chatbot widget -->
+    <div class="widget">
+      <div class="chat_header">
+        <!--Add the name of the bot here -->
+        <span class="chat_header_title">InvoiceBOT</span>
+        <span class="dropdown-trigger" href="#" data-target="dropdown1">
+          <i class="material-icons"> more_vert </i>
+        </span>
+         <span class="dropdown-trigger" href="" data-target="">
+           <i id="sound-on" class="fa fa-volume-up" onclick="Soundclicked()"></i>
+        </span>
+        <!-- Dropdown menu-->
+        <ul id="dropdown1" class="dropdown-content">
+          <li><a href="#" id="clear">Clear</a></li>
+          <li><a href="#" id="close">Close</a></li>
+        </ul>
+      </div>
+      <!--Chatbot contents goes here -->
+      <div class="chats" id="chats">
+        <div class="clearfix"></div>
+      </div>
+      <!--keypad for user to type the message -->
+      <div class="keypad">
+        <textarea id="userInput" placeholder="Type a message..." class="usrInput"></textarea>
+        <div id="buttonContainer">
+          <button class="roundButton" id="recordButton" onclick="record()">
+            <i id="micIcon" class="fa fa-microphone-slash" aria-hidden="true"></i>
+          </button>
+          <button class="roundButton" id="sendButton">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--bot profile-->
+    
+    <div class="profile_div" id="profile_div">
+      <img class="imgProfile" src="static/img/InvoiceBot.png" />
+    </div>
+    <!-- Bot pop-up intro -->
+    <div class="tap-target" data-target="profile_div">
+    </div>
+  </div>
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="static/js/lib/materialize.min.js"></script>
+  <script src="static/js/lib/uuid.min.js"></script>
+  <!--Main Script -->
+  <script type="text/javascript" src="static/js/script.js"></script>
+
+  <!--Chart.js Script -->
+  <script type="text/javascript" src="static/js/lib/chart.min.js"></script>
+  <script type="text/javascript" src="static/js/lib/showdown.min.js"></script>
+
+</body>
+<script>
+
+  
+  const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+recognition.continuous = false;
+recognition.lang = 'fr-FR' || 'en-US';
+recognition.interimResults = false;
+recognition.maxAlternatives = 5;
+
+recognition.onspeechend = () => {
+    recognition.stop();
+}
+
+recognition.onerror = (event) => {
+    console.log(event);
+    const micIcon = document.getElementById('micIcon');
+    micIcon.className = 'fa fa-microphone-slash';
+}
+
+function record() {
+  const micIcon = document.getElementById('micIcon');
+    micIcon.className = 'fa fa-microphone';
+    recognition.start();
+    console.log('Ready to receive a command.');
+}
+
+recognition.onresult = (event) => {
+    console.log(event);
+    displayResults(event.results[0])
+}
+
+function displayResults(results) {
+    let resultHtml = "";
+    resultHtml += `${results[0].transcript}`;
+    console.log(results[0].transcript);
+    document.getElementById("userInput").value = resultHtml;
+    const micIcon = document.getElementById('micIcon');
+    micIcon.className = 'fa fa-microphone-slash';
+
+}
+
+
+function Soundclicked() {
+  var soundIcon = document.getElementById("sound-on");
+  
+  if (soundIcon.className === "fa fa-volume-up") {
+    soundIcon.className = "fa fa-volume-off";
+  } else {
+    soundIcon.className = "fa fa-volume-up";
+  }
+}
+
+
+</script>
+</html>
