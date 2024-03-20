@@ -101,13 +101,13 @@
 <script>
 
   
-  const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
+const SpeechRecognition = window.SpeechRecognition || webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 
 recognition.continuous = false;
 recognition.lang = 'fr-FR' || 'en-US';
 recognition.interimResults = false;
-recognition.maxAlternatives = 5;
+recognition.maxAlternatives = 100;
 
 recognition.onspeechend = () => {
     recognition.stop();

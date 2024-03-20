@@ -148,3 +148,75 @@ stories:
   steps:
   - intent: demande_Facture
   - action: action_obtenir_Facture_montant
+
+- story: top fournisseur
+  steps:
+  - intent: demande_top_fournisseurs
+    entities:
+    - number: 10
+  - slot_was_set:
+    - top: 5
+  - action: action_top_fournisseurs
+
+- story: top type
+  steps:
+  - intent: demande_top_Type
+    entities:
+    - number: 10
+  - slot_was_set:
+    - top: 5
+  - action: action_top_Type
+
+- story: Less fournisseur
+  steps:
+  - intent: demande_Less_fournisseurs
+    entities:
+    - number: 10
+  - slot_was_set:
+    - top: 5
+  - action: action_Less_fournisseurs
+
+
+- story: Fournisseurs avec montant de 0
+  steps:
+  - intent: fournisseurs_zero
+  - action: action_fournisseurs_zero
+
+- story: Obtenir les montants dus par facture
+  steps:
+  - intent: obtenir_montant_total_facture
+  - action: action_montant_total_facture
+
+- story: facture par mois
+  steps:
+  - intent: inform
+  - action: action_get_Facture_mois
+
+- story: montant par année
+  steps:
+  - intent: montant_par_annee
+    entities:
+    - number: 2023
+  - slot_was_set:
+    - Année: 2022
+  - action: action_obtenir_montant_annee
+
+- story: Somme des montants
+  steps:
+  - intent: demander_Somme_total
+  - action: action_calculer_Somme_montant
+
+- story: Somme des montants annéé
+  steps:
+  - intent: demander_Somme_total_année
+  - action: action_calculer_montant_total_par_annee
+
+- story: Somme des montants entre 2 dates
+  steps:
+  - intent: calculer_Somme_entre_deux_années
+  - action: action_montant_total_entre_2_dates
+
+- story: Somme des montants entre les dates
+  steps:
+  - intent: calculer_Somme_entre_les_dates
+  - action: action_montant_total_entre_les_dates

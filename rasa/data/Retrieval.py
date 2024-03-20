@@ -134,6 +134,7 @@ def main():
             "Pouvez-vous me donner le montant pour [{element}](Fournisseur) ?",
             "Combien [{element}](Fournisseur) a-t-il facturé ?",
             "[{element}](Fournisseur)",
+            " donner moi la facture pour le fournisseur [{element}](Fournisseur)",
 
         ]
         
@@ -149,6 +150,9 @@ def main():
             "Pouvez-vous me donner la facture [{element}](Facture) ?",
             "cette facture [{element}](Facture) pour quelle fournisseur",
             "[{element}](Facture)",
+            "donner moi le fournisseur pour cette facture [{element}](Facture) ",
+            "donner le fournisseur pour la facture [{element}](Facture)",
+            "la facture [{element}](Facture)",
 
         ]
         
