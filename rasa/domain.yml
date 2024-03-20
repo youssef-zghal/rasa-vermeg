@@ -13,21 +13,10 @@ intents:
 - Montant_total_fournisseur
 - Reference
 - affirm
-- affirmer
 - ask_type_by_amount
-- au_revoir
 - demande_etat
-- deny
-- goodbye
-- greet
-- humeur_pas_contente
-- humeur_super
 - inform
 - montant_par_date
-- mood_great
-- mood_unhappy
-- nier
-- saluer
 - informer_etat_prêt_pour_paiement
 - informer_etat_créé
 - informer_etat_validé
@@ -40,6 +29,16 @@ intents:
 - inform_facture_count
 - intervalle_par_date
 - demande_Facture
+- demande_top_fournisseurs
+- demande_top_Type
+- demande_Less_fournisseurs
+- fournisseurs_zero
+- obtenir_montant_total_facture
+- demander_Somme_total
+- montant_par_annee
+- demander_Somme_total_année
+- calculer_Somme_entre_deux_années
+- calculer_Somme_entre_les_dates
 
 
 entities:
@@ -52,17 +51,30 @@ entities:
 - start_date
 - end_date
 - Facture
+- top
+- Jour
+- JourD
+- JourF
+- month
+- monthD
+- monthF
+- Année
+- AnnéeD
+- AnnéeF
+
 
 slots:
 
   start_date:
     type: text
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: start_date
 
   end_date:
     type: text
+    influence_conversation: true
     mappings:
       - type: from_entity
         entity: end_date
@@ -91,6 +103,7 @@ slots:
     mappings:
     - type: from_entity
       entity: number
+
   Date:
     type: text
     influence_conversation: true
@@ -109,16 +122,73 @@ slots:
     mappings:
     - type: from_entity
       entity: Facture
+  
+  top:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+  Jour:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: Jour
+  JourD:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: JourD
+  JourF:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: JourF 
+  month:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: month
+  monthD:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: monthD
+  monthF:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: monthF
+  Année:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: Année
+  AnnéeD:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: AnnéeD
+  AnnéeF:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: AnnéeF
 
 responses:
   utter_salutation:
   - text: "Bonjour Je suis InvoiceBOT powered by Vermeg.\n\nje suis prêt à vous aider!"
   utter_bye:
   - text: "Au revoir, content de vous avoir aidé! "
-  utter_heureux:
-  - text: Super, continue comme ça !
-  utter_au_revoir:
-  - text: Au revoir
   utter_Reference:
   - text: la reference pour le fornisseur {Fournisseur} est {Reference}.
   - text: le code du fournisseur pour cette facture est {Facture}.
@@ -126,8 +196,12 @@ responses:
   - text: le numero de Fournisseur pour cette facture est {Facture}.
   utter_montant:
   - text: Le montant de la facture qui a une reference {Référence} est de {montant}.
-  utter_details_facture:
-  - text: 'info:  {reference} {fournisseur} {facture} {date} {montant} {etat} {type}'
+  utter_inf:
+  - text: 'Les montants inférieurs à celui que tu as indiqué sont:{montant}'
+  utter_sup:
+  - text: 'Les montants superieur à celui que tu as indiqué sont:{montant}'
+  utter_egal:
+  - text: 'Les montants égal à celui que tu as indiqué sont:{montant}'
   utter_ask_date:
   - text: Quelle est la date pour laquelle vous souhaitez connaître le montant?
   utter_next_Montant_Total_Par_Etat:
@@ -163,3 +237,13 @@ actions:
 - action_count_Facture
 - action_Recuperer_Montant_Par_Date
 - action_obtenir_Facture_montant
+- action_top_fournisseurs
+- action_top_Type
+- action_Less_fournisseurs
+- action_fournisseurs_zero
+- action_montant_total_facture
+- action_get_Facture_mois
+- action_obtenir_montant_annee
+- action_calculer_Somme_montant
+- action_calculer_montant_total_par_annee
+- action_montant_total_entre_2_dates
