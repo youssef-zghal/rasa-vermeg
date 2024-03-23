@@ -86,6 +86,7 @@ def main():
             file.write("# Nouveaux éléments\n")
             file.write("data = [\n")
             for item in data:
+                item = item.strip()  # Enlever les espaces à la fin
                 escaped_item = item.replace("'", "\\'")  # Échapper les apostrophes
                 file.write(f"    '{escaped_item}',\n")
             file.write("]\n")

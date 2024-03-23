@@ -1,7 +1,5 @@
 version: '3.1'
 intents:
-- salutation
-- bye
 - Date
 - Etat
 - Facture
@@ -13,35 +11,37 @@ intents:
 - Montant_total_fournisseur
 - Reference
 - affirm
-- ask_type_by_amount
-- demande_etat
-- inform
-- montant_par_date
-- informer_etat_prêt_pour_paiement
-- informer_etat_créé
-- informer_etat_validé
 - ask_type
-- demande_montant_type
-- next_Montant_Total_Par_Type
+- ask_type_by_amount
+- bye
+- demande_Facture
+- demande_Less_fournisseurs
+- demande_etat
 - demande_montant_fournisseur
-- inform_fournisseur_count
+- demande_montant_type
+- demande_top_Type
+- demande_top_fournisseurs
+- fournisseurs_zero
+- inform
 - inform_Type_count
 - inform_facture_count
+- inform_fournisseur_count
+- informer_etat_créé
+- informer_etat_prêt_pour_paiement
+- informer_etat_validé
 - intervalle_par_date
-- demande_Facture
-- demande_top_fournisseurs
-- demande_top_Type
-- demande_Less_fournisseurs
-- fournisseurs_zero
+- montant_par_date
+- next_Montant_Total_Par_Type
+- obtenir_montant_total_annuel
 - obtenir_montant_total_facture
-- demander_Somme_total
-- montant_par_annee
-- demander_Somme_total_année
-- calculer_Somme_entre_deux_années
-- calculer_Somme_entre_les_dates
-
-
+- obtenir_montant_total_pluriannuel
+- obtenir_total_Deux_mois
+- salutation
 entities:
+- monthD
+- month
+- Année
+- monthF
 - number
 - text
 - Fournisseur
@@ -55,55 +55,43 @@ entities:
 - Jour
 - JourD
 - JourF
-- month
-- monthD
-- monthF
-- Année
 - AnnéeD
 - AnnéeF
-
-
 slots:
-
   start_date:
     type: text
     influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: start_date
-
+    - type: from_entity
+      entity: start_date
   end_date:
     type: text
     influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: end_date
-
+    - type: from_entity
+      entity: end_date
   Etat:
     type: categorical
     influence_conversation: true
     values:
-      - Validé
-      - Créé
-      - Prêt pour paiement
+    - Validé
+    - Créé
+    - Prêt pour paiement
     mappings:
-      - type: from_entity
-        entity: Etat
-
+    - type: from_entity
+      entity: Etat
   type:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
       entity: type
-
   Montant:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
       entity: number
-
   Date:
     type: text
     influence_conversation: true
@@ -122,7 +110,6 @@ slots:
     mappings:
     - type: from_entity
       entity: Facture
-  
   top:
     type: text
     influence_conversation: true
@@ -146,7 +133,7 @@ slots:
     influence_conversation: true
     mappings:
     - type: from_entity
-      entity: JourF 
+      entity: JourF
   month:
     type: text
     influence_conversation: true
@@ -183,12 +170,14 @@ slots:
     mappings:
     - type: from_entity
       entity: AnnéeF
-
 responses:
   utter_salutation:
-  - text: "Bonjour Je suis InvoiceBOT powered by Vermeg.\n\nje suis prêt à vous aider!"
+  - text: |-
+      Bonjour Je suis InvoiceBOT powered by Vermeg.
+
+      je suis prêt à vous aider!
   utter_bye:
-  - text: "Au revoir, content de vous avoir aidé! "
+  - text: 'Au revoir, content de vous avoir aidé! '
   utter_Reference:
   - text: la reference pour le fornisseur {Fournisseur} est {Reference}.
   - text: le code du fournisseur pour cette facture est {Facture}.
@@ -197,11 +186,11 @@ responses:
   utter_montant:
   - text: Le montant de la facture qui a une reference {Référence} est de {montant}.
   utter_inf:
-  - text: 'Les montants inférieurs à celui que tu as indiqué sont:{montant}'
+  - text: Les montants inférieurs à celui que tu as indiqué sont:{montant}
   utter_sup:
-  - text: 'Les montants superieur à celui que tu as indiqué sont:{montant}'
+  - text: Les montants superieur à celui que tu as indiqué sont:{montant}
   utter_egal:
-  - text: 'Les montants égal à celui que tu as indiqué sont:{montant}'
+  - text: Les montants égal à celui que tu as indiqué sont:{montant}
   utter_ask_date:
   - text: Quelle est la date pour laquelle vous souhaitez connaître le montant?
   utter_next_Montant_Total_Par_Etat:
@@ -211,12 +200,15 @@ responses:
   utter_next_Montant_Total_Par_Fournisseur:
   - text: Quel est le Fournisseur voudriez-vous détailler davantage?
   utter_default:
-  - text: "Pardon, pourriez-vous poser la question autrement ?"
-
+  - text: Pardon, pourriez-vous poser la question autrement ?
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 actions:
+- action_montant_total_pluriannuel
+- action_montant_total_annuel
+- action_get_Facture_mois
+- action_total_Deux_mois
 - action_obtenir_montant_inf
 - action_obtenir_Fournisseur_montant
 - action_obtenir_montant_Date
@@ -242,8 +234,3 @@ actions:
 - action_Less_fournisseurs
 - action_fournisseurs_zero
 - action_montant_total_facture
-- action_get_Facture_mois
-- action_obtenir_montant_annee
-- action_calculer_Somme_montant
-- action_calculer_montant_total_par_annee
-- action_montant_total_entre_2_dates

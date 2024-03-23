@@ -21,10 +21,10 @@ stories:
     - Montant: 9874561230
   - action: action_obtenir_Fournisseur_montant
 
-- story: Demande de intervalle par date
-  steps:
-  - intent: intervalle_par_date
-  - action: action_Recuperer_Montant_Par_Date
+# - story: Demande de intervalle par date
+#   steps:
+#   - intent: intervalle_par_date
+#   - action: action_Recuperer_Montant_Par_Date
 
 - story: montant par date
   steps:
@@ -192,31 +192,61 @@ stories:
   - intent: inform
   - action: action_get_Facture_mois
 
-- story: montant par année
+
+- story: Somme des montants pour année
   steps:
-  - intent: montant_par_annee
+  - intent: obtenir_montant_total_annuel
+  - action: action_montant_total_annuel
+
+- story: Somme des montants pour pluriannuel
+  steps:
+  - intent: obtenir_montant_total_pluriannuel
+  - action: action_montant_total_pluriannuel
+
+- story: montants Deux mois
+  steps:
+  - intent: obtenir_total_Deux_mois
+  - action: action_total_Deux_mois
+
+
+- story: interactive_story_1
+  steps:
+  - intent: obtenir_montant_total_pluriannuel
     entities:
-    - number: 2023
+    - Année: '2023'
+    - Année: '2022'
   - slot_was_set:
-    - Année: 2022
-  - action: action_obtenir_montant_annee
-
-- story: Somme des montants
-  steps:
-  - intent: demander_Somme_total
-  - action: action_calculer_Somme_montant
-
-- story: Somme des montants annéé
-  steps:
-  - intent: demander_Somme_total_année
-  - action: action_calculer_montant_total_par_annee
-
-- story: Somme des montants entre 2 dates
-  steps:
-  - intent: calculer_Somme_entre_deux_années
-  - action: action_montant_total_entre_2_dates
-
-- story: Somme des montants entre les dates
-  steps:
-  - intent: calculer_Somme_entre_les_dates
-  - action: action_montant_total_entre_les_dates
+    - Année: '2022'
+  - action: action_montant_total_pluriannuel
+  - intent: obtenir_montant_total_annuel
+    entities:
+    - Année: '2022'
+  - slot_was_set:
+    - Année: '2022'
+  - action: action_montant_total_annuel
+  - intent: inform
+    entities:
+    - month: janvier
+  - slot_was_set:
+    - month: janvier
+  - action: action_get_Facture_mois
+  - intent: nlu_fallback
+    entities:
+    - monthD: mars
+    - month: avril
+  - slot_was_set:
+    - month: avril
+  - slot_was_set:
+    - monthD: mars
+  - intent: obtenir_total_Deux_mois
+    entities:
+    - monthD: mars
+    - monthF: avril
+    - Année: '2023'
+  - slot_was_set:
+    - monthD: mars
+  - slot_was_set:
+    - monthF: avril
+  - slot_was_set:
+    - Année: '2023'
+  - action: action_total_Deux_mois

@@ -1,0 +1,10 @@
+[
+  {
+    "text": "bonne soirée",
+    "intent": "bye",
+    "intent_prediction": {
+      "name": "salutation",
+      "confidence": 0.7024438381195068
+    }
+  }
+]

@@ -1,6 +1,6 @@
 # Nouveaux éléments
 data = [
-    ' des cartes et systèmes électroniques',
+    'des cartes et systèmes électroniques',
     'agence de communication',
     'agence de voyage',
     'assurance',

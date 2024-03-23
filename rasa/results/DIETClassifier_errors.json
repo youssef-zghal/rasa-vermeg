@@ -1,0 +1,194 @@
+[
+  {
+    "text": "Montrez-moi le montant total des factures de l'année2022",
+    "entities": [
+      {
+        "start": 52,
+        "end": 56,
+        "value": "2022",
+        "entity": "Année"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "J'aimerais connaître les montants pour le type  des cartes et systèmes électroniques ?",
+    "entities": [
+      {
+        "start": 47,
+        "end": 84,
+        "value": " des cartes et systèmes électroniques",
+        "entity": "type"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Pouvez-vous me donner le montant pour ELWIFEK FLEXIBLES  ?",
+    "entities": [
+      {
+        "start": 38,
+        "end": 56,
+        "value": "ELWIFEK FLEXIBLES ",
+        "entity": "Fournisseur"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "donner moi la facture pour le fournisseur GENERAL TRANSPORT INTERNATIONAL   (GTI)",
+    "entities": [
+      {
+        "start": 42,
+        "end": 81,
+        "value": "GENERAL TRANSPORT INTERNATIONAL   (GTI)",
+        "entity": "Fournisseur"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Combien Industrial Technical Services   a-t-il facturé ?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 39,
+        "value": "Industrial Technical Services  ",
+        "entity": "Fournisseur"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Combien LA BATTERIE  a-t-il facturé ?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 20,
+        "value": "LA BATTERIE ",
+        "entity": "Fournisseur"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Pouvez-vous me donner le montant pour MMSE  ?",
+    "entities": [
+      {
+        "start": 38,
+        "end": 43,
+        "value": "MMSE ",
+        "entity": "Fournisseur"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Quel est le montant pour le fournisseur SHOPEX  ?",
+    "entities": [
+      {
+        "start": 40,
+        "end": 47,
+        "value": "SHOPEX ",
+        "entity": "Fournisseur"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Quel est le montant pour le fournisseur STATION PNEU CHOUCHA (SPC) ?",
+    "entities": [
+      {
+        "start": 40,
+        "end": 66,
+        "value": "STATION PNEU CHOUCHA (SPC)",
+        "entity": "Fournisseur"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Pouvez-vous me donner le montant pour STE OTOKAR  ?",
+    "entities": [
+      {
+        "start": 38,
+        "end": 49,
+        "value": "STE OTOKAR ",
+        "entity": "Fournisseur"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Pouvez-vous me donner la facture -1- ?",
+    "entities": [
+      {
+        "start": 33,
+        "end": 36,
+        "value": "-1-",
+        "entity": "Facture"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "donner moi le fournisseur pour cette facture 36/2022 (2/2)",
+    "entities": [
+      {
+        "start": 45,
+        "end": 58,
+        "value": "36/2022 (2/2)",
+        "entity": "Facture"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "pour quelle fournisseur cette facture FVG013600 (2/2) ?",
+    "entities": [
+      {
+        "start": 38,
+        "end": 53,
+        "value": "FVG013600 (2/2)",
+        "entity": "Facture"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "cette facture FVG013710 (2/2) pour quelle fournisseur",
+    "entities": [
+      {
+        "start": 14,
+        "end": 29,
+        "value": "FVG013710 (2/2)",
+        "entity": "Facture"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "donner moi le fournisseur pour cette facture MB-23+FVGS006480²",
+    "entities": [
+      {
+        "start": 45,
+        "end": 62,
+        "value": "MB-23+FVGS006480²",
+        "entity": "Facture"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Pouvez-vous me donner la facture REL  ?",
+    "entities": [
+      {
+        "start": 33,
+        "end": 37,
+        "value": "REL ",
+        "entity": "Facture"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

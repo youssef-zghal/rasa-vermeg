@@ -2,4 +2,5 @@
 python data\Retrieval.py
 
 # Exécuter la commande "rasa train"
-& rasa train
+& rasa train 
+

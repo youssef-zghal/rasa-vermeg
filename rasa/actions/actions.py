@@ -80,6 +80,7 @@ from typing import Type, Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 import pyodbc
+from rasa_sdk.events import SlotSet
 
 class ActionObtenirFournisseurMontant(Action):
     def name(self) -> Text:
@@ -117,7 +118,8 @@ class ActionObtenirFournisseurMontant(Action):
         else:
             dispatcher.utter_message(text="Désolé, je n'ai pas pu extraire le numéro de Reference.")
         
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
 
 # -----------------------------------------------------------------------------------------------------------------   
     
@@ -176,7 +178,8 @@ class ActionObtenirMontantInf(Action):
                 text="Désolé, je n'ai pas pu extraire le montant spécifié."
             )
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
 
  
 # ------------------------------------------------------------------------------------------------------------------
@@ -229,7 +232,8 @@ class ActionObtenirMontantSup(Action):
         else:
             dispatcher.utter_message(text="Désolé, je n'ai pas pu extraire le montant spécifié.")
         
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
 
 # ------------------------------------------------------------------------------------------------------------------
 from datetime import datetime
@@ -281,7 +285,8 @@ class ActionObtenirMontantegal(Action):
         else:
             dispatcher.utter_message(text="Désolé, je n'ai pas pu extraire le montant spécifié.")
         
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
     
 # -----------------------------------------------------------------------------------------------------------------
 
@@ -297,27 +302,38 @@ class ActionMontantTotalFournisseurs(Action):
 
         if conn:
             # Exécuter la requête SQL pour obtenir les montants dus par fournisseur
-            query = f"""
-            SELECT Fournisseur.Fournisseur , SUM(f.Montant) AS MontantTotal 
+            query = """
+            SELECT Fournisseur.Fournisseur, 
+                   SUM(f.Montant) AS MontantTotalFournisseur
             FROM dbo.fait f 
-            JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
-            GROUP BY Fournisseur
+            JOIN dbo.[Dimension fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_fournisseur
+            GROUP BY Fournisseur.Fournisseur
             """  
             results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
 
             if results:
+                montants_fournisseurs = []
                 for row in results:
-                    Fournisseur = row[0]
+                    fournisseur = row[0]
                     montant_total = row[1]
                     dispatcher.utter_message(
-                        text=f"Le fournisseur {Fournisseur} doit un montant total de {montant_total}."
+                        text=f"Le fournisseur {fournisseur} doit un montant total de {montant_total}."
                     )
+                    montants_fournisseurs.append(montant_total)
+
+                somme_total_montants = sum(montants_fournisseurs)
+                dispatcher.utter_message(
+                    text=f"La somme totale des montants dus par les fournisseurs est {somme_total_montants}."
+                )
+                
             else:
                 dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver les informations sur les montants dus par fournisseur.")
         else:
             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
+
 
 # -----------------------------------------------------------------------------------------------------------------
 
@@ -344,7 +360,8 @@ class ActionObtenirMontantDate(Action):
         else:
             dispatcher.utter_message(text=f"Aucun montant trouvé pour la date {date}.")
         
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
 
 # -----------------------------------------------------------------------------------------------------------------
 
@@ -381,7 +398,8 @@ class MontantTotalParEtat(Action):
         else:
             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
 
 
 # -----------------------------------------------------------------------------------------------------------------
@@ -417,7 +435,8 @@ class ActionAfficherMontantsEtatValidees(Action):
             # Aucun montant trouvé pour l'état Validé
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Validé'.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
 
 # -----------------------------------------------------------------------------------------------------------------
          
@@ -451,7 +470,8 @@ class ActionAfficherMontantsEtatCree(Action):
             # Aucun montant trouvé pour l'état Cree
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Créé'.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
 # -----------------------------------------------------------------------------------------------------------------
          
 class ActionAfficherMontantsEtatCree(Action):
@@ -485,7 +505,8 @@ class ActionAfficherMontantsEtatCree(Action):
             # Aucun montant trouvé pour l'état Pret
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Pret'.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
 
 
 
@@ -521,7 +542,7 @@ class ActionGetTypeByAmount(Action):
         else:
             dispatcher.utter_message("Je n'ai pas trouvé de type pour ce montant.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 # -----------------------------------------------------------------------------------------------------------------
 
 import re
@@ -556,7 +577,7 @@ class MontantTotalParType(Action):
         else:
             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
 # -----------------------------------------------------------------------------------------------------------------
 
@@ -599,7 +620,7 @@ class MontantParType(Action):
             # Aucun montant trouvé pour le type demandé
             dispatcher.utter_message(text=f"Aucun montant trouvé pour le type demandé.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
 
 # -----------------------------------------------------------------------------------------------------------------
@@ -646,7 +667,7 @@ class MontantParFournisseur(Action):
             dispatcher.utter_message(text=f"Aucun montant trouvé pour le fournisseur demandé.")
 
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
 # -----------------------------------------------------------------------------------------------------------------
 
@@ -667,7 +688,7 @@ class ActionCountFournisseur(Action):
             # En cas d'erreur, affichez un message d'erreur
             dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
     
 
 # -----------------------------------------------------------------------------------------------------------------
@@ -689,7 +710,7 @@ class ActionCountType(Action):
             # En cas d'erreur, affichez un message d'erreur
             dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
     
 # -----------------------------------------------------------------------------------------------------------------
 
@@ -719,7 +740,7 @@ class ActionRecupererMontantParDate(Action):
         # Envoyer les montants récupérés au dispatcher
         dispatcher.utter_message(f"Les montants à payer sont : {', '.join(map(str, montants))} ")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
     # -------------------------------------------------------------------------------------------
 class ActionObtenirFactureMontant(Action):
@@ -760,7 +781,7 @@ class ActionObtenirFactureMontant(Action):
                 else:
                     dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
         
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
 # -------------------------------------------------------------------------------------------
     
@@ -781,7 +802,7 @@ class ActionCountFacture(Action):
             # En cas d'erreur, affichez un message d'erreur
             dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
 
  # -------------------------------------------------------------------------------------------
@@ -827,7 +848,7 @@ class TopFournisseurs(Action):
         else:
             dispatcher.utter_message(text="Aucun résultat trouvé pour les top fournisseurs.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
     
 # -----------------------------------------------------------------------------
     
@@ -872,7 +893,7 @@ class TopType(Action):
         else:
             dispatcher.utter_message(text="Aucun résultat trouvé pour les top Type.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
 # -----------------------------------------------------------------------------
     
@@ -918,7 +939,7 @@ class LessFournisseurs(Action):
         else:
             dispatcher.utter_message(text="Aucun résultat trouvé pour les top fournisseurs.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
 # -----------------------------------------------------------------------------
  
@@ -948,7 +969,7 @@ class ActionFournisseursZero(Action):
         except Exception as e:
             dispatcher.utter_message("Une erreur s'est produite lors de la récupération des fournisseurs : {}".format(str(e)))
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
     
 # ------------------------------------------------------------------------------
 
@@ -964,65 +985,82 @@ class ActionMontantTotalFacture(Action):
 
         if conn:
             # Exécuter la requête SQL pour obtenir les montants dus par fournisseur
-            query = f"""
-            SELECT Fournisseur.Fournisseur , facture.Facture , SUM(f.Montant) AS MontantTotal
+            query = """
+            SELECT Fournisseur.Fournisseur, 
+                   Facture.Facture, 
+                   SUM(f.Montant) AS MontantTotalFacture
             FROM dbo.fait f 
-            JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
-            JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
-            GROUP BY fournisseur.Fournisseur, facture.Facture
+            JOIN dbo.[Dimensions facture] Facture ON f.FK_facture = Facture.PK_facture
+            JOIN dbo.[Dimension fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_fournisseur
+            GROUP BY Fournisseur.Fournisseur, Facture.Facture
             """  
             results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
 
             if results:
+                montants_factures = []
                 for row in results:
                     fournisseur = row[0]
                     facture = row[1]
-                    montant_total = row[2]
+                    montant_total_facture = row[2]
                     dispatcher.utter_message(
-                        text=f"La facture {facture} pour le fournisseur {fournisseur} doit un montant total de {montant_total}."
+                        text=f"La facture {facture} pour le fournisseur {fournisseur} doit un montant total de {montant_total_facture}."
                     )
+                    montants_factures.append(montant_total_facture)
+
+                somme_total_montants = sum(montants_factures)
+                dispatcher.utter_message(
+                    text=f"Le montant total des factures est {somme_total_montants}."
+                )
+                
             else:
                 dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver les informations sur les montants dus par facture.")
         else:
             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
 
-        return []
- 
-#---------------------------------------------------------------------------------------------
-
-    
-class ActionCalculerSommeTotal(Action):
-    def name(self):
-        return "action_calculer_Somme_montant"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
-        conn = se_connecter_a_ssms()
-        cursor = conn.cursor()
-        cursor.execute("SELECT SUM(montant) FROM dbo.fait f")
-        total = cursor.fetchone()[0]
-        dispatcher.utter_message("Le montant total des factures est : " + str(total))
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
 #---------------------------------------------------------------------------------------------
 
+class ActionMontantTotalAnnuel(Action):
+    def name(self) -> Text:
+        return "action_montant_total_annuel"
 
-class ActionCalculerMontantTotalParAnnee(Action):
-    def name(self):
-        return "action_calculer_montant_total_par_annee"
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[Dict[Text, Any]]:
+        # Se connecter à la base de données
+        conn = se_connecter_a_ssms()  # Assurez-vous d'avoir cette fonction implémentée
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
-        year = tracker.get_slot("Année")
-        conn = se_connecter_a_ssms()
-        cursor = conn.cursor()
-        cursor.execute("SELECT YEAR(Date), SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey WHERE YEAR(Date) = ? GROUP BY YEAR(Date)", (year,))
-        print("------",year)
-        result = cursor.fetchone()
-        if result:
-            year, total = result
-            dispatcher.utter_message(f"Le montant total des factures pour l'année {year} est : {total}")
+        if conn:
+            # Récupérer l'année spécifiée dans la phrase
+            annee = None
+            for entity in tracker.latest_message.get("entities"):
+                if entity["entity"] == "Année":
+                    annee = entity["value"]
+
+            if annee:
+                # Construire la requête SQL pour obtenir le montant total pour l'année spécifiée
+                query = f"""
+                SELECT SUM(f.Montant)
+                FROM dbo.fait f 
+                JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey
+                WHERE YEAR(date.date) = {annee}
+                """
+                results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
+
+                if results and results[0][0]:
+                    montant_total_annuel = results[0][0]
+                    dispatcher.utter_message(
+                        text=f"Le montant total des factures pour l'année {annee} est de {montant_total_annuel}."
+                    )
+                else:
+                    dispatcher.utter_message(text="Aucune facture trouvée pour cette année.")
+            else:
+                dispatcher.utter_message(text="Je n'ai pas compris pour quelle année vous voulez obtenir le montant total des factures.")
         else:
-            dispatcher.utter_message("Aucune facture trouvée pour cette année.")
-        return []
+            dispatcher.utter_message(text="Erreur de connexion à la base de données.")
+
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
     
 
 #---------------------------------------------------------------------------------------------
@@ -1079,12 +1117,12 @@ class ActionGetFactureParMois(Action):
         else:
             dispatcher.utter_message("Je n'ai pas compris le mois.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
     
 # ---------------------------------------------------------------------------------
-class ActionMontantTotalEntre2Dates(Action):
+class ActionMontantTotalPluriannuel(Action):
     def name(self) -> Text:
-        return "action_montant_total_entre_2_dates"
+        return "action_montant_total_pluriannuel"
 
     async def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
@@ -1093,142 +1131,110 @@ class ActionMontantTotalEntre2Dates(Action):
         conn = se_connecter_a_ssms()  # Assurez-vous d'avoir cette fonction implémentée
 
         if conn:
-            # Récupérer les années à partir des slots
-            année_debut = tracker.get_slot('AnnéeD')
-            année_fin = tracker.get_slot('AnnéeF')
+            # Récupérer les années spécifiées dans la phrase
+            annees = []
+            for entity in tracker.latest_message.get("entities"):
+                if entity["entity"] == "Année":
+                    annees.append(entity["value"])
 
-            if année_debut and année_fin:
-                # Exécuter la requête SQL pour obtenir les montants des factures et les détails des factures entre les années spécifiées
-                query = f"""
-                SELECT facture.Facture, fournisseur.Fournisseur, f.Montant
-                FROM dbo.fait f 
-                JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
-                JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
-                JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey
-                WHERE YEAR(date.date) BETWEEN {année_debut} AND {année_fin}
-                """
-                results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
+            if len(annees) >= 2:
+                montant_total_pluriannuel = 0
+                for annee in annees:
+                    # Construire la requête SQL pour obtenir le montant total pour chaque année spécifiée
+                    query = f"""
+                    SELECT SUM(f.Montant)
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey
+                    WHERE YEAR(date.date) = {annee}
+                    """
+                    results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
 
-                if results:
-                    montant_total = 0
-                    for row in results:
-                        facture = row[0]
-                        fournisseur = row[1]
-                        montant = row[2]
-                        montant_total += montant
-                        dispatcher.utter_message(
-                            # text=f"La facture {facture} pour le fournisseur {fournisseur} a un montant de {montant}."
-                        )
-                    dispatcher.utter_message(
-                        text=f"Le montant total des factures entre {année_debut} et {année_fin} est de {montant_total}."
-                    )
-                else:
-                    dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver les informations sur les factures pour les années spécifiées.")
+                    if results and results[0][0]:
+                        montant_total_pluriannuel += results[0][0]
+                    else:
+                        dispatcher.utter_message(text=f"Aucune facture trouvée pour l'année {annee}.")
+
+                dispatcher.utter_message(
+                    text=f"Le montant total des factures pour les années {', '.join(annees)} est de {montant_total_pluriannuel}."
+                )
             else:
-                dispatcher.utter_message(text="Veuillez spécifier à la fois l'année de début et l'année de fin.")
+                dispatcher.utter_message(text="Je n'ai pas compris pour quelles années vous voulez obtenir le montant total des factures.")
         else:
-            dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
+            dispatcher.utter_message(text="Erreur de connexion à la base de données.")
 
-        return []
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+    
+#----------------------------------------------------------------------------------------------------
+import re
+
+class ActionMontantTotalDeuxMois(Action):
+    def name(self) -> Text:
+        return "action_total_Deux_mois"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        # Correspondance de motifs pour les noms des mois
+        month_patterns = {
+            'janvier': 1, 'février': 2, 'mars': 3, 'avril': 4, 'mai': 5, 'juin': 6,
+            'juillet': 7, 'août': 8, 'septembre': 9, 'octobre': 10, 'novembre': 11, 'décembre': 12
+        }
+
+        # Correspondance de motifs pour les années
+        year_pattern = r'\b(20\d{2})\b'
+
+        # Extraction de la phrase de l'utilisateur
+        user_input = tracker.latest_message.get("text")
+
+        # Recherche des noms des mois dans la phrase de l'utilisateur
+        detected_months = []
+        for month_name, month_number in month_patterns.items():
+            if re.search(r'\b{}\b'.format(month_name), user_input, re.IGNORECASE):
+                detected_months.append((month_name, month_number))
+
+        if not detected_months:
+            dispatcher.utter_message("Je n'ai détecté aucun mois dans votre phrase.")
+            return []
+
+        # Sélection du premier et dernier mois détectés
+        start_month_name, start_month = detected_months[0]
+        end_month_name, end_month = detected_months[-1]
+
+        # Recherche de l'année dans la phrase de l'utilisateur
+        match = re.search(year_pattern, user_input)
+        if not match:
+            dispatcher.utter_message("Je n'ai détecté aucune année dans votre phrase.")
+            return []
+        year = int(match.group(1))
+
+        # Connexion à la base de données
+        conn = se_connecter_a_ssms()  # Assurez-vous de remplacer cette fonction par la méthode réelle de connexion
+
+        # Récupération du montant total des factures
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT SUM(f.montant) 
+            FROM dbo.fait f 
+            JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey
+            WHERE MONTH(date.date) BETWEEN ? AND ? AND YEAR(date.date) = ?
+            """, (start_month, end_month, year))
+        total_montant = cursor.fetchone()[0]
 
 
+        # Réponse du chatbot
+        if total_montant:
+            dispatcher.utter_message(f"Le montant total des factures entre {start_month_name} et {end_month_name} pour l'année {year} est de {total_montant}.")
+        else:
+            dispatcher.utter_message("Aucune facture trouvée pour les mois spécifiés.")
+
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
 
 #---------------------------------------------fonctionne pas-----------------------------------------------------
 
+
+
+
+
+
+
     
-class ActionObtenirMontantAnnee(Action):
-    def name(self) -> Text:
-        return "action_obtenir_montant_annee"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        # Obtenir la date de la requête de l'utilisateur
-        date = tracker.get_slot('Année')
-        
-        # Requête SQL pour obtenir tous les montants correspondant à l'année
-        cursor = conn.cursor()
-        cursor.execute("SELECT DISTINCT f.montant FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey  WHERE YEAR(date) = ?", (date,))
-        rows = cursor.fetchall()
-        
-        if rows:
-            montants = [row[0] for row in rows]
-            montant_str = ", ".join(str(montant) for montant in montants)
-            dispatcher.utter_message(text=f"Les montants pour l'année {date} sont : {montant_str} TND.")
-        else:
-            dispatcher.utter_message(text=f"Aucun montant trouvé pour l'année {date}.")
-        
-        return []
-    
-
-    # -------------------------------------------------------------------
-class ActionMontantTotalEntreLesDates(Action):
-    def name(self) -> Text:
-        return "action_montant_total_entre_les_dates"
-
-    async def run(
-        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
-    ) -> List[Dict[Text, Any]]:
-        # Se connecter à la base de données
-        conn = se_connecter_a_ssms()  # Assurez-vous d'avoir cette fonction implémentée
-
-        if conn:
-            # Initialiser les parties de la requête SQL
-            where_conditions = []
-
-            # Récupérer les slots non nuls
-            slots = {
-                "AnnéeD": tracker.get_slot('AnnéeD'),
-                "AnnéeF": tracker.get_slot('AnnéeF'),
-                "monthD": tracker.get_slot('monthD'),
-                "monthF": tracker.get_slot('monthF'),
-                "JourD": tracker.get_slot('JourD'),
-                "JourF": tracker.get_slot('JourF')
-            }
-            if slots["AnnéeD"] is None and slots["AnnéeF"] is None:
-                slots["AnnéeD"] = 2023
-            # Générer les conditions pour les slots non nuls
-            for slot, value in slots.items():
-                if value is not None:
-                    if slot.startswith("Année"):
-                        where_conditions.append(f"YEAR(date.date) = {value}")
-                    elif slot.startswith("month"):
-                        where_conditions.append(f"MONTH(date.date) = {value}")
-                    elif slot.startswith("Jour"):
-                        where_conditions.append(f"DAY(date.date) = {value}")
-
-            # Générer la clause WHERE
-            where_clause = " AND ".join(where_conditions)
-
-            # Exécuter la requête SQL avec la clause WHERE dynamique
-            query = f"""
-            SELECT facture.Facture, fournisseur.Fournisseur, f.Montant
-            FROM dbo.fait f 
-            JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
-            JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
-            JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey
-            WHERE {where_clause}
-            """
-            results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
-
-            if results:
-                montant_total = 0
-                for row in results:
-                    facture = row[0]
-                    fournisseur = row[1]
-                    montant = row[2]
-                    montant_total += montant
-                    dispatcher.utter_message(
-                        text=f"La facture {facture} pour le fournisseur {fournisseur} a un montant de {montant}."
-                    )
-                dispatcher.utter_message(
-                    text=f"Le montant total des factures est de {montant_total}."
-                )
-            else:
-                dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver les informations sur les factures pour les dates spécifiées.")
-        else:
-            dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
-
-        return []
+  
