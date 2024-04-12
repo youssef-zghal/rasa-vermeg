@@ -112,16 +112,14 @@ def main():
 
     def generate_nlu_contentType(elements):
         formulations = [
-            "Quel est le montant pour le type [{element}](type) ?",
-            "Combien a-t-on dépensé pour le type [{element}](type) ?",
-            "Peux-tu me dire les dépenses pour le type [{element}](type) ?",
-            "J'aimerais connaître les montants pour le type [{element}](type) ?",
-            "Je choisis de savoir sur le type [{element}](type) ?",
-            "je voudrais savoir sur [{element}](type) ?",
+            "le montant pour le type [{element}](type) ?",
+            "les dépenses pour le type [{element}](type) ?",
+            "les montants pour le type [{element}](type) ?",
+            "le type [{element}](type) ?",
             "[{element}](type)",
-            "detaille moi [{element}](type)",
-            "affiche moi les details sur [{element}](type)",
+            "les details sur [{element}](type)",
         ]
+    
         
         content = "- intent: demande_montant_type \n  examples: |\n"
         for element in elements:
@@ -131,28 +129,39 @@ def main():
 
     def generate_nlu_contentFournisseur(elements):
         formulations = [
-            "Quel est le montant pour le fournisseur [{element}](Fournisseur) ?",
-            "Pouvez-vous me donner le montant pour [{element}](Fournisseur) ?",
-            "Combien [{element}](Fournisseur) a-t-il facturé ?",
+            "le montant pour le fournisseur [{element}](Fournisseur) ?",
+            "le montant pour [{element}](Fournisseur) ?",
+            "Combien [{element}](Fournisseur)",
             "[{element}](Fournisseur)",
-            " donner moi la facture pour le fournisseur [{element}](Fournisseur)",
-
+            "la facture pour le fournisseur [{element}](Fournisseur)",
+        ]
+        formulations2=[
+            "le total des dépenses pour [{element}](Fournisseur) en [Mars](month) [2022](Année) ?"   ,
+            "Combien on a avec [{element}](Fournisseur) en [Fevrier](month)?",
+            "les montants pour le fournisseur [{element}](Fournisseur) pour mois [aout](month) [2022](Année)",
         ]
         
         content = "- intent: demande_montant_fournisseur \n  examples: |\n"
         for element in elements:
             formulation = random.choice(formulations)
             content += f"    - {formulation}\n".format(element=element)
-        return content
+        
+    
+        content2 = "- intent: demander_montant_total_fournisseur_mois_annee \n  examples: |\n"
+        for element2 in elements:
+            formulation2 = random.choice(formulations2)
+            content2 += f"    - {formulation2}\n".format(element=element2)
+        return content,content2
+
+
 
     def generate_nlu_contentFacture(elements):
         formulations = [
-            "pour quelle fournisseur cette facture [{element}](Facture) ?",
-            "Pouvez-vous me donner la facture [{element}](Facture) ?",
-            "cette facture [{element}](Facture) pour quelle fournisseur",
+            "fournisseur cette facture [{element}](Facture) ?",
+            "la facture [{element}](Facture) ?",
+            "cette facture [{element}](Facture)",
             "[{element}](Facture)",
-            "donner moi le fournisseur pour cette facture [{element}](Facture) ",
-            "donner le fournisseur pour la facture [{element}](Facture)",
+            "le fournisseur pour cette facture [{element}](Facture) ",
             "la facture [{element}](Facture)",
 
         ]
@@ -277,10 +286,11 @@ def main():
 # Extraction des éléments
         elements2 = extract_elements(file_path2)
 # Génération du contenu du fichier nlu.yml
-        nlu_content2 = generate_nlu_contentFournisseur(elements2)
+        nlu_content2,nlu_content4 = generate_nlu_contentFournisseur(elements2)
 # Écriture du contenu dans le fichier nlu.yml
         with open("data/nlu.yml", "a", encoding="utf-8") as nlu_file2:
             nlu_file2.write(nlu_content2)
+            nlu_file2.write(nlu_content4)
 
 # Chemin vers le fichier dictionnaire_Facture.py
         file_path3 = "dictionnaire_Facture.py"

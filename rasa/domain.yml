@@ -10,6 +10,9 @@ intents:
 - Montant_sup
 - Montant_total_fournisseur
 - Reference
+- afficher_montants_etat_Prêt_pour_paiement_date
+- afficher_montants_etat_créé_date
+- afficher_montants_etat_validees_date
 - affirm
 - ask_type
 - ask_type_by_amount
@@ -21,6 +24,8 @@ intents:
 - demande_montant_type
 - demande_top_Type
 - demande_top_fournisseurs
+- demander_factures_deux_mois_deux_annee
+- demander_montant_total_fournisseur_mois_annee
 - fournisseurs_zero
 - inform
 - inform_Type_count
@@ -32,19 +37,22 @@ intents:
 - intervalle_par_date
 - montant_par_date
 - next_Montant_Total_Par_Type
-- obtenir_montant_total_annuel
 - obtenir_montant_total_facture
 - obtenir_montant_total_pluriannuel
 - obtenir_total_Deux_mois
+- obtenir_total_Jusquau_mois
 - salutation
+# - obtenir_factures_entre_dates
 entities:
-- monthD
-- month
-- Année
 - monthF
+- monthD
+- Année
+- Fournisseur
+- month
+- AnnéeF
+- AnnéeD
 - number
 - text
-- Fournisseur
 - date
 - Etat
 - type
@@ -55,8 +63,6 @@ entities:
 - Jour
 - JourD
 - JourF
-- AnnéeD
-- AnnéeF
 slots:
   start_date:
     type: text
@@ -205,15 +211,22 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 actions:
-- action_montant_total_pluriannuel
-- action_montant_total_annuel
 - action_get_Facture_mois
 - action_total_Deux_mois
+- action_montant_total_facture
+- action_get_Facture_deux_mois_deux_annee
+- action_afficher_montants_etat_Prêt_pour_paiement_Date
+- action_afficher_montants_etat_créé_Date
+- action_afficher_montants_etat_validees_Date
+- action_get_Facture_Jusquau_Mois
+- action_montant_total_pluriannuel
+- action_Less_fournisseurs
+- action_obtenir_montant_egal
+- action_get_Fournisseur_Mois_Année
 - action_obtenir_montant_inf
 - action_obtenir_Fournisseur_montant
 - action_obtenir_montant_Date
 - action_obtenir_montant_sup
-- action_obtenir_montant_egal
 - action_montant_total_fournisseurs
 - action_get_type_by_amount
 - Montant_Total_Par_Etat
@@ -231,6 +244,5 @@ actions:
 - action_obtenir_Facture_montant
 - action_top_fournisseurs
 - action_top_Type
-- action_Less_fournisseurs
 - action_fournisseurs_zero
-- action_montant_total_facture
+# - action_montant_entre_dates

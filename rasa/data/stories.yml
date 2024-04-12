@@ -192,12 +192,6 @@ stories:
   - intent: inform
   - action: action_get_Facture_mois
 
-
-- story: Somme des montants pour année
-  steps:
-  - intent: obtenir_montant_total_annuel
-  - action: action_montant_total_annuel
-
 - story: Somme des montants pour pluriannuel
   steps:
   - intent: obtenir_montant_total_pluriannuel
@@ -207,6 +201,26 @@ stories:
   steps:
   - intent: obtenir_total_Deux_mois
   - action: action_total_Deux_mois
+
+- story: montants Jusquau mois
+  steps:
+  - intent: obtenir_total_Jusquau_mois
+  - action: action_get_Facture_Jusquau_Mois
+
+- story: montants get etat validees date
+  steps:
+  - intent: afficher_montants_etat_validees_date
+  - action: action_afficher_montants_etat_validees_Date
+
+- story: montants get etat créé date
+  steps:
+  - intent: afficher_montants_etat_créé_date
+  - action: action_afficher_montants_etat_créé_Date
+
+- story: montants get etat Prêt_pour_paiement date
+  steps:
+  - intent: afficher_montants_etat_Prêt_pour_paiement_date
+  - action: action_afficher_montants_etat_Prêt_pour_paiement_Date
 
 
 - story: interactive_story_1
@@ -218,26 +232,14 @@ stories:
   - slot_was_set:
     - Année: '2022'
   - action: action_montant_total_pluriannuel
-  - intent: obtenir_montant_total_annuel
-    entities:
-    - Année: '2022'
-  - slot_was_set:
-    - Année: '2022'
-  - action: action_montant_total_annuel
+
   - intent: inform
     entities:
     - month: janvier
   - slot_was_set:
     - month: janvier
   - action: action_get_Facture_mois
-  - intent: nlu_fallback
-    entities:
-    - monthD: mars
-    - month: avril
-  - slot_was_set:
-    - month: avril
-  - slot_was_set:
-    - monthD: mars
+
   - intent: obtenir_total_Deux_mois
     entities:
     - monthD: mars
@@ -250,3 +252,1029 @@ stories:
   - slot_was_set:
     - Année: '2023'
   - action: action_total_Deux_mois
+
+
+# - story: montants get Facture entre dates
+#   steps:
+#   - intent: obtenir_factures_entre_dates
+#   - action: action_montant_entre_dates
+  
+- story: montants get total fournisseur Mois Année
+  steps:
+  - intent: demander_montant_total_fournisseur_mois_annee
+  - action: action_get_Fournisseur_Mois_Année
+- story: interactive_story_1
+  steps:
+  - intent: demander_montant_total_fournisseur_mois_annee
+    entities:
+    - Fournisseur: Innovation mécanique industrielle
+    - month: janvier
+    - Année: '2023'
+  - slot_was_set:
+    - Fournisseur: Innovation mécanique industrielle
+  - slot_was_set:
+    - month: janvier
+  - slot_was_set:
+    - Année: '2023'
+  - action: action_get_Fournisseur_Mois_Année
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_1
+  steps:
+  - intent: obtenir_total_Deux_mois
+    entities:
+    - monthD: juin
+    - monthF: juillet
+    - Année: '2023'
+  - action: action_total_Deux_mois
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+  - intent: obtenir_montant_total_pluriannuel
+    entities:
+    - Année: '2022'
+    - Année: '2025'
+  - action: action_montant_total_pluriannuel
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+  
+  - intent: demande_Less_fournisseurs
+    entities:
+    - number: '5'
+  - slot_was_set:
+    - Montant: '5'
+  - slot_was_set:
+    - top: '5'
+  - action: action_Less_fournisseurs
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+  
+- story: interactive_story_1
+  steps:
+  - intent: obtenir_total_Jusquau_mois
+    entities:
+    - month: janvier
+    - Année: '2022'
+  - slot_was_set:
+    - month: janvier
+  - slot_was_set:
+    - Année: '2022'
+  - action: action_get_Facture_Jusquau_Mois
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+  - intent: obtenir_total_Jusquau_mois
+    entities:
+    - month: juin
+    - Année: '2022'
+  - slot_was_set:
+    - month: juin
+  - slot_was_set:
+    - Année: '2022'
+  - action: action_get_Facture_Jusquau_Mois
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_1
+  steps:
+  - intent: afficher_montants_etat_validees_date
+    entities:
+    - month: aout
+  - slot_was_set:
+    - month: aout
+  - action: action_afficher_montants_etat_validees_Date
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+  - intent: afficher_montants_etat_validees_date
+    entities:
+    - month: octobre
+    - Année: '2022'
+  - slot_was_set:
+    - month: octobre
+  - slot_was_set:
+    - Année: '2022'
+  - action: action_afficher_montants_etat_validees_Date
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_1
+  steps:
+  - intent: afficher_montants_etat_Prêt_pour_paiement_date
+    entities:
+    - month: juin
+  - slot_was_set:
+    - month: juin
+  - action: action_afficher_montants_etat_Prêt_pour_paiement_Date
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+  - intent: afficher_montants_etat_Prêt_pour_paiement_date
+    entities:
+    - month: decembre
+    - Année: '2022'
+  - slot_was_set:
+    - month: decembre
+  - slot_was_set:
+    - Année: '2022'
+  - action: action_afficher_montants_etat_Prêt_pour_paiement_Date
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+  - intent: afficher_montants_etat_créé_date
+    entities:
+    - month: juin
+  - slot_was_set:
+    - month: juin
+  - action: action_afficher_montants_etat_créé_Date
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+  - intent: inform
+    entities:
+    - month: janvier
+    - Année: '2022'
+  - slot_was_set:
+    - month: janvier
+  - slot_was_set:
+    - Année: '2022'
+  - intent: afficher_montants_etat_créé_date
+    entities:
+    - month: janvier
+    - Année: '2022'
+  - action: action_afficher_montants_etat_créé_Date
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: montants get Facture 2mois 2annee 
+  steps:
+  - intent: demander_factures_deux_mois_deux_annee
+  - action: action_get_Facture_deux_mois_deux_annee
+
+- story: interactive_story_1
+  steps:
+  - intent: demander_factures_deux_mois_deux_annee
+    entities:
+    - monthD: aout
+    - AnnéeD: '2022'
+    - monthF: decembre
+    - AnnéeF: '2022'
+  - action: action_get_Facture_deux_mois_deux_annee
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_2
+  steps:
+  - intent: demander_factures_deux_mois_deux_annee
+    entities:
+    - monthD: aout
+    - AnnéeD: '2022'
+    - monthF: decembre
+    - AnnéeF: '2022'
+  - slot_was_set:
+    - monthD: aout
+  - slot_was_set:
+    - monthF: decembre
+  - slot_was_set:
+    - AnnéeD: '2022'
+  - slot_was_set:
+    - AnnéeF: '2022'
+  - action: action_get_Facture_deux_mois_deux_annee
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_1
+  steps:
+  - intent: demander_factures_deux_mois_deux_annee
+    entities:
+    - monthD: janvier
+    - AnnéeD: '2022'
+    - monthF: aout
+    - AnnéeF: '2023'
+  - slot_was_set:
+    - monthD: janvier
+  - slot_was_set:
+    - monthF: aout
+  - slot_was_set:
+    - AnnéeD: '2022'
+  - slot_was_set:
+    - AnnéeF: '2023'
+  - action: action_get_Facture_deux_mois_deux_annee
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_1
+  steps:
+  - intent: demander_factures_deux_mois_deux_annee
+    entities:
+    - monthD: mai
+    - AnnéeD: '2022'
+    - monthF: octobre
+    - AnnéeF: '2023'
+  - action: action_get_Facture_deux_mois_deux_annee
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_2
+  steps:
+  - intent: demander_factures_deux_mois_deux_annee
+    entities:
+    - monthD: mai
+    - AnnéeD: '2022'
+    - monthF: octobre
+    - AnnéeF: '2023'
+  - slot_was_set:
+    - monthD: mai
+  - slot_was_set:
+    - monthF: octobre
+  - slot_was_set:
+    - AnnéeD: '2022'
+  - slot_was_set:
+    - AnnéeF: '2023'
+  - action: action_get_Facture_deux_mois_deux_annee
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_1
+  steps:
+  - intent: demander_factures_deux_mois_deux_annee
+    entities:
+    - monthD: decembre
+    - AnnéeD: '2022'
+    - monthF: aout
+    - AnnéeF: '2023'
+  - slot_was_set:
+    - monthD: decembre
+  - slot_was_set:
+    - monthF: aout
+  - slot_was_set:
+    - AnnéeD: '2022'
+  - slot_was_set:
+    - AnnéeF: '2023'
+  - action: action_get_Facture_deux_mois_deux_annee
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_1
+  steps:
+  - intent: obtenir_total_Deux_mois
+    entities:
+    - monthD: juillet
+    - monthF: aout
+    - Année: '2022'
+  - action: action_total_Deux_mois
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+  - intent: obtenir_total_Deux_mois
+    entities:
+    - monthD: mai
+    - monthF: novembre
+    - Année: '2023'
+  - slot_was_set:
+    - monthD: mai
+  - slot_was_set:
+    - monthF: novembre
+  - slot_was_set:
+    - Année: '2023'
+  - action: action_total_Deux_mois
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_1
+  steps:
+  - intent: obtenir_montant_total_facture
+  - action: action_montant_total_facture
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Année: null
+  - slot_was_set:
+    - AnnéeD: null
+  - slot_was_set:
+    - AnnéeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+
+

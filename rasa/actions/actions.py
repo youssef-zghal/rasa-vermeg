@@ -303,8 +303,7 @@ class ActionMontantTotalFournisseurs(Action):
         if conn:
             # Exécuter la requête SQL pour obtenir les montants dus par fournisseur
             query = """
-            SELECT Fournisseur.Fournisseur, 
-                   SUM(f.Montant) AS MontantTotalFournisseur
+            SELECT Fournisseur.Fournisseur, SUM(f.Montant) AS MontantTotalFournisseur
             FROM dbo.fait f 
             JOIN dbo.[Dimension fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_fournisseur
             GROUP BY Fournisseur.Fournisseur
@@ -370,7 +369,7 @@ import re
 class MontantTotalParEtat(Action):
     def name(self) -> Text:
         return "Montant_Total_Par_Etat"
-
+ 
     async def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[Dict[Text, Any]]:
@@ -474,7 +473,7 @@ class ActionAfficherMontantsEtatCree(Action):
 
 # -----------------------------------------------------------------------------------------------------------------
          
-class ActionAfficherMontantsEtatCree(Action):
+class ActionAfficherMontantsEtatPret(Action):
     def name(self) -> Text:
         return "action_afficher_montants_etat_prets"
 
@@ -818,7 +817,7 @@ class TopFournisseurs(Action):
         # Extraire la valeur du slot "top"
         top_value = tracker.get_slot("top")
         if top_value is None:
-            top_value = 5  # Par défaut, si aucun slot n'est fourni, on utilise top 5
+            top_value = 1  # Par défaut, si aucun slot n'est fourni, on utilise top 5
         else:
             try:
                 top_value = int(top_value)
@@ -863,7 +862,7 @@ class TopType(Action):
         # Extraire la valeur du slot "top"
         top_value = tracker.get_slot("top")
         if top_value is None:
-            top_value = 5  # Par défaut, si aucun slot n'est fourni, on utilise top 5
+            top_value = 1  # Par défaut, si aucun slot n'est fourni, on utilise top 1
         else:
             try:
                 top_value = int(top_value)
@@ -986,9 +985,7 @@ class ActionMontantTotalFacture(Action):
         if conn:
             # Exécuter la requête SQL pour obtenir les montants dus par fournisseur
             query = """
-            SELECT Fournisseur.Fournisseur, 
-                   Facture.Facture, 
-                   SUM(f.Montant) AS MontantTotalFacture
+            SELECT Fournisseur.Fournisseur,Facture.Facture,SUM(f.Montant) AS MontantTotalFacture
             FROM dbo.fait f 
             JOIN dbo.[Dimensions facture] Facture ON f.FK_facture = Facture.PK_facture
             JOIN dbo.[Dimension fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_fournisseur
@@ -1019,49 +1016,7 @@ class ActionMontantTotalFacture(Action):
 
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
 
-#---------------------------------------------------------------------------------------------
 
-class ActionMontantTotalAnnuel(Action):
-    def name(self) -> Text:
-        return "action_montant_total_annuel"
-
-    async def run(
-        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
-    ) -> List[Dict[Text, Any]]:
-        # Se connecter à la base de données
-        conn = se_connecter_a_ssms()  # Assurez-vous d'avoir cette fonction implémentée
-
-        if conn:
-            # Récupérer l'année spécifiée dans la phrase
-            annee = None
-            for entity in tracker.latest_message.get("entities"):
-                if entity["entity"] == "Année":
-                    annee = entity["value"]
-
-            if annee:
-                # Construire la requête SQL pour obtenir le montant total pour l'année spécifiée
-                query = f"""
-                SELECT SUM(f.Montant)
-                FROM dbo.fait f 
-                JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey
-                WHERE YEAR(date.date) = {annee}
-                """
-                results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
-
-                if results and results[0][0]:
-                    montant_total_annuel = results[0][0]
-                    dispatcher.utter_message(
-                        text=f"Le montant total des factures pour l'année {annee} est de {montant_total_annuel}."
-                    )
-                else:
-                    dispatcher.utter_message(text="Aucune facture trouvée pour cette année.")
-            else:
-                dispatcher.utter_message(text="Je n'ai pas compris pour quelle année vous voulez obtenir le montant total des factures.")
-        else:
-            dispatcher.utter_message(text="Erreur de connexion à la base de données.")
-
-        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
-    
 
 #---------------------------------------------------------------------------------------------
   
@@ -1098,20 +1053,36 @@ class ActionGetFactureParMois(Action):
         }
 
         month_entity = tracker.get_slot('month')
+        year_entity = tracker.get_slot('Année')
 
         if month_entity:
             preprocessed_month = self.preprocess_month(month_entity)
             month_num = month_map.get(preprocessed_month)
             if month_num:
-                conn = se_connecter_a_ssms()        
-                cursor = conn.cursor()
-                cursor.execute("SELECT SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey WHERE MONTH(date) = ?", (month_num,))
-                total_montant = cursor.fetchone()[0]
+                if year_entity:
+                    conn = se_connecter_a_ssms()        
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey WHERE MONTH(date) = ? AND YEAR(date.date) = ?", (month_num, year_entity,))
+                    total_montant = cursor.fetchone()[0]
 
-                if total_montant:
-                    dispatcher.utter_message(f"Le montant total des factures pour le mois de {month_entity} est {total_montant}.")
-                else:
-                    dispatcher.utter_message(f"Aucune donnée disponible pour le mois de {month_entity}.")
+                    if total_montant:
+                        dispatcher.utter_message(f"Le montant total des factures pour le mois de {month_entity} de l'année {year_entity} est {total_montant}.")
+                    else:
+                        dispatcher.utter_message(f"Aucune donnée disponible pour le mois de {month_entity} de l'année {year_entity}.")
+                    return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+    
+                else: 
+                    conn = se_connecter_a_ssms()        
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey WHERE MONTH(date) = ?", (month_num,))
+                    total_montant = cursor.fetchone()[0]
+
+                    if total_montant:
+                        dispatcher.utter_message(f"Le montant total des factures pour le mois de {month_entity} est {total_montant}.")
+                    else:
+                        dispatcher.utter_message(f"Aucune donnée disponible pour le mois de {month_entity}.")
+                    return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+    
             else:
                 dispatcher.utter_message("Mois invalide.")
         else:
@@ -1137,7 +1108,7 @@ class ActionMontantTotalPluriannuel(Action):
                 if entity["entity"] == "Année":
                     annees.append(entity["value"])
 
-            if len(annees) >= 2:
+            if len(annees) >= 1:
                 montant_total_pluriannuel = 0
                 for annee in annees:
                     # Construire la requête SQL pour obtenir le montant total pour chaque année spécifiée
@@ -1226,15 +1197,511 @@ class ActionMontantTotalDeuxMois(Action):
             dispatcher.utter_message("Aucune facture trouvée pour les mois spécifiés.")
 
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+    
+#---------------------------------------------------------------------------------------------------------------------------------------------------
 
+class ActionGetFournisseurMoisAnnée(Action):
+    def name(self):
+        return "action_get_Fournisseur_Mois_Année"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+        # Extraire les entités du tracker
+        fournisseur = tracker.get_slot("Fournisseur")
+        mois = tracker.get_slot("month")
+        annee = tracker.get_slot("Année")
+        print("annee", annee," mois",mois,"fournisseur", fournisseur)
+        # Vérifier si l'année est spécifiée, sinon utiliser 2023 par défaut
+        if not annee:
+            annee = 2023
+
+        # Convertir le nom du mois en numéro du mois (utilisation d'un dictionnaire pour la correspondance)
+        mois_mapping = {
+            "janvier": 1, "fevrier": 2, "mars": 3, "avril": 4, "mai": 5, "juin": 6,
+            "juillet": 7, "aout": 8, "septembre": 9, "octobre": 10, "novembre": 11, "decembre": 12
+        }
+
+        # Vérifier si le mois est en français, si oui, convertir en anglais
+        mois = mois.lower()
+        if mois in mois_mapping:
+            mois = mois_mapping[mois]
+
+        # Connexion à la base de données
+        conn = se_connecter_a_ssms()
+
+        # Exécuter la requête SQL pour obtenir le montant total
+        cursor = conn.cursor()
+        query = f"SELECT SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey WHERE fournisseur.Fournisseur = ? AND MONTH(date.date) = ? AND YEAR(date.date) = ?"
+        cursor.execute(query, (fournisseur, mois, annee))
+        total_amount = cursor.fetchone()[0]
+
+
+        # Envoyer la réponse au dispatcher
+        if total_amount:
+            dispatcher.utter_message(f"Le montant total pour {fournisseur} pour le mois {mois} de l'année {annee} est {total_amount}.")
+        else:
+            dispatcher.utter_message(f"Aucun montant trouvé pour {fournisseur} pour le mois {mois} de l'année {annee}.")
+
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+    
+
+from datetime import datetime
+import calendar
+
+class ActionAfficherMontantsEtatValideesDate(Action):
+    def name(self) -> Text:
+        return "action_afficher_montants_etat_validees_Date"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Récupérer le mois et l'année spécifiés, avec des valeurs par défaut si non spécifiés
+        month = tracker.get_slot("month") or datetime.now().month
+        year = tracker.get_slot("Année") or 2023  # Assurez-vous que le nom du slot est correct
+        
+        # Mapping des noms de mois français aux numéros de mois
+        month_map = {
+            "janvier": 1,
+            "fevrier": 2,
+            "mars": 3,
+            "avril": 4,
+            "mai": 5,
+            "juin": 6,
+            "juillet": 7,
+            "aout": 8,
+            "septembre": 9,
+            "octobre": 10,
+            "novembre": 11,
+            "decembre": 12
+        }
+        
+        # Vérifier si le mois spécifié est en français et le mapper au numéro de mois correspondant
+        if isinstance(month, str):
+            month = month_map.get(month.lower(), month)
+        
+        # Convertir le mois en entier
+        month = int(month)
+        
+        # Convertir l'année en entier
+        year = int(year)
+        
+        # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
+        conn = se_connecter_a_ssms() 
+        
+        # Obtenir le nombre de jours dans le mois spécifié pour la requête
+        num_days = calendar.monthrange(year, month)[1]
+        
+        # Requête SQL pour obtenir tous les montants correspondant à l'état Validé pour le mois et l'année spécifiés
+        query = f"""SELECT Fournisseur.Fournisseur , Facture.Facture , Date.Date , SUM(f.Montant) AS MontantTotal
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey 
+                    WHERE facture.etat = 'Validé' AND MONTH(Date.Date) = {month} AND YEAR(Date.Date) = {year}
+                    GROUP BY Fournisseur.Fournisseur, Facture.Facture, Date.Date"""
+        
+        results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
+
+        if results:
+            total_amount = 0
+            for result in results:
+                # Récupérer les détails de chaque facture
+                fournisseur, facture, date, montant_total = result
+                total_amount += montant_total
+                date_str = date.strftime("%Y-%m-%d")
+                dispatcher.utter_message(
+                    text=f"Le fournisseur {fournisseur} a une facture {facture} avec une etat validé datée du {date_str}."
+                )
+            dispatcher.utter_message(
+                text=f"Le montant total des factures validées pour le mois {calendar.month_name[month]} {year} est de {total_amount}."
+            )
+        else:
+            # Aucun montant trouvé pour l'état Validé ce mois-ci
+            dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Validé' pour le mois {calendar.month_name[month]} {year}.")
+
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
+
+#----------------------------------------créé-------------------------------------------
+from datetime import datetime
+import calendar
+
+class ActionAfficherMontantsEtatCrééDate(Action):
+    def name(self) -> Text:
+        return "action_afficher_montants_etat_créé_Date"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Récupérer le mois et l'année spécifiés, avec des valeurs par défaut si non spécifiés
+        month = tracker.get_slot("month") or datetime.now().month
+        year = tracker.get_slot("Année") or 2023  # Assurez-vous que le nom du slot est correct
+        
+        # Mapping des noms de mois français aux numéros de mois
+        month_map = {
+            "janvier": 1,
+            "fevrier": 2,
+            "mars": 3,
+            "avril": 4,
+            "mai": 5,
+            "juin": 6,
+            "juillet": 7,
+            "aout": 8,
+            "septembre": 9,
+            "octobre": 10,
+            "novembre": 11,
+            "decembre": 12
+        }
+        
+        # Vérifier si le mois spécifié est en français et le mapper au numéro de mois correspondant
+        if isinstance(month, str):
+            month = month_map.get(month.lower(), month)
+        
+        # Convertir le mois en entier
+        month = int(month)
+        
+        # Convertir l'année en entier
+        year = int(year)
+        
+        # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
+        conn = se_connecter_a_ssms() 
+        
+        # Obtenir le nombre de jours dans le mois spécifié pour la requête
+        num_days = calendar.monthrange(year, month)[1]
+        
+        # Requête SQL pour obtenir tous les montants correspondant à l'état Validé pour le mois et l'année spécifiés
+        query = f"""SELECT Fournisseur.Fournisseur , Facture.Facture , Date.Date , SUM(f.Montant) AS MontantTotal
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey 
+                    WHERE facture.etat = 'créé' AND MONTH(Date.Date) = {month} AND YEAR(Date.Date) = {year}
+                    GROUP BY Fournisseur.Fournisseur, Facture.Facture, Date.Date"""
+        
+        results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
+
+        if results:
+            total_amount = 0
+            for result in results:
+                # Récupérer les détails de chaque facture
+                fournisseur, facture, date, montant_total = result
+                total_amount += montant_total
+                date_str = date.strftime("%Y-%m-%d")
+                dispatcher.utter_message(
+                    text=f"Le fournisseur {fournisseur} a une facture {facture} avec une etat créé datée du {date_str}."
+                )
+            dispatcher.utter_message(
+                text=f"Le montant total des factures créé pour le mois {calendar.month_name[month]} {year} est de {total_amount}."
+            )
+        else:
+            # Aucun montant trouvé pour l'état Validé ce mois-ci
+            dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'créé' pour le mois {calendar.month_name[month]} {year}.")
+
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
+#---------------------------------------------pret pour paiement------------------------------------------------------
+from datetime import datetime
+import calendar
+
+class ActionAfficherMontantsEtatPrêtPourPaiementDate(Action):
+    def name(self) -> Text:
+        return "action_afficher_montants_etat_Prêt_pour_paiement_Date"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Récupérer le mois et l'année spécifiés, avec des valeurs par défaut si non spécifiés
+        month = tracker.get_slot("month") or datetime.now().month
+        year = tracker.get_slot("Année") or 2023  # Assurez-vous que le nom du slot est correct
+        
+        # Mapping des noms de mois français aux numéros de mois
+        month_map = {
+            "janvier": 1,
+            "fevrier": 2,
+            "mars": 3,
+            "avril": 4,
+            "mai": 5,
+            "juin": 6,
+            "juillet": 7,
+            "aout": 8,
+            "septembre": 9,
+            "octobre": 10,
+            "novembre": 11,
+            "decembre": 12
+        }
+        
+        # Vérifier si le mois spécifié est en français et le mapper au numéro de mois correspondant
+        if isinstance(month, str):
+            month = month_map.get(month.lower(), month)
+        
+        # Convertir le mois en entier
+        month = int(month)
+        
+        # Convertir l'année en entier
+        year = int(year)
+        
+        # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
+        conn = se_connecter_a_ssms() 
+        
+        # Obtenir le nombre de jours dans le mois spécifié pour la requête
+        num_days = calendar.monthrange(year, month)[1]
+        
+        # Requête SQL pour obtenir tous les montants correspondant à l'état Validé pour le mois et l'année spécifiés
+        query = f"""SELECT Fournisseur.Fournisseur , Facture.Facture , Date.Date , SUM(f.Montant) AS MontantTotal
+                    FROM dbo.fait f 
+                    JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey 
+                    WHERE facture.etat = 'Prét pour paiement' AND MONTH(Date.Date) = {month} AND YEAR(Date.Date) = {year}
+                    GROUP BY Fournisseur.Fournisseur, Facture.Facture, Date.Date"""
+        
+        results = executer_requete(conn, query)  # Vous devez implémenter cette fonction
+
+        if results:
+            total_amount = 0
+            for result in results:
+                # Récupérer les détails de chaque facture
+                fournisseur, facture, date, montant_total = result
+                total_amount += montant_total
+                date_str = date.strftime("%Y-%m-%d")
+                dispatcher.utter_message(
+                    text=f"Le fournisseur {fournisseur} a une facture {facture} avec une etat Prêt pour paiement datée du {date_str}."
+                )
+            dispatcher.utter_message(
+                text=f"Le montant total des factures Prêt pour paiement pour le mois {calendar.month_name[month]} {year} est de {total_amount}."
+            )
+        else:
+            # Aucun montant trouvé pour l'état Validé ce mois-ci
+            dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Prêt pour paiement' pour le mois {calendar.month_name[month]} {year}.")
+
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
+
+#----------------------------------------------------------------------------------------------------
+ 
+class ActionGetFactureJusquauMois(Action):
+    def name(self) -> Text:
+        return "action_get_Facture_Jusquau_Mois"
+
+    def preprocess_month(self, month: Text) -> Text:
+        """
+        Preprocesses the month entity to remove accents and circumflexes.
+        """
+        month = month.lower()
+        month = month.replace('é', 'e').replace('ê', 'e').replace('û', 'u').replace('û', 'u').replace('ô', 'o').replace('î', 'i').replace('è', 'e')
+        return month
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        month_map = {
+            "janvier": "01",
+            "fevrier": "02",
+            "mars": "03",
+            "avril": "04",
+            "mai": "05",
+            "juin": "06",
+            "juillet": "07",
+            "aout": "08",
+            "septembre": "09",
+            "octobre": "10",
+            "novembre": "11",
+            "decembre": "12"
+        }
+
+        month_entity = tracker.get_slot('month')
+        year_entity = tracker.get_slot('Année')
+
+        if month_entity:
+            preprocessed_month = self.preprocess_month(month_entity)
+            month_num = month_map.get(preprocessed_month)
+            if month_num:
+                if year_entity:
+                    conn = se_connecter_a_ssms()        
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey WHERE YEAR(date.date) = ? AND MONTH(date.date) <= ? ", (year_entity, month_num,))
+                    total_montant = cursor.fetchone()[0]
+
+                    if total_montant:
+                        dispatcher.utter_message(f"Le montant total des factures jusqu'au mois de {month_entity} de l'année {year_entity} est {total_montant}.")
+                    else:
+                        dispatcher.utter_message(f"Aucune donnée disponible jusqu'au mois de {month_entity} de l'année {year_entity}.")
+                    return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+                else: 
+                    conn = se_connecter_a_ssms()        
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey WHERE MONTH(date.date) <= ?", (month_num,))
+                    total_montant = cursor.fetchone()[0]
+
+                    if total_montant:
+                        dispatcher.utter_message(f"Le montant total des factures jusqu'au mois de {month_entity} est {total_montant}.")
+                    else:
+                        dispatcher.utter_message(f"Aucune donnée disponible jusqu'au mois de {month_entity}.")
+                    return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+            else:
+                dispatcher.utter_message("Mois invalide.")
+        else:
+            dispatcher.utter_message("Je n'ai pas compris le mois.")
+
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+
+#---------------------------------------------------------------------------------------------------------------------------------
+class ActionGetFactureDeuxMoisDeuxAnnee(Action):  
+    def name(self) -> Text:
+        return "action_get_Facture_deux_mois_deux_annee"
+
+    def preprocess_month(self, month: Text) -> Text:
+        """
+        Preprocesses the month entity to remove accents and circumflexes.
+        """
+        month = month.lower()
+        month = month.replace('é', 'e').replace('ê', 'e').replace('û', 'u').replace('û', 'u').replace('ô', 'o').replace('î', 'i').replace('è', 'e')
+        return month
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        month_map = {
+            "janvier": "01",
+            "fevrier": "02",
+            "mars": "03",
+            "avril": "04",
+            "mai": "05",
+            "juin": "06",
+            "juillet": "07",
+            "aout": "08",
+            "septembre": "09",
+            "octobre": "10",
+            "novembre": "11",
+            "decembre": "12"
+        }
+
+        month_entity1 = tracker.get_slot('monthD')
+        month_entity2 = tracker.get_slot('monthF')
+        year_entity1 = tracker.get_slot('AnnéeD')
+        year_entity2 = tracker.get_slot('AnnéeF')
+
+        print("monthD ",month_entity1, "yearD ",year_entity1 )
+        print("monthF" ,month_entity2 ,"yearF ",year_entity2 )
+        
+        if month_entity1 and month_entity2 and year_entity1 and year_entity2:
+            preprocessed_month1 = self.preprocess_month(month_entity1)
+            preprocessed_month2 = self.preprocess_month(month_entity2)
+            month_num1 = month_map.get(preprocessed_month1)
+            month_num2 = month_map.get(preprocessed_month2)
+
+            if month_num1 and month_num2:
+                # Conversion des dates en objets datetime
+                date1 = datetime(int(year_entity1), int(month_num1), 1)
+                date2 = datetime(int(year_entity2), int(month_num2), 1)
+                
+                if date1 <= date2:
+                    start_date, end_date = date1, date2
+                else:
+                    start_date, end_date = date2, date1
+
+                conn = se_connecter_a_ssms()        
+                cursor = conn.cursor()
+                cursor.execute("SELECT SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey WHERE date.FullDate BETWEEN ? AND ?", (start_date, end_date,))
+                total_montant = cursor.fetchone()[0]
+
+                if total_montant:
+                    dispatcher.utter_message(f"Le montant total des factures entre {month_entity1} {year_entity1} et {month_entity2} {year_entity2} est {total_montant}.")
+                else:
+                    dispatcher.utter_message(f"Aucune donnée disponible pour la période entre {month_entity1} {year_entity1} et {month_entity2} {year_entity2}.")
+            else:
+                dispatcher.utter_message("Mois invalide.")
+        else:
+            dispatcher.utter_message("Je n'ai pas compris les mois ou les années.")
+
+        return [SlotSet(slot, None) for slot in ["Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+# import openai
+# from rasa_sdk import Action
+
+# class ActionGetFactureDeuxMoisDeuxAnnee(Action):
+#     def name(self) -> Text:
+#         return "action_get_Facture_deux_mois_deux_annee"
+
+#     def run(self, dispatcher, tracker, domain):
+#         # Get user input
+#         user_input = tracker.latest_message.get("text")
+
+#         # Use OpenAI for text generation (replace with your API key)
+#         openai.api_key = "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"  # Replace with your actual key
+
+#         generated_text = openai.Completion.create(
+#             engine="babbage-002",  # Replace with your model
+#             prompt=user_input,
+#             max_tokens=250
+#         )
+
+#         # Send response to user
+#         dispatcher.utter_message(text=generated_text.choices[0].text)
+#         return []
 
 #---------------------------------------------fonctionne pas-----------------------------------------------------
 
+# class ActionMontantEntreDates(Action):
+#     def name(self) -> Text:
+#         return "action_montant_entre_dates"
 
+#     def preprocess_month(self, month: Text) -> Text:
+#         """
+#         Preprocesses the month entity to remove accents and circumflexes.
+#         """
+#         month = month.lower()
+#         month = month.replace('é', 'e').replace('ê', 'e').replace('û', 'u').replace('û', 'u').replace('ô', 'o').replace('î', 'i').replace('è', 'e')
+#         return month
 
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
+#         month_map = {
+#             "janvier": "01",
+#             "fevrier": "02",
+#             "mars": "03",
+#             "avril": "04",
+#             "mai": "05",
+#             "juin": "06",
+#             "juillet": "07",
+#             "aout": "08",
+#             "septembre": "09",
+#             "octobre": "10",
+#             "novembre": "11",
+#             "decembre": "12"
+#         }
 
+#         day_entityD = tracker.get_slot('JourD')
+#         month_entityD = tracker.get_slot('monthD')
+#         year_entityD = tracker.get_slot('AnnéeD')
 
+#         day_entityF = tracker.get_slot('JourF')
+#         month_entityF = tracker.get_slot('monthF')
+#         year_entityF = tracker.get_slot('AnnéeF')
 
-    
-  
+#         if day_entityD and month_entityD and year_entityD and day_entityF and month_entityF and year_entityF:
+#             start_date = f"{year_entityD}-{month_map.get(self.preprocess_month(month_entityD))}-{day_entityD}"
+#             end_date = f"{year_entityF}-{month_map.get(self.preprocess_month(month_entityF))}-{day_entityF}"
+#         else:
+#             dispatcher.utter_message("Veuillez préciser correctement les dates.")
+#             dispatcher.utter_message(f"JourD: {day_entityD}, monthD: {month_entityD}, AnnéeD: {year_entityD}, JourF: {day_entityF}, monthF: {month_entityF}, AnnéeF: {year_entityF}")
+#             return [SlotSet(slot, None) for slot in ["start_date", "end_date"]]
+
+#         conn = se_connecter_a_ssms()        
+#         cursor = conn.cursor()
+#         cursor.execute("SELECT SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey WHERE date BETWEEN ? AND ?", (start_date, end_date,))
+#         total_montant = cursor.fetchone()[0]
+
+#         if total_montant:
+#             dispatcher.utter_message(f"Le montant total des factures entre {start_date} et {end_date} est {total_montant}.")
+#         else:
+#             dispatcher.utter_message(f"Aucune donnée disponible entre {start_date} et {end_date}.")
+
+#         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+ 
+
