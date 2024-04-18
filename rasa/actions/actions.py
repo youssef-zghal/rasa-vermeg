@@ -1702,9 +1702,6 @@ class ActionGetFactureDeuxMoisDeuxAnnee(Action):
 
 #---------------------------------------------fonctionne pas-----------------------------------------------------
 
-import pyodbc
-from typing import Optional
-
 class ActionMontantEntreDates(Action):
     def name(self) -> Text:
         return "action_montant_entre_dates"
@@ -1713,31 +1710,47 @@ class ActionMontantEntreDates(Action):
         """
         Preprocesses the month entity to remove accents and circumflexes.
         """
-        replacements = {'é': 'e', 'ê': 'e', 'û': 'u', 'ô': 'o', 'î': 'i', 'è': 'e'}
-        return ''.join(replacements.get(c, c) for c in month.lower())
-
-    def extract_date(self, tracker: Tracker, prefix: str) -> Optional[str]:
-        day = tracker.get_slot(f'{prefix}Jour')
-        month = tracker.get_slot(f'{prefix}month')
-        year = tracker.get_slot(f'{prefix}Année')
-        if day and month and year:
-            return f"{year}-{self.preprocess_month(month)}-{day}"
-        return None
+        month = month.lower()
+        month = month.replace('é', 'e').replace('ê', 'e').replace('û', 'u').replace('û', 'u').replace('ô', 'o').replace('î', 'i').replace('è', 'e')
+        return month
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
-        start_date = self.extract_date(tracker, "D")
-        end_date = self.extract_date(tracker, "F")
 
-        if not (start_date and end_date):
+        month_map = {
+            "janvier": "01",
+            "fevrier": "02",
+            "mars": "03",
+            "avril": "04",
+            "mai": "05",
+            "juin": "06",
+            "juillet": "07",
+            "aout": "08",
+            "septembre": "09",
+            "octobre": "10",
+            "novembre": "11",
+            "decembre": "12"
+        }
+
+        day_entityD = tracker.get_slot('JourD')
+        month_entityD = tracker.get_slot('monthD')
+        year_entityD = tracker.get_slot('AnnéeD')
+
+        day_entityF = tracker.get_slot('JourF')
+        month_entityF = tracker.get_slot('monthF')
+        year_entityF = tracker.get_slot('AnnéeF')
+
+        if day_entityD and month_entityD and year_entityD and day_entityF and month_entityF and year_entityF:
+            start_date = f"{year_entityD}-{month_map.get(self.preprocess_month(month_entityD))}-{day_entityD}"
+            end_date = f"{year_entityF}-{month_map.get(self.preprocess_month(month_entityF))}-{day_entityF}"
+        else:
             dispatcher.utter_message("Veuillez préciser correctement les dates.")
+            dispatcher.utter_message(f"JourD: {day_entityD}, monthD: {month_entityD}, AnnéeD: {year_entityD}, JourF: {day_entityF}, monthF: {month_entityF}, AnnéeF: {year_entityF}")
             return [SlotSet(slot, None) for slot in ["start_date", "end_date"]]
-        
-        conn = pyodbc.connect('DRIVER={SQL Server};SERVER=your_server;DATABASE=your_database;UID=username;PWD=password') # Remplacer les valeurs par les vôtres
-        cursor = conn.cursor()
 
+        conn = se_connecter_a_ssms()        
+        cursor = conn.cursor()
         cursor.execute("SELECT SUM(f.montant) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = date.DateKey WHERE date BETWEEN ? AND ?", (start_date, end_date,))
         total_montant = cursor.fetchone()[0]
 
@@ -1746,9 +1759,6 @@ class ActionMontantEntreDates(Action):
         else:
             dispatcher.utter_message(f"Aucune donnée disponible entre {start_date} et {end_date}.")
 
-        cursor.close()
-        conn.close()
-
-        return [SlotSet(slot, None) for slot in ["start_date", "end_date"]]
-
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Année", "AnnéeD", "AnnéeF", "session_started_metadata"]]
+ 
 

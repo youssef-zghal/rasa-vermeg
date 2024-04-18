@@ -240,11 +240,12 @@ nlu:
 
 - intent: obtenir_factures_entre_dates
   examples: |
-    - total entre le [2](Jour) [mars](month) [2021](Année) et le [13](Jour) [janvier](month) [2024](Année).
-    - l'intervalle de [15](Jour) [mars](month) [2021](Année) à [8](Jour) [avril](month) [2021](Année).
-    - factures entre le [10](Jour) [juillet](month) [2023](Année) et le [15](Jour) [septembre](month) [2023](Année).
-    - total des factures entre le [1](Jour) [avril](month) [2021](Année) et le [23](Jour) [juin](month) [2023](Année).
-    - [19](Jour) [aout](month) [2021](Année) et le [21](Jour) [decembre](month) [2023](Année).
+    - total entre le [2](JourD) [mars](monthD) [2021](AnnéeD) et le [13](JourF) [janvier](monthF) [2024](AnnéeF).
+    - l'intervalle de [15](JourD) [mars](monthD) [2021](AnnéeD) à [8](JourF) [avril](monthF) [2021](AnnéeF).
+    - factures entre le [10](JourD) [juillet](monthD) [2023](AnnéeD) et le [15](JourF) [septembre](monthF) [2023](AnnéeF).
+    - total des factures entre le [1](JourD) [avril](monthD) [2021](AnnéeD) et le [23](JourF) [juin](monthF) [2023](AnnéeF).
+    - [19](JourD) [aout](monthD) [2021](AnnéeD) et le [21](JourF) [decembre](monthF) [2023](AnnéeF).
+    - [9](JourD) [mai](monthD) [2021](AnnéeD) et le [20](JourF) [juillet](monthF) [2023](AnnéeF).
 
 - intent: obtenir_total_Jusquau_mois
   examples: |
