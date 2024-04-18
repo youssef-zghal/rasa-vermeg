@@ -2,7 +2,7 @@
 body {
   font-family: "Open Sans", sans-serif;
   background-size: cover;
-background-color: rgb(25,25,112);
+  background-color: #192444;
 }
 
 /* ============= css related to chats =============== */
@@ -580,7 +580,7 @@ div.content_data::-webkit-scrollbar {
   border-radius: 10px;
 }
 
-@-webkit-keyframes fadeInLeft {
+/* @-webkit-keyframes fadeInLeft {
   from {
     opacity: 0;
     -webkit-transform: translatex(-10px);
@@ -595,7 +595,7 @@ div.content_data::-webkit-scrollbar {
     -o-transform: translatex(0);
     transform: translatex(0);
   }
-}
+} */
 
 .in-left {
   -webkit-animation-name: fadeInLeft;

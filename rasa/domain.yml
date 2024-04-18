@@ -1,19 +1,13 @@
 version: '3.1'
 intents:
-- Date
-- Etat
-- Facture
-- Fournisseur
 - Montant
 - Montant_egal
 - Montant_inf
 - Montant_sup
 - Montant_total_fournisseur
-- Reference
 - afficher_montants_etat_Prêt_pour_paiement_date
 - afficher_montants_etat_créé_date
 - afficher_montants_etat_validees_date
-- affirm
 - ask_type
 - ask_type_by_amount
 - bye
@@ -34,15 +28,23 @@ intents:
 - informer_etat_créé
 - informer_etat_prêt_pour_paiement
 - informer_etat_validé
-- intervalle_par_date
 - montant_par_date
-- next_Montant_Total_Par_Type
 - obtenir_montant_total_facture
 - obtenir_montant_total_pluriannuel
 - obtenir_total_Deux_mois
 - obtenir_total_Jusquau_mois
 - salutation
-# - obtenir_factures_entre_dates
+- obtenir_factures_entre_dates
+# - intervalle_par_date
+# - Reference
+# - affirm
+# - next_Montant_Total_Par_Type
+# - Date
+# - Etat
+# - Facture
+# - Fournisseur
+
+
 entities:
 - monthF
 - monthD
@@ -186,9 +188,6 @@ responses:
   - text: 'Au revoir, content de vous avoir aidé! '
   utter_Reference:
   - text: la reference pour le fornisseur {Fournisseur} est {Reference}.
-  - text: le code du fournisseur pour cette facture est {Facture}.
-  - text: le numero de reference pour cette facture est {Facture}.
-  - text: le numero de Fournisseur pour cette facture est {Facture}.
   utter_montant:
   - text: Le montant de la facture qui a une reference {Référence} est de {montant}.
   utter_inf:
@@ -197,8 +196,6 @@ responses:
   - text: Les montants superieur à celui que tu as indiqué sont:{montant}
   utter_egal:
   - text: Les montants égal à celui que tu as indiqué sont:{montant}
-  utter_ask_date:
-  - text: Quelle est la date pour laquelle vous souhaitez connaître le montant?
   utter_next_Montant_Total_Par_Etat:
   - text: Voudriez afficher ceux qui sont d'état validé/Créé ou Prêt pour paiement
   utter_next_Montant_Total_Par_Type:
@@ -245,4 +242,5 @@ actions:
 - action_top_fournisseurs
 - action_top_Type
 - action_fournisseurs_zero
-# - action_montant_entre_dates
+- action_montant_entre_dates
+

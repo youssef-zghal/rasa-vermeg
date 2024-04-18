@@ -232,14 +232,12 @@ stories:
   - slot_was_set:
     - Année: '2022'
   - action: action_montant_total_pluriannuel
-
   - intent: inform
     entities:
     - month: janvier
   - slot_was_set:
     - month: janvier
   - action: action_get_Facture_mois
-
   - intent: obtenir_total_Deux_mois
     entities:
     - monthD: mars
@@ -253,16 +251,16 @@ stories:
     - Année: '2023'
   - action: action_total_Deux_mois
 
-
-# - story: montants get Facture entre dates
-#   steps:
-#   - intent: obtenir_factures_entre_dates
-#   - action: action_montant_entre_dates
+- story: montants get Facture entre dates
+  steps:
+  - intent: obtenir_factures_entre_dates
+  - action: action_montant_entre_dates
   
 - story: montants get total fournisseur Mois Année
   steps:
   - intent: demander_montant_total_fournisseur_mois_annee
   - action: action_get_Fournisseur_Mois_Année
+
 - story: interactive_story_1
   steps:
   - intent: demander_montant_total_fournisseur_mois_annee
@@ -783,14 +781,6 @@ stories:
     - AnnéeF: null
   - slot_was_set:
     - session_started_metadata: null
-  - intent: inform
-    entities:
-    - month: janvier
-    - Année: '2022'
-  - slot_was_set:
-    - month: janvier
-  - slot_was_set:
-    - Année: '2022'
   - intent: afficher_montants_etat_créé_date
     entities:
     - month: janvier

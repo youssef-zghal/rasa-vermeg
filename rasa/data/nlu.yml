@@ -37,1707 +37,572 @@ nlu:
     - bonne journée
 - intent: Montant
   examples: |
-    - le montant pour la facture qui a une reference [7559854598](number) ?
+    - montant pour la facture qui a une reference [7559854598](number) ?
     - payer pour cette [9874562159](number) ?
-    - le montant du [2365894561](number)?
+    - montant du [2365894561](number)?
     - cette reference [2365894561](number)?
     - reference [2365894561](number) combien il faut payer?
-    - le coût total pour la référence [2365894561](number)?
-    - le montant pour la référence [7559854598](number) ?
+    - coût total pour la référence [2365894561](number)?
+    - montant pour la référence [7559854598](number) ?
 
 - intent: montant_par_date
   examples: |
-    - le montant pour la date [2023-01-14](date) ?
+    - montant pour la date [2023-01-14](date) ?
     - Combien payer le [2023-01-14](date) ?
-    - le montant le [2023-01-14](date) ?
+    - montant le [2023-01-14](date) ?
     - payer pour cette date [2023-01-14](date)?
     - payer en [2023-01-14](date)?
-    - les montants à la date [2025-01-14](date) ?
-    - le montant prévu pour le [2026-02-31](date) 
+    - montants à la date [2025-01-14](date) ?
+    - montant prévu pour le [2026-02-31](date) 
 
 - intent: Montant_sup
   examples: |
-    - la facture ayant un montant superieur à [7559854598](number) ?
+    - facture ayant un montant superieur à [7559854598](number) ?
     - montant superieur à [7559854598](number) ?
-    - les montants payer superieur a [7559854598](number)?
-    - les montants [7559854598] qui sont supérieurs ?
-    - des montants dépassant [7559854598](number) ?
-    - les paiements excédant a [15233853548](number)
-    - les montants sont plus élevés que [15233853548](number)
+    - montants payer superieur a [7559854598](number)?
+    - montants [7559854598] qui sont supérieurs ?
+    - montants dépassant [7559854598](number) ?
+    - paiements excédant a [15233853548](number)
+    - montants sont plus élevés que [15233853548](number)
 
 - intent: Montant_inf
   examples: |
-    - la facture ayant un montant inférieur à [7559854598](number) ?
+    - facture ayant un montant inférieur à [7559854598](number) ?
     - montant inférieur à [7559854598](number) ?
     - les payement inferieur a [100](number)
     - inferieur a ce montant [100](number) ?
-    - le montant est en dessous de [2939223](number)
-    - les dépenses inférieures à [37779555](number)
-    - les achats dont le coût est moins élevé que [37779555](number)
+    - montant est en dessous de [2939223](number)
+    - dépenses inférieures à [37779555](number)
+    - achats dont le coût est moins élevé que [37779555](number)
 
 - intent: Montant_egal
   examples: |
     - donne moi les factures ayant un montant égal à [7559854598](number) ?
     - montant egal à [7559854598](number) ?
-    - un montant egal a [0](number)
+    - montant egal a [0](number)
     - montant identique à [49420](number)
-    - des montants égaux à [49420](number) dans les transactions récentes
-    - des factures avec un montant exact de [7559854598](number)
+    - montants égaux à [49420](number) dans les transactions récentes
+    - factures avec un montant exact de [7559854598](number)
 
 - intent: Montant_total_fournisseur
   examples: |
     - combien les fournisseurs doivent nous t-il au total ?
-    - le montant total pour tous les fournisseurs ?
-    - le total des montants dus par les fournisseurs ?
-    - le montant global que nous devons à nos fournisseurs ?
-    - le total des sommes dues par nos fournisseurs.
-    - le chiffre total des créances fournisseurs ?
+    - montant total pour tous les fournisseurs ?
+    - total des montants dus par les fournisseurs ?
+    - montant global que nous devons à nos fournisseurs ?
+    - total des sommes dues par nos fournisseurs.
+    - chiffre total des créances fournisseurs ?
 
 - intent: demande_etat
   examples: |
-    - les montants pour tous les états ?
-    - la situation financière ?
-    - les situations des etat
-    - les montants pour chaque état ?
-    - les montants attribués à chaque État ?
+    - montants pour tous les états ?
+    - situation financière ?
+    - situations des etat
+    - montants pour chaque état ?
+    - montants attribués à chaque État ?
 
 - intent: informer_etat_validé
   examples: |
     - Validé
     - ceux qui sont valide
-    - les factures qui sont validées
-    - les montants qui sont valide
-    - les facture qu'on a payer
-    - les montant valide
+    - factures qui sont validées
+    - montants qui sont valide
+    - facture qu'on a payer
+    - montant valide
 
 - intent: informer_etat_créé
   examples: |
     - Cree
     - ceux qui sont crées
-    - les montants qui sont cree
+    - montants qui sont cree
     - donne moi tout les facture crée
-    - les factures créé
+    - factures créé
 
 - intent: informer_etat_prêt_pour_paiement
   examples: |
     - Prêt pour paiement
     - pret
     - ceux qui sont pret
-    - les factures Pret pour paiement
-    - les montants qui ne sont pas payer
+    - factures Pret pour paiement
+    - montants qui ne sont pas payer
 
 - intent: ask_type_by_amount
   examples: |
-    - le type pour [500](amount) ?
+    - type pour [500](amount) ?
     - montant de [1000](amount), quel est le type ?
-    - Le type pour [500](amount) ?
-    - des type avec ce montant [500](amount)?
+    - type pour [500](amount) ?
+    - type avec ce montant [500](amount)?
     - Quel type correspond à [300](amount)
     - Pour [500](amount) euros, quel est le type associé ?
 
 
 - intent: ask_type
   examples: |
-    - une liste des montants pour chaque type ?
-    - les montants pour chaque catégorie.
-    - les montant pour les type?
-    - le montant pour tous nos secteur 
-    - les montants attribués à chaque type ?
-    - les allocations budgétaires pour chaque domaine.
+    - liste des montants pour chaque type ?
+    - montants pour chaque catégorie.
+    - montant pour les type?
+    - montant pour tous nos secteur 
+    - montants attribués à chaque type ?
+    - allocations budgétaires pour chaque domaine.
 
 - intent: inform_fournisseur_count
   examples: |
-    - le nombre de fournisseurs ?
-    - le nombre exact de fournisseurs ?
-    - le nombre total de fournisseurs enregistrés.
-    - le nombre de fournisseurs dans notre base de données ?
+    - nombre de fournisseurs ?
+    - nombre exact de fournisseurs ?
+    - combien le total de fournisseurs enregistrés.
+    - nombre de fournisseurs dans notre base de données ?
 
 - intent: inform_Type_count
   examples: |
     - Combien de types avons-nous enregistrés ?
-    - le nombre total de types ?
+    - nombre total de types ?
     - combien de types nous avons ?
-    - le nombre de types dans notre base de données ?
+    - nombre de types dans notre base de données ?
 
 - intent: inform_facture_count
   examples: |
     - Combien de factures avons-nous ?
-    - le nombre de factures dans la base de données ?
+    - nombre de factures dans la base de données ?
     - nombre de factures enregistrées ?
     - Combien de factures sont là ?
-    - le nombre total de factures ?
+    - nombre total de factures ?
 
 - intent: intervalle_par_date
   examples: |
-    - le montant total à payer pour la période du [2024-01-01](start_date) au [2024-01-31](end_date) ?
-    - le montant a payée entre [2024-01-01](start_date) et [2024-01-31](end_date).
-    - les paiements restant à effectuer entre le [2024-01-01](start_date) et [2024-01-31](end_date) ?
+    - montant total à payer pour la période du [2024-01-01](start_date) au [2024-01-31](end_date) ?
+    - montant a payée entre [2024-01-01](start_date) et [2024-01-31](end_date).
+    - paiements restant à effectuer entre le [2024-01-01](start_date) et [2024-01-31](end_date) ?
     - Entre [2024-01-01](start_date) et [2024-01-31](end_date) quels sont les paiements à effectuer ?
-    - les montants entre [2023-07-24](start_date) et [2023-07-26](end_date)
+    - montants entre [2023-07-24](start_date) et [2023-07-26](end_date)
 
 - intent: demande_top_fournisseurs
   examples: |
-    - les principaux [10](number) fournisseurs qu'on a ?
-    - les top [2](number) fournisseurs.
-    - les [8](number) premie fournisseurs par montant ?
-    - les [8](number) meilleur fournisseur   
-    - les [20](number) fournisseur en travail avec eux le plus?
-    - le fournisseur avec qui nous avons effectué le plus d'achats ?
+    - principaux [10](number) fournisseurs qu'on a ?
+    - top [2](number) fournisseurs.
+    - [8](number) premie fournisseurs par montant ?
+    - [8](number) meilleur fournisseur   
+    - [20](number) fournisseur en travail avec eux le plus?
+    - fournisseur avec qui nous avons effectué le plus d'achats ?
 
 - intent: demande_top_Type
   examples: |
-    - les [4](number) principaux types?
-    - les top [12](number) Type.
-    - les [5](number) type avec les montants les plus élevés.
-    - les top [9](number) 
-    - les [1](number) meilleur type
-    - le type de fournisseur avec le plus grand montant
-    - les [9](number) secteurs avec lesquels nous travaillons le plus ?
+    - [4](number) principaux types?
+    - top [12](number) Type.
+    - [5](number) type avec les montants les plus élevés.
+    - top [9](number) 
+    - [1](number) meilleur type
+    - type de fournisseur avec le plus grand montant
+    - [9](number) secteurs avec lesquels nous travaillons le plus ?
 
 - intent: demande_Less_fournisseurs
   examples: |
-    - les [2](number) fournisseurs les moins significatifs.
-    - les [5](number) fournisseurs avec les montants les plus bas.
-    - Les [8](number) fournisseurs les moins importants
-    - les [5](number) moins fournisseurs qu'on a?
+    - [2](number) fournisseurs les moins significatifs.
+    - [5](number) fournisseurs avec les montants les plus bas.
+    - [8](number) fournisseurs les moins importants
+    - [5](number) moins fournisseurs qu'on a?
 
 - intent: fournisseurs_zero
   examples: |
-    - les fournisseurs qu'on a jamais travailler avec eux
-    - les fournisseur avec 0
+    - fournisseurs qu'on a jamais travailler avec eux
+    - fournisseur avec 0
 
 - intent: obtenir_montant_total_facture
   examples: |
-    - le montant total de ma dernière facture ?
-    - le total des factures ?
-    - la somme des factures ?
-    - le montant total que je dois pour mes factures ?
+    - montant total de ma dernière facture ?
+    - total des factures ?
+    - somme des factures ?
+    - montant total que je dois pour mes factures ?
 
 - intent: inform
   examples: |
-    - le total des factures pour le mois de [janvier](month) ?
-    - payé en [septembre](month) [2023](Année) ?
-    - le total des factures pour [novembre](month).
-    - les montants des factures de [juin](month) [2023](Année) ?
-    - le total des dépenses pour [mai](month) [2022](Année) ?
+    - total pour le mois de [janvier](month) ?
+    - montants pour [novembre](month).
+    - montants des factures de [juin](month) pour l'année [2023](Année) ?
+    - total des dépenses pour [mai](month) en [2022](Année) ?
 
 
 - intent: obtenir_montant_total_pluriannuel
   examples: | 
-    - le total des factures pour l'année [2023](Année) ?
-    - les chiffres cumulés pour [2023](Année) et [2022](Année) ?
-    - une vue d'ensemble financière pour [2022](Année).
-    - les dépenses pour [2023](Année) et [2024](Année) ?
+    - total des factures pour l'année [2023](Année) ?
+    - chiffres cumulés pour [2023](Année) et [2022](Année) ?
+    - vue d'ensemble financière pour [2022](Année).
+    - dépenses pour [2023](Année) et [2024](Année) ?
 
 - intent: obtenir_total_Deux_mois
   examples: |
-    - les dépenses pour [mars](monthD) et [avril](monthF) [2022](Année) ?
-    - les coûts pour [mai](monthD) et [juin](monthF) [2023](Année) ?
+    - dépenses pour [mars](monthD) et [avril](monthF) [2022](Année) ?
+    - coûts pour [mai](monthD) et [juin](monthF) [2023](Année) ?
     - dépensé de [juin](monthD) jusqu'au [juillet](monthF) en [2023](Année) ?
-    - le total des factures entre [decembre](monthD) et [janvier](monthF) de l'année [2021](Année) ?
+    - total des factures entre [decembre](monthD) et [janvier](monthF) de l'année [2021](Année) ?
     - Montant total des factures entre [mai](monthD) et [novembre](monthF) en [2023](Année).
-    - les montants entre [mai](monthD) et [decembre](monthF) en [2023](Année).
+    - montants entre [mai](monthD) et [decembre](monthF) en [2023](Année).
 
 
-# - intent: obtenir_factures_entre_dates
-#   examples: |
-#     - donne-moi le total des factures entre le [2](JourD) [mars](monthD) [2021](AnnéeD) et le [3](JourF) [avril](monthF) [2024](AnnéeF).
-#     - je veux tout savoir exactement pour l'intervalle de [5](JourD) [mars](monthD) à [8](JourF) [avril](monthF).
-#     - quel est le montant total des factures entre [juin](monthD) [2021](AnnéeD) et [novembre](monthF) [2024](AnnéeF) ?
-#     - montre-moi les détails des factures entre le [10](JourD) [juillet](monthD) [2023](AnnéeD) et le [15](JourF) [septembre](monthF) [2023](AnnéeF).
-#     - peux-tu me donner un résumé des factures entre le [1](JourD) [janvier](monthD) [2022](AnnéeD) et le [31](JourF) [décembre](monthF) [2022](AnnéeF) ?
-#     - je veux savoir les détails des factures du [20](JourD) [février](monthD) [2021](AnnéeD) au [15](JourF) [mars](monthF) [2021](AnnéeF).
-#     - quelles sont les transactions entre [juin](monthD) [2021](AnnéeD) et [novembre](monthF) [2024](AnnéeF) ?
-#     - montre-moi le total des factures entre le [1](JourD) [avril](monthD) et le [juin](monthF) [2023](AnnéeF).
-#     - peux-tu me donner un résumé des transactions entre le [10](JourD) [janvier](monthD) et le [20](JourF) [mars](monthF)?
+- intent: obtenir_factures_entre_dates
+  examples: |
+    - total entre le [2](Jour) [mars](month) [2021](Année) et le [13](Jour) [janvier](month) [2024](Année).
+    - l'intervalle de [15](Jour) [mars](month) [2021](Année) à [8](Jour) [avril](month) [2021](Année).
+    - factures entre le [10](Jour) [juillet](month) [2023](Année) et le [15](Jour) [septembre](month) [2023](Année).
+    - total des factures entre le [1](Jour) [avril](month) [2021](Année) et le [23](Jour) [juin](month) [2023](Année).
+    - [19](Jour) [aout](month) [2021](Année) et le [21](Jour) [decembre](month) [2023](Année).
 
 - intent: obtenir_total_Jusquau_mois
   examples: |
-    - les dépenses jusqu'au mois [octobre](month) [2023](Année) ?
+    - dépenses jusqu'au mois [octobre](month) [2023](Année) ?
     - Montant total jusqu'au mois [novembre](month) ?
     - Total des factures jusqu'au mois de [decembre](month) [2023](Année) ?
 
 - intent: afficher_montants_etat_validees_date
   examples: |
-    - les montants des factures validées pour [fevrier](month) [2022](Année)
-    - le total des factures valide en [mars](month) [2023](Année)?
+    - montants des factures validées pour [fevrier](month) [2022](Année)
+    - total des factures valide en [mars](month) [2023](Année)?
     - dépensé en factures valides en [avril](month)?
 
 
 - intent: afficher_montants_etat_créé_date
   examples: |
-    - le total des factures créé en [mars](month) [2023](Année)?
+    - total des factures créé en [mars](month) [2023](Année)?
     - dépensé en factures créé en [avril](month)?
-    - les montants des factures cree pour le mois [mai](month)
+    - montants des factures cree pour le mois [mai](month)
 
 - intent: afficher_montants_etat_Prêt_pour_paiement_date
   examples: |
-    - les montant qu'on va les payer [juin](month) [2023](Année)
-    - le total des factures Prêt pour paiement en [aout](month) [2023](Année)?
-    - les dépensés en factures Prêt pour paiement en [septembre](month)?
-    - les montants des factures Prêt pour paiement pour le mois [octobre](month)
-    - les dettes qu'on a en mois [decembre](month) [2022](Année)
+    - montant qu'on va les payer [juin](month) [2023](Année)
+    - total des factures Pret pour paiement en [aout](month) [2023](Année)?
+    - dépensés en factures Pret pour paiement en [septembre](month)?
+    - dettes qu'on a en mois [decembre](month) [2022](Année)
 
 
 - intent: demander_factures_deux_mois_deux_annee
   examples: |
-    - le montant des factures entre [decembre](monthD) [2022](AnnéeD) et [avril](monthF) [2023](AnnéeF).
-    - la somme totale des factures de [mai](monthD) [2022](AnnéeD) à [aout](monthF) [2022](AnnéeF) ?
-    - le total des factures de [janvier](monthD) [2021](AnnéeD) à [juin](monthF) [2021](AnnéeF) ?
-    - les dépenses entre [octobre](monthD) [2023](AnnéeD) et [novembre](monthF) [2023](AnnéeF).
+    - montant des factures entre [decembre](monthD) [2022](AnnéeD) et [avril](monthF) [2023](AnnéeF).
+    - somme totale des factures de [mai](monthD) [2022](AnnéeD) à [aout](monthF) [2022](AnnéeF) ?
+    - total des factures de [janvier](monthD) [2021](AnnéeD) à [juin](monthF) [2021](AnnéeF) ?
+    - dépenses entre [octobre](monthD) [2023](AnnéeD) et [novembre](monthF) [2023](AnnéeF).
+
+- intent: demande_Facture 
+  examples: |
+    - fournisseur pour cette facture [000126-23](Facture) 
+    - [000267/23](Facture)
+    - facture [000455/23](Facture) ?
+    - cette facture [000484/23](Facture)
 
 - intent: demande_montant_type 
   examples: |
     - [des cartes et systèmes électroniques](type)
-    - les dépenses pour le type [agence de communication](type) ?
-    - les montants pour le type [agence de voyage](type) ?
-    - les details sur [assurance](type)
-    - le montant pour le type [Assurance/Consulting](type) ?
-    - le type [automobile](type) ?
-    - le type [avocat](type) ?
-    - les details sur [banque/assurance](type)
-    - les details sur [bureautique](type)
-    - les details sur [centre dappele](type)
-    - [consulting](type)
-    - le montant pour le type [decoration](type) ?
-    - [domaine electricite](type)
-    - le type [equipement](type) ?
-    - les details sur [equipement Electriques](type)
-    - les dépenses pour le type [équipement pour le bâtiment](type) ?
-    - les details sur [expertise](type)
-    - les montants pour le type [formattion](type) ?
-    - les montants pour le type [industrie](type) ?
-    - les details sur [informatique](type)
-    - le type [kiosque](type) ?
-    - le type [laboratoire](type) ?
-    - le type [mecanique](type) ?
-    - le type [medical](type) ?
-    - les dépenses pour le type [meubles](type) ?
-    - les details sur [société](type)
-    - les montants pour le type [societe de livraison](type) ?
-    - le montant pour le type [societe de vetements](type) ?
-    - les dépenses pour le type [transit](type) ?
-    - le montant pour le type [vente different produit](type) ?
+    - dépenses pour le type [agence de communication](type) ?
+    - montants pour le type [agence de voyage](type) ?
+    - details sur [assurance](type)
+    - [Assurance/Consulting](type) ?
+    - [automobile](type) ?
+    - [avocat](type) ?
+    - [banque/assurance](type) ?
+    - [bureautique](type) ?
+    - [centre d'appel](type) ?
+    - [consulting](type) ?
+    - [decoration](type) ?
+    - [domaine electricite](type) ?
+    - [equipement](type) ?
+    - [equipement Electriques](type) ?
+    - [équipement pour le bâtiment](type) ?
+    - [expertise](type) ?
+    - [formation](type) ?
+    - [industrie](type) ?
+    - [informatique](type) ?
+    - [kiosque](type) ?
+    - [laboratoire](type) ?
+    - [mecanique](type) ?
+    - [medical](type) ?
+    - [meubles](type) ?
+    - [société](type) ?
+    - [societe de livraison](type) ?
+    - [societe de vetements](type) ?
+    - [transit](type) ?
+    - [vente different produit](type) ?
+  
 - intent: demande_montant_fournisseur 
   examples: |
     - [ADHECOM SARL](Fournisseur)
-    - le montant pour le fournisseur [AIRCO](Fournisseur) ?
+    - montant pour le fournisseur [AIRCO](Fournisseur) ?
     - [AL MAADEN](Fournisseur)
-    - le montant pour le fournisseur [AMM](Fournisseur) ?
-    - le montant pour le fournisseur [ARC BUREAUTIQUE](Fournisseur) ?
-    - Combien [ARCHIDOC](Fournisseur)
-    - la facture pour le fournisseur [ASSAD INDUSTRIAL](Fournisseur)
-    - la facture pour le fournisseur [AST AVENIR SERVICE TRANSPORT](Fournisseur)
-    - la facture pour le fournisseur [ATR CORPORATE ET CONSULTING](Fournisseur)
-    - [Avocat Hatem Kourda](Fournisseur)
-    - le montant pour le fournisseur [BAIEXPRESS](Fournisseur) ?
-    - le montant pour [BECHIR FAKHFAKH](Fournisseur) ?
-    - le montant pour le fournisseur [BEST CAR](Fournisseur) ?
-    - [BOUDRANT](Fournisseur)
-    - le montant pour le fournisseur [BTP-EQUIPEMENT](Fournisseur) ?
-    - la facture pour le fournisseur [CABINET BEN CHEIKH HENDA](Fournisseur)
-    - [CAR PRO](Fournisseur)
-    - le montant pour [Cash&Carry](Fournisseur) ?
-    - le montant pour [CDTPR](Fournisseur) ?
-    - [Chiffon d’Essuyage Tunisienne](Fournisseur)
-    - le montant pour [CMG](Fournisseur) ?
-    - [CMVI](Fournisseur)
-    - la facture pour le fournisseur [COMET](Fournisseur)
-    - le montant pour [COREME](Fournisseur) ?
-    - Combien [CREATIVE AD. SCHOOL](Fournisseur)
-    - la facture pour le fournisseur [DELLMANN](Fournisseur)
-    - le montant pour le fournisseur [DELOITTE](Fournisseur) ?
-    - Combien [DIESEL ENERGY](Fournisseur)
-    - le montant pour le fournisseur [Dr. Jamel Darragi](Fournisseur) ?
-    - Combien [EDT](Fournisseur)
-    - le montant pour [ELECSA-TN](Fournisseur) ?
-    - [ELECTROCNIC DESIGN SERVICE  *EDS](Fournisseur)
-    - le montant pour [ELWIFEK FLEXIBLES](Fournisseur) ?
-    - Combien [EQUIPEMENT MODERNE AUTOMOTIVE](Fournisseur)
-    - le montant pour [EQUIPEMENT MODERNE HARDWARE](Fournisseur) ?
-    - Combien [EQUIPEMENTS SOUSSI](Fournisseur)
-    - le montant pour le fournisseur [ETS BEN YOUSSEF](Fournisseur) ?
-    - la facture pour le fournisseur [ETS BERRAIES](Fournisseur)
-    - la facture pour le fournisseur [EURO PARTS](Fournisseur)
-    - la facture pour le fournisseur [EXCELLIA CREANCE](Fournisseur)
-    - le montant pour [GAM](Fournisseur) ?
-    - [GARAGE DU NORD BOURAOUI ZARDI](Fournisseur)
-    - [GAS](Fournisseur)
-    - Combien [GATTOUSSI MECANIQUE GENERALE](Fournisseur)
-    - Combien [GEELEC](Fournisseur)
-    - [GEISER](Fournisseur)
-    - la facture pour le fournisseur [GENERAL RADIATORS](Fournisseur)
-    - [GENERAL TRANSPORT INTERNATIONAL   (GTI)](Fournisseur)
-    - la facture pour le fournisseur [GLAMIVER](Fournisseur)
-    - le montant pour le fournisseur [GLOBAL RECOUVREMENT](Fournisseur) ?
-    - le montant pour [ICAR SA](Fournisseur) ?
-    - le montant pour le fournisseur [IDEAL ORAGANISATION SERVICES](Fournisseur) ?
-    - la facture pour le fournisseur [IDEALE AUTO NEGOCE](Fournisseur)
-    - le montant pour le fournisseur [Industrial Technical Services](Fournisseur) ?
-    - le montant pour [Innovation mécanique industrielle](Fournisseur) ?
-    - le montant pour le fournisseur [INTERNATIONAL TRANSIT](Fournisseur) ?
-    - le montant pour le fournisseur [IRES](Fournisseur) ?
-    - la facture pour le fournisseur [J.M.S PLUS](Fournisseur)
-    - le montant pour [JOUINI ELECTRIQUE INDUSTRIEL](Fournisseur) ?
-    - le montant pour [KAIS DORGHAM MECANIQUE AUTO](Fournisseur) ?
-    - Combien [LA BATTERIE](Fournisseur)
-    - le montant pour le fournisseur [La BATTERIE INDUSTRIELLE](Fournisseur) ?
-    - le montant pour le fournisseur [LA PRECISION T.M.T](Fournisseur) ?
-    - [LE MOTEUR DIESEL](Fournisseur)
-    - la facture pour le fournisseur [LE PROFESSIONNEL](Fournisseur)
-    - [Loogik Interactive](Fournisseur)
-    - la facture pour le fournisseur [LOURD DEPANN](Fournisseur)
-    - la facture pour le fournisseur [MAC BUREAU](Fournisseur)
-    - Combien [Maitre Yahyaoui Mustapha](Fournisseur)
-    - la facture pour le fournisseur [MARE](Fournisseur)
-    - la facture pour le fournisseur [MECANICA DIVISION GROS](Fournisseur)
-    - la facture pour le fournisseur [MEGA NUMERIQUE](Fournisseur)
-    - le montant pour [MEZGHANI PLUS MEUBLES](Fournisseur) ?
-    - le montant pour [MMSE](Fournisseur) ?
-    - [MONDIAL ELECTRIC](Fournisseur)
-    - le montant pour le fournisseur [PEARTECH](Fournisseur) ?
-    - Combien [PIMA](Fournisseur)
-    - le montant pour [POLYCARGO](Fournisseur) ?
-    - la facture pour le fournisseur [QUEEN FORMATION](Fournisseur)
-    - le montant pour [RAPID POSTE](Fournisseur) ?
-    - le montant pour [ROYALTYRE](Fournisseur) ?
-    - Combien [SBIKA PROTECTION](Fournisseur)
-    - le montant pour [SCCM BF](Fournisseur) ?
-    - Combien [SELECT TRAVEL ET TOURS](Fournisseur)
-    - le montant pour [SHOPEX](Fournisseur) ?
-    - le montant pour le fournisseur [SHYK AUTO](Fournisseur) ?
-    - le montant pour [SIMEC](Fournisseur) ?
-    - la facture pour le fournisseur [SINPAR](Fournisseur)
-    - la facture pour le fournisseur [SMART ELECTRIC](Fournisseur)
-    - le montant pour le fournisseur [SMART TACHY](Fournisseur) ?
-    - [SOCAGE](Fournisseur)
-    - [SOCIETE BEN MESSAOUD FRERES](Fournisseur)
-    - [SOCIETE DE MANUTENSION HELALI SARL](Fournisseur)
-    - le montant pour [SOCIETE ELBEZ DISTRIBUTION](Fournisseur) ?
-    - le montant pour le fournisseur [SOCIETE IMPRIMERIE DU CENTRE](Fournisseur) ?
-    - [SOCIETE KACEM ET FILS](Fournisseur)
-    - [SOCIETE PIECES ET MATERIELS  SPM](Fournisseur)
-    - Combien [SODICA](Fournisseur)
-    - Combien [SOGEMAQ](Fournisseur)
-    - [SOREM](Fournisseur)
-    - le montant pour le fournisseur [SOTUFLEX](Fournisseur) ?
-    - [SPAIE](Fournisseur)
-    - [SPIT ENGINS](Fournisseur)
-    - le montant pour le fournisseur [SSG SOCIETE SADRABAAL DE GARDIENNAGE](Fournisseur) ?
-    - la facture pour le fournisseur [SSTM](Fournisseur)
-    - le montant pour le fournisseur [STAFIM](Fournisseur) ?
-    - le montant pour le fournisseur [STAR EQUIPEMENTS](Fournisseur) ?
-    - la facture pour le fournisseur [STATION PNEU CHOUCHA (SPC)](Fournisseur)
-    - [STE ALLO SERVICE REMORQUAGE](Fournisseur)
-    - la facture pour le fournisseur [STE BRAVO DES SERVICES](Fournisseur)
-    - le montant pour [STE BSA](Fournisseur) ?
-    - Combien [STE COSTA RENT A CAR](Fournisseur)
-    - [STE EMEM DU CAPBON](Fournisseur)
-    - [STE GHAMMAM NEGOCE](Fournisseur)
-    - le montant pour le fournisseur [STE JOMAA SA](Fournisseur) ?
-    - le montant pour [STE LE MOTEUR HOUSE](Fournisseur) ?
-    - [STE OTOKAR](Fournisseur)
-    - le montant pour le fournisseur [STE POLY ELECTRIC AKOUDA](Fournisseur) ?
-    - le montant pour [STE POWER PROFESSIONEL TRANSPORT](Fournisseur) ?
-    - Combien [STE T.D.S](Fournisseur)
-    - Combien [STE ZOUHAIR KARRAY SECURITE](Fournisseur)
-    - la facture pour le fournisseur [STPR](Fournisseur)
-    - le montant pour le fournisseur [Stratégie Digitale](Fournisseur) ?
-    - la facture pour le fournisseur [STRPA](Fournisseur)
-    - [SUD METAL](Fournisseur)
-    - la facture pour le fournisseur [TASNIME VOYAGE ET TOURISME](Fournisseur)
-    - le montant pour le fournisseur [Téchnique informatique et bureautique](Fournisseur) ?
-    - [TECHNOMACHINE](Fournisseur)
-    - le montant pour [TOOFAST TECHNIC SERVICE PNEUS](Fournisseur) ?
-    - le montant pour [TOTAL TUNISIE](Fournisseur) ?
-    - le montant pour le fournisseur [TOUDECORS SARL](Fournisseur) ?
-    - la facture pour le fournisseur [TPS](Fournisseur)
-    - le montant pour le fournisseur [UHD](Fournisseur) ?
-    - le montant pour le fournisseur [USP](Fournisseur) ?
-    - le montant pour [VALORIA S.A](Fournisseur) ?
-    - la facture pour le fournisseur [VOGUE DISTRIBUTION](Fournisseur)
-    - la facture pour le fournisseur [ZRIBI MAJDI ARCHITECTE ET EXPERT BATIMENT](Fournisseur)
+    - le fournisseur [AMM](Fournisseur) ?
+    - [ARC BUREAUTIQUE](Fournisseur) ?
+    - [ARCHIDOC](Fournisseur) ?
+    - [ASSAD INDUSTRIAL](Fournisseur) ?
+    - [AST AVENIR SERVICE TRANSPORT](Fournisseur) ?
+    - [ATR CORPORATE ET CONSULTING](Fournisseur) ?
+    - [Avocat Hatem Kourda](Fournisseur) ?
+    - [BAIEXPRESS](Fournisseur) ?
+    - [BECHIR FAKHFAKH](Fournisseur) ?
+    - [BEST CAR](Fournisseur) ?
+    - [BOUDRANT](Fournisseur) ?
+    - [BTP-EQUIPEMENT](Fournisseur) ?
+    - [CABINET BEN CHEIKH HENDA](Fournisseur) ?
+    - [CAR PRO](Fournisseur) ?
+    - [Cash&Carry](Fournisseur) ?
+    - [CDTPR](Fournisseur) ?
+    - [Chiffon d’Essuyage Tunisienne](Fournisseur) ?
+    - [CMG](Fournisseur) ?
+    - [CMVI](Fournisseur) ?
+    - [COMET](Fournisseur) ?
+    - [COREME](Fournisseur) ?
+    - [CREATIVE AD. SCHOOL](Fournisseur) ?
+    - [DELLMANN](Fournisseur) ?
+    - [DELOITTE](Fournisseur) ?
+    - [DIESEL ENERGY](Fournisseur) ?
+    - [Dr. Jamel Darragi](Fournisseur) ?
+    - [EDT](Fournisseur) ?
+    - [ELECSA-TN](Fournisseur) ?
+    - [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) ?
+    - [ELWIFEK FLEXIBLES](Fournisseur) ?
+    - [EQUIPEMENT MODERNE AUTOMOTIVE](Fournisseur) ?
+    - [EQUIPEMENT MODERNE HARDWARE](Fournisseur) ?
+    - [EQUIPEMENTS SOUSSI](Fournisseur) ?
+    - [ETS BEN YOUSSEF](Fournisseur) ?
+    - [ETS BERRAIES](Fournisseur) ?
+    - [EURO PARTS](Fournisseur) ?
+    - [EXCELLIA CREANCE](Fournisseur) ?
+    - [GAM](Fournisseur) ?
+    - [GARAGE DU NORD BOURAOUI ZARDI](Fournisseur) ?
+    - [GAS](Fournisseur) ?
+    - [GATTOUSSI MECANIQUE GENERALE](Fournisseur) ?
+    - [GEELEC](Fournisseur) ?
+    - [GEISER](Fournisseur) ?
+    - [GENERAL RADIATORS](Fournisseur) ?
+    - [GENERAL TRANSPORT INTERNATIONAL](Fournisseur) (GTI)
+    - [GENERALE D'EQUIPEMENTS ELECTRIQUES](Fournisseur) ?
+    - [GLAMIVER](Fournisseur) ?
+    - [GLOBAL RECOUVREMENT](Fournisseur) ?
+    - [ICAR SA](Fournisseur) ?
+    - [IDEAL ORAGANISATION SERVICES](Fournisseur) ?
+    - [IDEALE AUTO NEGOCE](Fournisseur) ?
+    - [Industrial Technical Services](Fournisseur) ?
+    - [Innovation mécanique industrielle](Fournisseur) ?
+    - [INTERNATIONAL TRANSIT](Fournisseur) ?
+    - [IRES](Fournisseur) ?
+    - [J.M.S PLUS](Fournisseur) ?
+    - [JOUINI ELECTRIQUE INDUSTRIEL](Fournisseur) ?
+    - [KAIS DORGHAM MECANIQUE AUTO](Fournisseur) ?
+    - [LA BATTERIE](Fournisseur) ?
+    - [La BATTERIE INDUSTRIELLE](Fournisseur) ?
+    - [LA PRECISION T.M.T](Fournisseur) ?
+    - [LE MOTEUR DIESEL](Fournisseur) ?
+    - [LE PROFESSIONNEL](Fournisseur) ?
+    - [Loogik Interactive](Fournisseur) ?
+    - [LOURD DEPANN](Fournisseur) ?
+    - [MAC BUREAU](Fournisseur) ?
+    - [Maitre Yahyaoui Mustapha](Fournisseur) ?
+    - [MARE](Fournisseur) ?
+    - [MECANICA DIVISION GROS](Fournisseur) ?
+    - [MEGA NUMERIQUE](Fournisseur) ?
+    - [MEZGHANI PLUS MEUBLES](Fournisseur) ?
+    - [MMSE](Fournisseur) ?
+    - [MONDIAL ELECTRIC](Fournisseur) ?
+    - [PEARTECH](Fournisseur) ?
+    - [PIMA](Fournisseur) ?
+    - [POLYCARGO](Fournisseur) ?
+    - [QUEEN FORMATION](Fournisseur) ?
+    - [RAPID POSTE](Fournisseur) ?
+    - [ROYALTYRE](Fournisseur) ?
+    - [SBIKA PROTECTION](Fournisseur) ?
+    - [SCCM BF](Fournisseur) ?
+    - [SELECT TRAVEL ET TOURS](Fournisseur) ?
+    - [SHOPEX](Fournisseur) ?
+    - [SHYK AUTO](Fournisseur) ?
+    - [SIMEC](Fournisseur) ?
+    - [SINPAR](Fournisseur) ?
+    - [SMART ELECTRIC](Fournisseur) ?
+    - [SMART TACHY](Fournisseur) ?
+    - [SOCAGE](Fournisseur) ?
+    - [SOCIETE BEN MESSAOUD FRERES](Fournisseur) ?
+    - [SOCIETE DE MANUTENSION HELALI SARL](Fournisseur) ?
+    - [SOCIETE ELBEZ DISTRIBUTION](Fournisseur) ?
+    - [SOCIETE IMPRIMERIE DU CENTRE](Fournisseur) ?
+    - [SOCIETE KACEM ET FILS](Fournisseur) ?
+    - [SOCIETE PIECES ET MATERIELS SPM](Fournisseur) ?
+    - [SODICA](Fournisseur) ?
+    - [SOGEMAQ](Fournisseur) ?
+    - [SOREM](Fournisseur) ?
+    - [SOTUFLEX](Fournisseur) ?
+    - [SPAIE](Fournisseur) ?
+    - [SPIT ENGINS](Fournisseur) ?
+    - [SSG SOCIETE SADRABAAL DE GARDIENNAGE](Fournisseur) ?
+    - [SSTM](Fournisseur) ?
+    - [STAFIM](Fournisseur) ?
+    - [STAR EQUIPEMENTS](Fournisseur) ?
+    - [STATION PNEU CHOUCHA](Fournisseur) (SPC) ?
+    - [STE ALLO SERVICE REMORQUAGE](Fournisseur) ?
+    - [STE BRAVO DES SERVICES](Fournisseur) ?
+    - [STE BSA](Fournisseur) ?
+    - [STE COSTA RENT A CAR](Fournisseur) ?
+    - [STE EMEM DU CAPBON](Fournisseur) ?
+    - [STE GHAMMAM NEGOCE](Fournisseur) ?
+    - [STE JOMAA SA](Fournisseur) ?
+    - [STE LE MOTEUR HOUSE](Fournisseur) ?
+    - [STE OTOKAR](Fournisseur) ?
+    - [STE POLY ELECTRIC AKOUDA](Fournisseur) ?
+    - [STE POWER PROFESSIONEL TRANSPORT](Fournisseur) ?
+    - [STE T.D.S](Fournisseur) ?
+    - [STE ZOUHAIR KARRAY SECURITE](Fournisseur) ?
+    - [STPR](Fournisseur) ?
+    - [Stratégie Digitale](Fournisseur) ?
+    - [STRPA](Fournisseur) ?
+    - [SUD METAL](Fournisseur) ?
+    - [TASNIME VOYAGE ET TOURISME](Fournisseur) ?
+    - [TECHNIQUE DE L'ELECTRICITE ET SERVICES](Fournisseur) T.E.S. ?
+    - [Téchnique informatique et bureautique](Fournisseur) ?
+    - [TECHNOMACHINE](Fournisseur) ?
+    - [TOOFAST TECHNIC SERVICE PNEUS](Fournisseur) ?
+    - [TOTAL TUNISIE](Fournisseur) ?
+    - [TOUDECORS SARL](Fournisseur) ?
+    - [TPS](Fournisseur) ?
+    - [UHD](Fournisseur) ?
+    - [USP](Fournisseur) ?
+    - [VALORIA S.A](Fournisseur) ?
+    - [VOGUE DISTRIBUTION](Fournisseur) ?
+    - [ZRIBI MAJDI ARCHITECTE ET EXPERT BATIMENT](Fournisseur) ?
+
 - intent: demander_montant_total_fournisseur_mois_annee 
   examples: |
-    - le total des dépenses pour [ADHECOM SARL](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [AIRCO](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [AL MAADEN](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [AMM](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [ARC BUREAUTIQUE](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [ARCHIDOC](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [ASSAD INDUSTRIAL](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [AST AVENIR SERVICE TRANSPORT](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [ATR CORPORATE ET CONSULTING](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [Avocat Hatem Kourda](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [BAIEXPRESS](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [BECHIR FAKHFAKH](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [BEST CAR](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [BOUDRANT](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [BTP-EQUIPEMENT](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [CABINET BEN CHEIKH HENDA](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [CAR PRO](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [Cash&Carry](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [CDTPR](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [Chiffon d’Essuyage Tunisienne](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [CMG](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [CMVI](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [COMET](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [COREME](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [CREATIVE AD. SCHOOL](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [DELLMANN](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [DELOITTE](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [DIESEL ENERGY](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [Dr. Jamel Darragi](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [EDT](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [ELECSA-TN](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [ELECTROCNIC DESIGN SERVICE  *EDS](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [ELWIFEK FLEXIBLES](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [EQUIPEMENT MODERNE AUTOMOTIVE](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [EQUIPEMENT MODERNE HARDWARE](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [EQUIPEMENTS SOUSSI](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [ETS BEN YOUSSEF](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [ETS BERRAIES](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [EURO PARTS](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [EXCELLIA CREANCE](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [GAM](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [GARAGE DU NORD BOURAOUI ZARDI](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [GAS](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [GATTOUSSI MECANIQUE GENERALE](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [GEELEC](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [GEISER](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [GENERAL RADIATORS](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [GENERAL TRANSPORT INTERNATIONAL   (GTI)](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [GLAMIVER](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [GLOBAL RECOUVREMENT](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [ICAR SA](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [IDEAL ORAGANISATION SERVICES](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [IDEALE AUTO NEGOCE](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [Industrial Technical Services](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [Innovation mécanique industrielle](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [INTERNATIONAL TRANSIT](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [IRES](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [J.M.S PLUS](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [JOUINI ELECTRIQUE INDUSTRIEL](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [KAIS DORGHAM MECANIQUE AUTO](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [LA BATTERIE](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [La BATTERIE INDUSTRIELLE](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [LA PRECISION T.M.T](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [LE MOTEUR DIESEL](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [LE PROFESSIONNEL](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [Loogik Interactive](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [LOURD DEPANN](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [MAC BUREAU](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [Maitre Yahyaoui Mustapha](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [MARE](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [MECANICA DIVISION GROS](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [MEGA NUMERIQUE](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [MEZGHANI PLUS MEUBLES](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [MMSE](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [MONDIAL ELECTRIC](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [PEARTECH](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [PIMA](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [POLYCARGO](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [QUEEN FORMATION](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [RAPID POSTE](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [ROYALTYRE](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [SBIKA PROTECTION](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [SCCM BF](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [SELECT TRAVEL ET TOURS](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [SHOPEX](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [SHYK AUTO](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [SIMEC](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [SINPAR](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [SMART ELECTRIC](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [SMART TACHY](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [SOCAGE](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [SOCIETE BEN MESSAOUD FRERES](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [SOCIETE DE MANUTENSION HELALI SARL](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [SOCIETE ELBEZ DISTRIBUTION](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [SOCIETE IMPRIMERIE DU CENTRE](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [SOCIETE KACEM ET FILS](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [SOCIETE PIECES ET MATERIELS  SPM](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [SODICA](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [SOGEMAQ](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [SOREM](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [SOTUFLEX](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [SPAIE](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [SPIT ENGINS](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [SSG SOCIETE SADRABAAL DE GARDIENNAGE](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [SSTM](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [STAFIM](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [STAR EQUIPEMENTS](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [STATION PNEU CHOUCHA (SPC)](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [STE ALLO SERVICE REMORQUAGE](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [STE BRAVO DES SERVICES](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [STE BSA](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [STE COSTA RENT A CAR](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [STE EMEM DU CAPBON](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [STE GHAMMAM NEGOCE](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [STE JOMAA SA](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [STE LE MOTEUR HOUSE](Fournisseur) pour mois [aout](month) [2022](Année)
-    - les montants pour le fournisseur [STE OTOKAR](Fournisseur) pour mois [aout](month) [2022](Année)
-    - le total des dépenses pour [STE POLY ELECTRIC AKOUDA](Fournisseur) en [Mars](month) [2022](Année) ?
-    - Combien on a avec [STE POWER PROFESSIONEL TRANSPORT](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [STE T.D.S](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [STE ZOUHAIR KARRAY SECURITE](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [STPR](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [Stratégie Digitale](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [STRPA](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [SUD METAL](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [TASNIME VOYAGE ET TOURISME](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [Téchnique informatique et bureautique](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [TECHNOMACHINE](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [TOOFAST TECHNIC SERVICE PNEUS](Fournisseur) en [Fevrier](month)?
-    - le total des dépenses pour [TOTAL TUNISIE](Fournisseur) en [Mars](month) [2022](Année) ?
-    - le total des dépenses pour [TOUDECORS SARL](Fournisseur) en [Mars](month) [2022](Année) ?
-    - les montants pour le fournisseur [TPS](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [UHD](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [USP](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [VALORIA S.A](Fournisseur) en [Fevrier](month)?
-    - Combien on a avec [VOGUE DISTRIBUTION](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [ZRIBI MAJDI ARCHITECTE ET EXPERT BATIMENT](Fournisseur) pour mois [aout](month) [2022](Année)
-- intent: demande_Facture 
-  examples: |
-    - le fournisseur pour cette facture [000126-23](Facture) 
-    - [000267/23](Facture)
-    - la facture [000455/23](Facture) ?
-    - cette facture [000484/23](Facture)
-    - la facture [000555/23](Facture) ?
-    - [000594/22](Facture)
-    - fournisseur cette facture [000706-23](Facture) ?
-    - la facture [000713/23](Facture) ?
-    - le fournisseur pour cette facture [000734/23](Facture) 
-    - [000925/23](Facture)
-    - cette facture [000994/23](Facture)
-    - la facture [001038/22](Facture)
-    - la facture [001065/23](Facture)
-    - [001079/23](Facture)
-    - le fournisseur pour cette facture [001143/23](Facture) 
-    - fournisseur cette facture [001440-23](Facture) ?
-    - cette facture [001546/22](Facture)
-    - la facture [001563/22](Facture) ?
-    - le fournisseur pour cette facture [001674/22](Facture) 
-    - fournisseur cette facture [001674/22  10/10](Facture) ?
-    - le fournisseur pour cette facture [001674/22  2/10](Facture) 
-    - cette facture [001674/22  3/10](Facture)
-    - [001674/22  4/10](Facture)
-    - la facture [001674/22  6/10](Facture) ?
-    - cette facture [001674/22  7/10](Facture)
-    - [001674/22  8/10](Facture)
-    - la facture [001674/22  9/10](Facture)
-    - la facture [001674/22 1/10](Facture) ?
-    - la facture [0017/2023](Facture)
-    - fournisseur cette facture [0024/2023](Facture) ?
-    - la facture [0081/2023](Facture)
-    - la facture [0085_2022](Facture)
-    - le fournisseur pour cette facture [009/2023](Facture) 
-    - le fournisseur pour cette facture [01/006773](Facture) 
-    - la facture [01/006796](Facture)
-    - la facture [01/006822](Facture) ?
-    - cette facture [010-23](Facture)
-    - [0132/2023](Facture)
-    - la facture [0158/2023](Facture)
-    - [019/2023](Facture)
-    - la facture [019379/23](Facture) ?
-    - le fournisseur pour cette facture [019458/23](Facture) 
-    - cette facture [019517/23](Facture)
-    - fournisseur cette facture [021/2023](Facture) ?
-    - la facture [023-23](Facture) ?
-    - cette facture [026/2022](Facture)
-    - le fournisseur pour cette facture [02872  4/1](Facture) 
-    - la facture [02872  4/2](Facture) ?
-    - le fournisseur pour cette facture [02872  4/3](Facture) 
-    - fournisseur cette facture [02872  4/4](Facture) ?
-    - cette facture [029/2023](Facture)
-    - fournisseur cette facture [032 2023](Facture) ?
-    - la facture [0325/2023](Facture)
-    - [0327/2023](Facture)
-    - la facture [036 2023](Facture) ?
-    - cette facture [0376/2023](Facture)
-    - la facture [038/2023](Facture) ?
-    - la facture [039 2023](Facture) ?
-    - la facture [039-23](Facture) ?
-    - la facture [04/2022 du 01/12/2022](Facture)
-    - le fournisseur pour cette facture [0438/2022](Facture) 
-    - la facture [045_2023](Facture) ?
-    - fournisseur cette facture [052/2023](Facture) ?
-    - fournisseur cette facture [052-23](Facture) ?
-    - la facture [053-2023](Facture) ?
-    - la facture [0558/2023](Facture) ?
-    - la facture [058/2023](Facture)
-    - la facture [058_2023](Facture)
-    - la facture [073/2023](Facture)
-    - la facture [073_2023](Facture) ?
-    - le fournisseur pour cette facture [082-2023](Facture) 
-    - cette facture [083/2023](Facture)
-    - la facture [088/2023](Facture) ?
-    - la facture [091/2023](Facture)
-    - le fournisseur pour cette facture [099-23](Facture) 
-    - le fournisseur pour cette facture [-1](Facture) 
-    - le fournisseur pour cette facture [-1-](Facture) 
-    - [102](Facture)
-    - la facture [102/2023](Facture) ?
-    - fournisseur cette facture [105/2023](Facture) ?
-    - la facture [1052](Facture)
-    - [113-23](Facture)
-    - [116/2023](Facture)
-    - [1165](Facture)
-    - [119/2023](Facture)
-    - le fournisseur pour cette facture [1197](Facture) 
-    - fournisseur cette facture [12/157/23](Facture) ?
-    - la facture [12/222/23](Facture)
-    - le fournisseur pour cette facture [12/275/23](Facture) 
-    - cette facture [12/300/23](Facture)
-    - fournisseur cette facture [12/301/23](Facture) ?
-    - la facture [12/728/22](Facture)
-    - [12309315](Facture)
-    - la facture [12309317](Facture)
-    - fournisseur cette facture [12309901](Facture) ?
-    - fournisseur cette facture [12310545](Facture) ?
-    - la facture [12310547](Facture)
-    - la facture [12310970](Facture)
-    - fournisseur cette facture [12310972](Facture) ?
-    - fournisseur cette facture [12311507](Facture) ?
-    - [12312108](Facture)
-    - la facture [12312281](Facture)
-    - le fournisseur pour cette facture [12312282](Facture) 
-    - fournisseur cette facture [12312617](Facture) ?
-    - la facture [12312783](Facture) ?
-    - [12313222](Facture)
-    - la facture [12313805](Facture) ?
-    - la facture [12313975](Facture)
-    - la facture [12314039](Facture)
-    - cette facture [12314275](Facture)
-    - la facture [1259](Facture)
-    - la facture [127/2023](Facture) ?
-    - cette facture [1273](Facture)
-    - cette facture [12877-A](Facture)
-    - cette facture [12899-A](Facture)
-    - [1300](Facture)
-    - fournisseur cette facture [13021](Facture) ?
-    - cette facture [13024](Facture)
-    - la facture [13058](Facture)
-    - [13070](Facture)
-    - fournisseur cette facture [1310](Facture) ?
-    - cette facture [132023](Facture)
-    - le fournisseur pour cette facture [1323](Facture) 
-    - la facture [1335](Facture) ?
-    - la facture [135/2023](Facture) ?
-    - la facture [1351](Facture) ?
-    - cette facture [1363](Facture)
-    - la facture [138/2023](Facture) ?
-    - la facture [140/2023](Facture)
-    - la facture [1427](Facture) ?
-    - la facture [143/2023](Facture)
-    - cette facture [1452/2023](Facture)
-    - cette facture [146/2023](Facture)
-    - la facture [15/2023](Facture) ?
-    - le fournisseur pour cette facture [1507](Facture) 
-    - fournisseur cette facture [1508](Facture) ?
-    - cette facture [153-23](Facture)
-    - la facture [1538](Facture) ?
-    - le fournisseur pour cette facture [154/2023](Facture) 
-    - la facture [155/2023](Facture)
-    - la facture [158/2023](Facture)
-    - la facture [159/2023](Facture) ?
-    - [165/2023](Facture)
-    - [1666](Facture)
-    - le fournisseur pour cette facture [1667/2022](Facture) 
-    - la facture [168/2023](Facture)
-    - la facture [1765](Facture) ?
-    - fournisseur cette facture [1807](Facture) ?
-    - fournisseur cette facture [184/11/04/2023](Facture) ?
-    - [185](Facture)
-    - cette facture [185/2023](Facture)
-    - la facture [1859](Facture) ?
-    - la facture [185DU2023](Facture) ?
-    - la facture [187](Facture)
-    - cette facture [1888](Facture)
-    - la facture [19/28/02/2023](Facture)
-    - fournisseur cette facture [19-2023](Facture) ?
-    - cette facture [1929](Facture)
-    - le fournisseur pour cette facture [1930](Facture) 
-    - cette facture [1946](Facture)
-    - le fournisseur pour cette facture [1952](Facture) 
-    - le fournisseur pour cette facture [196-23](Facture) 
-    - le fournisseur pour cette facture [197/2023](Facture) 
-    - le fournisseur pour cette facture [199-23](Facture) 
-    - cette facture [200/2022](Facture)
-    - fournisseur cette facture [200-23](Facture) ?
-    - la facture [201/2022](Facture) ?
-    - la facture [201234](Facture) ?
-    - la facture [201237](Facture) ?
-    - fournisseur cette facture [201238](Facture) ?
-    - la facture [201239](Facture) ?
-    - la facture [201240](Facture) ?
-    - la facture [202/2022](Facture) ?
-    - cette facture [20201389](Facture)
-    - [20-2023](Facture)
-    - [20212062](Facture)
-    - fournisseur cette facture [20212063](Facture) ?
-    - fournisseur cette facture [2022/0132](Facture) ?
-    - la facture [2022/2240](Facture)
-    - [2022/3472](Facture)
-    - cette facture [2022/3477](Facture)
-    - fournisseur cette facture [202200671](Facture) ?
-    - fournisseur cette facture [202200833](Facture) ?
-    - la facture [20220115](Facture) ?
-    - le fournisseur pour cette facture [20220120](Facture) 
-    - fournisseur cette facture [20220121](Facture) ?
-    - la facture [2022016874](Facture)
-    - le fournisseur pour cette facture [2022017282](Facture) 
-    - cette facture [2022017476](Facture)
-    - [202202732](Facture)
-    - la facture [20220576](Facture) ?
-    - cette facture [20222243](Facture)
-    - [2023/0002](Facture)
-    - [2023/0012](Facture)
-    - cette facture [2023/0022](Facture)
-    - [2023/0040](Facture)
-    - la facture [2023/0049](Facture) ?
-    - la facture [2023/0053](Facture)
-    - cette facture [2023/0061](Facture)
-    - la facture [2023/0079](Facture)
-    - la facture [2023/0080](Facture)
-    - la facture [2023/0090](Facture) ?
-    - fournisseur cette facture [2023/0094](Facture) ?
-    - le fournisseur pour cette facture [2023/0095](Facture) 
-    - cette facture [2023/0104](Facture)
-    - la facture [2023/0106](Facture)
-    - la facture [2023/0122](Facture)
-    - fournisseur cette facture [2023/0129](Facture) ?
-    - la facture [2023/0150](Facture)
-    - cette facture [2023/0190](Facture)
-    - la facture [2023/0200](Facture)
-    - la facture [2023/0216](Facture) ?
-    - la facture [2023/0323](Facture) ?
-    - la facture [2023/0537](Facture)
-    - cette facture [2023/0567](Facture)
-    - le fournisseur pour cette facture [2023/0626](Facture) 
-    - cette facture [2023/0627](Facture)
-    - le fournisseur pour cette facture [2023/0642](Facture) 
-    - cette facture [2023/0914](Facture)
-    - la facture [2023/1028](Facture)
-    - [2023/1029](Facture)
-    - la facture [2023/1276](Facture) ?
-    - le fournisseur pour cette facture [2023/12884](Facture) 
-    - cette facture [2023/1317](Facture)
-    - fournisseur cette facture [2023/1446](Facture) ?
-    - [2023/1658](Facture)
-    - la facture [2023/1810](Facture) ?
-    - la facture [2023/2020](Facture)
-    - [2023/2060](Facture)
-    - fournisseur cette facture [2023/2091](Facture) ?
-    - [2023/2092](Facture)
-    - cette facture [2023/2166](Facture)
-    - le fournisseur pour cette facture [2023/2167](Facture) 
-    - fournisseur cette facture [2023/2414](Facture) ?
-    - le fournisseur pour cette facture [2023/2583](Facture) 
-    - la facture [2023/2666](Facture)
-    - la facture [2023/2738](Facture) ?
-    - la facture [2023/2864](Facture)
-    - la facture [2023/2865](Facture) ?
-    - cette facture [2023/2972](Facture)
-    - la facture [2023/3074](Facture)
-    - la facture [2023/3126](Facture)
-    - la facture [2023/3266](Facture)
-    - [2023/3327](Facture)
-    - la facture [2023/3394](Facture) ?
-    - [2023/3448](Facture)
-    - la facture [2023/3525](Facture)
-    - fournisseur cette facture [2023/3733](Facture) ?
-    - [2023000160](Facture)
-    - la facture [2023-000164](Facture) ?
-    - la facture [2023-000273](Facture)
-    - fournisseur cette facture [2023-000353](Facture) ?
-    - fournisseur cette facture [2023000496](Facture) ?
-    - cette facture [2023000718](Facture)
-    - fournisseur cette facture [202300106](Facture) ?
-    - le fournisseur pour cette facture [20230020](Facture) 
-    - le fournisseur pour cette facture [20230021](Facture) 
-    - [20230022](Facture)
-    - la facture [20230031](Facture) ?
-    - cette facture [20230032](Facture)
-    - la facture [202300384](Facture) ?
-    - le fournisseur pour cette facture [202300389](Facture) 
-    - le fournisseur pour cette facture [202300626](Facture) 
-    - fournisseur cette facture [202300649](Facture) ?
-    - fournisseur cette facture [202300763](Facture) ?
-    - la facture [202301204](Facture)
-    - fournisseur cette facture [20230148](Facture) ?
-    - la facture [202301821](Facture)
-    - fournisseur cette facture [20230183](Facture) ?
-    - [202301929](Facture)
-    - le fournisseur pour cette facture [202302023](Facture) 
-    - la facture [2023021](Facture)
-    - le fournisseur pour cette facture [202302234](Facture) 
-    - la facture [202302372](Facture) ?
-    - [2023024](Facture)
-    - [20230301](Facture)
-    - fournisseur cette facture [20230302](Facture) ?
-    - la facture [20230356](Facture) ?
-    - cette facture [20230430](Facture)
-    - la facture [2023047](Facture)
-    - la facture [2023048](Facture) ?
-    - [2023049](Facture)
-    - la facture [20230495](Facture) ?
-    - le fournisseur pour cette facture [20230536](Facture) 
-    - cette facture [2023054](Facture)
-    - cette facture [202306-01](Facture)
-    - le fournisseur pour cette facture [20230611](Facture) 
-    - [2023071](Facture)
-    - [2023072](Facture)
-    - cette facture [2023073](Facture)
-    - le fournisseur pour cette facture [2023092](Facture) 
-    - le fournisseur pour cette facture [2023107](Facture) 
-    - la facture [2023114](Facture)
-    - la facture [2023118](Facture) ?
-    - [2023119](Facture)
-    - cette facture [20231478](Facture)
-    - [20231658](Facture)
-    - la facture [2023169](Facture) ?
-    - fournisseur cette facture [2023174](Facture) ?
-    - fournisseur cette facture [20231886](Facture) ?
-    - fournisseur cette facture [20232973](Facture) ?
-    - cette facture [20233205](Facture)
-    - [20248/23](Facture)
-    - la facture [2031605](Facture) ?
-    - cette facture [2057](Facture)
-    - la facture [20684](Facture) ?
-    - la facture [208/2023](Facture)
-    - fournisseur cette facture [21135/22](Facture) ?
-    - la facture [21-2023](Facture)
-    - fournisseur cette facture [213/2023](Facture) ?
-    - la facture [216](Facture) ?
-    - [217](Facture)
-    - le fournisseur pour cette facture [219](Facture) 
-    - le fournisseur pour cette facture [22/00351](Facture) 
-    - la facture [22/006653](Facture)
-    - [22/006654](Facture)
-    - fournisseur cette facture [22/006815](Facture) ?
-    - cette facture [22/006908](Facture)
-    - fournisseur cette facture [220](Facture) ?
-    - cette facture [2200982](Facture)
-    - la facture [2200994](Facture) ?
-    - la facture [2200996](Facture)
-    - le fournisseur pour cette facture [2201014](Facture) 
-    - fournisseur cette facture [220178](Facture) ?
-    - le fournisseur pour cette facture [220185](Facture) 
-    - la facture [220188](Facture) ?
-    - cette facture [220612/23](Facture)
-    - la facture [221134/22](Facture)
-    - le fournisseur pour cette facture [221136/22](Facture) 
-    - fournisseur cette facture [221137/22](Facture) ?
-    - [221137/22 2/2](Facture)
-    - [221138/22](Facture)
-    - la facture [221139/22](Facture)
-    - fournisseur cette facture [221140/22](Facture) ?
-    - fournisseur cette facture [221141/22](Facture) ?
-    - cette facture [221142/22](Facture)
-    - cette facture [221143/22](Facture)
-    - la facture [221144/22](Facture)
-    - le fournisseur pour cette facture [221145/22](Facture) 
-    - la facture [221150/22](Facture)
-    - la facture [221151/22](Facture) ?
-    - la facture [221152/22](Facture) ?
-    - cette facture [221153/22](Facture)
-    - le fournisseur pour cette facture [221154/22](Facture) 
-    - le fournisseur pour cette facture [221155/22](Facture) 
-    - fournisseur cette facture [221156/23](Facture) ?
-    - cette facture [221162/23](Facture)
-    - [221163/23](Facture)
-    - fournisseur cette facture [221164/23](Facture) ?
-    - la facture [221165/23](Facture)
-    - fournisseur cette facture [221166/23](Facture) ?
-    - [221167/23](Facture)
-    - [221168/23](Facture)
-    - le fournisseur pour cette facture [221169/23](Facture) 
-    - la facture [221170/23](Facture)
-    - [221186/23](Facture)
-    - le fournisseur pour cette facture [221187/23](Facture) 
-    - [221188/23](Facture)
-    - la facture [221189/23](Facture) ?
-    - [221190/23](Facture)
-    - cette facture [221208/23](Facture)
-    - le fournisseur pour cette facture [221210/23](Facture) 
-    - la facture [221211/23](Facture)
-    - la facture [221212/23](Facture) ?
-    - cette facture [221286/23](Facture)
-    - la facture [221287/23](Facture) ?
-    - [221288/23](Facture)
-    - la facture [221289/23](Facture) ?
-    - cette facture [221290/23](Facture)
-    - la facture [221291/23](Facture)
-    - la facture [221305/23](Facture) ?
-    - [221306/23](Facture)
-    - la facture [221307/23](Facture)
-    - fournisseur cette facture [221308/23](Facture) ?
-    - la facture [221309/23](Facture)
-    - [221312/23](Facture)
-    - la facture [221313/23](Facture) ?
-    - cette facture [221321/23](Facture)
-    - [22-2023](Facture)
-    - fournisseur cette facture [2230195](Facture) ?
-    - cette facture [223646](Facture)
-    - [226/2022](Facture)
-    - [227/2022](Facture)
-    - le fournisseur pour cette facture [2281](Facture) 
-    - le fournisseur pour cette facture [2292](Facture) 
-    - la facture [22FA0665](Facture) ?
-    - la facture [22-FC50879](Facture) ?
-    - la facture [22-FCC41573](Facture)
-    - fournisseur cette facture [22-FCC41574](Facture) ?
-    - [22-FCC41575](Facture)
-    - [22-FCC42593](Facture)
-    - cette facture [22-FCC42840](Facture)
-    - le fournisseur pour cette facture [22-FCC42841](Facture) 
-    - fournisseur cette facture [22-FCC50044](Facture) ?
-    - fournisseur cette facture [22-FCC50046](Facture) ?
-    - le fournisseur pour cette facture [22-FCC51964](Facture) 
-    - cette facture [22-FCC51965](Facture)
-    - cette facture [22-FCC51967](Facture)
-    - cette facture [22-FCC51968](Facture)
-    - la facture [22-FCC51969](Facture)
-    - cette facture [22-FCC51995](Facture)
-    - la facture [22-FCC52133](Facture) ?
-    - la facture [22-FCC52134](Facture)
-    - la facture [22-FCC52137](Facture)
-    - le fournisseur pour cette facture [22-FCC52215](Facture) 
-    - [22-FCC52216](Facture)
-    - [22-FCC52406](Facture)
-    - la facture [22-FCC52409](Facture)
-    - [22-FCC52415](Facture)
-    - cette facture [22MEG03566](Facture)
-    - le fournisseur pour cette facture [22MMEG02634](Facture) 
-    - la facture [23/000631](Facture)
-    - [23/000653](Facture)
-    - la facture [23/000722](Facture) ?
-    - fournisseur cette facture [23/000965](Facture) ?
-    - le fournisseur pour cette facture [23/001004](Facture) 
-    - la facture [23/001419](Facture)
-    - la facture [23/001831](Facture)
-    - [23/002194](Facture)
-    - cette facture [23/002544](Facture)
-    - la facture [23/002769](Facture) ?
-    - fournisseur cette facture [23/002771](Facture) ?
-    - [23/002821](Facture)
-    - cette facture [23/002949](Facture)
-    - [23/003484](Facture)
-    - la facture [23/004456](Facture)
-    - fournisseur cette facture [23/004655](Facture) ?
-    - fournisseur cette facture [23/0165](Facture) ?
-    - le fournisseur pour cette facture [23/0308](Facture) 
-    - la facture [23/0309](Facture)
-    - cette facture [23/0379](Facture)
-    - [23/0380](Facture)
-    - fournisseur cette facture [23/0381](Facture) ?
-    - cette facture [23+FVG006875](Facture)
-    - la facture [23+FVGS002623](Facture)
-    - le fournisseur pour cette facture [23+FVGS004412](Facture) 
-    - la facture [23+FVGS005037](Facture)
-    - la facture [23+FVGS005038](Facture) ?
-    - cette facture [23+FVGS005606](Facture)
-    - la facture [23+FVGS006843](Facture) ?
-    - [23+FVGS006873](Facture)
-    - la facture [23+FVGS006874](Facture)
-    - le fournisseur pour cette facture [23+FVGS008055](Facture) 
-    - le fournisseur pour cette facture [23+FVGS008058](Facture) 
-    - le fournisseur pour cette facture [23+FVGS008123](Facture) 
-    - la facture [2300042](Facture)
-    - cette facture [230006](Facture)
-    - fournisseur cette facture [230010](Facture) ?
-    - le fournisseur pour cette facture [230011](Facture) 
-    - fournisseur cette facture [2300112](Facture) ?
-    - le fournisseur pour cette facture [230023](Facture) 
-    - cette facture [230038](Facture)
-    - la facture [230039](Facture)
-    - le fournisseur pour cette facture [230054](Facture) 
-    - le fournisseur pour cette facture [2300676](Facture) 
-    - fournisseur cette facture [230074](Facture) ?
-    - [230075](Facture)
-    - la facture [230076](Facture)
-    - fournisseur cette facture [2300781](Facture) ?
-    - la facture [2300783](Facture) ?
-    - la facture [230084](Facture)
-    - le fournisseur pour cette facture [2301142](Facture) 
-    - cette facture [230131](Facture)
-    - cette facture [230143](Facture)
-    - la facture [230177](Facture)
-    - fournisseur cette facture [230183](Facture) ?
-    - fournisseur cette facture [230184](Facture) ?
-    - fournisseur cette facture [230245](Facture) ?
-    - cette facture [2302715](Facture)
-    - fournisseur cette facture [230579](Facture) ?
-    - [230623](Facture)
-    - le fournisseur pour cette facture [230880](Facture) 
-    - la facture [231204](Facture)
-    - la facture [231205](Facture) ?
-    - la facture [231352](Facture) ?
-    - cette facture [231353](Facture)
-    - cette facture [231577](Facture)
-    - [231787](Facture)
-    - le fournisseur pour cette facture [231833](Facture) 
-    - le fournisseur pour cette facture [232](Facture) 
-    - la facture [232477](Facture) ?
-    - le fournisseur pour cette facture [234403](Facture) 
-    - le fournisseur pour cette facture [234519](Facture) 
-    - le fournisseur pour cette facture [234528](Facture) 
-    - [235059](Facture)
-    - la facture [238.951](Facture)
-    - la facture [23FA0055](Facture)
-    - le fournisseur pour cette facture [23FA0139](Facture) 
-    - fournisseur cette facture [23FA0226](Facture) ?
-    - [23FA0519](Facture)
-    - fournisseur cette facture [23FA0615](Facture) ?
-    - le fournisseur pour cette facture [23FA0685](Facture) 
-    - le fournisseur pour cette facture [23-FCC55166](Facture) 
-    - cette facture [23-FCC55168](Facture)
-    - fournisseur cette facture [23-FCC55444](Facture) ?
-    - [23-FCC56640](Facture)
-    - fournisseur cette facture [23-FCC56641](Facture) ?
-    - cette facture [23-FCC56642](Facture)
-    - [23-FCC56643](Facture)
-    - la facture [23-FCC69566](Facture)
-    - fournisseur cette facture [23-FCC69580](Facture) ?
-    - cette facture [23-FCC69594](Facture)
-    - fournisseur cette facture [23-FCC69595](Facture) ?
-    - [23-FCC69763](Facture)
-    - la facture [23-FCC69764](Facture) ?
-    - fournisseur cette facture [23-FCC70848](Facture) ?
-    - [23FCC70883](Facture)
-    - fournisseur cette facture [23-FCC70885](Facture) ?
-    - le fournisseur pour cette facture [23-FCC70886](Facture) 
-    - fournisseur cette facture [23-FCC70887](Facture) ?
-    - la facture [23-FCC70900](Facture)
-    - le fournisseur pour cette facture [23-FCC70940](Facture) 
-    - fournisseur cette facture [23-FCC70941](Facture) ?
-    - le fournisseur pour cette facture [23-FCC70945](Facture) 
-    - [23-FCC70993](Facture)
-    - la facture [23-FCC71229](Facture)
-    - la facture [23-FCC71230](Facture) ?
-    - la facture [23-FCC71231](Facture)
-    - [23-FCC71269](Facture)
-    - la facture [23-FCC71271](Facture) ?
-    - fournisseur cette facture [23-FCC71476](Facture) ?
-    - la facture [23-FCC71477](Facture) ?
-    - la facture [23-FCC71515](Facture) ?
-    - le fournisseur pour cette facture [23-FVGS007149](Facture) 
-    - la facture [23-FVPR000984](Facture) ?
-    - la facture [23MEG00376](Facture)
-    - [23MEG00486](Facture)
-    - la facture [23MEG00744](Facture) ?
-    - la facture [23MEG02370](Facture) ?
-    - le fournisseur pour cette facture [23MEG02493](Facture) 
-    - le fournisseur pour cette facture [23MEG02776](Facture) 
-    - le fournisseur pour cette facture [23MEG03656](Facture) 
-    - cette facture [23MEG03734](Facture)
-    - fournisseur cette facture [23TSP00087](Facture) ?
-    - le fournisseur pour cette facture [23TSP00119](Facture) 
-    - cette facture [246/05/06/2023](Facture)
-    - le fournisseur pour cette facture [247/2022](Facture) 
-    - [248/2023](Facture)
-    - le fournisseur pour cette facture [2517](Facture) 
-    - la facture [2559](Facture)
-    - fournisseur cette facture [272023](Facture) ?
-    - le fournisseur pour cette facture [2761](Facture) 
-    - la facture [2762](Facture)
-    - fournisseur cette facture [2766](Facture) ?
-    - le fournisseur pour cette facture [2769](Facture) 
-    - fournisseur cette facture [2774](Facture) ?
-    - fournisseur cette facture [2775](Facture) ?
-    - fournisseur cette facture [2776](Facture) ?
-    - cette facture [2780](Facture)
-    - la facture [2786](Facture) ?
-    - [2787](Facture)
-    - la facture [2789](Facture) ?
-    - la facture [2790](Facture) ?
-    - [2805](Facture)
-    - [2806](Facture)
-    - le fournisseur pour cette facture [2807](Facture) 
-    - [2809](Facture)
-    - fournisseur cette facture [2810](Facture) ?
-    - cette facture [2814](Facture)
-    - [2816](Facture)
-    - [2827](Facture)
-    - la facture [2828](Facture)
-    - cette facture [2829](Facture)
-    - la facture [2834](Facture)
-    - le fournisseur pour cette facture [2840](Facture) 
-    - cette facture [29/ 2023](Facture)
-    - fournisseur cette facture [29/2023](Facture) ?
-    - la facture [29/2023 -](Facture)
-    - la facture [2921](Facture) ?
-    - la facture [3000](Facture) ?
-    - la facture [3023](Facture) ?
-    - le fournisseur pour cette facture [30392](Facture) 
-    - la facture [304/2023](Facture)
-    - fournisseur cette facture [322/2023](Facture) ?
-    - [328](Facture)
-    - la facture [331/2023](Facture) ?
-    - le fournisseur pour cette facture [3376](Facture) 
-    - cette facture [3387](Facture)
-    - la facture [3408](Facture) ?
-    - la facture [3425](Facture)
-    - le fournisseur pour cette facture [3447](Facture) 
-    - la facture [3465](Facture)
-    - cette facture [3470](Facture)
-    - le fournisseur pour cette facture [3480](Facture) 
-    - le fournisseur pour cette facture [35/2023](Facture) 
-    - cette facture [350](Facture)
-    - la facture [3503](Facture) ?
-    - cette facture [3508](Facture)
-    - [3523](Facture)
-    - la facture [3528](Facture) ?
-    - [3537](Facture)
-    - [354](Facture)
-    - la facture [354/](Facture) ?
-    - [3549](Facture)
-    - cette facture [355](Facture)
-    - cette facture [36/2022](Facture)
-    - le fournisseur pour cette facture [36/2022 (2/2)](Facture) 
-    - fournisseur cette facture [364](Facture) ?
-    - [365](Facture)
-    - le fournisseur pour cette facture [366](Facture) 
-    - cette facture [37/2023](Facture)
-    - la facture [374](Facture)
-    - [377](Facture)
-    - la facture [383/2023](Facture) ?
-    - la facture [391/2023](Facture)
-    - [393](Facture)
-    - cette facture [393/2023](Facture)
-    - [395/2023](Facture)
-    - [4](Facture)
-    - le fournisseur pour cette facture [40](Facture) 
-    - la facture [40/2023](Facture)
-    - la facture [4005897589](Facture)
-    - la facture [4005898980](Facture) ?
-    - [4005902305](Facture)
-    - fournisseur cette facture [4005906201](Facture) ?
-    - [4005916537](Facture)
-    - fournisseur cette facture [4005922644](Facture) ?
-    - cette facture [4005925724](Facture)
-    - le fournisseur pour cette facture [4005930417](Facture) 
-    - la facture [4005931059](Facture) ?
-    - la facture [4005931060](Facture)
-    - [4005931441](Facture)
-    - la facture [4005938019](Facture)
-    - [4005939383](Facture)
-    - le fournisseur pour cette facture [4005940113](Facture) 
-    - la facture [4005941590](Facture) ?
-    - cette facture [4005945996](Facture)
-    - fournisseur cette facture [4005952355](Facture) ?
-    - [4005955095](Facture)
-    - le fournisseur pour cette facture [40462](Facture) 
-    - [41](Facture)
-    - le fournisseur pour cette facture [43](Facture) 
-    - la facture [437/2023](Facture) ?
-    - la facture [438/2023](Facture)
-    - le fournisseur pour cette facture [439/2023](Facture) 
-    - [448/2023](Facture)
-    - le fournisseur pour cette facture [44927](Facture) 
-    - la facture [44958](Facture) ?
-    - le fournisseur pour cette facture [45078](Facture) 
-    - fournisseur cette facture [477/2023](Facture) ?
-    - cette facture [5](Facture)
-    - fournisseur cette facture [50](Facture) ?
-    - la facture [50416](Facture) ?
-    - cette facture [505](Facture)
-    - le fournisseur pour cette facture [50744](Facture) 
-    - le fournisseur pour cette facture [51165](Facture) 
-    - cette facture [51501](Facture)
-    - la facture [5297/2023](Facture)
-    - [54/2023](Facture)
-    - la facture [55/2023](Facture)
-    - [559](Facture)
-    - [56/2023](Facture)
-    - [57/2023](Facture)
-    - fournisseur cette facture [6](Facture) ?
-    - la facture [63/2023](Facture) ?
-    - la facture [641428/2023/000852](Facture) ?
-    - [647083/2022/000852](Facture)
-    - cette facture [649](Facture)
-    - la facture [66/2023](Facture)
-    - la facture [670](Facture) ?
-    - la facture [68](Facture)
-    - la facture [69/12/09/2023](Facture)
-    - la facture [694](Facture) ?
-    - la facture [696750/2023/0000852](Facture) ?
-    - cette facture [70/2023](Facture)
-    - [7002023](Facture)
-    - cette facture [704](Facture)
-    - [7052023](Facture)
-    - la facture [7092023](Facture) ?
-    - le fournisseur pour cette facture [73/2023](Facture) 
-    - fournisseur cette facture [737](Facture) ?
-    - la facture [739](Facture)
-    - le fournisseur pour cette facture [755](Facture) 
-    - le fournisseur pour cette facture [768](Facture) 
-    - [77/2023](Facture)
-    - le fournisseur pour cette facture [783](Facture) 
-    - [81/2023](Facture)
-    - la facture [846](Facture) ?
-    - la facture [847](Facture)
-    - la facture [848](Facture) ?
-    - [849](Facture)
-    - cette facture [85/2023](Facture)
-    - [850](Facture)
-    - cette facture [850/2023](Facture)
-    - fournisseur cette facture [872](Facture) ?
-    - la facture [88](Facture)
-    - la facture [893](Facture)
-    - fournisseur cette facture [898](Facture) ?
-    - [900](Facture)
-    - [9102302292](Facture)
-    - cette facture [9102303480](Facture)
-    - fournisseur cette facture [9201001308](Facture) ?
-    - la facture [9201001385](Facture)
-    - le fournisseur pour cette facture [9201001446](Facture) 
-    - [9201001570](Facture)
-    - fournisseur cette facture [9201001661](Facture) ?
-    - [9201002111](Facture)
-    - la facture [9201002202](Facture) ?
-    - la facture [94/2023](Facture)
-    - [9401001219](Facture)
-    - [9401001344](Facture)
-    - la facture [9401001389](Facture) ?
-    - [9401001851](Facture)
-    - la facture [941001769](Facture) ?
-    - fournisseur cette facture [958](Facture) ?
-    - fournisseur cette facture [959](Facture) ?
-    - la facture [A202203948](Facture) ?
-    - la facture [A202300397](Facture)
-    - la facture [A202300397 2/3](Facture)
-    - la facture [A202300397 3/3](Facture)
-    - la facture [A202300399A](Facture) ?
-    - [A202301420](Facture)
-    - le fournisseur pour cette facture [A202301421](Facture) 
-    - cette facture [A202302356](Facture)
-    - fournisseur cette facture [A202302701](Facture) ?
-    - le fournisseur pour cette facture [AVRIL 2023](Facture) 
-    - la facture [BL1020360](Facture)
-    - la facture [EDT-23-FCC69596](Facture) ?
-    - la facture [ELS-22FAC1001](Facture) ?
-    - [F TN000628/23](Facture)
-    - la facture [F00853](Facture) ?
-    - la facture [F0191/2023](Facture)
-    - la facture [F20225908](Facture) ?
-    - fournisseur cette facture [F20231441](Facture) ?
-    - cette facture [F20231856](Facture)
-    - la facture [F20232448](Facture)
-    - fournisseur cette facture [F20232968](Facture) ?
-    - fournisseur cette facture [F20233339](Facture) ?
-    - la facture [F20233977](Facture)
-    - cette facture [F20234506](Facture)
-    - fournisseur cette facture [F20234993](Facture) ?
-    - la facture [F2225382](Facture) ?
-    - [F2300023](Facture)
-    - le fournisseur pour cette facture [F230134](Facture) 
-    - cette facture [F2307-00418](Facture)
-    - le fournisseur pour cette facture [F231007](Facture) 
-    - le fournisseur pour cette facture [FA000378](Facture) 
-    - la facture [FA000380](Facture)
-    - [FA000384](Facture)
-    - cette facture [FA000398](Facture)
-    - fournisseur cette facture [FA000399](Facture) ?
-    - la facture [FA000400](Facture) ?
-    - la facture [FA000402](Facture) ?
-    - cette facture [FA000404](Facture)
-    - fournisseur cette facture [FA000405](Facture) ?
-    - fournisseur cette facture [FA000406](Facture) ?
-    - cette facture [FA000410](Facture)
-    - cette facture [FA000431](Facture)
-    - la facture [FA000439](Facture)
-    - fournisseur cette facture [FA000443](Facture) ?
-    - fournisseur cette facture [FA000450](Facture) ?
-    - fournisseur cette facture [FA000454](Facture) ?
-    - le fournisseur pour cette facture [FA0010546](Facture) 
-    - cette facture [FA0010608](Facture)
-    - la facture [FA105601](Facture)
-    - fournisseur cette facture [FA105602](Facture) ?
-    - la facture [FA105637](Facture) ?
-    - fournisseur cette facture [FA105644](Facture) ?
-    - fournisseur cette facture [FA202239](Facture) ?
-    - le fournisseur pour cette facture [FA2023024](Facture) 
-    - la facture [FA22023](Facture) ?
-    - la facture [FA221513](Facture)
-    - la facture [FA221668](Facture) ?
-    - fournisseur cette facture [FA23/0191](Facture) ?
-    - la facture [FA230315](Facture)
-    - la facture [FA230430](Facture)
-    - la facture [FA230841](Facture) ?
-    - le fournisseur pour cette facture [FAB004338](Facture) 
-    - la facture [FAB004468](Facture)
-    - fournisseur cette facture [FAC/2022/1617](Facture) ?
-    - cette facture [FAC/2022/1873](Facture)
-    - cette facture [FAC/2022/2086](Facture)
-    - la facture [FAC/2023/0124](Facture)
-    - [FAC/2023/0285](Facture)
-    - le fournisseur pour cette facture [FAC/2023/1006](Facture) 
-    - fournisseur cette facture [FAC/2023/1164](Facture) ?
-    - la facture [FAC/2023/1333](Facture) ?
-    - fournisseur cette facture [FAC02934](Facture) ?
-    - fournisseur cette facture [FAC230099](Facture) ?
-    - le fournisseur pour cette facture [FACBA23-01373](Facture) 
-    - fournisseur cette facture [FACT-2023/000131](Facture) ?
-    - le fournisseur pour cette facture [FACT-2023/000169](Facture) 
-    - le fournisseur pour cette facture [FACT-2023/000170](Facture) 
-    - cette facture [FACT-2023/000188](Facture)
-    - [FC220328/22](Facture)
-    - le fournisseur pour cette facture [FC232199](Facture) 
-    - [FC4  008](Facture)
-    - [FC4 009](Facture)
-    - la facture [FCC44088](Facture) ?
-    - le fournisseur pour cette facture [FCC44089](Facture) 
-    - [FCC44090](Facture)
-    - cette facture [FCC45499](Facture)
-    - la facture [FCC45500](Facture)
-    - [FCC45501](Facture)
-    - [FCC50047](Facture)
-    - le fournisseur pour cette facture [FCC50049](Facture) 
-    - fournisseur cette facture [FCC50050](Facture) ?
-    - [FCC50051](Facture)
-    - la facture [FCC50052](Facture)
-    - la facture [FCC50055](Facture) ?
-    - la facture [FCC50056](Facture)
-    - le fournisseur pour cette facture [FCC50579](Facture) 
-    - la facture [FCC50580](Facture)
-    - la facture [FCC50581](Facture) ?
-    - fournisseur cette facture [FCC50662](Facture) ?
-    - fournisseur cette facture [FCC51587](Facture) ?
-    - [FCC52497](Facture)
-    - la facture [FCC53444](Facture)
-    - fournisseur cette facture [FCC53544](Facture) ?
-    - le fournisseur pour cette facture [FCC53619](Facture) 
-    - cette facture [FCC53623](Facture)
-    - [FCC53654](Facture)
-    - fournisseur cette facture [FCC53655](Facture) ?
-    - le fournisseur pour cette facture [FCC53656](Facture) 
-    - cette facture [FCC53739](Facture)
-    - cette facture [FCC53984](Facture)
-    - cette facture [FCC53985](Facture)
-    - cette facture [FCC54006](Facture)
-    - la facture [FCC54141](Facture)
-    - le fournisseur pour cette facture [FCC54142](Facture) 
-    - cette facture [FCC69565](Facture)
-    - [FCV2300174](Facture)
-    - [FCV2300661](Facture)
-    - fournisseur cette facture [FEVRIER 2023](Facture) ?
-    - [FT/00024/2023](Facture)
-    - la facture [FT/00107/2023](Facture) ?
-    - cette facture [FT/00192/2023](Facture)
-    - [FT/00546/2023](Facture)
-    - fournisseur cette facture [FT/00641/2023](Facture) ?
-    - fournisseur cette facture [FT/00685/2022](Facture) ?
-    - le fournisseur pour cette facture [FT/00748/2022   3/1](Facture) 
-    - la facture [FT/00748/2022  3/2](Facture) ?
-    - [FT/00748/2022  3/3](Facture)
-    - la facture [FT000349](Facture) ?
-    - cette facture [FT000372](Facture)
-    - [FT000388](Facture)
-    - fournisseur cette facture [FT000449](Facture) ?
-    - [FT000460](Facture)
-    - fournisseur cette facture [FT000461](Facture) ?
-    - [FT000462](Facture)
-    - le fournisseur pour cette facture [FT23/02477](Facture) 
-    - [FT23/02663](Facture)
-    - la facture [FT2300437](Facture) ?
-    - cette facture [FT2300597](Facture)
-    - la facture [FT230386](Facture)
-    - [FTN 000631/23](Facture)
-    - la facture [FTN000173/22](Facture)
-    - [FTN000194/23](Facture)
-    - [FTN000480/23](Facture)
-    - la facture [FTN000635/23](Facture)
-    - fournisseur cette facture [FV/2300409](Facture) ?
-    - [FV1972023](Facture)
-    - fournisseur cette facture [FV210413](Facture) ?
-    - cette facture [FV22/00308](Facture)
-    - [FV22/00319](Facture)
-    - le fournisseur pour cette facture [FV220867](Facture) 
-    - la facture [FV220893](Facture)
-    - le fournisseur pour cette facture [FV220912](Facture) 
-    - fournisseur cette facture [FV220927](Facture) ?
-    - cette facture [FV220939](Facture)
-    - [FV23/00003](Facture)
-    - la facture [FV23/00004](Facture) ?
-    - fournisseur cette facture [FV23/00005](Facture) ?
-    - la facture [FV23/00011](Facture)
-    - la facture [FV23/00013](Facture) ?
-    - fournisseur cette facture [FV23/00034](Facture) ?
-    - fournisseur cette facture [FV23/00060](Facture) ?
-    - le fournisseur pour cette facture [FV23/00106](Facture) 
-    - la facture [FV23/00166](Facture) ?
-    - la facture [FV23/00191](Facture)
-    - fournisseur cette facture [FV23/00192](Facture) ?
-    - cette facture [FV23/00193](Facture)
-    - le fournisseur pour cette facture [FV23/00207](Facture) 
-    - [FV23/00216](Facture)
-    - la facture [FV23/00221](Facture)
-    - [FV23/00228](Facture)
-    - [FV23/00267](Facture)
-    - fournisseur cette facture [FV23/00280](Facture) ?
-    - la facture [FV23/00281](Facture) ?
-    - [FV23/00325](Facture)
-    - fournisseur cette facture [FV23/00327](Facture) ?
-    - le fournisseur pour cette facture [FV23/00332](Facture) 
-    - cette facture [FV23/00333](Facture)
-    - fournisseur cette facture [FV230012](Facture) ?
-    - [FV230022](Facture)
-    - la facture [FV230035](Facture) ?
-    - cette facture [FV230050](Facture)
-    - le fournisseur pour cette facture [FV230085](Facture) 
-    - le fournisseur pour cette facture [FV230100](Facture) 
-    - cette facture [FV230113](Facture)
-    - la facture [FV230231](Facture) ?
-    - la facture [FV230237](Facture)
-    - [FV230275](Facture)
-    - fournisseur cette facture [FV230350](Facture) ?
-    - cette facture [FV230357](Facture)
-    - fournisseur cette facture [FV230411](Facture) ?
-    - la facture [FV230420](Facture)
-    - la facture [FV230457](Facture)
-    - la facture [FV230459](Facture)
-    - [FV230560](Facture)
-    - [FV230564](Facture)
-    - le fournisseur pour cette facture [FV230589](Facture) 
-    - la facture [FV230652](Facture)
-    - la facture [FV230665](Facture) ?
-    - la facture [FV230674](Facture)
-    - fournisseur cette facture [FV230703](Facture) ?
-    - cette facture [FV230730](Facture)
-    - [FV230762](Facture)
-    - le fournisseur pour cette facture [FV230778](Facture) 
-    - la facture [FV230779](Facture) ?
-    - cette facture [FV230780](Facture)
-    - le fournisseur pour cette facture [FV230800](Facture) 
-    - la facture [FV230818](Facture)
-    - [FV230824](Facture)
-    - fournisseur cette facture [FV230828](Facture) ?
-    - [FV230847](Facture)
-    - le fournisseur pour cette facture [FVAV378695](Facture) 
-    - fournisseur cette facture [FVG013597](Facture) ?
-    - la facture [FVG013598](Facture) ?
-    - fournisseur cette facture [FVG013599](Facture) ?
-    - la facture [FVG01360 2/2](Facture)
-    - la facture [FVG013600](Facture)
-    - cette facture [FVG013600 (2/2)](Facture)
-    - fournisseur cette facture [FVG013609](Facture) ?
-    - fournisseur cette facture [FVG013661](Facture) ?
-    - la facture [FVG013662](Facture)
-    - cette facture [FVG013710](Facture)
-    - la facture [FVG013710 (2/2)](Facture)
-    - cette facture [FVG013711](Facture)
-    - [FVG013712](Facture)
-    - le fournisseur pour cette facture [FVG014776](Facture) 
-    - fournisseur cette facture [FVG014789](Facture) ?
-    - la facture [FVG014858](Facture) ?
-    - la facture [FVG014968](Facture) ?
-    - la facture [FVG014969](Facture) ?
-    - le fournisseur pour cette facture [FVG014970](Facture) 
-    - cette facture [FVG015243](Facture)
-    - la facture [FVG015365](Facture)
-    - fournisseur cette facture [FVG015366](Facture) ?
-    - fournisseur cette facture [FVG015367](Facture) ?
-    - cette facture [FVGS000236](Facture)
-    - [FVGS000255](Facture)
-    - [FVGS000554](Facture)
-    - la facture [FVGS000702](Facture)
-    - [FVGS001211](Facture)
-    - cette facture [FVGS001383](Facture)
-    - fournisseur cette facture [FVGS001592](Facture) ?
-    - la facture [FVGS001597](Facture)
-    - la facture [FVGS001598](Facture)
-    - fournisseur cette facture [FVGS007704](Facture) ?
-    - la facture [FVGS007716](Facture) ?
-    - le fournisseur pour cette facture [FVGS007925](Facture) 
-    - le fournisseur pour cette facture [FVGS00886](Facture) 
-    - la facture [FVPR000063](Facture)
-    - [LD04/2023](Facture)
-    - [LD05/2023](Facture)
-    - [LD1005/2022](Facture)
-    - la facture [LD1007/2022](Facture) ?
-    - la facture [LD1008/2023](Facture) ?
-    - la facture [LD1015/2023](Facture)
-    - la facture [LD1017/2022](Facture) ?
-    - [LD1020/2022](Facture)
-    - cette facture [LD1021/2023](Facture)
-    - cette facture [LD1025/2023](Facture)
-    - la facture [LD1027/2023](Facture)
-    - cette facture [LD1029/2022](Facture)
-    - fournisseur cette facture [LD1030/2022](Facture) ?
-    - [LD1033/2023](Facture)
-    - fournisseur cette facture [LD1037](Facture) ?
-    - fournisseur cette facture [LD1040/2022](Facture) ?
-    - [LD1044/2023](Facture)
-    - le fournisseur pour cette facture [LD1050/2023](Facture) 
-    - [LD1052/2022](Facture)
-    - fournisseur cette facture [LD1064/2022](Facture) ?
-    - [LD1083/2022](Facture)
-    - [LD1114/2022](Facture)
-    - fournisseur cette facture [LD1119/2022](Facture) ?
-    - cette facture [LD112/2023](Facture)
-    - cette facture [LD1120/2022](Facture)
-    - [LD1129/2022](Facture)
-    - la facture [LD1139/2022](Facture) ?
-    - [LD1153/2022](Facture)
-    - le fournisseur pour cette facture [LD1154/2022](Facture) 
-    - fournisseur cette facture [LD116/2023](Facture) ?
-    - [LD1170/2022](Facture)
-    - cette facture [LD1172/2022](Facture)
-    - cette facture [LD119/2023](Facture)
-    - fournisseur cette facture [LD12/2023](Facture) ?
-    - la facture [LD122/2023](Facture)
-    - cette facture [LD123/2023](Facture)
-    - la facture [LD125/2023](Facture) ?
-    - la facture [LD13/2023](Facture) ?
-    - la facture [LD142/2023](Facture) ?
-    - cette facture [LD16/2023](Facture)
-    - la facture [LD170/2023](Facture)
-    - la facture [LD176/2023](Facture) ?
-    - [LD182/2023](Facture)
-    - fournisseur cette facture [LD187/2023](Facture) ?
-    - fournisseur cette facture [LD197/2023](Facture) ?
-    - la facture [LD206/2023](Facture)
-    - [LD216/2023](Facture)
-    - fournisseur cette facture [LD233/2023](Facture) ?
-    - la facture [LD256/2023](Facture) ?
-    - fournisseur cette facture [LD270/2023](Facture) ?
-    - la facture [LD280/2023](Facture) ?
-    - la facture [LD283/2023](Facture) ?
-    - la facture [LD294/2023](Facture)
-    - cette facture [LD30/2023](Facture)
-    - [LD301/2023](Facture)
-    - fournisseur cette facture [LD313/2023](Facture) ?
-    - la facture [LD331/2023](Facture) ?
-    - le fournisseur pour cette facture [LD341/2023](Facture) 
-    - la facture [LD342/2023](Facture)
-    - [LD345/2023](Facture)
-    - la facture [LD357/2023](Facture) ?
-    - le fournisseur pour cette facture [LD375/2023](Facture) 
-    - [LD376/2023](Facture)
-    - le fournisseur pour cette facture [LD397/2023](Facture) 
-    - le fournisseur pour cette facture [LD399/2023](Facture) 
-    - fournisseur cette facture [LD40/2023](Facture) ?
-    - [LD414/2023](Facture)
-    - cette facture [LD420/2023](Facture)
-    - la facture [LD43/2023](Facture) ?
-    - le fournisseur pour cette facture [LD433/2023](Facture) 
-    - le fournisseur pour cette facture [LD44/2023](Facture) 
-    - cette facture [LD441/2023](Facture)
-    - fournisseur cette facture [LD450/2023](Facture) ?
-    - cette facture [LD451/2023](Facture)
-    - la facture [LD459/2023](Facture) ?
-    - cette facture [LD47/2023](Facture)
-    - cette facture [LD475/2023](Facture)
-    - la facture [LD483/2023](Facture)
-    - la facture [LD486/2023](Facture)
-    - cette facture [LD488/2023](Facture)
-    - le fournisseur pour cette facture [LD489/2023](Facture) 
-    - la facture [LD497/2023](Facture)
-    - le fournisseur pour cette facture [LD504/2023](Facture) 
-    - fournisseur cette facture [LD525/2023](Facture) ?
-    - la facture [LD53/2023](Facture)
-    - fournisseur cette facture [LD542/2023](Facture) ?
-    - fournisseur cette facture [LD544/2023](Facture) ?
-    - cette facture [LD547/2023](Facture)
-    - la facture [LD548/2023](Facture)
-    - cette facture [LD55/2023](Facture)
-    - [LD579/2023](Facture)
-    - le fournisseur pour cette facture [LD58/2023](Facture) 
-    - fournisseur cette facture [LD607/2023](Facture) ?
-    - [LD640/2023](Facture)
-    - le fournisseur pour cette facture [LD678/2023](Facture) 
-    - [LD683/2023](Facture)
-    - [LD688/2023](Facture)
-    - la facture [LD71/2023](Facture) ?
-    - cette facture [LD714/2023](Facture)
-    - [LD716/2023](Facture)
-    - le fournisseur pour cette facture [LD727/2023](Facture) 
-    - la facture [LD737/2023](Facture)
-    - le fournisseur pour cette facture [LD752/2023](Facture) 
-    - le fournisseur pour cette facture [LD771/2023](Facture) 
-    - fournisseur cette facture [LD830/2023](Facture) ?
-    - [LD862/2023](Facture)
-    - fournisseur cette facture [LD868/2023](Facture) ?
-    - le fournisseur pour cette facture [LD871/2023](Facture) 
-    - la facture [LD887/2023](Facture) ?
-    - le fournisseur pour cette facture [LD896/2023](Facture) 
-    - [LD903/2023](Facture)
-    - la facture [LD941/2023](Facture) ?
-    - la facture [LD966/2023](Facture) ?
-    - la facture [LD969/2023](Facture)
-    - la facture [LD985/2023](Facture)
-    - la facture [LD987/2023](Facture) ?
-    - [LD998/2023](Facture)
-    - fournisseur cette facture [lLD750/2023](Facture) ?
-    - la facture [MAIS 2023](Facture)
-    - fournisseur cette facture [MB-23+FVGS000487](Facture) ?
-    - [MB-23+FVGS003871](Facture)
-    - [MB-23+FVGS005176](Facture)
-    - le fournisseur pour cette facture [MB-23+FVGS005585](Facture) 
-    - la facture [MB-23+FVGS006480²](Facture)
-    - [MB-23+FVGS006844](Facture)
-    - cette facture [MB-23+FVGS006845](Facture)
-    - la facture [ME/17/8576  1/3](Facture) ?
-    - la facture [ME/17/8576  2/3](Facture) ?
-    - la facture [ME/17/8576  3/3](Facture)
-    - cette facture [ME/18/0098 2/1](Facture)
-    - la facture [ME/18/0098 2/2](Facture) ?
-    - [ME/18/0345  1/2](Facture)
-    - fournisseur cette facture [ME/18/0345  2/2](Facture) ?
-    - la facture [ME/18/0649](Facture)
-    - cette facture [ME/18/0892](Facture)
-    - le fournisseur pour cette facture [ME/18/1206](Facture) 
-    - fournisseur cette facture [ME/18/2395](Facture) ?
-    - cette facture [ME/18/2477](Facture)
-    - la facture [MOIS DE MARS](Facture) ?
-    - [NA-23+FVGSAV00719](Facture)
-    - fournisseur cette facture [NOTE DE DEBIT N°03/2022](Facture) ?
-    - [REL](Facture)
-    - le fournisseur pour cette facture [SF230007](Facture) 
-    - cette facture [SF230063](Facture)
-    - la facture [SF230752](Facture)
-    - la facture [SF230851](Facture) ?
-    - le fournisseur pour cette facture [SF230981](Facture) 
-    - fournisseur cette facture [SMFAC+22/3683](Facture) ?
-    - la facture [SMFAC+22/3774](Facture) ?
-    - le fournisseur pour cette facture [SMFAC+22/3776](Facture) 
-    - [SMFAC+22/3869](Facture)
-    - fournisseur cette facture [SMFAC+22/3870](Facture) ?
-    - fournisseur cette facture [SMFAC+22/3948](Facture) ?
-    - [SMFAC+22/3961](Facture)
-    - fournisseur cette facture [SMFAC+22/4026](Facture) ?
-    - le fournisseur pour cette facture [SMFAC+22/4027](Facture) 
-    - la facture [SMFAC+22/4157](Facture)
-    - la facture [SMFAC+22/4188](Facture)
-    - la facture [SMFAC+22/4191](Facture) ?
-    - la facture [SMFAC+22/4752](Facture) ?
-    - cette facture [SMFAC+22/4838](Facture)
-    - [SMFAC+22/4900](Facture)
-    - cette facture [SMFAC+22/4901](Facture)
-    - la facture [SMFAC+22/4902](Facture) ?
-    - fournisseur cette facture [SMFAC+22/4933](Facture) ?
-    - la facture [SMFAC+22/4934](Facture)
-    - [SMFAC+22/4935](Facture)
-    - la facture [SMFAC+22/4936](Facture)
-    - cette facture [SMFAC+22/4961](Facture)
-    - cette facture [SMFAC+22/5046](Facture)
-    - le fournisseur pour cette facture [SMFAC+22/5058](Facture) 
-    - fournisseur cette facture [SMFAC+22/5093](Facture) ?
-    - fournisseur cette facture [SMFAC+23/0115](Facture) ?
-    - le fournisseur pour cette facture [SMFAC+23/0202](Facture) 
-    - la facture [SMFAC+23/0211](Facture)
-    - la facture [SMFAC+23/0322](Facture) ?
-    - la facture [SMFAC+23/0325](Facture) ?
-    - la facture [SMFAC+23/0488](Facture) ?
-    - la facture [SMFAC+23/0591](Facture) ?
-    - la facture [SMFAC+23/0592](Facture)
-    - fournisseur cette facture [SMFAC+23/2734](Facture) ?
-    - [SMFAC+23/2828](Facture)
-    - la facture [SMFAC+23/3363](Facture) ?
-    - le fournisseur pour cette facture [SMFAC+23/3530](Facture) 
-    - cette facture [SMFAC+23/3632](Facture)
-    - cette facture [SYS-2023](Facture)
-    - la facture [USP-23-FCC55167](Facture) ?
-    - la facture [V+FACT22/0440](Facture) ?
-    - cette facture [V+FACT22/0441](Facture)
+    - total des dépenses pour [ADHECOM SARL](Fournisseur) en [Mars](month) [2022](Année) ?
+    - montants pour le fournisseur [AIRCO](Fournisseur) pour mois [aout](month) [2022](Année)
+    - Combien on a avec [AL MAADEN](Fournisseur) en [Fevrier](month)?
+    - [AMM](Fournisseur) en [Avril](month) [2023](Année) ?
+    - [ARC BUREAUTIQUE](Fournisseur) en [Mai](month) [2023](Année) ?
+    - [ARCHIDOC](Fournisseur) en [Juin](month) [2023](Année) ?
+    - [ASSAD INDUSTRIAL](Fournisseur) en [Juillet](month) [2023](Année) ?
+    - [AST AVENIR SERVICE TRANSPORT](Fournisseur) en [Août](month) [2023](Année) ?
+    - [ATR CORPORATE ET CONSULTING](Fournisseur) en [Septembre](month) [2023](Année) ?
+    - [Avocat Hatem Kourda](Fournisseur) en [Octobre](month) [2023](Année) ?
+    - [BAIEXPRESS](Fournisseur) en [Novembre](month) [2023](Année) ?
+    - [BECHIR FAKHFAKH](Fournisseur) en [Décembre](month) [2023](Année) ?
+    - [BEST CAR](Fournisseur) en [Janvier](month) [2024](Année) ?
+    - [BOUDRANT](Fournisseur) en [Février](month) [2024](Année) ?
+    - [BTP-EQUIPEMENT](Fournisseur) en [Mars](month) [2024](Année) ?
+    - [CABINET BEN CHEIKH HENDA](Fournisseur) en [Avril](month) [2024](Année) ?
+    - [CAR PRO](Fournisseur) en [Mai](month) [2024](Année) ?
+    - [Cash&Carry](Fournisseur) en [Juin](month) [2024](Année) ?
+    - [CDTPR](Fournisseur) en [Juillet](month) [2024](Année) ?
+    - [Chiffon d’Essuyage Tunisienne](Fournisseur) en [Août](month) [2024](Année) ?
+    - [CMG](Fournisseur) en [Septembre](month) [2024](Année) ?
+    - [CMVI](Fournisseur) en [Octobre](month) [2024](Année) ?
+    - [COMET](Fournisseur) en [Novembre](month) [2024](Année) ?
+    - [COREME](Fournisseur) en [Décembre](month) [2024](Année) ?
+    - [CREATIVE AD. SCHOOL](Fournisseur) en [Janvier](month) [2025](Année) ?
+    - [DELLMANN](Fournisseur) en [Février](month) [2025](Année) ?
+    - [DELOITTE](Fournisseur) en [Mars](month) [2025](Année) ?
+    - [DIESEL ENERGY](Fournisseur) en [Avril](month) [2025](Année) ?
+    - [Dr. Jamel Darragi](Fournisseur) en [Mai](month) [2025](Année) ?
+    - [EDT](Fournisseur) en [Juin](month) [2025](Année) ?
+    - [ELECSA-TN](Fournisseur) en [Juillet](month) [2025](Année) ?
+    - [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) en [Août](month) [2025](Année) ?
+    - [ELWIFEK FLEXIBLES](Fournisseur) en [Septembre](month) [2025](Année) ?
+    - [EQUIPEMENT MODERNE AUTOMOTIVE](Fournisseur) en [Octobre](month) [2025](Année) ?
+    - [EQUIPEMENT MODERNE HARDWARE](Fournisseur) en [Novembre](month) [2025](Année) ?
+    - [EQUIPEMENTS SOUSSI](Fournisseur) en [Décembre](month) [2025](Année) ?
+    - [ETS BEN YOUSSEF](Fournisseur) en [Janvier](month) [2026](Année) ?
+    - [ETS BERRAIES](Fournisseur) en [Février](month) [2026](Année) ?
+    - [EURO PARTS](Fournisseur) en [Mars](month) [2026](Année) ?
+    - [EXCELLIA CREANCE](Fournisseur) en [Avril](month) [2026](Année) ?
+    - [GAM](Fournisseur) en [Mai](month) [2026](Année) ?
+    - [GARAGE DU NORD BOURAOUI ZARDI](Fournisseur) en [Juin](month) [2026](Année) ?
+    - [GAS](Fournisseur) en [Juillet](month) [2026](Année) ?
+    - [GATTOUSSI MECANIQUE GENERALE](Fournisseur) en [Août](month) [2026](Année) ?
+    - [GEELEC](Fournisseur) en [Septembre](month) [2026](Année) ?
+    - [GEISER](Fournisseur) en [Octobre](month) [2026](Année) ?
+    - [GENERAL RADIATORS](Fournisseur) en [Novembre](month) [2026](Année) ?
+    - [GENERAL TRANSPORT INTERNATIONAL](Fournisseur) (GTI) en [Décembre](month) [2026](Année) ?
+    - [GENERALE D'EQUIPEMENTS ELECTRIQUES](Fournisseur) en [Janvier](month) [2027](Année) ?
+    - [GLAMIVER](Fournisseur) en [Février](month) [2027](Année) ?
+    - [GLOBAL RECOUVREMENT](Fournisseur) en [Mars](month) [2027](Année) ?
+    - [ICAR SA](Fournisseur) en [Avril](month) [2027](Année) ?
+    - [IDEAL ORAGANISATION SERVICES](Fournisseur) en [Mai](month) [2027](Année) ?
+    - [IDEALE AUTO NEGOCE](Fournisseur) en [Juin](month) [2027](Année) ?
+    - [Industrial Technical Services](Fournisseur) en [Juillet](month) [2027](Année) ?
+    - [Innovation mécanique industrielle](Fournisseur) en [Août](month) [2027](Année) ?
+    - [INTERNATIONAL TRANSIT](Fournisseur) en [Septembre](month) [2027](Année) ?
+    - [IRES](Fournisseur) en [Octobre](month) [2027](Année) ?
+    - [J.M.S PLUS](Fournisseur) en [Novembre](month) [2027](Année) ?
+    - [JOUINI ELECTRIQUE INDUSTRIEL](Fournisseur) en [Décembre](month) [2027](Année) ?
+    - [KAIS DORGHAM MECANIQUE AUTO](Fournisseur) en [Janvier](month) [2028](Année) ?
+    - [LA BATTERIE](Fournisseur) en [Février](month) [2028](Année) ?
+    - [La BATTERIE INDUSTRIELLE](Fournisseur) en [Mars](month) [2028](Année) ?
+    - [LA PRECISION T.M.T](Fournisseur) en [Avril](month) [2028](Année) ?
+    - [LE MOTEUR DIESEL](Fournisseur) en [Mai](month) [2028](Année) ?
+    - [LE PROFESSIONNEL](Fournisseur) en [Juin](month) [2028](Année) ?
+    - [Loogik Interactive](Fournisseur) en [Juillet](month) [2028](Année) ?
+    - [LOURD DEPANN](Fournisseur) en [Août](month) [2028](Année) ?
+    - [MAC BUREAU](Fournisseur) en [Septembre](month) [2028](Année) ?
+    - [Maitre Yahyaoui Mustapha](Fournisseur) en [Octobre](month) [2028](Année) ?
+    - [MARE](Fournisseur) en [Novembre](month) [2028](Année) ?
+    - [MECANICA DIVISION GROS](Fournisseur) en [Décembre](month) [2028](Année) ?
+    - [MEGA NUMERIQUE](Fournisseur) en [Janvier](month) [2029](Année) ?
+    - [MEZGHANI PLUS MEUBLES](Fournisseur) en [Février](month) [2029](Année) ?
+    - [MMSE](Fournisseur) en [Mars](month) [2029](Année) ?
+    - [MONDIAL ELECTRIC](Fournisseur) en [Avril](month) [2029](Année) ?
+    - [PEARTECH](Fournisseur) en [Mai](month) [2029](Année) ?
+    - [PIMA](Fournisseur) en [Juin](month) [2029](Année) ?
+    - [POLYCARGO](Fournisseur) en [Juillet](month) [2029](Année) ?
+    - [QUEEN FORMATION](Fournisseur) en [Août](month) [2029](Année) ?
+    - [RAPID POSTE](Fournisseur) en [Septembre](month) [2029](Année) ?
+    - [ROYALTYRE](Fournisseur) en [Octobre](month) [2029](Année) ?
+    - [SBIKA PROTECTION](Fournisseur) en [Novembre](month) [2029](Année) ?
+    - [SCCM BF](Fournisseur) en [Décembre](month) [2029](Année) ?
+    - [SELECT TRAVEL ET TOURS](Fournisseur) en [Janvier](month) [2030](Année) ?
+    - [SHOPEX](Fournisseur) en [Février](month) [2030](Année) ?
+    - [SHYK AUTO](Fournisseur) en [Mars](month) [2030](Année) ?
+    - [SIMEC](Fournisseur) en [Avril](month) [2030](Année) ?
+    - [SINPAR](Fournisseur) en [Mai](month) [2030](Année) ?
+    - [SMART ELECTRIC](Fournisseur) en [Juin](month) [2030](Année) ?
+    - [SMART TACHY](Fournisseur) en [Juillet](month) [2030](Année) ?
+    - [SOCAGE](Fournisseur) en [Août](month) [2030](Année) ?
+    - [SOCIETE BEN MESSAOUD FRERES](Fournisseur) en [Septembre](month) [2030](Année) ?
+    - [SOCIETE DE MANUTENSION HELALI SARL](Fournisseur) en [Octobre](month) [2030](Année) ?
+    - [SOCIETE ELBEZ DISTRIBUTION](Fournisseur) en [Novembre](month) [2030](Année) ?
+    - [SOCIETE IMPRIMERIE DU CENTRE](Fournisseur) en [Décembre](month) [2030](Année) ?
+    - [SOCIETE KACEM ET FILS](Fournisseur) en [Janvier](month) [2031](Année) ?
+    - [SOCIETE PIECES ET MATERIELS SPM](Fournisseur) en [Février](month) [2031](Année) ?
+    - [SODICA](Fournisseur) en [Mars](month) [2031](Année) ?
+    - [SOGEMAQ](Fournisseur) en [Avril](month) [2031](Année) ?
+    - [SOREM](Fournisseur) en [Mai](month) [2031](Année) ?
+    - [SOTUFLEX](Fournisseur) en [Juin](month) [2031](Année) ?
+    - [SPAIE](Fournisseur) en [Juillet](month) [2031](Année) ?
+    - [SPIT ENGINS](Fournisseur) en [Août](month) [2031](Année) ?
+    - [SSG SOCIETE SADRABAAL DE GARDIENNAGE](Fournisseur) en [Septembre](month) [2031](Année) ?
+    - [SSTM](Fournisseur) en [Octobre](month) [2031](Année) ?
+    - [STAFIM](Fournisseur) en [Novembre](month) [2031](Année) ?
+    - [STAR EQUIPEMENTS](Fournisseur) en [Décembre](month) [2031](Année) ?
+    - [STATION PNEU CHOUCHA](Fournisseur) (SPC) en [Janvier](month) [2032](Année) ?
+    - [STE ALLO SERVICE REMORQUAGE](Fournisseur) en [Février](month) [2032](Année) ?
+    - [STE BRAVO DES SERVICES](Fournisseur) en [Mars](month) [2032](Année) ?
+    - [STE BSA](Fournisseur) en [Avril](month) [2032](Année) ?
+    - [STE COSTA RENT A CAR](Fournisseur) en [Mai](month) [2032](Année) ?
+    - [STE EMEM DU CAPBON](Fournisseur) en [Juin](month) [2032](Année) ?
+    - [STE GHAMMAM NEGOCE](Fournisseur) en [Juillet](month) [2032](Année) ?
+    - [STE JOMAA SA](Fournisseur) en [Août](month) [2032](Année) ?
+    - [STE LE MOTEUR HOUSE](Fournisseur) en [Septembre](month) [2032](Année) ?
+    - [STE OTOKAR](Fournisseur) en [Octobre](month) [2032](Année) ?
+    - [STE POLY ELECTRIC AKOUDA](Fournisseur) en [Novembre](month) [2032](Année) ?
+    - [STE POWER PROFESSIONEL TRANSPORT](Fournisseur) en [Décembre](month) [2032](Année) ?
+    - [STE T.D.S](Fournisseur) en [Janvier](month) [2033](Année) ?
+    - [STE ZOUHAIR KARRAY SECURITE](Fournisseur) en [Février](month) [2033](Année) ?
+    - [STPR](Fournisseur) en [Mars](month) [2033](Année) ?
+    - [Stratégie Digitale](Fournisseur) en [Avril](month) [2033](Année) ?
+    - [STRPA](Fournisseur) en [Mai](month) [2033](Année) ?
+    - [SUD METAL](Fournisseur) en [Juin](month) [2033](Année) ?
+    - [TASNIME VOYAGE ET TOURISME](Fournisseur) en [Juillet](month) [2033](Année) ?
+    - [TECHNIQUE DE L'ELECTRICITE ET SERVICES](Fournisseur) T.E.S. en [Août](month) [2033](Année) ?
+    - [Téchnique informatique et bureautique](Fournisseur) en [Septembre](month) [2033](Année) ?
+    - [TECHNOMACHINE](Fournisseur) en [Octobre](month) [2033](Année) ?
+    - [TOOFAST TECHNIC SERVICE PNEUS](Fournisseur) en [Novembre](month) [2033](Année) ?
+    - [TOTAL TUNISIE](Fournisseur) en [Décembre](month) [2033](Année) ?
+    - [TOUDECORS SARL](Fournisseur) en [Janvier](month) [2034](Année) ?
+    - [TPS](Fournisseur) en [Février](month) [2034](Année) ?
+    - [UHD](Fournisseur) en [Mars](month) [2034](Année) ?
+    - [USP](Fournisseur) en [Avril](month) [2034](Année) ?
+    - [VALORIA S.A](Fournisseur) en [Mai](month) [2034](Année) ?
+    - [VOGUE DISTRIBUTION](Fournisseur) en [Juin](month) [2034](Année) ?
+    - [ZRIBI MAJDI ARCHITECTE ET EXPERT BATIMENT](Fournisseur) en [Juillet](month) [2034](Année) ?
+
+
+

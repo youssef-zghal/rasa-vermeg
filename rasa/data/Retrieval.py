@@ -112,12 +112,12 @@ def main():
 
     def generate_nlu_contentType(elements):
         formulations = [
-            "le montant pour le type [{element}](type) ?",
-            "les dépenses pour le type [{element}](type) ?",
-            "les montants pour le type [{element}](type) ?",
-            "le type [{element}](type) ?",
+            "montant pour le type [{element}](type) ?",
+            "dépenses pour le type [{element}](type) ?",
+            "montants pour le type [{element}](type) ?",
+            "type [{element}](type) ?",
             "[{element}](type)",
-            "les details sur [{element}](type)",
+            "details sur [{element}](type)",
         ]
     
         
@@ -129,16 +129,16 @@ def main():
 
     def generate_nlu_contentFournisseur(elements):
         formulations = [
-            "le montant pour le fournisseur [{element}](Fournisseur) ?",
-            "le montant pour [{element}](Fournisseur) ?",
+            "montant pour le fournisseur [{element}](Fournisseur) ?",
+            "montant pour [{element}](Fournisseur) ?",
             "Combien [{element}](Fournisseur)",
             "[{element}](Fournisseur)",
-            "la facture pour le fournisseur [{element}](Fournisseur)",
+            "facture pour le fournisseur [{element}](Fournisseur)",
         ]
         formulations2=[
-            "le total des dépenses pour [{element}](Fournisseur) en [Mars](month) [2022](Année) ?"   ,
+            "total des dépenses pour [{element}](Fournisseur) en [Mars](month) [2022](Année) ?"   ,
             "Combien on a avec [{element}](Fournisseur) en [Fevrier](month)?",
-            "les montants pour le fournisseur [{element}](Fournisseur) pour mois [aout](month) [2022](Année)",
+            "montants pour le fournisseur [{element}](Fournisseur) pour mois [aout](month) [2022](Année)",
         ]
         
         content = "- intent: demande_montant_fournisseur \n  examples: |\n"
@@ -158,11 +158,11 @@ def main():
     def generate_nlu_contentFacture(elements):
         formulations = [
             "fournisseur cette facture [{element}](Facture) ?",
-            "la facture [{element}](Facture) ?",
+            "facture [{element}](Facture) ?",
             "cette facture [{element}](Facture)",
             "[{element}](Facture)",
-            "le fournisseur pour cette facture [{element}](Facture) ",
-            "la facture [{element}](Facture)",
+            "fournisseur pour cette facture [{element}](Facture) ",
+            "facture [{element}](Facture)",
 
         ]
         
