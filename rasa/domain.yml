@@ -6,10 +6,9 @@ intents:
 - Montant_sup
 - Montant_total_fournisseur
 - afficher_montants_etat_Prêt_pour_paiement_date
-- afficher_montants_etat_créé_date
+- afficher_montants_etat_cree_date
 - afficher_montants_etat_validees_date
 - ask_type
-- ask_type_by_amount
 - bye
 - demande_Facture
 - demande_Less_fournisseurs
@@ -25,16 +24,16 @@ intents:
 - inform_Type_count
 - inform_facture_count
 - inform_fournisseur_count
-- informer_etat_créé
+- informer_etat_cree
 - informer_etat_prêt_pour_paiement
-- informer_etat_validé
-- montant_par_date
+- informer_etat_valide
 - obtenir_montant_total_facture
 - obtenir_montant_total_pluriannuel
 - obtenir_total_Deux_mois
 - obtenir_total_Jusquau_mois
 - salutation
-- obtenir_factures_entre_dates
+# - montant_par_date
+# - obtenir_factures_entre_dates
 # - intervalle_par_date
 # - Reference
 # - affirm
@@ -48,11 +47,11 @@ intents:
 entities:
 - monthF
 - monthD
-- Année
+- Annee
 - Fournisseur
 - month
-- AnnéeF
-- AnnéeD
+- AnneeF
+- AnneeD
 - number
 - text
 - date
@@ -65,7 +64,14 @@ entities:
 - Jour
 - JourD
 - JourF
+- fournisseur_reconnu
 slots:
+  fournisseur_reconnu:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: fournisseur_reconnu
   start_date:
     type: text
     influence_conversation: true
@@ -82,8 +88,8 @@ slots:
     type: categorical
     influence_conversation: true
     values:
-    - Validé
-    - Créé
+    - Valide
+    - Cree
     - Prêt pour paiement
     mappings:
     - type: from_entity
@@ -160,72 +166,72 @@ slots:
     mappings:
     - type: from_entity
       entity: monthF
-  Année:
+  Annee:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
-      entity: Année
-  AnnéeD:
+      entity: Annee
+  AnneeD:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
-      entity: AnnéeD
-  AnnéeF:
+      entity: AnneeD
+  AnneeF:
     type: text
     influence_conversation: true
     mappings:
     - type: from_entity
-      entity: AnnéeF
+      entity: AnneeF
 responses:
-  utter_salutation:
-  - text: |-
-      Bonjour Je suis InvoiceBOT powered by Vermeg.
+  # utter_salutation:
+  # - text: |-
+  #     Bonjour Je suis InvoiceBOT powered by Vermeg.
 
-      je suis prêt à vous aider!
+  #     je suis prêt à vous aider!
   utter_bye:
-  - text: 'Au revoir, content de vous avoir aidé! '
+  - text: 'Au revoir, content de vous avoir aide! '
   utter_Reference:
   - text: la reference pour le fornisseur {Fournisseur} est {Reference}.
   utter_montant:
-  - text: Le montant de la facture qui a une reference {Référence} est de {montant}.
+  - text: Le montant de la facture qui a une reference {Reference} est de {montant}.
   utter_inf:
-  - text: Les montants inférieurs à celui que tu as indiqué sont:{montant}
+  - text: Les montants inferieurs à celui que tu as indique sont:{montant}
   utter_sup:
-  - text: Les montants superieur à celui que tu as indiqué sont:{montant}
+  - text: Les montants superieur à celui que tu as indique sont:{montant}
   utter_egal:
-  - text: Les montants égal à celui que tu as indiqué sont:{montant}
+  - text: Les montants egal à celui que tu as indique sont:{montant}
   utter_next_Montant_Total_Par_Etat:
-  - text: Voudriez afficher ceux qui sont d'état validé/Créé ou Prêt pour paiement
+  - text: Voudriez afficher ceux qui sont d'etat valide/Cree ou Prêt pour paiement
   utter_next_Montant_Total_Par_Type:
-  - text: Quel type voudriez-vous détailler davantage?
+  - text: Quel type voudriez-vous detailler davantage?
   utter_next_Montant_Total_Par_Fournisseur:
-  - text: Quel est le Fournisseur voudriez-vous détailler davantage?
+  - text: Quel est le Fournisseur voudriez-vous detailler davantage?
   utter_default:
   - text: Pardon, pourriez-vous poser la question autrement ?
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 actions:
+- action_default_fallback
 - action_get_Facture_mois
 - action_total_Deux_mois
 - action_montant_total_facture
 - action_get_Facture_deux_mois_deux_annee
 - action_afficher_montants_etat_Prêt_pour_paiement_Date
-- action_afficher_montants_etat_créé_Date
+- action_afficher_montants_etat_cree_Date
 - action_afficher_montants_etat_validees_Date
 - action_get_Facture_Jusquau_Mois
 - action_montant_total_pluriannuel
 - action_Less_fournisseurs
 - action_obtenir_montant_egal
-- action_get_Fournisseur_Mois_Année
+- action_get_Fournisseur_Mois_Annee
 - action_obtenir_montant_inf
 - action_obtenir_Fournisseur_montant
-- action_obtenir_montant_Date
+# - action_obtenir_montant_Date
 - action_obtenir_montant_sup
 - action_montant_total_fournisseurs
-- action_get_type_by_amount
 - Montant_Total_Par_Etat
 - action_afficher_montants_etat
 - Montant_Total_Par_Type
@@ -242,5 +248,7 @@ actions:
 - action_top_fournisseurs
 - action_top_Type
 - action_fournisseurs_zero
-- action_montant_entre_dates
+# - action_montant_entre_dates
+- action_verifier_fournisseur
+- action_reset_fournisseur_slot
 

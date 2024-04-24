@@ -1,46 +1,33 @@
 recipe: default.v1
-
 language: fr
-
+encoding: "utf-8"  # Spécifiez l'encodage UTF-8
 pipeline:
-- name: WhitespaceTokenizer
-- name: LanguageModelFeaturizer
-    # Name of the language model to use
-  model_name: "bert"
-    # Pre-Trained weights to be loaded
-  model_weights: "rasa/LaBSE"
-  cache_dir: null
-# - name: LanguageModelFeaturizer
-#   model_name: "bert"
-#   model_weights: "bert-base-multilingual-cased"
+- name: SpacyNLP
+  model: "fr_core_news_md"  # Remplacez "fr_core_news_md" par le nom du modèle SpaCy en français que vous souhaitez utiliser
+- name: SpacyTokenizer
+- name: SpacyFeaturizer
 - name: RegexFeaturizer
-- name: LexicalSyntacticFeaturizer
+- name: CRFEntityExtractor  # Composant NER fourni par Rasa
 - name: CountVectorsFeaturizer
   analyzer: char_wb
   min_ngram: 1
   max_ngram: 4
 - name: DIETClassifier
-  epochs: 120
+  epochs: 130
   constrain_similarities: true
 - name: EntitySynonymMapper
 - name: ResponseSelector
-  epochs: 110
+  epochs: 120
   constrain_similarities: true
-- name: FallbackClassifier
-  threshold: 0.3
-  ambiguity_threshold: 0.1
-assistant_id: 20240216-164319-tractable-convergence
-policies:
-# # No configuration for policies was provided. The following default policies were used to train your model.
-# # If you'd like to customize them, uncomment and adjust the policies.
-# # See https://rasa.com/docs/rasa/policies for more information.
-#   - name: MemoizationPolicy
-#   - name: RulePolicy
-#   - name: UnexpecTEDIntentPolicy
-#     max_history: 5
-#     epochs: 100
-#   - name: TEDPolicy
-#     max_history: 5
-#     epochs: 100
-#     constrain_similarities: true
 
+policies:
+- name: MemoizationPolicy
+- name: RulePolicy
+- name: UnexpecTEDIntentPolicy
+  max_history: 2
+  epochs: 120
+- name: TEDPolicy
+  max_history: 2
+  epochs: 120
+  constrain_similarities: true
+assistant_id: 20240423-212904-miniature-pintail

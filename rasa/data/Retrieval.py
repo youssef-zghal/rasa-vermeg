@@ -113,7 +113,7 @@ def main():
     def generate_nlu_contentType(elements):
         formulations = [
             "montant pour le type [{element}](type) ?",
-            "dépenses pour le type [{element}](type) ?",
+            "depenses pour le type [{element}](type) ?",
             "montants pour le type [{element}](type) ?",
             "type [{element}](type) ?",
             "[{element}](type)",
@@ -136,9 +136,9 @@ def main():
             "facture pour le fournisseur [{element}](Fournisseur)",
         ]
         formulations2=[
-            "total des dépenses pour [{element}](Fournisseur) en [Mars](month) [2022](Année) ?"   ,
+            "total [{element}](Fournisseur) en [Mars](month) [2022](Annee) ?"   ,
             "Combien on a avec [{element}](Fournisseur) en [Fevrier](month)?",
-            "montants pour le fournisseur [{element}](Fournisseur) pour mois [aout](month) [2022](Année)",
+            "montants pour le fournisseur [{element}](Fournisseur) pour mois [aout](month) [2022](Annee)",
         ]
         
         content = "- intent: demande_montant_fournisseur \n  examples: |\n"

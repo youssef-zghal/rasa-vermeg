@@ -1,6 +1,5 @@
-# Nouveaux Ã©lÃ©ments
-data = [
-    ' des cartes et systèmes électroniques',
+types_factures = [
+    'des cartes et systèmes électroniques',
     'agence de communication',
     'agence de voyage',
     'assurance',

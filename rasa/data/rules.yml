@@ -1,20 +1,19 @@
-# version: "3.1"
+version: "3.1"
 
 # rules:
-
-# - rule: Say goodbye anytime the user says goodbye
+# - rule: Vérifier et récupérer le fournisseur
 #   steps:
-#   - intent: goodbye
-#   - action: utter_goodbye
+#   - intent: '*'
+#   - action: action_verifier_fournisseur
+#   - action: Montant_Par_Fournisseur
+#   - active_loop: null
+#   - slot_was_set:
+#       - fournisseur_reconnu: true
+#   - action: action_reset_fournisseur_slot
+#   - active_loop: null
 
-# - rule: Say 'I am a bot' anytime the user challenges
-#   steps:
-#   - intent: bot_challenge
-#   - action: utter_iamabot
 
 
-# - rule: Action Obtenir Montant
-#   steps:
-#     - intent: Montant
-#     - action: action_obtenir_montant
+  # Continuez avec d'autres actions si aucun fournisseur n'a été reconnu
+
 

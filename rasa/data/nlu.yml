@@ -16,8 +16,8 @@ nlu:
     - cc
     - hey
     - Allô
-    - Bonne journée
-    - Bonne soirée
+    - Bonne journee
+    - Bonne soiree
     - ciao
     - alloha
     - bonjour
@@ -27,179 +27,159 @@ nlu:
     - au revoir
     - à toute à l'heure
     - bientôt
-    - bonne soirée
+    - bonne soiree
     - bonne nuit
     - à plus
     - prenez soin de vous
     - à la prochaine
     - bye
     - plus tard
-    - bonne journée
+    - bonne journee
 - intent: Montant
   examples: |
     - montant pour la facture qui a une reference [7559854598](number) ?
     - payer pour cette [9874562159](number) ?
-    - montant du [2365894561](number)?
     - cette reference [2365894561](number)?
     - reference [2365894561](number) combien il faut payer?
-    - coût total pour la référence [2365894561](number)?
-    - montant pour la référence [7559854598](number) ?
+    - coût total pour la reference [2365894561](number)?
 
-- intent: montant_par_date
-  examples: |
-    - montant pour la date [2023-01-14](date) ?
-    - Combien payer le [2023-01-14](date) ?
-    - montant le [2023-01-14](date) ?
-    - payer pour cette date [2023-01-14](date)?
-    - payer en [2023-01-14](date)?
-    - montants à la date [2025-01-14](date) ?
-    - montant prévu pour le [2026-02-31](date) 
+
+# - intent: montant_par_date 
+#   examples: |
+#     - Quel est le montant pour la date [2023-01-14](date) ?
+#     - Combien dois-je payer le [2023-01-14](date) ?
+#     - Montant à regler pour le [2023-01-14](date)?
+#     - Quel est le montant prevu pour le [2026-02-31](date) 
 
 - intent: Montant_sup
   examples: |
-    - facture ayant un montant superieur à [7559854598](number) ?
-    - montant superieur à [7559854598](number) ?
-    - montants payer superieur a [7559854598](number)?
-    - montants [7559854598] qui sont supérieurs ?
-    - montants dépassant [7559854598](number) ?
-    - paiements excédant a [15233853548](number)
-    - montants sont plus élevés que [15233853548](number)
+    - Factures avec un montant superieur a [7559854598](number) ?
+    - paiement superieur à [7559854598](number) ?
+    - Montant des paiements  [7559854598](number) ?
+    - Quels sont les montants qui excedant a [15233853548](number)
+    - paiements sup a [15233853548](number)
 
 - intent: Montant_inf
   examples: |
-    - facture ayant un montant inférieur à [7559854598](number) ?
-    - montant inférieur à [7559854598](number) ?
-    - les payement inferieur a [100](number)
-    - inferieur a ce montant [100](number) ?
-    - montant est en dessous de [2939223](number)
-    - dépenses inférieures à [37779555](number)
-    - achats dont le coût est moins élevé que [37779555](number)
+    - Factures avec un montant inferieur a [7559854598](number) ?
+    - montant inferieur à [7559854598](number) ?
+    - Les paiements sont-ils inferieurs à [100](number)
+    - Quel est le montant en dessous de [2939223](number)
+    - depenses inf à [37779555](number)
+    - Achats avec un cout moins eleve que [37779555](number)
 
 - intent: Montant_egal
   examples: |
-    - donne moi les factures ayant un montant égal à [7559854598](number) ?
-    - montant egal à [7559854598](number) ?
+    - Quelles sont les factures avec un montant egal à [7559854598](number) ?
     - montant egal a [0](number)
-    - montant identique à [49420](number)
-    - montants égaux à [49420](number) dans les transactions récentes
+    - Quel est le montant identique a [49420](number)
+    - Paiements egaux à [49420](number) dans les transactions recentes
     - factures avec un montant exact de [7559854598](number)
 
 - intent: Montant_total_fournisseur
   examples: |
-    - combien les fournisseurs doivent nous t-il au total ?
-    - montant total pour tous les fournisseurs ?
-    - total des montants dus par les fournisseurs ?
-    - montant global que nous devons à nos fournisseurs ?
-    - total des sommes dues par nos fournisseurs.
-    - chiffre total des créances fournisseurs ?
+    - Quel est le montant total du par les fournisseurs ?
+    - Montant total pour tous les fournisseurs ?
+    - Total des montants dus par les fournisseurs ?
+    - Quel est le montant global que nous devons à nos fournisseurs ?
+    - Total des sommes dues par nos fournisseurs.
+    - Quel est le chiffre total des creances fournisseurs ?
 
 - intent: demande_etat
   examples: |
-    - montants pour tous les états ?
-    - situation financière ?
-    - situations des etat
-    - montants pour chaque état ?
-    - montants attribués à chaque État ?
+    - Quel est le montant total pour les etats ?
+    - Situation financière ?
+    - Montants pour chaque etat ?
+    - Montants attribues à chaque etat 
 
-- intent: informer_etat_validé
+- intent: informer_etat_valide
   examples: |
-    - Validé
-    - ceux qui sont valide
-    - factures qui sont validées
-    - montants qui sont valide
-    - facture qu'on a payer
-    - montant valide
+    - Quels sont les montants valides ?
+    - Montants valides
+    - Factures validees
+    - Paiements valides
+    - Quels sont les montants valides ?
+    - Montant total pour etat valide
 
-- intent: informer_etat_créé
+- intent: informer_etat_cree
   examples: |
-    - Cree
-    - ceux qui sont crées
-    - montants qui sont cree
-    - donne moi tout les facture crée
-    - factures créé
+    - Factures crees
+    - Montants cree
+    - Quelles sont les factures cree ?
+    - Quels montants ont ete cree ?
+    - Factures cree
 
 - intent: informer_etat_prêt_pour_paiement
   examples: |
-    - Prêt pour paiement
-    - pret
-    - ceux qui sont pret
-    - factures Pret pour paiement
-    - montants qui ne sont pas payer
-
-- intent: ask_type_by_amount
-  examples: |
-    - type pour [500](amount) ?
-    - montant de [1000](amount), quel est le type ?
-    - type pour [500](amount) ?
-    - type avec ce montant [500](amount)?
-    - Quel type correspond à [300](amount)
-    - Pour [500](amount) euros, quel est le type associé ?
+    - Quels sont les paiements prets pour paiement ?
+    - Paiements prets
+    - Factures prete pour paiement
+    - Montants qui ne sont pas payes
 
 
 - intent: ask_type
   examples: |
-    - liste des montants pour chaque type ?
-    - montants pour chaque catégorie.
-    - montant pour les type?
-    - montant pour tous nos secteur 
-    - montants attribués à chaque type ?
-    - allocations budgétaires pour chaque domaine.
+    - Liste des montants pour les types ?
+    - Montants par categorie.
+    - Montant total pour les types ?
+    - Paiement total pour tous nos secteurs
+    - Montants attribues à chaque type ?
+    - Montant total pour les types
 
 - intent: inform_fournisseur_count
   examples: |
     - nombre de fournisseurs ?
     - nombre exact de fournisseurs ?
-    - combien le total de fournisseurs enregistrés.
-    - nombre de fournisseurs dans notre base de données ?
+    - combien le total de fournisseurs enregistres.
+    - nombre de fournisseurs dans notre base de donnees ?
 
 - intent: inform_Type_count
   examples: |
-    - Combien de types avons-nous enregistrés ?
-    - nombre total de types ?
-    - combien de types nous avons ?
-    - nombre de types dans notre base de données ?
+    - Combien de types avons-nous enregistres ?
+    - Nombre total de secteurs ?
+    - Combien de types avons-nous ?
+    - Nombre de types dans notre base de donnees ?
 
 - intent: inform_facture_count
   examples: |
     - Combien de factures avons-nous ?
-    - nombre de factures dans la base de données ?
-    - nombre de factures enregistrées ?
-    - Combien de factures sont là ?
-    - nombre total de factures ?
+    - Nombre de factures dans la base de donnees ?
+    - Combien de factures sont la ?
+
 
 - intent: intervalle_par_date
   examples: |
-    - montant total à payer pour la période du [2024-01-01](start_date) au [2024-01-31](end_date) ?
-    - montant a payée entre [2024-01-01](start_date) et [2024-01-31](end_date).
-    - paiements restant à effectuer entre le [2024-01-01](start_date) et [2024-01-31](end_date) ?
+    - Quel est le montant total à payer pour la periode du [2024-01-01](start_date) au [2024-01-31](end_date) ?
+    - Combien doit-on payer entre le [2024-01-01](start_date) et [2024-01-31](end_date).
+    - Quels paiements restent à effectuer entre le [2024-01-01](start_date) et [2024-01-31](end_date) ?
     - Entre [2024-01-01](start_date) et [2024-01-31](end_date) quels sont les paiements à effectuer ?
-    - montants entre [2023-07-24](start_date) et [2023-07-26](end_date)
+    - Quels sont les montants entre le [2023-07-24](start_date) et [2023-07-26](end_date)
 
 - intent: demande_top_fournisseurs
   examples: |
-    - principaux [10](number) fournisseurs qu'on a ?
-    - top [2](number) fournisseurs.
-    - [8](number) premie fournisseurs par montant ?
-    - [8](number) meilleur fournisseur   
+    - Quels sont les [10](number) principaux fournisseurs ?
+    - Les [2](number) meilleurs fournisseurs.
+    - [8](number) premiers fournisseurs par montant ?
+    - top [13](number) fournisseur 
     - [20](number) fournisseur en travail avec eux le plus?
-    - fournisseur avec qui nous avons effectué le plus d'achats ?
+    - fournisseur avec qui nous avons effectue le plus d'achats ?
 
 - intent: demande_top_Type
   examples: |
-    - [4](number) principaux types?
+    - [4](number) principaux secteur?
     - top [12](number) Type.
-    - [5](number) type avec les montants les plus élevés.
-    - top [9](number) 
+    - [5](number) secteur avec les montants les plus eleves.
     - [1](number) meilleur type
     - type de fournisseur avec le plus grand montant
-    - [9](number) secteurs avec lesquels nous travaillons le plus ?
+    - Avec quels [9](number) secteurs avons-nous le plus travaille ?
 
 - intent: demande_Less_fournisseurs
   examples: |
-    - [2](number) fournisseurs les moins significatifs.
-    - [5](number) fournisseurs avec les montants les plus bas.
-    - [8](number) fournisseurs les moins importants
-    - [5](number) moins fournisseurs qu'on a?
+    - Les [2](number) fournisseurs les moins significatifs.
+    - Les [2](number) fournisseurs avec les montants les plus bas.
+    - Quels sont les [2](number) fournisseurs les moins importants ?
+    - Combien avons-nous de fournisseurs moins importants ?
+    - Qui sont les [2](number) fournisseurs avec les montants les plus bas ?
 
 - intent: fournisseurs_zero
   examples: |
@@ -208,402 +188,122 @@ nlu:
 
 - intent: obtenir_montant_total_facture
   examples: |
-    - montant total de ma dernière facture ?
-    - total des factures ?
-    - somme des factures ?
-    - montant total que je dois pour mes factures ?
+    - Quel est le montant total des factures ?
+    - Quel est le total des factures ?
+    - Quel est le montant total de toutes les factures ?
+    - Quel est le total des paiements des factures ?
+    - Combien dois-je pour mes factures au total ?
 
 - intent: inform
   examples: |
-    - total pour le mois de [janvier](month) ?
-    - montants pour [novembre](month).
-    - montants des factures de [juin](month) pour l'année [2023](Année) ?
-    - total des dépenses pour [mai](month) en [2022](Année) ?
+    - Quel est le montant total pour le mois de [janvier](month) ?
+    - Pouvez-vous me donner les montants pour [novembre](month) ?
+    - Quel est le total des montants des factures de [juin](month) pour l'annee [2023](Annee) ?
+    - Quel est le total des depenses pour le mois de [mai](month) [2022](Annee) ?
+    - Pouvez-vous me fournir le montant total pour le mois [aout](month) en [2022](Annee) ?
 
 
 - intent: obtenir_montant_total_pluriannuel
   examples: | 
-    - total des factures pour l'année [2023](Année) ?
-    - chiffres cumulés pour [2023](Année) et [2022](Année) ?
-    - vue d'ensemble financière pour [2022](Année).
-    - dépenses pour [2023](Année) et [2024](Année) ?
+    - Quel est le total des factures pour l'annee [2023](Annee) ?
+    - Quel est le montant cumule pour [2023](Annee) et [2022](Annee) ?
+    - Pouvez-vous me donner une vue d'ensemble financière pour [2022](Annee).
+    - Quel est le montant pour [2023](Annee) et [2024](Annee) ?
+    - Quel est le montant total pour [2026](Annee)
 
 - intent: obtenir_total_Deux_mois
   examples: |
-    - dépenses pour [mars](monthD) et [avril](monthF) [2022](Année) ?
-    - coûts pour [mai](monthD) et [juin](monthF) [2023](Année) ?
-    - dépensé de [juin](monthD) jusqu'au [juillet](monthF) en [2023](Année) ?
-    - total des factures entre [decembre](monthD) et [janvier](monthF) de l'année [2021](Année) ?
-    - Montant total des factures entre [mai](monthD) et [novembre](monthF) en [2023](Année).
-    - montants entre [mai](monthD) et [decembre](monthF) en [2023](Année).
+    - Quels sont les depenses pour [mars](monthD) et [avril](monthF) [2022](Annee) ?
+    - Combien avons-nous depense pour [mai](monthD) et [juin](monthF) [2023](Annee) ?
+    - Quel est le montant depense de [juin](monthD) jusqu'au [juillet](monthF) en [2023](Annee) ?
+    - Quel est le total des factures entre [decembre](monthD) et [janvier](monthF) de l'annee [2021](Annee) ?
+    - Quel est le montant total entre [mai](monthD) et [novembre](monthF) en [2023](Annee).
+    - Quels sont les montants entre [mai](monthD) et [decembre](monthF) en [2023](Annee).
 
 
-- intent: obtenir_factures_entre_dates
-  examples: |
-    - total entre le [2](JourD) [mars](monthD) [2021](AnnéeD) et le [13](JourF) [janvier](monthF) [2024](AnnéeF).
-    - l'intervalle de [15](JourD) [mars](monthD) [2021](AnnéeD) à [8](JourF) [avril](monthF) [2021](AnnéeF).
-    - factures entre le [10](JourD) [juillet](monthD) [2023](AnnéeD) et le [15](JourF) [septembre](monthF) [2023](AnnéeF).
-    - total des factures entre le [1](JourD) [avril](monthD) [2021](AnnéeD) et le [23](JourF) [juin](monthF) [2023](AnnéeF).
-    - [19](JourD) [aout](monthD) [2021](AnnéeD) et le [21](JourF) [decembre](monthF) [2023](AnnéeF).
-    - [9](JourD) [mai](monthD) [2021](AnnéeD) et le [20](JourF) [juillet](monthF) [2023](AnnéeF).
+# - intent: obtenir_factures_entre_dates
+#   examples: |
+#     - Quel est le total entre le [2](JourD) [mars](monthD) [2021](AnneeD) et le [13](JourF) [janvier](monthF) [2024](AnneeF).
+#     - Pouvez-vous me montrer les montants de [15](JourD) [mars](monthD) [2021](AnneeD) à [8](JourF) [avril](monthF) [2021](AnneeF).
+#     - Quel est le montant entre le [10](JourD) [juillet](monthD) [2023](AnneeD) et le [15](JourF) [septembre](monthF) [2023](AnneeF).
+#     - Combien avons-nous depense entre le [1](JourD) [avril](monthD) [2021](AnneeD) et [23](JourF) [juin](monthF) [2023](AnneeF).
+#     - Pouvez-vous me montrer le montant total entre [19](JourD) [aout](monthD) [2021](AnneeD) et [21](JourF) [decembre](monthF) [2023](AnneeF).
+
 
 - intent: obtenir_total_Jusquau_mois
   examples: |
-    - dépenses jusqu'au mois [octobre](month) [2023](Année) ?
-    - Montant total jusqu'au mois [novembre](month) ?
-    - Total des factures jusqu'au mois de [decembre](month) [2023](Année) ?
+    - Quelles sont les depenses accumulees jusqu'au mois de [octobre](month) [2023](Annee) ?
+    - Pouvez-vous me fournir le total des depenses jusqu'au mois de [novembre](month) ?
+    - Quel est le montant total des factures jusqu'au mois de [decembre](month) [2023](Annee) ?
+    - Quels sont les coûts cumules jusqu'au mois de [septembre](month) [2022](Annee) ?
+    - Combien avons-nous depense jusqu'à present pour le mois de [juillet](month) [2024](Annee) ?
+
 
 - intent: afficher_montants_etat_validees_date
   examples: |
-    - montants des factures validées pour [fevrier](month) [2022](Année)
-    - total des factures valide en [mars](month) [2023](Année)?
-    - dépensé en factures valides en [avril](month)?
+    - Quels sont les montants valides pour [fevrier](month) en [2022](Annee)
+    - Quel est le total des factures validees en [mars](month) [2023](Annee)?
+    - Pouvez-vous me montrer des factures validees en [septembre](month) [2023](Annee)?
+    - Quelles sont les depenses validees en [avril](month)?
 
 
-- intent: afficher_montants_etat_créé_date
+- intent: afficher_montants_etat_cree_date
   examples: |
-    - total des factures créé en [mars](month) [2023](Année)?
-    - dépensé en factures créé en [avril](month)?
-    - montants des factures cree pour le mois [mai](month)
+    - Quel est le total des factures creees en [mars](month) [2023](Annee)?
+    - Combien avons-nous depense en factures creees en [avril](month)?
+    - Quels sont les montants crees pour le mois de [mai](month)
 
 - intent: afficher_montants_etat_Prêt_pour_paiement_date
   examples: |
-    - montant qu'on va les payer [juin](month) [2023](Année)
-    - total des factures Pret pour paiement en [aout](month) [2023](Année)?
-    - dépensés en factures Pret pour paiement en [septembre](month)?
-    - dettes qu'on a en mois [decembre](month) [2022](Année)
-
+    - Quels sont les montants prêts pour le paiement en [juin](month) [2023](Annee)
+    - Pouvez-vous me montrer le total des factures prêtes pour paiement en [aout](month) [2023](Annee)?
+    - Quelles sont les depenses en factures prêtes pour paiement en [septembre](month)?
+    - Quelles sont les dettes que nous avons en [decembre](month) [2022](Annee)
 
 - intent: demander_factures_deux_mois_deux_annee
   examples: |
-    - montant des factures entre [decembre](monthD) [2022](AnnéeD) et [avril](monthF) [2023](AnnéeF).
-    - somme totale des factures de [mai](monthD) [2022](AnnéeD) à [aout](monthF) [2022](AnnéeF) ?
-    - total des factures de [janvier](monthD) [2021](AnnéeD) à [juin](monthF) [2021](AnnéeF) ?
-    - dépenses entre [octobre](monthD) [2023](AnnéeD) et [novembre](monthF) [2023](AnnéeF).
+    - Quel est le montant des factures entre [decembre](monthD) [2022](AnneeD) et [avril](monthF) [2023](AnneeF).
+    - Quelle est la somme des factures de [mai](monthD) [2022](AnneeD) à [aout](monthF) [2022](AnneeF) ?
+    - Combien avons-nous depense de [janvier](monthD) [2021](AnneeD) à [juin](monthF) [2021](AnneeF) ?
+    - Quelles sont les depenses entre [octobre](monthD) [2023](AnneeD)  [novembre](monthF) [2023](AnneeF).
+    - Pouvez-vous me montrer les montants entre les deux mois [fevrier](monthD) [2021](AnneeD) le mois [decembre](monthF) [2024](AnneeF)
+    - Quel est le montant total pour le mois de [septembre](monthD) [2029](AnneeD) le mois [decembre](monthF) [2030](AnneeF)
 
 - intent: demande_Facture 
   examples: |
-    - fournisseur pour cette facture [000126-23](Facture) 
-    - [000267/23](Facture)
-    - facture [000455/23](Facture) ?
-    - cette facture [000484/23](Facture)
+    - Quel est le fournisseur pour cette facture [000126-23](Facture) 
+    - Pouvez-vous me donner des informations sur la facture [000455/23](Facture) ?
+    - Pourriez-vous consulter la facture [FX/28382-5](Facture)
+    - Pouvez-vous voir les fournisseurs pour la facture [-1](Facture) 
+    - Quelles informations pouvez-vous me fournir sur la facture [292938-22](Facture)  
 
 - intent: demande_montant_type 
   examples: |
-    - [des cartes et systèmes électroniques](type)
-    - dépenses pour le type [agence de communication](type) ?
-    - montants pour le type [agence de voyage](type) ?
-    - details sur [assurance](type)
-    - [Assurance/Consulting](type) ?
-    - [automobile](type) ?
-    - [avocat](type) ?
-    - [banque/assurance](type) ?
-    - [bureautique](type) ?
-    - [centre d'appel](type) ?
-    - [consulting](type) ?
-    - [decoration](type) ?
-    - [domaine electricite](type) ?
-    - [equipement](type) ?
-    - [equipement Electriques](type) ?
-    - [équipement pour le bâtiment](type) ?
-    - [expertise](type) ?
-    - [formation](type) ?
-    - [industrie](type) ?
-    - [informatique](type) ?
-    - [kiosque](type) ?
-    - [laboratoire](type) ?
-    - [mecanique](type) ?
-    - [medical](type) ?
-    - [meubles](type) ?
-    - [société](type) ?
-    - [societe de livraison](type) ?
-    - [societe de vetements](type) ?
-    - [transit](type) ?
-    - [vente different produit](type) ?
+    - Pouvez-vous me montrer les details du type [des cartes et systèmes electroniques](type)
+    - Quelles sont les depenses pour le type [agence de communication](type) ?
+    - Quels sont les montants pour le type [agence de voyage](type) ?
+    - Pouvez-vous me donner des details sur [banque/assurance](type)
+    - avoir une idee sur le montant du type [Assurance/Consulting](type) ?
+    - Pouvez-vous afficher le type [automobile](type) ?
+    - Quels sont les montants pour le type [avocat](type) ?
   
 - intent: demande_montant_fournisseur 
   examples: |
-    - [ADHECOM SARL](Fournisseur)
-    - montant pour le fournisseur [AIRCO](Fournisseur) ?
-    - [AL MAADEN](Fournisseur)
-    - le fournisseur [AMM](Fournisseur) ?
-    - [ARC BUREAUTIQUE](Fournisseur) ?
-    - [ARCHIDOC](Fournisseur) ?
-    - [ASSAD INDUSTRIAL](Fournisseur) ?
-    - [AST AVENIR SERVICE TRANSPORT](Fournisseur) ?
-    - [ATR CORPORATE ET CONSULTING](Fournisseur) ?
-    - [Avocat Hatem Kourda](Fournisseur) ?
-    - [BAIEXPRESS](Fournisseur) ?
-    - [BECHIR FAKHFAKH](Fournisseur) ?
-    - [BEST CAR](Fournisseur) ?
-    - [BOUDRANT](Fournisseur) ?
-    - [BTP-EQUIPEMENT](Fournisseur) ?
-    - [CABINET BEN CHEIKH HENDA](Fournisseur) ?
-    - [CAR PRO](Fournisseur) ?
-    - [Cash&Carry](Fournisseur) ?
-    - [CDTPR](Fournisseur) ?
-    - [Chiffon d’Essuyage Tunisienne](Fournisseur) ?
-    - [CMG](Fournisseur) ?
-    - [CMVI](Fournisseur) ?
-    - [COMET](Fournisseur) ?
-    - [COREME](Fournisseur) ?
-    - [CREATIVE AD. SCHOOL](Fournisseur) ?
-    - [DELLMANN](Fournisseur) ?
-    - [DELOITTE](Fournisseur) ?
-    - [DIESEL ENERGY](Fournisseur) ?
-    - [Dr. Jamel Darragi](Fournisseur) ?
-    - [EDT](Fournisseur) ?
-    - [ELECSA-TN](Fournisseur) ?
-    - [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) ?
-    - [ELWIFEK FLEXIBLES](Fournisseur) ?
-    - [EQUIPEMENT MODERNE AUTOMOTIVE](Fournisseur) ?
-    - [EQUIPEMENT MODERNE HARDWARE](Fournisseur) ?
-    - [EQUIPEMENTS SOUSSI](Fournisseur) ?
-    - [ETS BEN YOUSSEF](Fournisseur) ?
-    - [ETS BERRAIES](Fournisseur) ?
-    - [EURO PARTS](Fournisseur) ?
-    - [EXCELLIA CREANCE](Fournisseur) ?
-    - [GAM](Fournisseur) ?
-    - [GARAGE DU NORD BOURAOUI ZARDI](Fournisseur) ?
-    - [GAS](Fournisseur) ?
-    - [GATTOUSSI MECANIQUE GENERALE](Fournisseur) ?
-    - [GEELEC](Fournisseur) ?
-    - [GEISER](Fournisseur) ?
-    - [GENERAL RADIATORS](Fournisseur) ?
-    - [GENERAL TRANSPORT INTERNATIONAL](Fournisseur) (GTI)
-    - [GENERALE D'EQUIPEMENTS ELECTRIQUES](Fournisseur) ?
-    - [GLAMIVER](Fournisseur) ?
-    - [GLOBAL RECOUVREMENT](Fournisseur) ?
-    - [ICAR SA](Fournisseur) ?
-    - [IDEAL ORAGANISATION SERVICES](Fournisseur) ?
-    - [IDEALE AUTO NEGOCE](Fournisseur) ?
-    - [Industrial Technical Services](Fournisseur) ?
-    - [Innovation mécanique industrielle](Fournisseur) ?
-    - [INTERNATIONAL TRANSIT](Fournisseur) ?
-    - [IRES](Fournisseur) ?
-    - [J.M.S PLUS](Fournisseur) ?
-    - [JOUINI ELECTRIQUE INDUSTRIEL](Fournisseur) ?
-    - [KAIS DORGHAM MECANIQUE AUTO](Fournisseur) ?
-    - [LA BATTERIE](Fournisseur) ?
-    - [La BATTERIE INDUSTRIELLE](Fournisseur) ?
-    - [LA PRECISION T.M.T](Fournisseur) ?
-    - [LE MOTEUR DIESEL](Fournisseur) ?
-    - [LE PROFESSIONNEL](Fournisseur) ?
-    - [Loogik Interactive](Fournisseur) ?
-    - [LOURD DEPANN](Fournisseur) ?
-    - [MAC BUREAU](Fournisseur) ?
-    - [Maitre Yahyaoui Mustapha](Fournisseur) ?
-    - [MARE](Fournisseur) ?
-    - [MECANICA DIVISION GROS](Fournisseur) ?
-    - [MEGA NUMERIQUE](Fournisseur) ?
-    - [MEZGHANI PLUS MEUBLES](Fournisseur) ?
-    - [MMSE](Fournisseur) ?
-    - [MONDIAL ELECTRIC](Fournisseur) ?
-    - [PEARTECH](Fournisseur) ?
-    - [PIMA](Fournisseur) ?
-    - [POLYCARGO](Fournisseur) ?
-    - [QUEEN FORMATION](Fournisseur) ?
-    - [RAPID POSTE](Fournisseur) ?
-    - [ROYALTYRE](Fournisseur) ?
-    - [SBIKA PROTECTION](Fournisseur) ?
-    - [SCCM BF](Fournisseur) ?
-    - [SELECT TRAVEL ET TOURS](Fournisseur) ?
-    - [SHOPEX](Fournisseur) ?
-    - [SHYK AUTO](Fournisseur) ?
-    - [SIMEC](Fournisseur) ?
-    - [SINPAR](Fournisseur) ?
-    - [SMART ELECTRIC](Fournisseur) ?
-    - [SMART TACHY](Fournisseur) ?
-    - [SOCAGE](Fournisseur) ?
-    - [SOCIETE BEN MESSAOUD FRERES](Fournisseur) ?
-    - [SOCIETE DE MANUTENSION HELALI SARL](Fournisseur) ?
-    - [SOCIETE ELBEZ DISTRIBUTION](Fournisseur) ?
-    - [SOCIETE IMPRIMERIE DU CENTRE](Fournisseur) ?
-    - [SOCIETE KACEM ET FILS](Fournisseur) ?
-    - [SOCIETE PIECES ET MATERIELS SPM](Fournisseur) ?
-    - [SODICA](Fournisseur) ?
-    - [SOGEMAQ](Fournisseur) ?
-    - [SOREM](Fournisseur) ?
-    - [SOTUFLEX](Fournisseur) ?
-    - [SPAIE](Fournisseur) ?
-    - [SPIT ENGINS](Fournisseur) ?
-    - [SSG SOCIETE SADRABAAL DE GARDIENNAGE](Fournisseur) ?
-    - [SSTM](Fournisseur) ?
-    - [STAFIM](Fournisseur) ?
-    - [STAR EQUIPEMENTS](Fournisseur) ?
-    - [STATION PNEU CHOUCHA](Fournisseur) (SPC) ?
-    - [STE ALLO SERVICE REMORQUAGE](Fournisseur) ?
-    - [STE BRAVO DES SERVICES](Fournisseur) ?
-    - [STE BSA](Fournisseur) ?
-    - [STE COSTA RENT A CAR](Fournisseur) ?
-    - [STE EMEM DU CAPBON](Fournisseur) ?
-    - [STE GHAMMAM NEGOCE](Fournisseur) ?
-    - [STE JOMAA SA](Fournisseur) ?
-    - [STE LE MOTEUR HOUSE](Fournisseur) ?
-    - [STE OTOKAR](Fournisseur) ?
-    - [STE POLY ELECTRIC AKOUDA](Fournisseur) ?
-    - [STE POWER PROFESSIONEL TRANSPORT](Fournisseur) ?
-    - [STE T.D.S](Fournisseur) ?
-    - [STE ZOUHAIR KARRAY SECURITE](Fournisseur) ?
-    - [STPR](Fournisseur) ?
-    - [Stratégie Digitale](Fournisseur) ?
-    - [STRPA](Fournisseur) ?
-    - [SUD METAL](Fournisseur) ?
-    - [TASNIME VOYAGE ET TOURISME](Fournisseur) ?
-    - [TECHNIQUE DE L'ELECTRICITE ET SERVICES](Fournisseur) T.E.S. ?
-    - [Téchnique informatique et bureautique](Fournisseur) ?
-    - [TECHNOMACHINE](Fournisseur) ?
-    - [TOOFAST TECHNIC SERVICE PNEUS](Fournisseur) ?
-    - [TOTAL TUNISIE](Fournisseur) ?
-    - [TOUDECORS SARL](Fournisseur) ?
-    - [TPS](Fournisseur) ?
-    - [UHD](Fournisseur) ?
-    - [USP](Fournisseur) ?
-    - [VALORIA S.A](Fournisseur) ?
-    - [VOGUE DISTRIBUTION](Fournisseur) ?
-    - [ZRIBI MAJDI ARCHITECTE ET EXPERT BATIMENT](Fournisseur) ?
+    - Pouvez-vous me montrer le fournisseur [ADHECOM SARL](Fournisseur)
+    - Quel est le montant total pour le fournisseur [AIRCO](Fournisseur) ?
+    - Pouvez-vous consulter le fournisseur [TECHNIQUE DE L'ELECTRICITE ET SERVICES T.E.S.](Fournisseur)
+    - Combien avons-nous depense avec [STATION PNEU CHOUCHA (SPC)](Fournisseur) ?
+    - Quel est le montant depense avec [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) ?
+    - Combien avons-nous depense avec [GENERAL TRANSPORT INTERNATIONAL (GTI)](Fournisseur) ?
+
 
 - intent: demander_montant_total_fournisseur_mois_annee 
   examples: |
-    - total des dépenses pour [ADHECOM SARL](Fournisseur) en [Mars](month) [2022](Année) ?
-    - montants pour le fournisseur [AIRCO](Fournisseur) pour mois [aout](month) [2022](Année)
-    - Combien on a avec [AL MAADEN](Fournisseur) en [Fevrier](month)?
-    - [AMM](Fournisseur) en [Avril](month) [2023](Année) ?
-    - [ARC BUREAUTIQUE](Fournisseur) en [Mai](month) [2023](Année) ?
-    - [ARCHIDOC](Fournisseur) en [Juin](month) [2023](Année) ?
-    - [ASSAD INDUSTRIAL](Fournisseur) en [Juillet](month) [2023](Année) ?
-    - [AST AVENIR SERVICE TRANSPORT](Fournisseur) en [Août](month) [2023](Année) ?
-    - [ATR CORPORATE ET CONSULTING](Fournisseur) en [Septembre](month) [2023](Année) ?
-    - [Avocat Hatem Kourda](Fournisseur) en [Octobre](month) [2023](Année) ?
-    - [BAIEXPRESS](Fournisseur) en [Novembre](month) [2023](Année) ?
-    - [BECHIR FAKHFAKH](Fournisseur) en [Décembre](month) [2023](Année) ?
-    - [BEST CAR](Fournisseur) en [Janvier](month) [2024](Année) ?
-    - [BOUDRANT](Fournisseur) en [Février](month) [2024](Année) ?
-    - [BTP-EQUIPEMENT](Fournisseur) en [Mars](month) [2024](Année) ?
-    - [CABINET BEN CHEIKH HENDA](Fournisseur) en [Avril](month) [2024](Année) ?
-    - [CAR PRO](Fournisseur) en [Mai](month) [2024](Année) ?
-    - [Cash&Carry](Fournisseur) en [Juin](month) [2024](Année) ?
-    - [CDTPR](Fournisseur) en [Juillet](month) [2024](Année) ?
-    - [Chiffon d’Essuyage Tunisienne](Fournisseur) en [Août](month) [2024](Année) ?
-    - [CMG](Fournisseur) en [Septembre](month) [2024](Année) ?
-    - [CMVI](Fournisseur) en [Octobre](month) [2024](Année) ?
-    - [COMET](Fournisseur) en [Novembre](month) [2024](Année) ?
-    - [COREME](Fournisseur) en [Décembre](month) [2024](Année) ?
-    - [CREATIVE AD. SCHOOL](Fournisseur) en [Janvier](month) [2025](Année) ?
-    - [DELLMANN](Fournisseur) en [Février](month) [2025](Année) ?
-    - [DELOITTE](Fournisseur) en [Mars](month) [2025](Année) ?
-    - [DIESEL ENERGY](Fournisseur) en [Avril](month) [2025](Année) ?
-    - [Dr. Jamel Darragi](Fournisseur) en [Mai](month) [2025](Année) ?
-    - [EDT](Fournisseur) en [Juin](month) [2025](Année) ?
-    - [ELECSA-TN](Fournisseur) en [Juillet](month) [2025](Année) ?
-    - [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) en [Août](month) [2025](Année) ?
-    - [ELWIFEK FLEXIBLES](Fournisseur) en [Septembre](month) [2025](Année) ?
-    - [EQUIPEMENT MODERNE AUTOMOTIVE](Fournisseur) en [Octobre](month) [2025](Année) ?
-    - [EQUIPEMENT MODERNE HARDWARE](Fournisseur) en [Novembre](month) [2025](Année) ?
-    - [EQUIPEMENTS SOUSSI](Fournisseur) en [Décembre](month) [2025](Année) ?
-    - [ETS BEN YOUSSEF](Fournisseur) en [Janvier](month) [2026](Année) ?
-    - [ETS BERRAIES](Fournisseur) en [Février](month) [2026](Année) ?
-    - [EURO PARTS](Fournisseur) en [Mars](month) [2026](Année) ?
-    - [EXCELLIA CREANCE](Fournisseur) en [Avril](month) [2026](Année) ?
-    - [GAM](Fournisseur) en [Mai](month) [2026](Année) ?
-    - [GARAGE DU NORD BOURAOUI ZARDI](Fournisseur) en [Juin](month) [2026](Année) ?
-    - [GAS](Fournisseur) en [Juillet](month) [2026](Année) ?
-    - [GATTOUSSI MECANIQUE GENERALE](Fournisseur) en [Août](month) [2026](Année) ?
-    - [GEELEC](Fournisseur) en [Septembre](month) [2026](Année) ?
-    - [GEISER](Fournisseur) en [Octobre](month) [2026](Année) ?
-    - [GENERAL RADIATORS](Fournisseur) en [Novembre](month) [2026](Année) ?
-    - [GENERAL TRANSPORT INTERNATIONAL](Fournisseur) (GTI) en [Décembre](month) [2026](Année) ?
-    - [GENERALE D'EQUIPEMENTS ELECTRIQUES](Fournisseur) en [Janvier](month) [2027](Année) ?
-    - [GLAMIVER](Fournisseur) en [Février](month) [2027](Année) ?
-    - [GLOBAL RECOUVREMENT](Fournisseur) en [Mars](month) [2027](Année) ?
-    - [ICAR SA](Fournisseur) en [Avril](month) [2027](Année) ?
-    - [IDEAL ORAGANISATION SERVICES](Fournisseur) en [Mai](month) [2027](Année) ?
-    - [IDEALE AUTO NEGOCE](Fournisseur) en [Juin](month) [2027](Année) ?
-    - [Industrial Technical Services](Fournisseur) en [Juillet](month) [2027](Année) ?
-    - [Innovation mécanique industrielle](Fournisseur) en [Août](month) [2027](Année) ?
-    - [INTERNATIONAL TRANSIT](Fournisseur) en [Septembre](month) [2027](Année) ?
-    - [IRES](Fournisseur) en [Octobre](month) [2027](Année) ?
-    - [J.M.S PLUS](Fournisseur) en [Novembre](month) [2027](Année) ?
-    - [JOUINI ELECTRIQUE INDUSTRIEL](Fournisseur) en [Décembre](month) [2027](Année) ?
-    - [KAIS DORGHAM MECANIQUE AUTO](Fournisseur) en [Janvier](month) [2028](Année) ?
-    - [LA BATTERIE](Fournisseur) en [Février](month) [2028](Année) ?
-    - [La BATTERIE INDUSTRIELLE](Fournisseur) en [Mars](month) [2028](Année) ?
-    - [LA PRECISION T.M.T](Fournisseur) en [Avril](month) [2028](Année) ?
-    - [LE MOTEUR DIESEL](Fournisseur) en [Mai](month) [2028](Année) ?
-    - [LE PROFESSIONNEL](Fournisseur) en [Juin](month) [2028](Année) ?
-    - [Loogik Interactive](Fournisseur) en [Juillet](month) [2028](Année) ?
-    - [LOURD DEPANN](Fournisseur) en [Août](month) [2028](Année) ?
-    - [MAC BUREAU](Fournisseur) en [Septembre](month) [2028](Année) ?
-    - [Maitre Yahyaoui Mustapha](Fournisseur) en [Octobre](month) [2028](Année) ?
-    - [MARE](Fournisseur) en [Novembre](month) [2028](Année) ?
-    - [MECANICA DIVISION GROS](Fournisseur) en [Décembre](month) [2028](Année) ?
-    - [MEGA NUMERIQUE](Fournisseur) en [Janvier](month) [2029](Année) ?
-    - [MEZGHANI PLUS MEUBLES](Fournisseur) en [Février](month) [2029](Année) ?
-    - [MMSE](Fournisseur) en [Mars](month) [2029](Année) ?
-    - [MONDIAL ELECTRIC](Fournisseur) en [Avril](month) [2029](Année) ?
-    - [PEARTECH](Fournisseur) en [Mai](month) [2029](Année) ?
-    - [PIMA](Fournisseur) en [Juin](month) [2029](Année) ?
-    - [POLYCARGO](Fournisseur) en [Juillet](month) [2029](Année) ?
-    - [QUEEN FORMATION](Fournisseur) en [Août](month) [2029](Année) ?
-    - [RAPID POSTE](Fournisseur) en [Septembre](month) [2029](Année) ?
-    - [ROYALTYRE](Fournisseur) en [Octobre](month) [2029](Année) ?
-    - [SBIKA PROTECTION](Fournisseur) en [Novembre](month) [2029](Année) ?
-    - [SCCM BF](Fournisseur) en [Décembre](month) [2029](Année) ?
-    - [SELECT TRAVEL ET TOURS](Fournisseur) en [Janvier](month) [2030](Année) ?
-    - [SHOPEX](Fournisseur) en [Février](month) [2030](Année) ?
-    - [SHYK AUTO](Fournisseur) en [Mars](month) [2030](Année) ?
-    - [SIMEC](Fournisseur) en [Avril](month) [2030](Année) ?
-    - [SINPAR](Fournisseur) en [Mai](month) [2030](Année) ?
-    - [SMART ELECTRIC](Fournisseur) en [Juin](month) [2030](Année) ?
-    - [SMART TACHY](Fournisseur) en [Juillet](month) [2030](Année) ?
-    - [SOCAGE](Fournisseur) en [Août](month) [2030](Année) ?
-    - [SOCIETE BEN MESSAOUD FRERES](Fournisseur) en [Septembre](month) [2030](Année) ?
-    - [SOCIETE DE MANUTENSION HELALI SARL](Fournisseur) en [Octobre](month) [2030](Année) ?
-    - [SOCIETE ELBEZ DISTRIBUTION](Fournisseur) en [Novembre](month) [2030](Année) ?
-    - [SOCIETE IMPRIMERIE DU CENTRE](Fournisseur) en [Décembre](month) [2030](Année) ?
-    - [SOCIETE KACEM ET FILS](Fournisseur) en [Janvier](month) [2031](Année) ?
-    - [SOCIETE PIECES ET MATERIELS SPM](Fournisseur) en [Février](month) [2031](Année) ?
-    - [SODICA](Fournisseur) en [Mars](month) [2031](Année) ?
-    - [SOGEMAQ](Fournisseur) en [Avril](month) [2031](Année) ?
-    - [SOREM](Fournisseur) en [Mai](month) [2031](Année) ?
-    - [SOTUFLEX](Fournisseur) en [Juin](month) [2031](Année) ?
-    - [SPAIE](Fournisseur) en [Juillet](month) [2031](Année) ?
-    - [SPIT ENGINS](Fournisseur) en [Août](month) [2031](Année) ?
-    - [SSG SOCIETE SADRABAAL DE GARDIENNAGE](Fournisseur) en [Septembre](month) [2031](Année) ?
-    - [SSTM](Fournisseur) en [Octobre](month) [2031](Année) ?
-    - [STAFIM](Fournisseur) en [Novembre](month) [2031](Année) ?
-    - [STAR EQUIPEMENTS](Fournisseur) en [Décembre](month) [2031](Année) ?
-    - [STATION PNEU CHOUCHA](Fournisseur) (SPC) en [Janvier](month) [2032](Année) ?
-    - [STE ALLO SERVICE REMORQUAGE](Fournisseur) en [Février](month) [2032](Année) ?
-    - [STE BRAVO DES SERVICES](Fournisseur) en [Mars](month) [2032](Année) ?
-    - [STE BSA](Fournisseur) en [Avril](month) [2032](Année) ?
-    - [STE COSTA RENT A CAR](Fournisseur) en [Mai](month) [2032](Année) ?
-    - [STE EMEM DU CAPBON](Fournisseur) en [Juin](month) [2032](Année) ?
-    - [STE GHAMMAM NEGOCE](Fournisseur) en [Juillet](month) [2032](Année) ?
-    - [STE JOMAA SA](Fournisseur) en [Août](month) [2032](Année) ?
-    - [STE LE MOTEUR HOUSE](Fournisseur) en [Septembre](month) [2032](Année) ?
-    - [STE OTOKAR](Fournisseur) en [Octobre](month) [2032](Année) ?
-    - [STE POLY ELECTRIC AKOUDA](Fournisseur) en [Novembre](month) [2032](Année) ?
-    - [STE POWER PROFESSIONEL TRANSPORT](Fournisseur) en [Décembre](month) [2032](Année) ?
-    - [STE T.D.S](Fournisseur) en [Janvier](month) [2033](Année) ?
-    - [STE ZOUHAIR KARRAY SECURITE](Fournisseur) en [Février](month) [2033](Année) ?
-    - [STPR](Fournisseur) en [Mars](month) [2033](Année) ?
-    - [Stratégie Digitale](Fournisseur) en [Avril](month) [2033](Année) ?
-    - [STRPA](Fournisseur) en [Mai](month) [2033](Année) ?
-    - [SUD METAL](Fournisseur) en [Juin](month) [2033](Année) ?
-    - [TASNIME VOYAGE ET TOURISME](Fournisseur) en [Juillet](month) [2033](Année) ?
-    - [TECHNIQUE DE L'ELECTRICITE ET SERVICES](Fournisseur) T.E.S. en [Août](month) [2033](Année) ?
-    - [Téchnique informatique et bureautique](Fournisseur) en [Septembre](month) [2033](Année) ?
-    - [TECHNOMACHINE](Fournisseur) en [Octobre](month) [2033](Année) ?
-    - [TOOFAST TECHNIC SERVICE PNEUS](Fournisseur) en [Novembre](month) [2033](Année) ?
-    - [TOTAL TUNISIE](Fournisseur) en [Décembre](month) [2033](Année) ?
-    - [TOUDECORS SARL](Fournisseur) en [Janvier](month) [2034](Année) ?
-    - [TPS](Fournisseur) en [Février](month) [2034](Année) ?
-    - [UHD](Fournisseur) en [Mars](month) [2034](Année) ?
-    - [USP](Fournisseur) en [Avril](month) [2034](Année) ?
-    - [VALORIA S.A](Fournisseur) en [Mai](month) [2034](Année) ?
-    - [VOGUE DISTRIBUTION](Fournisseur) en [Juin](month) [2034](Année) ?
-    - [ZRIBI MAJDI ARCHITECTE ET EXPERT BATIMENT](Fournisseur) en [Juillet](month) [2034](Année) ?
-
-
-
+    - Quel est le total des depenses pour [ADHECOM SARL](Fournisseur) mois [Mars](month) [2022](Annee) ?
+    - Pouvez-vous me donner des details sur [AIRCO](Fournisseur) pour mois [aout](month) [2022](Annee)
+    - Combien depense avec [AL MAADEN](Fournisseur) en [Fevrier](month)?
+    - les montants pour le fournisseur [AMM](Fournisseur) en [Avril](month) [2023](Annee) ?
+    - le montant total pour le fournisseur [TECHNIQUE DE L'ELECTRICITE ET SERVICES T.E.S.](Fournisseur) en [Juin](month) [2023](Annee) ?
+    - Combien avons-nous depense avec [STATION PNEU CHOUCHA (SPC)](Fournisseur) en [novembre](month) [2022](Annee) ?
+    - le montant depense avec [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) pour mois [octobre](month)?
+    - Combien avons-nous depense avec [GENERAL TRANSPORT INTERNATIONAL (GTI)](Fournisseur) pour mois [decmbre](month) [2022](Annee)
