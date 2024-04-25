@@ -1154,3 +1154,99 @@ stories:
 
 
 
+
+- story: interactive_story_1
+  steps:
+  - intent: inform
+    entities:
+    - month: juillet
+    - month: juillet
+  - slot_was_set:
+    - month: juillet
+  - action: action_get_Facture_mois
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Annee: null
+  - slot_was_set:
+    - AnneeD: null
+  - slot_was_set:
+    - AnneeF: null
+  - slot_was_set:
+    - session_started_metadata: null
+
+- story: interactive_story_1
+  steps:
+  - intent: obtenir_total_Jusquau_mois
+    entities:
+    - month: septembre
+    - month: septembre
+  - slot_was_set:
+    - month: septembre
+  - action: action_get_Facture_Jusquau_Mois
+  - slot_was_set:
+    - start_date: null
+  - slot_was_set:
+    - end_date: null
+  - slot_was_set:
+    - Etat: null
+  - slot_was_set:
+    - type: null
+  - slot_was_set:
+    - Montant: null
+  - slot_was_set:
+    - Date: null
+  - slot_was_set:
+    - Fournisseur: null
+  - slot_was_set:
+    - Facture: null
+  - slot_was_set:
+    - top: null
+  - slot_was_set:
+    - Jour: null
+  - slot_was_set:
+    - JourD: null
+  - slot_was_set:
+    - JourF: null
+  - slot_was_set:
+    - month: null
+  - slot_was_set:
+    - monthD: null
+  - slot_was_set:
+    - monthF: null
+  - slot_was_set:
+    - Annee: null
+  - slot_was_set:
+    - AnneeD: null
+  - slot_was_set:
+    - AnneeF: null
+  - slot_was_set:
+    - session_started_metadata: null

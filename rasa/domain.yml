@@ -42,14 +42,12 @@ intents:
 # - Etat
 # - Facture
 # - Fournisseur
-
-
 entities:
+- month
 - monthF
 - monthD
 - Annee
 - Fournisseur
-- month
 - AnneeF
 - AnneeD
 - number
@@ -214,22 +212,21 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 actions:
-- action_default_fallback
+- action_get_Facture_Jusquau_Mois
 - action_get_Facture_mois
+- action_default_fallback
 - action_total_Deux_mois
 - action_montant_total_facture
 - action_get_Facture_deux_mois_deux_annee
 - action_afficher_montants_etat_Prêt_pour_paiement_Date
 - action_afficher_montants_etat_cree_Date
 - action_afficher_montants_etat_validees_Date
-- action_get_Facture_Jusquau_Mois
 - action_montant_total_pluriannuel
 - action_Less_fournisseurs
 - action_obtenir_montant_egal
 - action_get_Fournisseur_Mois_Annee
 - action_obtenir_montant_inf
 - action_obtenir_Fournisseur_montant
-# - action_obtenir_montant_Date
 - action_obtenir_montant_sup
 - action_montant_total_fournisseurs
 - Montant_Total_Par_Etat
@@ -248,7 +245,7 @@ actions:
 - action_top_fournisseurs
 - action_top_Type
 - action_fournisseurs_zero
-# - action_montant_entre_dates
 - action_verifier_fournisseur
 - action_reset_fournisseur_slot
-
+# - action_montant_entre_dates
+#  - action_obtenir_montant_Date

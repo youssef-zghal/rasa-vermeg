@@ -1605,7 +1605,7 @@ class MontantParType(Action):
         return []
 
 # ----------------------------------------------------------------------------------------
-
+ 
 class ActionObtenirFactureMontant(Action):
     def name(self) -> Text:
         return "action_obtenir_Facture_montant"
@@ -1617,46 +1617,50 @@ class ActionObtenirFactureMontant(Action):
         # Récupérer l'input complet de l'utilisateur
         user_input = tracker.latest_message.get("text")
 
-        # Recherche de la facture dans l'input utilisateur
-        # facture = tracker.get_slot("Facture")  # Ajout de facture_entity pour utiliser plus tard
+        # Initialisation de la facture détectée et de sa longueur
+        facture_detectee = None
+        longueur_facture_detectee = 0
 
-        facture = None
-        if facture is None:
-            # dispatcher.utter_message(text="Désolé, je n'ai pas compris le numéro de facture.")
-            # return []
-        
-            for f in factures:
-                if f.lower() in user_input.lower():
-            # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
-                    conn = se_connecter_a_ssms()  # Vous devez implémenter cette fonction
+        for f in factures:
+            if f.lower() in user_input.lower():
+                # Vérifier si la facture courante est plus longue que la facture déjà détectée
+                if len(f) > longueur_facture_detectee:
+                    facture_detectee = f
+                    longueur_facture_detectee = len(f)
 
-                    if conn:
-                        # Exécuter la requête SQL pour obtenir le montant de la facture
-                        cursor = conn.cursor()
-                        query = """
-                            SELECT f.montant, facture.facture, fournisseur.fournisseur, date.date
-                            FROM dbo.fait f
-                            JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey
-                            JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
-                            JOIN dbo.[Dimension Fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_Fournisseur
-                            WHERE facture.facture = ?
-                        """
-                        cursor.execute(query, (f,))
-                        results = cursor.fetchall()
+        if facture_detectee:
+            conn = se_connecter_a_ssms()  # Vous devez implémenter cette fonction
 
-                        if results:
-                            for result in results:
-                                # Récupérer les détails de chaque facture
-                                montant, Facture, Fournisseur, Date = result
-                                dispatcher.utter_message(
-                                    text=f"La facture {Facture} est établie au nom du {Fournisseur}, d'un montant de {montant}, et datée du {Date}."
-                                )
-                        else:
-                            dispatcher.utter_message(text="Désolé, aucune information trouvée pour la facture spécifiée.")
-                    else:
-                        dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
+            if conn:
+                # Exécuter la requête SQL pour obtenir le montant de la facture
+                cursor = conn.cursor()
+                query = """
+                    SELECT f.montant, facture.facture, fournisseur.fournisseur, date.date
+                    FROM dbo.fait f
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension Fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_Fournisseur
+                    WHERE facture.facture = ?
+                """
+                cursor.execute(query, (facture_detectee,))
+                results = cursor.fetchall()
 
-                    return []
+                if results:
+                    for result in results:
+                        # Récupérer les détails de chaque facture
+                        montant, Facture, Fournisseur, Date = result
+                        dispatcher.utter_message(
+                            text=f"La facture {Facture} est établie au nom du {Fournisseur}, d'un montant de {montant}, et datée du {Date}."
+                        )
+                else:
+                    dispatcher.utter_message(text="Désolé, aucune information trouvée pour la facture spécifiée.")
+            else:
+                dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
+        else:
+            dispatcher.utter_message(text="Désolé, je n'ai pas compris le numéro de facture.")
+
+        return []
+
 
 # --------------------------------------------------------------------------------------------------------------------------------
 
@@ -1857,12 +1861,25 @@ class DefaultFallback(Action):
 
         # Récupérer l'entrée utilisateur
         user_input = tracker.latest_message.get("text")
+        fournisseur_detecte = None
+        longueur_fournisseur_detecte = 0
 
         # Vérifier si l'entrée utilisateur contient un nom de fournisseur
+        # for f in fournisseurs:
+        #     if f.lower() in user_input.lower():
+        #         # Si un nom de fournisseur est trouvé, invoquer l'intention de récupération
+        #         return [UserUtteranceReverted(), FollowupAction("Montant_Par_Fournisseur")]
         for f in fournisseurs:
             if f.lower() in user_input.lower():
-                # Si un nom de fournisseur est trouvé, invoquer l'intention de récupération
-                return [UserUtteranceReverted(), FollowupAction("Montant_Par_Fournisseur")]
+        # Vérifier si le fournisseur courant est plus long que le fournisseur déjà détecté
+                if len(f) > longueur_fournisseur_detecte:
+                    fournisseur_detecte = f
+                longueur_fournisseur_detecte = len(f)
+
+        if fournisseur_detecte:
+    # Si un nom de fournisseur est trouvé, invoquer l'intention de récupération
+            return [UserUtteranceReverted(), FollowupAction("Montant_Par_Fournisseur")]
+ 
         if "facture" in user_input.lower():
             # Parcourir la liste des noms de facture
             for facture in factures:
@@ -1874,13 +1891,10 @@ class DefaultFallback(Action):
         # Si aucun nom de fournisseur n'est trouvé, retourner un message d'erreur par défaut
         dispatcher.utter_message(template="utter_default")
         return []
+    
 
 
-
-
-
-
-
+ 
 fournisseurs = [
     'ADHECOM SARL',
     'AIRCO',
@@ -3203,3 +3217,4 @@ types_factures = [
     'transit',
     'vente different produit',
 ]
+

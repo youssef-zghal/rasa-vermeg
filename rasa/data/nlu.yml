@@ -42,15 +42,6 @@ nlu:
     - cette reference [2365894561](number)?
     - reference [2365894561](number) combien il faut payer?
     - coût total pour la reference [2365894561](number)?
-
-
-# - intent: montant_par_date 
-#   examples: |
-#     - Quel est le montant pour la date [2023-01-14](date) ?
-#     - Combien dois-je payer le [2023-01-14](date) ?
-#     - Montant à regler pour le [2023-01-14](date)?
-#     - Quel est le montant prevu pour le [2026-02-31](date) 
-
 - intent: Montant_sup
   examples: |
     - Factures avec un montant superieur a [7559854598](number) ?
@@ -58,7 +49,6 @@ nlu:
     - Montant des paiements  [7559854598](number) ?
     - Quels sont les montants qui excedant a [15233853548](number)
     - paiements sup a [15233853548](number)
-
 - intent: Montant_inf
   examples: |
     - Factures avec un montant inferieur a [7559854598](number) ?
@@ -67,7 +57,6 @@ nlu:
     - Quel est le montant en dessous de [2939223](number)
     - depenses inf à [37779555](number)
     - Achats avec un cout moins eleve que [37779555](number)
-
 - intent: Montant_egal
   examples: |
     - Quelles sont les factures avec un montant egal à [7559854598](number) ?
@@ -75,7 +64,6 @@ nlu:
     - Quel est le montant identique a [49420](number)
     - Paiements egaux à [49420](number) dans les transactions recentes
     - factures avec un montant exact de [7559854598](number)
-
 - intent: Montant_total_fournisseur
   examples: |
     - Quel est le montant total du par les fournisseurs ?
@@ -84,23 +72,20 @@ nlu:
     - Quel est le montant global que nous devons à nos fournisseurs ?
     - Total des sommes dues par nos fournisseurs.
     - Quel est le chiffre total des creances fournisseurs ?
-
 - intent: demande_etat
   examples: |
     - Quel est le montant total pour les etats ?
     - Situation financière ?
     - Montants pour chaque etat ?
-    - Montants attribues à chaque etat 
-
+    - Montants attribues à chaque etat
 - intent: informer_etat_valide
   examples: |
     - Quels sont les montants valides ?
     - Montants valides
     - Factures validees
     - Paiements valides
-    - Quels sont les montants valides ?
     - Montant total pour etat valide
-
+    - valide
 - intent: informer_etat_cree
   examples: |
     - Factures crees
@@ -108,15 +93,14 @@ nlu:
     - Quelles sont les factures cree ?
     - Quels montants ont ete cree ?
     - Factures cree
-
+    - cree
 - intent: informer_etat_prêt_pour_paiement
   examples: |
     - Quels sont les paiements prets pour paiement ?
     - Paiements prets
     - Factures prete pour paiement
     - Montants qui ne sont pas payes
-
-
+    - pret pour paiement
 - intent: ask_type
   examples: |
     - Liste des montants pour les types ?
@@ -125,45 +109,31 @@ nlu:
     - Paiement total pour tous nos secteurs
     - Montants attribues à chaque type ?
     - Montant total pour les types
-
 - intent: inform_fournisseur_count
   examples: |
     - nombre de fournisseurs ?
     - nombre exact de fournisseurs ?
     - combien le total de fournisseurs enregistres.
     - nombre de fournisseurs dans notre base de donnees ?
-
 - intent: inform_Type_count
   examples: |
     - Combien de types avons-nous enregistres ?
     - Nombre total de secteurs ?
     - Combien de types avons-nous ?
     - Nombre de types dans notre base de donnees ?
-
 - intent: inform_facture_count
   examples: |
     - Combien de factures avons-nous ?
     - Nombre de factures dans la base de donnees ?
     - Combien de factures sont la ?
-
-
-- intent: intervalle_par_date
-  examples: |
-    - Quel est le montant total à payer pour la periode du [2024-01-01](start_date) au [2024-01-31](end_date) ?
-    - Combien doit-on payer entre le [2024-01-01](start_date) et [2024-01-31](end_date).
-    - Quels paiements restent à effectuer entre le [2024-01-01](start_date) et [2024-01-31](end_date) ?
-    - Entre [2024-01-01](start_date) et [2024-01-31](end_date) quels sont les paiements à effectuer ?
-    - Quels sont les montants entre le [2023-07-24](start_date) et [2023-07-26](end_date)
-
 - intent: demande_top_fournisseurs
   examples: |
     - Quels sont les [10](number) principaux fournisseurs ?
     - Les [2](number) meilleurs fournisseurs.
     - [8](number) premiers fournisseurs par montant ?
-    - top [13](number) fournisseur 
+    - top [13](number) fournisseur
     - [20](number) fournisseur en travail avec eux le plus?
     - fournisseur avec qui nous avons effectue le plus d'achats ?
-
 - intent: demande_top_Type
   examples: |
     - [4](number) principaux secteur?
@@ -172,7 +142,6 @@ nlu:
     - [1](number) meilleur type
     - type de fournisseur avec le plus grand montant
     - Avec quels [9](number) secteurs avons-nous le plus travaille ?
-
 - intent: demande_Less_fournisseurs
   examples: |
     - Les [2](number) fournisseurs les moins significatifs.
@@ -180,12 +149,10 @@ nlu:
     - Quels sont les [2](number) fournisseurs les moins importants ?
     - Combien avons-nous de fournisseurs moins importants ?
     - Qui sont les [2](number) fournisseurs avec les montants les plus bas ?
-
 - intent: fournisseurs_zero
   examples: |
     - fournisseurs qu'on a jamais travailler avec eux
     - fournisseur avec 0
-
 - intent: obtenir_montant_total_facture
   examples: |
     - Quel est le montant total des factures ?
@@ -193,7 +160,6 @@ nlu:
     - Quel est le montant total de toutes les factures ?
     - Quel est le total des paiements des factures ?
     - Combien dois-je pour mes factures au total ?
-
 - intent: inform
   examples: |
     - Quel est le montant total pour le mois de [janvier](month) ?
@@ -201,35 +167,23 @@ nlu:
     - Quel est le total des montants des factures de [juin](month) pour l'annee [2023](Annee) ?
     - Quel est le total des depenses pour le mois de [mai](month) [2022](Annee) ?
     - Pouvez-vous me fournir le montant total pour le mois [aout](month) en [2022](Annee) ?
-
-
+    - montant total mois [septembre](month) [2024](Annee)
+    - le montant total des factures pour le mois [juillet][{"entity": "month"}, {"entity": "month"}]
 - intent: obtenir_montant_total_pluriannuel
-  examples: | 
+  examples: |
     - Quel est le total des factures pour l'annee [2023](Annee) ?
     - Quel est le montant cumule pour [2023](Annee) et [2022](Annee) ?
     - Pouvez-vous me donner une vue d'ensemble financière pour [2022](Annee).
     - Quel est le montant pour [2023](Annee) et [2024](Annee) ?
     - Quel est le montant total pour [2026](Annee)
-
 - intent: obtenir_total_Deux_mois
   examples: |
-    - Quels sont les depenses pour [mars](monthD) et [avril](monthF) [2022](Annee) ?
-    - Combien avons-nous depense pour [mai](monthD) et [juin](monthF) [2023](Annee) ?
+    - Quels sont les depenses [mars](monthD) et [avril](monthF) [2022](Annee) ?
+    - Combien avons-nous depense [mai](monthD) et [juin](monthF) [2023](Annee) ?
     - Quel est le montant depense de [juin](monthD) jusqu'au [juillet](monthF) en [2023](Annee) ?
     - Quel est le total des factures entre [decembre](monthD) et [janvier](monthF) de l'annee [2021](Annee) ?
     - Quel est le montant total entre [mai](monthD) et [novembre](monthF) en [2023](Annee).
     - Quels sont les montants entre [mai](monthD) et [decembre](monthF) en [2023](Annee).
-
-
-# - intent: obtenir_factures_entre_dates
-#   examples: |
-#     - Quel est le total entre le [2](JourD) [mars](monthD) [2021](AnneeD) et le [13](JourF) [janvier](monthF) [2024](AnneeF).
-#     - Pouvez-vous me montrer les montants de [15](JourD) [mars](monthD) [2021](AnneeD) à [8](JourF) [avril](monthF) [2021](AnneeF).
-#     - Quel est le montant entre le [10](JourD) [juillet](monthD) [2023](AnneeD) et le [15](JourF) [septembre](monthF) [2023](AnneeF).
-#     - Combien avons-nous depense entre le [1](JourD) [avril](monthD) [2021](AnneeD) et [23](JourF) [juin](monthF) [2023](AnneeF).
-#     - Pouvez-vous me montrer le montant total entre [19](JourD) [aout](monthD) [2021](AnneeD) et [21](JourF) [decembre](monthF) [2023](AnneeF).
-
-
 - intent: obtenir_total_Jusquau_mois
   examples: |
     - Quelles sont les depenses accumulees jusqu'au mois de [octobre](month) [2023](Annee) ?
@@ -237,29 +191,31 @@ nlu:
     - Quel est le montant total des factures jusqu'au mois de [decembre](month) [2023](Annee) ?
     - Quels sont les coûts cumules jusqu'au mois de [septembre](month) [2022](Annee) ?
     - Combien avons-nous depense jusqu'à present pour le mois de [juillet](month) [2024](Annee) ?
-
-
+    - montant total jusquau mois [fevrier](month) [2022](Annee)
+    - le montant total jusquau mois [septembre][{"entity": "month"}, {"entity": "month"}]
 - intent: afficher_montants_etat_validees_date
   examples: |
     - Quels sont les montants valides pour [fevrier](month) en [2022](Annee)
     - Quel est le total des factures validees en [mars](month) [2023](Annee)?
     - Pouvez-vous me montrer des factures validees en [septembre](month) [2023](Annee)?
     - Quelles sont les depenses validees en [avril](month)?
-
-
+    - valide mois [septembre](month)
+    - montant valide [mai](month) [2024](Annee)
 - intent: afficher_montants_etat_cree_date
   examples: |
     - Quel est le total des factures creees en [mars](month) [2023](Annee)?
     - Combien avons-nous depense en factures creees en [avril](month)?
     - Quels sont les montants crees pour le mois de [mai](month)
-
+    - cree mois [janvier](month)
+    - montant cree [fevrier](month) [2022](Annee)
 - intent: afficher_montants_etat_Prêt_pour_paiement_date
   examples: |
     - Quels sont les montants prêts pour le paiement en [juin](month) [2023](Annee)
     - Pouvez-vous me montrer le total des factures prêtes pour paiement en [aout](month) [2023](Annee)?
     - Quelles sont les depenses en factures prêtes pour paiement en [septembre](month)?
     - Quelles sont les dettes que nous avons en [decembre](month) [2022](Annee)
-
+    - pret pour paiement [octobre](month) [2024](Annee)
+    - montant pret paiement [juillet](month) [2023](Annee)
 - intent: demander_factures_deux_mois_deux_annee
   examples: |
     - Quel est le montant des factures entre [decembre](monthD) [2022](AnneeD) et [avril](monthF) [2023](AnneeF).
@@ -268,16 +224,16 @@ nlu:
     - Quelles sont les depenses entre [octobre](monthD) [2023](AnneeD)  [novembre](monthF) [2023](AnneeF).
     - Pouvez-vous me montrer les montants entre les deux mois [fevrier](monthD) [2021](AnneeD) le mois [decembre](monthF) [2024](AnneeF)
     - Quel est le montant total pour le mois de [septembre](monthD) [2029](AnneeD) le mois [decembre](monthF) [2030](AnneeF)
-
-- intent: demande_Facture 
+- intent: demande_Facture
   examples: |
-    - Quel est le fournisseur pour cette facture [000126-23](Facture) 
+    - Quel est le fournisseur pour cette facture [000126-23](Facture)
     - Pouvez-vous me donner des informations sur la facture [000455/23](Facture) ?
     - Pourriez-vous consulter la facture [FX/28382-5](Facture)
-    - Pouvez-vous voir les fournisseurs pour la facture [-1](Facture) 
-    - Quelles informations pouvez-vous me fournir sur la facture [292938-22](Facture)  
-
-- intent: demande_montant_type 
+    - Pouvez-vous voir les fournisseurs pour la facture [-1](Facture)
+    - Quelles informations pouvez-vous me fournir sur la facture [292938-22](Facture)
+    - la facture [FV230847](Facture)
+    - voir la facture [LD547/2023](Facture)
+- intent: demande_montant_type
   examples: |
     - Pouvez-vous me montrer les details du type [des cartes et systèmes electroniques](type)
     - Quelles sont les depenses pour le type [agence de communication](type) ?
@@ -286,8 +242,8 @@ nlu:
     - avoir une idee sur le montant du type [Assurance/Consulting](type) ?
     - Pouvez-vous afficher le type [automobile](type) ?
     - Quels sont les montants pour le type [avocat](type) ?
-  
-- intent: demande_montant_fournisseur 
+    - le type [expertise](type)
+- intent: demande_montant_fournisseur
   examples: |
     - Pouvez-vous me montrer le fournisseur [ADHECOM SARL](Fournisseur)
     - Quel est le montant total pour le fournisseur [AIRCO](Fournisseur) ?
@@ -295,9 +251,10 @@ nlu:
     - Combien avons-nous depense avec [STATION PNEU CHOUCHA (SPC)](Fournisseur) ?
     - Quel est le montant depense avec [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) ?
     - Combien avons-nous depense avec [GENERAL TRANSPORT INTERNATIONAL (GTI)](Fournisseur) ?
-
-
-- intent: demander_montant_total_fournisseur_mois_annee 
+    - le fournisseur [COREME](Fournisseur)
+    - consulter [DELOITTE](Fournisseur)
+    - je veux connaitre des details sur [Cash&Carry](Fournisseur) 
+- intent: demander_montant_total_fournisseur_mois_annee
   examples: |
     - Quel est le total des depenses pour [ADHECOM SARL](Fournisseur) mois [Mars](month) [2022](Annee) ?
     - Pouvez-vous me donner des details sur [AIRCO](Fournisseur) pour mois [aout](month) [2022](Annee)
@@ -307,3 +264,28 @@ nlu:
     - Combien avons-nous depense avec [STATION PNEU CHOUCHA (SPC)](Fournisseur) en [novembre](month) [2022](Annee) ?
     - le montant depense avec [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) pour mois [octobre](month)?
     - Combien avons-nous depense avec [GENERAL TRANSPORT INTERNATIONAL (GTI)](Fournisseur) pour mois [decmbre](month) [2022](Annee)
+    - le montant pour le fournisseur [DIESEL ENERGY](Fournisseur) le mois [septembre](month) [2028](Annee)
+    - montant fournisseur [Dr. Jamel Darragi](Fournisseur) le mois [mai](month) [2023](Annee)
+
+# - intent: montant_par_date 
+#   examples: |
+#     - Quel est le montant pour la date [2023-01-14](date) ?
+#     - Combien dois-je payer le [2023-01-14](date) ?
+#     - Montant à regler pour le [2023-01-14](date)?
+#     - Quel est le montant prevu pour le [2026-02-31](date) 
+
+# - intent: intervalle_par_date
+  # examples: |
+  #   - Quel est le montant total à payer pour la periode du [2024-01-01](start_date) au [2024-01-31](end_date) ?
+  #   - Combien doit-on payer entre le [2024-01-01](start_date) et [2024-01-31](end_date).
+  #   - Quels paiements restent à effectuer entre le [2024-01-01](start_date) et [2024-01-31](end_date) ?
+  #   - Entre [2024-01-01](start_date) et [2024-01-31](end_date) quels sont les paiements à effectuer ?
+  #   - Quels sont les montants entre le [2023-07-24](start_date) et [2023-07-26](end_date)
+
+# - intent: obtenir_factures_entre_dates
+#   examples: |
+#     - Quel est le total entre le [2](JourD) [mars](monthD) [2021](AnneeD) et le [13](JourF) [janvier](monthF) [2024](AnneeF).
+#     - Pouvez-vous me montrer les montants de [15](JourD) [mars](monthD) [2021](AnneeD) à [8](JourF) [avril](monthF) [2021](AnneeF).
+#     - Quel est le montant entre le [10](JourD) [juillet](monthD) [2023](AnneeD) et le [15](JourF) [septembre](monthF) [2023](AnneeF).
+#     - Combien avons-nous depense entre le [1](JourD) [avril](monthD) [2021](AnneeD) et [23](JourF) [juin](monthF) [2023](AnneeF).
+#     - Pouvez-vous me montrer le montant total entre [19](JourD) [aout](monthD) [2021](AnneeD) et [21](JourF) [decembre](monthF) [2023](AnneeF).
