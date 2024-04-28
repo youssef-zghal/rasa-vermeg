@@ -19,7 +19,6 @@ intents:
 - demande_top_fournisseurs
 - demander_factures_deux_mois_deux_annee
 - demander_montant_total_fournisseur_mois_annee
-- fournisseurs_zero
 - inform
 - inform_Type_count
 - inform_facture_count
@@ -32,6 +31,11 @@ intents:
 - obtenir_total_Deux_mois
 - obtenir_total_Jusquau_mois
 - salutation
+- inform_facture_count_par_mois
+- inform_facture_count_par_annee
+- inform_fournisseur_count_par_mois
+- inform_fournisseur_count_par_annee
+# - fournisseurs_zero
 # - montant_par_date
 # - obtenir_factures_entre_dates
 # - intervalle_par_date
@@ -63,6 +67,8 @@ entities:
 - JourD
 - JourF
 - fournisseur_reconnu
+
+
 slots:
   fournisseur_reconnu:
     type: bool
@@ -183,11 +189,6 @@ slots:
     - type: from_entity
       entity: AnneeF
 responses:
-  # utter_salutation:
-  # - text: |-
-  #     Bonjour Je suis InvoiceBOT powered by Vermeg.
-
-  #     je suis prêt à vous aider!
   utter_bye:
   - text: 'Au revoir, content de vous avoir aide! '
   utter_Reference:
@@ -208,10 +209,12 @@ responses:
   - text: Quel est le Fournisseur voudriez-vous detailler davantage?
   utter_default:
   - text: Pardon, pourriez-vous poser la question autrement ?
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 actions:
+- action_salutation
 - action_get_Facture_Jusquau_Mois
 - action_get_Facture_mois
 - action_default_fallback
@@ -244,8 +247,12 @@ actions:
 - action_obtenir_Facture_montant
 - action_top_fournisseurs
 - action_top_Type
-- action_fournisseurs_zero
+- action_count_Facture_par_mois
 - action_verifier_fournisseur
 - action_reset_fournisseur_slot
+- action_count_Facture_par_annee
+- action_count_Fournisseur_par_mois
+- action_count_Fournisseur_par_annee
 # - action_montant_entre_dates
-#  - action_obtenir_montant_Date
+# - action_obtenir_montant_Date
+# - action_fournisseurs_zero

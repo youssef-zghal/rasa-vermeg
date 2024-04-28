@@ -76,11 +76,54 @@ conn = se_connecter_a_ssms()
 
 
 
+
+
 from typing import Type, Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 import pyodbc
 from rasa_sdk.events import SlotSet
+from langchain_community.llms import GPT4All
+
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+from typing import Any, Text, Dict, List
+
+
+class ActionSayHello(Action):
+    def name(self) -> Text:
+        return "action_salutation"
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        user_input = tracker.latest_message.get("text")
+        try:
+            # Charger le modèle avec les paramètres personnalisés
+            llm = GPT4All(
+                model="C:/Users/ADMIN/AppData/Local/nomic.ai/GPT4All/Nous-Hermes-2-Mistral-7B-DPO.Q4_0.gguf",
+                max_tokens=30,  # Réduisez ce nombre pour obtenir des réponses plus courtes
+                n_batch=15,  # Vous pouvez ajuster ce nombre selon vos besoins
+                temp=0.7,  # Réduisez cette valeur pour des réponses plus déterministes
+                top_k=10,  # Augmentez ce nombre pour des réponses plus déterministes
+                top_p=0.8  # Réduisez cette valeur pour des réponses plus déterministes
+            )
+            # Appeler la méthode invoke avec le prompt et le contexte système
+        
+            response = llm.invoke(f"""be polite your name is InvoiceBot and answer briefly in french to any query\n 
+                                you are a financial advisor\n
+                                  don't write output just answer to the question\nInput: {user_input}""")
+            # Parse the response to get the answer
+            answer_start = response.find("Output: ")+7
+            answer_end = len(response) - 1  # Assuming the answer ends with a newline
+            answer = response[answer_start:answer_end].strip()
+
+            # Display the answer
+            dispatcher.utter_message(text=answer)
+
+        except Exception as e:
+            # Gérer les exceptions et afficher un message approprié
+            print("Une erreur s'est produite:", e)
+
+        return []
+
 
 class ActionObtenirFournisseurMontant(Action):
     def name(self) -> Text:
@@ -133,7 +176,16 @@ class ActionObtenirMontantInf(Action):
     async def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[Dict[Text, Any]]:
-        
+        user_input = tracker.latest_message.get("text")
+
+        # Initialisation de la facture détectée et de sa longueur
+
+
+        for f in factures:
+            if f.lower() in user_input.lower():
+                    return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
+
+
         # Récupérer l'entité montant du tracker
         ref_entity = tracker.get_slot("Montant")
         if ref_entity:
@@ -194,7 +246,10 @@ class ActionObtenirMontantSup(Action):
     async def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[Dict[Text, Any]]:
-        
+        user_input = tracker.latest_message.get("text")
+        for f in factures:
+            if f.lower() in user_input.lower():
+                    return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
         # Récupérer l'entité montant du tracker
         ref_entity = tracker.get_slot("Montant")
         if ref_entity:
@@ -319,14 +374,16 @@ class ActionMontantTotalFournisseurs(Action):
                 for row in results:
                     fournisseur = row[0]
                     montant_total = row[1]
+                    montant_formatte = "{:,.2f}".format(montant_total)  # Formatage du montant
                     dispatcher.utter_message(
-                        text=f"Le fournisseur {fournisseur} doit un montant total de {montant_total}."
+                        text=f"Le fournisseur {fournisseur} doit un montant total de {montant_formatte}."
                     )
                     montants_fournisseurs.append(montant_total)
 
                 somme_total_montants = sum(montants_fournisseurs)
+                somme_total_formattee = "{:,.2f}".format(somme_total_montants)  # Formatage de la somme totale
                 dispatcher.utter_message(
-                    text=f"La somme totale des montants dus par les fournisseurs est {somme_total_montants}."
+                    text=f"La somme totale des montants dus par les fournisseurs est {somme_total_formattee}."
                 )
                 
             else:
@@ -335,7 +392,6 @@ class ActionMontantTotalFournisseurs(Action):
             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
 
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
-
 
 
 # -----------------------------------------------------------------------------------------------------------------
@@ -418,10 +474,11 @@ class MontantTotalParEtat(Action):
 
             if results:
                 for row in results:
-                    Etat = row[0]
+                    etat = row[0]
                     montant_total = row[1]
+                    montant_formatte = "{:,.2f}".format(montant_total)  # Formatage du montant
                     dispatcher.utter_message(
-                        text=f"L'Etat' {Etat} -> {montant_total}."
+                        text=f"L'Etat {etat} doit un montant total de {montant_formatte}."
                     )
             else:
                 dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver les informations sur les montants dus par etat.")
@@ -429,7 +486,6 @@ class MontantTotalParEtat(Action):
             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
 
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
-
 
 
 # -----------------------------------------------------------------------------------------------------------------
@@ -460,19 +516,21 @@ class ActionAfficherMontantsEtatValidees(Action):
                 # Récupérer les détails de chaque facture
                 fournisseur, reference, facture, date, montant, etat, type = result
                 date_str = date.strftime("%Y-%m-%d")
+                montant_formatte = "{:,.2f}".format(montant)  # Formatage du montant
                 dispatcher.utter_message(
-                        text=f"Le fournisseur {fournisseur} a une facture {facture} d'un montant de {montant} avec un état {etat}."
+                        text=f"Le fournisseur {fournisseur} a une facture {facture} d'un montant de {montant_formatte} avec un état {etat}."
                     )
                 total_montant += montant  # Ajoute le montant au total
 
+            # Formatage du montant total
+            total_montant_formatte = "{:,.2f}".format(total_montant)
             # Affiche le montant total à la fin
-            dispatcher.utter_message(text=f"Le montant total des factures validées est de : {total_montant}.")
+            dispatcher.utter_message(text=f"Le montant total des factures validées est de : {total_montant_formatte}.")
         else:
             # Aucun montant trouvé pour l'état Validé
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Validé'.")
 
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
-
 
 # -----------------------------------------------------------------------------------------------------------------
          
@@ -501,13 +559,16 @@ class ActionAfficherMontantsEtatCree(Action):
                 # Récupérer les détails de chaque facture
                 fournisseur, reference, facture, date, montant, etat, type = result
                 date_str = date.strftime("%Y-%m-%d")
+                montant_formatte = "{:,.2f}".format(montant)  # Formatage du montant
                 dispatcher.utter_message(
-                        text=f"Le fournisseur {fournisseur} a une facture {facture} d'un montant de {montant} avec un état {etat}."
+                        text=f"Le fournisseur {fournisseur} a une facture {facture} d'un montant de {montant_formatte} avec un état {etat}."
                     )
                 total_montant += montant  # Ajoute le montant au total
 
+            # Formatage du montant total
+            total_montant_formatte = "{:,.2f}".format(total_montant)
             # Affiche le montant total à la fin
-            dispatcher.utter_message(text=f"Le montant total des factures créées est de : {total_montant}.")
+            dispatcher.utter_message(text=f"Le montant total des factures créées est de : {total_montant_formatte}.")
         else:
             # Aucun montant trouvé pour l'état Créé
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Créé'.")
@@ -542,13 +603,16 @@ class ActionAfficherMontantsEtatPret(Action):
                 # Récupérer les détails de chaque facture
                 fournisseur, reference, facture, date, montant, etat, type = result
                 date_str = date.strftime("%Y-%m-%d")
+                montant_formatte = "{:,.2f}".format(montant)  # Formatage du montant
                 dispatcher.utter_message(
-                        text=f"Le fournisseur {fournisseur} a une facture {facture} d'un montant de {montant} avec un état {etat}."
+                        text=f"Le fournisseur {fournisseur} a une facture {facture} d'un montant de {montant_formatte} avec un état {etat}."
                     )
                 total_montant += montant  # Ajoute le montant au total
 
+            # Formatage du montant total
+            total_montant_formatte = "{:,.2f}".format(total_montant)
             # Affiche le montant total à la fin
-            dispatcher.utter_message(text=f"Le montant total des factures prêtes pour paiement est de : {total_montant}.")
+            dispatcher.utter_message(text=f"Le montant total des factures prêtes pour paiement est de : {total_montant_formatte}.")
         else:
             # Aucun montant trouvé pour l'état Prêt pour paiement
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Prêt pour paiement'.")
@@ -585,13 +649,16 @@ class MontantTotalParType(Action):
                 for row in results:
                     type = row[0]
                     montant_total = row[1]
+                    montant_formatte = "{:,.2f}".format(montant_total)  # Formatage du montant
                     total_general += montant_total  # Ajouter le montant total de chaque type au total général
                     dispatcher.utter_message(
-                        text=f"Type: {type} -> Montant total: {montant_total}."
+                        text=f"Type: {type} -> Montant total: {montant_formatte}."
                     )
+                # Formatage du montant total général
+                total_general_formatte = "{:,.2f}".format(total_general)
                 # Afficher le montant total général
                 dispatcher.utter_message(
-                    text=f"Montant total de tous les types: {total_general}."
+                    text=f"Montant total de tous les types: {total_general_formatte}."
                 )
             else:
                 dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver les informations sur les montants dus par type.")
@@ -601,7 +668,130 @@ class MontantTotalParType(Action):
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
 
 # -----------------------------------------------------------------------------------------------------------------
+class ActionCountFournisseurParAnnee(Action):
+    def name(self) -> Text:
+        return "action_count_Fournisseur_par_annee"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        try:
+            # Récupérer l'année spécifiée par l'utilisateur
+            year_entity = tracker.get_slot("Annee")
+
+            if year_entity:
+                # Exécuter la requête pour compter les fournisseurs pour l'année spécifiée
+                cursor = conn.cursor()
+                cursor.execute("SELECT COUNT(DISTINCT Fournisseur) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey JOIN dbo.[Dimension Fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.PK_Fournisseur WHERE YEAR(date.date) = ?", (year_entity,))
+                count = cursor.fetchone()[0]  # Obtenir le nombre de fournisseurs pour l'année spécifiée
+
+                # Envoyer la réponse avec le nombre de fournisseurs pour l'année spécifiée
+                dispatcher.utter_message(text=f"Nombre de fournisseurs pour l'année {year_entity} : {count}")
+            else:
+                # Exécuter la requête pour compter le nombre total de fournisseurs par année
+                cursor = conn.cursor()
+                cursor.execute("SELECT YEAR(date.date), COUNT(DISTINCT Fournisseur) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey JOIN dbo.[Dimension Fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.PK_Fournisseur GROUP BY YEAR(date.date)")
+                counts_by_year = cursor.fetchall()  # Obtenir le nombre total de fournisseurs par année
+
+                # Formatage de la réponse avec les résultats pour chaque année
+                response_text = "Nombre de fournisseurs par année :\n"
+                for year, count in counts_by_year:
+                    response_text += f"{year} : {count}\n"
+
+                # Envoyer la réponse avec le texte formaté
+                dispatcher.utter_message(text=response_text)
+
+        except Exception as e:
+            # En cas d'erreur, afficher un message d'erreur
+            dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
+
+        return [SlotSet("Annee", None)]
+
+
 # -----------------------------------------------------------------------------------------------------------------
+class ActionCountFournisseurParMois(Action):
+    def name(self) -> Text:
+        return "action_count_Fournisseur_par_mois"
+
+    def preprocess_month(self, month: Text) -> Text:
+        """
+        Preprocesses the month entity to remove accents and circumflexes.
+        """
+        month = month.lower()
+        month = month.replace('é', 'e').replace('ê', 'e').replace('û', 'u').replace('û', 'u').replace('ô', 'o').replace('î', 'i').replace('è', 'e')
+        return month
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        month_map = {
+            "janvier": "01",
+            "fevrier": "02",
+            "mars": "03",
+            "avril": "04",
+            "mai": "05",
+            "juin": "06",
+            "juillet": "07",
+            "aout": "08",
+            "septembre": "09",
+            "octobre": "10",
+            "novembre": "11",
+            "decembre": "12"
+        }
+
+        # Récupérer l'input complet de l'utilisateur
+        user_input = tracker.latest_message.get("text")
+
+        try:
+            # Vérifier si l'utilisateur a spécifié un mois
+            specified_month = None
+            for month, month_num in month_map.items():
+                preprocessed_month = self.preprocess_month(month)
+                if preprocessed_month in user_input:
+                    specified_month = month
+                    specified_month_num = month_num
+                    break
+
+            # Exécuter la requête SQL pour compter les fournisseurs pour le mois spécifié
+            if specified_month:
+                cursor = conn.cursor()
+                cursor.execute("SELECT COUNT(DISTINCT Fournisseur) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey JOIN dbo.[Dimension Fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.PK_Fournisseur WHERE MONTH(date) = ?", (specified_month_num,))
+                count_specified_month = cursor.fetchone()[0]  # Obtenir le nombre de fournisseurs distincts pour le mois spécifié
+
+                # Envoyer la réponse avec le nombre de fournisseurs pour le mois spécifié
+                response_text_specified_month = f"Nombre de fournisseurs distincts pour {specified_month.capitalize()} : {count_specified_month}"
+                dispatcher.utter_message(text=response_text_specified_month)
+
+            # Si aucun mois spécifié, compter les fournisseurs pour chaque mois
+            else:
+                # Initialiser un dictionnaire pour stocker les résultats par mois
+                counts_by_month = {}
+
+                # Boucle à travers tous les mois
+                for month, month_num in month_map.items():
+                    # Exécuter la requête SQL pour compter les fournisseurs pour chaque mois
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT COUNT(DISTINCT Fournisseur) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey JOIN dbo.[Dimension Fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.PK_Fournisseur WHERE MONTH(date) = ?", (month_num,))
+                    count = cursor.fetchone()[0]  # Obtenir le nombre de fournisseurs distincts pour le mois donné
+                    counts_by_month[month] = count
+
+                # Formatage de la réponse avec les résultats pour chaque mois
+                response_text_by_month = "Nombre de fournisseurs distincts par mois :\n"
+                for month, count in counts_by_month.items():
+                    response_text_by_month += f"{month.capitalize()} : {count}\n"
+
+                # Envoyer la réponse avec le texte formaté pour chaque mois
+                dispatcher.utter_message(text=response_text_by_month)
+
+        except Exception as e:
+            # En cas d'erreur, affichez un message d'erreur
+            dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
+
+        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
+
+
 # -----------------------------------------------------------------------------------------------------------------
 
 class ActionCountFournisseur(Action):
@@ -738,7 +928,132 @@ class ActionCountFacture(Action):
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
 
 
- # -------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------
+
+
+class ActionCountFactureParMois(Action):
+    def name(self) -> Text:
+        return "action_count_Facture_par_mois"
+
+    def preprocess_month(self, month: Text) -> Text:
+        """
+        Preprocesses the month entity to match the format in the database.
+        """
+        month_map = {
+            "janvier": "01",
+            "février": "02",
+            "mars": "03",
+            "avril": "04",
+            "mai": "05",
+            "juin": "06",
+            "juillet": "07",
+            "aout": "08",
+            "septembre": "09",
+            "octobre": "10",
+            "novembre": "11",
+            "decembre": "12"
+        }
+        preprocessed_month = month.lower()
+        preprocessed_month = preprocessed_month.replace('é', 'e').replace('ê', 'e').replace('û', 'u').replace('û', 'u').replace('ô', 'o').replace('î', 'i').replace('è', 'e')
+        return month_map.get(preprocessed_month, None)
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        try:
+            # Récupérer le mois spécifié par l'utilisateur
+            month_entity = tracker.get_slot("month")
+
+            if month_entity:
+                # Prétraiter le mois pour correspondre au format dans la base de données
+                month_num = self.preprocess_month(month_entity)
+
+                if month_num:
+                    # Exécuter la requête pour compter les factures pour le mois spécifié
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT COUNT(Facture) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture WHERE MONTH(date) = ?", (month_num,))
+                    count = cursor.fetchone()[0]  # Obtenir le nombre de factures pour le mois spécifié
+
+                    # Envoyer la réponse avec le nombre de factures pour le mois spécifié
+                    dispatcher.utter_message(text=f"Nombre de factures pour {month_entity.capitalize()} : {count}")
+                else:
+                    dispatcher.utter_message(text="Mois non valide.")
+
+            else:
+                # Initialise un dictionnaire pour stocker les résultats par mois
+                counts_by_month = {}
+
+                # Liste des mois
+                mois_list = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre"]
+
+                # Boucle à travers tous les mois
+                for month in mois_list:
+                    month_num = self.preprocess_month(month)
+
+                    # Exécuter la requête pour compter les Facture pour le mois donné
+                    cursor = conn.cursor()
+                    cursor.execute("SELECT COUNT(Facture) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture WHERE MONTH(date) = ?", (month_num,))
+                    count = cursor.fetchone()[0]  # Obtenir le nombre de facture pour le mois donné
+
+                    # Stockez le résultat dans le dictionnaire
+                    counts_by_month[month] = count
+
+                # Envoyez la réponse avec les résultats pour chaque mois
+                response_text = "Nombre de factures par mois :\n"
+                for month, count in counts_by_month.items():
+                    response_text += f"{month.capitalize()} : {count}\n"
+
+                dispatcher.utter_message(text=response_text)
+
+        except Exception as e:
+            # En cas d'erreur, affichez un message d'erreur
+            dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
+
+        return [SlotSet("month", None)]
+# -------------------------------------------------------------------------------------------
+
+class ActionCountFactureParAnnee(Action):
+    def name(self) -> Text:
+        return "action_count_Facture_par_annee"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        try:
+            # Récupérer l'année spécifiée par l'utilisateur
+            year_entity = tracker.get_slot("Annee")
+
+            if year_entity:
+                # Exécuter la requête pour compter les factures pour l'année spécifiée
+                cursor = conn.cursor()
+                cursor.execute("SELECT COUNT(Facture) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture WHERE YEAR(date.date) = ?", (year_entity,))
+                count = cursor.fetchone()[0]  # Obtenir le nombre de factures pour l'année spécifiée
+
+                # Envoyer la réponse avec le nombre de factures pour l'année spécifiée
+                dispatcher.utter_message(text=f"Nombre de factures pour l'année {year_entity} : {count}")
+            else:
+                # Exécuter la requête pour compter le nombre total de factures par année
+                cursor = conn.cursor()
+                cursor.execute("SELECT YEAR(date.date), COUNT(Facture) FROM dbo.fait f JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture GROUP BY YEAR(date.date)")
+                counts_by_year = cursor.fetchall()  # Obtenir le nombre total de factures par année
+
+                # Formatage de la réponse avec les résultats pour chaque année
+                response_text = "Nombre de factures par année :\n"
+                for year, count in counts_by_year:
+                    response_text += f"{year} : {count}\n"
+
+                # Envoyer la réponse avec le texte formaté
+                dispatcher.utter_message(text=response_text)
+
+        except Exception as e:
+            # En cas d'erreur, afficher un message d'erreur
+            dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
+
+        return [SlotSet("Annee", None)]
+
+# -------------------------------------------------------------------------------------------
 
 class TopFournisseurs(Action):
     def name(self) -> Text:
@@ -775,8 +1090,9 @@ class TopFournisseurs(Action):
         if results:
             for idx, result in enumerate(results, start=1):
                 fournisseur, total_montant = result
+                montant_formatte = "{:,.2f}".format(total_montant)  # Formatage du montant
                 dispatcher.utter_message(
-                    text=f"{idx}. {fournisseur} : {total_montant} "
+                    text=f"{idx}. {fournisseur} : {montant_formatte} "
                 )
         else:
             dispatcher.utter_message(text="Aucun résultat trouvé pour les top fournisseurs.")
@@ -820,8 +1136,9 @@ class TopType(Action):
         if results:
             for idx, result in enumerate(results, start=1):
                 Type, total_montant = result
+                montant_formatte = "{:,.2f}".format(total_montant)  # Formatage du montant
                 dispatcher.utter_message(
-                    text=f"{idx}. {Type} : {total_montant} "
+                    text=f"{idx}. {Type} : {montant_formatte} "
                 )
         else:
             dispatcher.utter_message(text="Aucun résultat trouvé pour les top Type.")
@@ -866,8 +1183,9 @@ class LessFournisseurs(Action):
         if results:
             for idx, result in enumerate(results, start=1):
                 fournisseur, total_montant = result
+                montant_formatte = "{:,.2f}".format(total_montant)  # Formatage du montant
                 dispatcher.utter_message(
-                    text=f"{idx}. {fournisseur} : {total_montant} "
+                    text=f"{idx}. {fournisseur} : {montant_formatte} "
                 )
         else:
             dispatcher.utter_message(text="Aucun résultat trouvé pour les top fournisseurs.")
@@ -876,33 +1194,33 @@ class LessFournisseurs(Action):
 
 # -----------------------------------------------------------------------------
  
-class ActionFournisseursZero(Action):
-    def name(self):
-        return "action_fournisseurs_zero"
+# class ActionFournisseursZero(Action):
+#     def name(self):
+#         return "action_fournisseurs_zero"
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
-        try:
-            # Connexion à la base de données
-            conn = se_connecter_a_ssms()
+#     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
+#         try:
+#             # Connexion à la base de données
+#             conn = se_connecter_a_ssms()
 
-            # Exécuter la requête SQL pour récupérer les fournisseurs avec un montant de 0
-            query = f"""SELECT DISTINCT fournisseur.fournisseur 
-                        FROM dbo.Fait f 
-                        JOIN dbo.[Dimension Fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_Fournisseur
-                        WHERE montant = 0"""
-            results = executer_requete(conn, query)
+#             # Exécuter la requête SQL pour récupérer les fournisseurs avec un montant de 0
+#             query = f"""SELECT DISTINCT fournisseur.fournisseur 
+#                         FROM dbo.Fait f 
+#                         JOIN dbo.[Dimension Fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_Fournisseur
+#                         WHERE montant = 0"""
+#             results = executer_requete(conn, query)
 
-            # Si des résultats sont trouvés, les envoyer au chatbot
-            if results:
-                fournisseurs = [row[0] for row in results]
-                dispatcher.utter_message("Les fournisseurs qu'on a jamais travailler avec eux sont : {}".format(", ".join(fournisseurs)))
-            else:
-                dispatcher.utter_message("Aucun fournisseur n'a été trouvé.")
+#             # Si des résultats sont trouvés, les envoyer au chatbot
+#             if results:
+#                 fournisseurs = [row[0] for row in results]
+#                 dispatcher.utter_message("Les fournisseurs qu'on a jamais travailler avec eux sont : {}".format(", ".join(fournisseurs)))
+#             else:
+#                 dispatcher.utter_message("Aucun fournisseur n'a été trouvé.")
 
-        except Exception as e:
-            dispatcher.utter_message("Une erreur s'est produite lors de la récupération des fournisseurs : {}".format(str(e)))
+#         except Exception as e:
+#             dispatcher.utter_message("Une erreur s'est produite lors de la récupération des fournisseurs : {}".format(str(e)))
 
-        return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
+#         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
     
 # ------------------------------------------------------------------------------
 
@@ -933,14 +1251,16 @@ class ActionMontantTotalFacture(Action):
                     fournisseur = row[0]
                     facture = row[1]
                     montant_total_facture = row[2]
+                    montant_formatte = "{:,.2f}".format(montant_total_facture)  # Formatage du montant
                     dispatcher.utter_message(
-                        text=f"La facture {facture} pour le fournisseur {fournisseur} doit un montant total de {montant_total_facture}."
+                        text=f"La facture {facture} pour le fournisseur {fournisseur} doit un montant total de {montant_formatte}."
                     )
                     montants_factures.append(montant_total_facture)
 
                 somme_total_montants = sum(montants_factures)
+                total_formatte = "{:,.2f}".format(somme_total_montants)  # Formatage du montant total
                 dispatcher.utter_message(
-                    text=f"Le montant total des factures est {somme_total_montants}."
+                    text=f"Le montant total des factures est {total_formatte}."
                 )
                 
             else:
@@ -988,8 +1308,9 @@ class ActionMontantTotalPluriannuel(Action):
                     else:
                         dispatcher.utter_message(text=f"Aucune facture trouvée pour l'Annee {annee}.")
 
+                montant_total_pluriannuel_formatte = "{:,.2f}".format(montant_total_pluriannuel)  # Formatage du montant total
                 dispatcher.utter_message(
-                    text=f"Le montant total des factures pour les Annees {', '.join(annees)} est de {montant_total_pluriannuel}."
+                    text=f"Le montant total des factures pour les Annees {', '.join(annees)} est de {montant_total_pluriannuel_formatte}."
                 )
             else:
                 dispatcher.utter_message(text="Je n'ai pas compris pour quelles Annees vous voulez obtenir le montant total des factures.")
@@ -997,7 +1318,6 @@ class ActionMontantTotalPluriannuel(Action):
             dispatcher.utter_message(text="Erreur de connexion à la base de données.")
 
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
-
 #----------------------------------------------------------------------------------------------------
 import re
 
@@ -1062,15 +1382,13 @@ class ActionMontantTotalDeuxMois(Action):
             """, (start_month, end_month, year))
         total_montant = cursor.fetchone()[0]
 
+        # Formatage du montant total
+        total_montant_formatte = "{:,.2f}".format(total_montant) if total_montant is not None else "0.00"
 
         # Réponse du chatbot
-        if total_montant:
-            dispatcher.utter_message(f"Le montant total des factures entre {start_month_name} et {end_month_name} pour l'Annee {year} est de {total_montant}.")
-        else:
-            dispatcher.utter_message("Aucune facture trouvée pour les mois spécifiés.")
+        dispatcher.utter_message(f"Le montant total des factures entre {start_month_name} et {end_month_name} pour l'Annee {year} est de {total_montant_formatte}.")
 
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
-
 #---------------------------------------------------------------------------------------------------------------------------------------------------
   
 #---------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1327,7 +1645,7 @@ class ActionGetFactureDeuxMoisDeuxAnnee(Action):
 
         month_map = {
             "janvier": "01",
-            "fevrier": "02",
+            "février": "02",
             "février": "02",
             "août": "08",
             "mars": "03",
@@ -1339,9 +1657,8 @@ class ActionGetFactureDeuxMoisDeuxAnnee(Action):
             "septembre": "09",
             "octobre": "10",
             "novembre": "11",
-            "decembre": "12",
-            "décembre": "12"
-
+            "décembre": "12",
+            "decembre": "12"
         }
 
         month_entity1 = tracker.get_slot('monthD')
@@ -1351,7 +1668,7 @@ class ActionGetFactureDeuxMoisDeuxAnnee(Action):
 
         print("monthD ",month_entity1, "yearD ",year_entity1 )
         print("monthF" ,month_entity2 ,"yearF ",year_entity2 )
-        
+
         if month_entity1 and month_entity2 and year_entity1 and year_entity2:
             preprocessed_month1 = self.preprocess_month(month_entity1)
             preprocessed_month2 = self.preprocess_month(month_entity2)
@@ -1374,7 +1691,9 @@ class ActionGetFactureDeuxMoisDeuxAnnee(Action):
                 total_montant = cursor.fetchone()[0]
 
                 if total_montant:
-                    dispatcher.utter_message(f"Le montant total des factures entre {month_entity1} {year_entity1} et {month_entity2} {year_entity2} est {total_montant}.")
+                    # Formatage du montant total
+                    total_montant_formatted = "{:,.2f}".format(total_montant)
+                    dispatcher.utter_message(f"Le montant total des factures entre {month_entity1} {year_entity1} et {month_entity2} {year_entity2} est {total_montant_formatted}.")
                 else:
                     dispatcher.utter_message(f"Aucune donnée disponible pour la période entre {month_entity1} {year_entity1} et {month_entity2} {year_entity2}.")
             else:
@@ -1616,7 +1935,7 @@ class ActionObtenirFactureMontant(Action):
 
         # Récupérer l'input complet de l'utilisateur
         user_input = tracker.latest_message.get("text")
-
+        print('-----------------------',user_input)
         # Initialisation de la facture détectée et de sa longueur
         facture_detectee = None
         longueur_facture_detectee = 0
@@ -1855,43 +2174,37 @@ class DefaultFallback(Action):
     def name(self) -> Text:
         return "action_default_fallback"
 
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        # Récupérer l'entrée utilisateur
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         user_input = tracker.latest_message.get("text")
-        fournisseur_detecte = None
-        longueur_fournisseur_detecte = 0
+        try:
+            # Charger le modèle avec les paramètres personnalisés
+            llm = GPT4All(
+                model="C:/Users/ADMIN/AppData/Local/nomic.ai/GPT4All/Nous-Hermes-2-Mistral-7B-DPO.Q4_0.gguf",
+                max_tokens=30,  # Réduisez ce nombre pour obtenir des réponses plus courtes
+                n_batch=15,  # Vous pouvez ajuster ce nombre selon vos besoins
+                temp=0.7,  # Réduisez cette valeur pour des réponses plus déterministes
+                top_k=10,  # Augmentez ce nombre pour des réponses plus déterministes
+                top_p=0.8  # Réduisez cette valeur pour des réponses plus déterministes
+            )
+            # Appeler la méthode invoke avec le prompt et le contexte système
+        
+            response = llm.invoke(f"""be polite your name is InvoiceBot and answer briefly in french to any query\n 
+                                you are a financial advisor\n
+                                  don't write output just answer to the question\nInput: {user_input}""")
+            # Parse the response to get the answer
+            answer_start = response.find("Output: ")+7
+            answer_end = len(response) - 1  # Assuming the answer ends with a newline
+            answer = response[answer_start:answer_end].strip()
 
-        # Vérifier si l'entrée utilisateur contient un nom de fournisseur
-        # for f in fournisseurs:
-        #     if f.lower() in user_input.lower():
-        #         # Si un nom de fournisseur est trouvé, invoquer l'intention de récupération
-        #         return [UserUtteranceReverted(), FollowupAction("Montant_Par_Fournisseur")]
-        for f in fournisseurs:
-            if f.lower() in user_input.lower():
-        # Vérifier si le fournisseur courant est plus long que le fournisseur déjà détecté
-                if len(f) > longueur_fournisseur_detecte:
-                    fournisseur_detecte = f
-                longueur_fournisseur_detecte = len(f)
+            # Display the answer
+            dispatcher.utter_message(text=answer)
 
-        if fournisseur_detecte:
-    # Si un nom de fournisseur est trouvé, invoquer l'intention de récupération
-            return [UserUtteranceReverted(), FollowupAction("Montant_Par_Fournisseur")]
- 
-        if "facture" in user_input.lower():
-            # Parcourir la liste des noms de facture
-            for facture in factures:
-                # Vérifier si le nom de facture est présent dans la chaîne
-                if f"facture {facture.lower()}" in user_input.lower():
-                    # Retourner le nom de la facture trouvé
-                    return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
+        except Exception as e:
+            # Gérer les exceptions et afficher un message approprié
+            print("Une erreur s'est produite:", e)
 
-        # Si aucun nom de fournisseur n'est trouvé, retourner un message d'erreur par défaut
-        dispatcher.utter_message(template="utter_default")
         return []
-    
+
 
 
  

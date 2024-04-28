@@ -2,10 +2,10 @@ version: "3.1"
 
 stories:
 
-# - story: salutation
-#   steps:
-#   - intent: salutation
-#   - action: utter_salutation
+- story: salutation
+  steps:
+  - intent: salutation
+  - action: action_salutation
 
 - story: bye
   steps:
@@ -130,6 +130,16 @@ stories:
   - intent: inform_fournisseur_count
   - action: action_count_Fournisseur
 
+- story: demande nombre de fournisseur par mois
+  steps:
+  - intent: inform_fournisseur_count_par_mois
+  - action: action_count_Fournisseur_par_mois
+
+- story: demande nombre de fournisseur par annee
+  steps:
+  - intent: inform_fournisseur_count_par_annee
+  - action: action_count_Fournisseur_par_annee
+
 - story: demande nombre de Type
   steps:
   - intent: inform_Type_count
@@ -139,6 +149,16 @@ stories:
   steps:
   - intent: inform_facture_count
   - action: action_count_Facture
+  
+- story: demande nombre de Facture par mois
+  steps:
+  - intent: inform_facture_count_par_mois
+  - action: action_count_Facture_par_mois
+
+- story: demande nombre de Facture par annee
+  steps:
+  - intent: inform_facture_count_par_annee
+  - action: action_count_Facture_par_annee
 
 - story: Demande de montant pour un facture
   steps:
@@ -173,10 +193,11 @@ stories:
   - action: action_Less_fournisseurs
 
 
-- story: Fournisseurs avec montant de 0
-  steps:
-  - intent: fournisseurs_zero
-  - action: action_fournisseurs_zero
+# - story: Fournisseurs avec montant de 0
+#   steps:
+#   - intent: fournisseurs_zero
+#   - action: action_fournisseurs_zero
+
 
 - story: Obtenir les montants dus par facture
   steps:
@@ -1250,3 +1271,5 @@ stories:
     - AnneeF: null
   - slot_was_set:
     - session_started_metadata: null
+
+
