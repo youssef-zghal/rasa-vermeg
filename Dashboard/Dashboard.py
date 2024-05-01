@@ -731,4 +731,4 @@ def display_table(select_year, select_month):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8053    )
+    app.run_server(debug=True, port=8053)

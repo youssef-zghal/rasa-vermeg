@@ -1,5 +1,14 @@
-
-from tkinter import EventType
+from datetime import datetime
+import re
+import unicodedata
+import calendar
+from rasa_sdk.events import UserUtteranceReverted, FollowupAction
+from typing import Type, Any, Text, Dict, List
+from rasa_sdk import Action, Tracker
+from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
+from langchain_community.llms import GPT4All
+from rasa_sdk import Action, Tracker
 import pyodbc
 
 def executer_autre_fichier():
@@ -58,36 +67,6 @@ def executer_requete(conn, sql_query):
 
 # Exemple d'utilisation
 conn = se_connecter_a_ssms()
-# if conn:
-#     print("Connexion réussie à la base de données.")
-#     # Exemple de requête SELECT
-#     query = "SELECT * FROM dbo.Source"
-#     results = executer_requete(conn, query)
-#     if results:
-#         print("Résultats de la requête :")
-#         for row in results:
-#             print(row)
-#     else:
-#         print("Aucun résultat retourné.")
-
-#     # Vous pouvez exécuter d'autres requêtes ici
-# else:
-#     print("Échec de la connexion à la base de données.")
-
-
-
-
-
-from typing import Type, Any, Text, Dict, List
-from rasa_sdk import Action, Tracker
-from rasa_sdk.executor import CollectingDispatcher
-import pyodbc
-from rasa_sdk.events import SlotSet
-from langchain_community.llms import GPT4All
-
-from rasa_sdk import Action, Tracker
-from rasa_sdk.executor import CollectingDispatcher
-from typing import Any, Text, Dict, List
 
 
 class ActionSayHello(Action):
@@ -98,26 +77,30 @@ class ActionSayHello(Action):
         try:
             # Charger le modèle avec les paramètres personnalisés
             llm = GPT4All(
-                model="C:/Users/ADMIN/AppData/Local/nomic.ai/GPT4All/Nous-Hermes-2-Mistral-7B-DPO.Q4_0.gguf",
-                max_tokens=30,  # Réduisez ce nombre pour obtenir des réponses plus courtes
-                n_batch=15,  # Vous pouvez ajuster ce nombre selon vos besoins
-                temp=0.7,  # Réduisez cette valeur pour des réponses plus déterministes
+                model="C:/Users/ADMIN/AppData/Local/nomic.ai/GPT4All/mistral-7b-instruct-v0.1.Q4_0.gguf",
+                max_tokens=500,  # Réduisez ce nombre pour obtenir des réponses plus courtes
+                n_batch=30,  # Vous pouvez ajuster ce nombre selon vos besoins
+                temp=0.9,  # Réduisez cette valeur pour des réponses plus déterministes
                 top_k=10,  # Augmentez ce nombre pour des réponses plus déterministes
                 top_p=0.8  # Réduisez cette valeur pour des réponses plus déterministes
             )
             # Appeler la méthode invoke avec le prompt et le contexte système
-        
-            response = llm.invoke(f"""be polite your name is InvoiceBot and answer briefly in french to any query\n 
-                                you are a financial advisor\n
-                                  don't write output just answer to the question\nInput: {user_input}""")
-            # Parse the response to get the answer
-            answer_start = response.find("Output: ")+7
-            answer_end = len(response) - 1  # Assuming the answer ends with a newline
+            prompt = "<s>[INST]Hello [/INST] Hello I'm InvoiceBot and I'm happy to be in your help!</s> "
+            prompt += """[INST] You are financial advisor. Your name is InvoiceBot and you are designed to provide polite responses in French. Provide brief responses to inputs without saying ouput or response or answer just directly answer.[/INST]"""
+            prompt += "[INST] Input: "+ user_input +" [/INST]"
+            
+            # Call the model with the prompt and extract the answer
+            response = llm.invoke(prompt)
+            print(response)
+            answer_start=0
+            # if (response.find("Output: ")!=0):
+            #     answer_start = response.find("Output: ") + 7
+            # elif(response.find("Réponse: ")!=0):
+            #     answer_start = response.find("Réponse: ") + 8
+            answer_end = len(response) - 1
             answer = response[answer_start:answer_end].strip()
-
             # Display the answer
             dispatcher.utter_message(text=answer)
-
         except Exception as e:
             # Gérer les exceptions et afficher un message approprié
             print("Une erreur s'est produite:", e)
@@ -166,33 +149,23 @@ class ActionObtenirFournisseurMontant(Action):
 
 
 # -----------------------------------------------------------------------------------------------------------------   
-    
-from datetime import datetime
-
 class ActionObtenirMontantInf(Action):
     def name(self) -> Text:
         return "action_obtenir_montant_inf"
-
     async def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[Dict[Text, Any]]:
         user_input = tracker.latest_message.get("text")
-
         # Initialisation de la facture détectée et de sa longueur
-
-
         for f in factures:
             if f.lower() in user_input.lower():
                     return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
-
-
         # Récupérer l'entité montant du tracker
         ref_entity = tracker.get_slot("Montant")
         if ref_entity:
             montant = int(ref_entity)
             # Se connecter à la base de données
             conn = se_connecter_a_ssms()  # Vous devez implémenter ces fonctions
-
             if conn:
                 # Exécuter la requête SQL pour obtenir les détails des factures avec un montant supérieur
                 query = f"""
@@ -237,7 +210,6 @@ class ActionObtenirMontantInf(Action):
 
  
 # ------------------------------------------------------------------------------------------------------------------
-from datetime import datetime
 
 class ActionObtenirMontantSup(Action):
     def name(self) -> Text:
@@ -294,7 +266,6 @@ class ActionObtenirMontantSup(Action):
 
 
 # ------------------------------------------------------------------------------------------------------------------
-from datetime import datetime
 
 class ActionObtenirMontantegal(Action):
     def name(self) -> Text:
@@ -396,7 +367,6 @@ class ActionMontantTotalFournisseurs(Action):
 
 # -----------------------------------------------------------------------------------------------------------------
 
-# from datetime import datetime
 
 # class ActionObtenirMontantDate(Action):
 #     def name(self) -> Text:
@@ -451,7 +421,6 @@ class ActionMontantTotalFournisseurs(Action):
 
 # -----------------------------------------------------------------------------------------------------------------
 
-import re
 
 class MontantTotalParEtat(Action):
     def name(self) -> Text:
@@ -622,7 +591,7 @@ class ActionAfficherMontantsEtatPret(Action):
 # -----------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------
 
-import re
+
 
 class MontantTotalParType(Action):
     def name(self) -> Text:
@@ -1319,9 +1288,7 @@ class ActionMontantTotalPluriannuel(Action):
 
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
 #----------------------------------------------------------------------------------------------------
-import re
 
-import unicodedata
 
 def preprocess_month_name(month_name):
     # Supprimer les accents et les circonflexes
@@ -1393,8 +1360,6 @@ class ActionMontantTotalDeuxMois(Action):
   
 #---------------------------------------------------------------------------------------------------------------------------------------------------
 
-from datetime import datetime
-import calendar
 
 class ActionAfficherMontantsEtatValideesDate(Action):
     def name(self) -> Text:
@@ -1472,8 +1437,7 @@ class ActionAfficherMontantsEtatValideesDate(Action):
 
 
 #----------------------------------------créé-------------------------------------------
-from datetime import datetime
-import calendar
+
 
 class ActionAfficherMontantsEtatCrééDate(Action):
     def name(self) -> Text:
@@ -1550,8 +1514,6 @@ class ActionAfficherMontantsEtatCrééDate(Action):
         return [SlotSet(slot, None) for slot in ["start_date", "end_date", "Etat", "type", "Montant", "Date", "Fournisseur", "Facture", "top", "Jour", "JourD", "JourF", "month", "monthD", "monthF", "Annee", "AnneeD", "AnneeF", "session_started_metadata"]]
 
 #---------------------------------------------pret pour paiement------------------------------------------------------
-from datetime import datetime
-import calendar
 
 class ActionAfficherMontantsEtatPrêtPourPaiementDate(Action):
     def name(self) -> Text:
@@ -2168,44 +2130,43 @@ class ResetFournisseurSlot(Action):
 
 # -------------------------------------------------------------------------------------------------------------------
 # from factures import factures
-from rasa_sdk.events import UserUtteranceReverted, FollowupAction
+
 
 class DefaultFallback(Action):
     def name(self) -> Text:
         return "action_default_fallback"
 
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        # Récupérer l'entrée utilisateur
         user_input = tracker.latest_message.get("text")
-        try:
-            # Charger le modèle avec les paramètres personnalisés
-            llm = GPT4All(
-                model="C:/Users/ADMIN/AppData/Local/nomic.ai/GPT4All/Nous-Hermes-2-Mistral-7B-DPO.Q4_0.gguf",
-                max_tokens=30,  # Réduisez ce nombre pour obtenir des réponses plus courtes
-                n_batch=15,  # Vous pouvez ajuster ce nombre selon vos besoins
-                temp=0.7,  # Réduisez cette valeur pour des réponses plus déterministes
-                top_k=10,  # Augmentez ce nombre pour des réponses plus déterministes
-                top_p=0.8  # Réduisez cette valeur pour des réponses plus déterministes
-            )
-            # Appeler la méthode invoke avec le prompt et le contexte système
-        
-            response = llm.invoke(f"""be polite your name is InvoiceBot and answer briefly in french to any query\n 
-                                you are a financial advisor\n
-                                  don't write output just answer to the question\nInput: {user_input}""")
-            # Parse the response to get the answer
-            answer_start = response.find("Output: ")+7
-            answer_end = len(response) - 1  # Assuming the answer ends with a newline
-            answer = response[answer_start:answer_end].strip()
+        fournisseur_detecte = None
+        longueur_fournisseur_detecte = 0
 
-            # Display the answer
-            dispatcher.utter_message(text=answer)
+        for f in fournisseurs:
+            if f.lower() in user_input.lower():
+        # Vérifier si le fournisseur courant est plus long que le fournisseur déjà détecté
+                if len(f) > longueur_fournisseur_detecte:
+                    fournisseur_detecte = f
+                longueur_fournisseur_detecte = len(f)
 
-        except Exception as e:
-            # Gérer les exceptions et afficher un message approprié
-            print("Une erreur s'est produite:", e)
+        if fournisseur_detecte:
+    # Si un nom de fournisseur est trouvé, invoquer l'intention de récupération
+            return [UserUtteranceReverted(), FollowupAction("Montant_Par_Fournisseur")]
+ 
+        if "facture" in user_input.lower():
+            # Parcourir la liste des noms de facture
+            for facture in factures:
+                # Vérifier si le nom de facture est présent dans la chaîne
+                if f"facture {facture.lower()}" in user_input.lower():
+                    # Retourner le nom de la facture trouvé
+                    return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
 
+        # Si aucun nom de fournisseur n'est trouvé, retourner un message d'erreur par défaut
+        dispatcher.utter_message(template="utter_default")
         return []
-
-
 
  
 fournisseurs = [
