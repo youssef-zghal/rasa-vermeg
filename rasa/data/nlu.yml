@@ -274,10 +274,10 @@ nlu:
 - intent: demander_factures_deux_mois_deux_annee
   examples: |
     - Quel est le montant des factures entre [decembre](monthD) [2022](AnneeD) et [avril](monthF) [2023](AnneeF).
-    - Quelle est la somme des factures de [mai](monthD) [2022](AnneeD) à [aout](monthF) [2022](AnneeF) ?
-    - Combien avons-nous depense de [janvier](monthD) [2021](AnneeD) à [juin](monthF) [2021](AnneeF) ?
+    - Quelle est la somme des factures de [mai](monthD) [2022](AnneeD) et [aout](monthF) [2022](AnneeF) ?
+    - Combien avons-nous depense de [janvier](monthD) [2021](AnneeD) et [juin](monthF) [2021](AnneeF) ?
     - Quelles sont les depenses entre [octobre](monthD) [2023](AnneeD)  [novembre](monthF) [2023](AnneeF).
-    - Pouvez-vous me montrer les montants entre les deux mois [fevrier](monthD) [2021](AnneeD) le mois [decembre](monthF) [2024](AnneeF)
+    - Pouvez-vous me montrer les montants entre les deux mois [fevrier](monthD) [2021](AnneeD) [decembre](monthF) [2024](AnneeF)
     - Quel est le montant total pour le mois de [septembre](monthD) [2029](AnneeD) le mois [janvier](monthF) [2030](AnneeF)
     - les achats entre [juin](monthD) [2029](AnneeD) le mois [mai](monthF) [2030](AnneeF)
     - la totalite de nos achat entre [novembre](monthD) [2029](AnneeD) le mois [septembre](monthF) [2030](AnneeF)
