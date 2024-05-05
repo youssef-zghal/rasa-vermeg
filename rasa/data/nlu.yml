@@ -15,13 +15,12 @@ nlu:
     - Salutations
     - cc
     - hey
-    - Allô
     - Bonne journee
-    - Bonne soiree
-    - ciao
-    - alloha
     - bonjour
-    - !
+    - salut cava 
+    - salut comment tu t'appelles
+    - salut qu'est ce que tu sais faire
+    - salut tu es qui
 - intent: bye
   examples: |
     - au revoir
@@ -85,6 +84,7 @@ nlu:
     - etat 
     - total de chaque etat
     - quelle sont les etats
+    - je veux voir les montants total des etats   
 - intent: informer_etat_valide
   examples: |
     - Quels sont les montants valides ?
@@ -95,6 +95,7 @@ nlu:
     - valide
     - etat valide
     - quelle sont les factures payee
+    - le montant total valide
 - intent: informer_etat_cree
   examples: |
     - Factures crees
@@ -105,6 +106,7 @@ nlu:
     - cree
     - etat cree
     - quelle sont les facture qu'on a ajoute
+    - montant total facture cree
 - intent: informer_etat_prêt_pour_paiement
   examples: |
     - Quels sont les paiements prets pour paiement ?
@@ -115,6 +117,7 @@ nlu:
     - etat pret pour paiement
     - quelle sont les facture qui ne sont pas payee
     - facture non payee
+    - le montant total pour les etats pret pour paiement
 - intent: ask_type
   examples: |
     - Liste des montants pour les types ?
@@ -252,11 +255,12 @@ nlu:
     - facture payee pour mois [mai](month) [2024](Annee)
 - intent: afficher_montants_etat_cree_date
   examples: |
-    - Quel est le total des factures creees en [mars](month) [2023](Annee)?
-    - Combien avons-nous depense en factures creees en [avril](month)?
+    - Quel est le total des factures cree en [mars](month) [2023](Annee)?
+    - Combien avons-nous depense en factures cree en [avril](month)?
     - Quels sont les montants crees pour le mois de [mai](month)
     - cree mois [janvier](month)
     - montant cree [fevrier](month) [2022](Annee)
+    - montant total pour les facturs cree mois [decembre](month) [2027](Annee)
 - intent: afficher_montants_etat_Prêt_pour_paiement_date
   examples: |
     - Quels sont les montants prêts pour le paiement en [juin](month) [2023](Annee)
@@ -286,6 +290,7 @@ nlu:
     - Quelles informations pouvez-vous me fournir sur la facture [292938-22](Facture)
     - la facture [FV230847](Facture)
     - voir la facture [LD547/2023](Facture)
+
 - intent: demande_montant_type
   examples: |
     - Pouvez-vous me montrer les details du type [des cartes et systèmes electroniques](type)
@@ -305,7 +310,7 @@ nlu:
     - Combien avons-nous depense avec [STATION PNEU CHOUCHA (SPC)](Fournisseur) ?
     - Quel est le montant depense avec [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) ?
     - Combien avons-nous depense avec [GENERAL TRANSPORT INTERNATIONAL (GTI)](Fournisseur) ?
-    - le fournisseur [COREME](Fournisseur)
+    - le fournisseur [Chiffon d’Essuyage Tunisienne](Fournisseur)
     - consulter [DELOITTE](Fournisseur)
     - je veux connaitre des details sur [Cash&Carry](Fournisseur) 
     - les achats pour fournisseur [CABINET BEN CHEIKH HENDA](Fournisseur) 
@@ -315,14 +320,14 @@ nlu:
     - Quel est le total des depenses pour [ADHECOM SARL](Fournisseur) mois [Mars](month) [2022](Annee) ?
     - Pouvez-vous me donner des details sur [AIRCO](Fournisseur) pour mois [aout](month) [2022](Annee)
     - Combien depense avec [AL MAADEN](Fournisseur) en [Fevrier](month)?
-    - les montants pour le fournisseur [AMM](Fournisseur) en [Avril](month) [2023](Annee) ?
+    - les montants pour le fournisseur [Chiffon d’Essuyage Tunisienne](Fournisseur) en [Avril](month) [2023](Annee) ?
     - le montant total pour le fournisseur [TECHNIQUE DE L'ELECTRICITE ET SERVICES T.E.S.](Fournisseur) en [Juin](month) [2023](Annee) ?
     - Combien avons-nous depense avec [STATION PNEU CHOUCHA (SPC)](Fournisseur) en [novembre](month) [2022](Annee) ?
     - le montant depense avec [ELECTROCNIC DESIGN SERVICE *EDS](Fournisseur) pour mois [octobre](month)?
     - Combien avons-nous depense avec [GENERAL TRANSPORT INTERNATIONAL (GTI)](Fournisseur) pour mois [decmbre](month) [2022](Annee)
     - le montant pour le fournisseur [DIESEL ENERGY](Fournisseur) le mois [septembre](month) [2028](Annee)
     - montant fournisseur [Dr. Jamel Darragi](Fournisseur) le mois [mai](month) [2023](Annee)
-    - achats pour fournisseur [EDT](Fournisseur) le mois [juin](month) [2021](Annee)
+    - achats pour fournisseur [EDT](Fournisseur) le mois [juillet](month) [2021](Annee)
 
 # - intent: montant_par_date 
 #   examples: |

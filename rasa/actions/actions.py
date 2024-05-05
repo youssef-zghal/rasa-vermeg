@@ -80,14 +80,14 @@ class ActionSayHello(Action):
                 model="C:/Users/ADMIN/AppData/Local/nomic.ai/GPT4All/mistral-7b-instruct-v0.1.Q4_0.gguf",
                 max_tokens=500,  # Réduisez ce nombre pour obtenir des réponses plus courtes
                 n_batch=30,  # Vous pouvez ajuster ce nombre selon vos besoins
-                temp=0.9,  # Réduisez cette valeur pour des réponses plus déterministes
+                temp=0.7,  # Réduisez cette valeur pour des réponses plus déterministes
                 top_k=10,  # Augmentez ce nombre pour des réponses plus déterministes
                 top_p=0.8  # Réduisez cette valeur pour des réponses plus déterministes
             )
             # Appeler la méthode invoke avec le prompt et le contexte système
-            prompt = "<s>[INST]Hello [/INST] Hello I'm InvoiceBot and I'm happy to be in your help!</s> "
-            prompt += """[INST] You are financial advisor. Your name is InvoiceBot and you are designed to provide polite responses in French. Provide brief responses to inputs without saying ouput or response or answer just directly answer.[/INST]"""
-            prompt += "[INST] Input: "+ user_input +" [/INST]"
+            prompt = "<s> [INST] You are a friendly chatbot and a financial advisor who answers to user greetings. At every greeting say your name and say that you are a financial advisor "
+            prompt += """Your name is InvoiceBot and you are designed to provide polite responses in French, answer to this text: """
+            prompt += user_input +" [/INST]"
             
             # Call the model with the prompt and extract the answer
             response = llm.invoke(prompt)
@@ -156,11 +156,11 @@ class ActionObtenirMontantInf(Action):
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[Dict[Text, Any]]:
         user_input = tracker.latest_message.get("text")
-        # Initialisation de la facture détectée et de sa longueur
+        # # Initialisation de la facture détectée et de sa longueur
         for f in factures:
             if f.lower() in user_input.lower():
                     return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
-        # Récupérer l'entité montant du tracker
+        # Récupérer l'entité montant du tracker 
         ref_entity = tracker.get_slot("Montant")
         if ref_entity:
             montant = int(ref_entity)
@@ -274,7 +274,10 @@ class ActionObtenirMontantegal(Action):
     async def run(
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[Dict[Text, Any]]:
-        
+        user_input = tracker.latest_message.get("text")
+        for f in factures:
+            if f.lower() in user_input.lower():
+                    return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
         # Récupérer l'entité montant du tracker
         ref_entity = tracker.get_slot("Montant")
         if ref_entity:
@@ -1441,7 +1444,7 @@ class ActionAfficherMontantsEtatValideesDate(Action):
 
 class ActionAfficherMontantsEtatCrééDate(Action):
     def name(self) -> Text:
-        return "action_afficher_montants_etat_créé_Date"
+        return "action_afficher_montants_etat_cree_Date"
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -1769,6 +1772,7 @@ class ActionGetFournisseurMoisAnnee(Action):
 
 
 # -----------------------------------------------------------------------------------------------------------------
+import requests
 
 class MontantParFournisseur(Action):
     def name(self) -> Text:
@@ -1819,11 +1823,87 @@ class MontantParFournisseur(Action):
 
             # Affiche le montant total à la fin
             dispatcher.utter_message(text=f"Le montant total des factures pour le fournisseur {requested_fournisseur} est de : {total_montant}.")
+
+            # Envoi des données du fournisseur à l'API Plotly
+            response = update_plotly_filter(requested_fournisseur)
+            if response:
+                dispatcher.utter_message(text="Données envoyées à l'API Plotly avec succès.")
+            else:
+                dispatcher.utter_message(text="Erreur lors de l'envoi des données à l'API Plotly.")
         else:
             # Aucun montant trouvé pour le fournisseur demandé
             dispatcher.utter_message(text=f"Aucun montant trouvé pour le fournisseur demandé pour {requested_fournisseur} .")
 
         return []
+
+# Fonction pour envoyer les données du fournisseur à l'API Plotly
+def update_plotly_filter(fournisseur):
+    url = 'http://localhost:8053/'  # URL de votre API Plotly
+    data = {'fournisseur': fournisseur}
+    
+    try:
+        response = requests.post(url, json=data)
+        response.raise_for_status()  # Raise an error for bad status codes
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error making request: {e}")
+        return None
+
+# ---------------------------------------------------------------------------
+# class MontantParFournisseur(Action):
+#     def name(self) -> Text:
+#         return "Montant_Par_Fournisseur"
+
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+#         # Récupérer l'input complet de l'utilisateur
+#         user_input = tracker.latest_message.get("text")
+
+#         # Recherche du fournisseur dans l'input utilisateur
+#         requested_fournisseur = None
+#         for f in fournisseurs:
+#             if f.lower() in user_input.lower():
+#                 requested_fournisseur = f
+#                 break
+        
+#         if requested_fournisseur is None:
+#             dispatcher.utter_message(text="Désolé, je n'ai pas compris le fournisseur demandé.")
+#             return []
+
+#         # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
+#         cursor = conn.cursor()
+            
+#         # Requête SQL pour obtenir les montants correspondant à un fournisseur donné
+#         query = """SELECT Fournisseur.Fournisseur, f.Montant, facture.etat , facture.Facture
+#                     FROM dbo.Fait f 
+#                     JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+#                     JOIN dbo.[Dimension Fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_Fournisseur
+#                     WHERE Fournisseur.Fournisseur = ?"""
+
+#         # Exécuter la requête SQL avec le fournisseur en tant que paramètre sécurisé
+#         cursor.execute(query, (requested_fournisseur,))
+#         results = cursor.fetchall()
+
+#         total_montant = 0  # Initialise le montant total
+
+#         if results:
+#             for result in results:
+#                 # Récupérer les détails de chaque facture
+#                 fournisseur, montant, etat , facture = result
+#                 dispatcher.utter_message(
+#                     text=f"Le fournisseur {fournisseur} pour la facture {facture} a un montant de {montant} pour l'état {etat}."
+#                 )
+#                 total_montant += montant  # Ajoute le montant au total
+
+#             # Affiche le montant total à la fin
+#             dispatcher.utter_message(text=f"Le montant total des factures pour le fournisseur {requested_fournisseur} est de : {total_montant}.")
+#         else:
+#             # Aucun montant trouvé pour le fournisseur demandé
+#             dispatcher.utter_message(text=f"Aucun montant trouvé pour le fournisseur demandé pour {requested_fournisseur} .")
+
+#         return []
 
 # -------------------------------------------------------------------------------------------------------------
 # from dictionnaire_Types import types_factures
@@ -1887,62 +1967,6 @@ class MontantParType(Action):
 
 # ----------------------------------------------------------------------------------------
  
-class ActionObtenirFactureMontant(Action):
-    def name(self) -> Text:
-        return "action_obtenir_Facture_montant"
-
-    async def run(
-        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
-    ) -> List[Dict[Text, Any]]:
-
-        # Récupérer l'input complet de l'utilisateur
-        user_input = tracker.latest_message.get("text")
-        print('-----------------------',user_input)
-        # Initialisation de la facture détectée et de sa longueur
-        facture_detectee = None
-        longueur_facture_detectee = 0
-
-        for f in factures:
-            if f.lower() in user_input.lower():
-                # Vérifier si la facture courante est plus longue que la facture déjà détectée
-                if len(f) > longueur_facture_detectee:
-                    facture_detectee = f
-                    longueur_facture_detectee = len(f)
-
-        if facture_detectee:
-            conn = se_connecter_a_ssms()  # Vous devez implémenter cette fonction
-
-            if conn:
-                # Exécuter la requête SQL pour obtenir le montant de la facture
-                cursor = conn.cursor()
-                query = """
-                    SELECT f.montant, facture.facture, fournisseur.fournisseur, date.date
-                    FROM dbo.fait f
-                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey
-                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
-                    JOIN dbo.[Dimension Fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_Fournisseur
-                    WHERE facture.facture = ?
-                """
-                cursor.execute(query, (facture_detectee,))
-                results = cursor.fetchall()
-
-                if results:
-                    for result in results:
-                        # Récupérer les détails de chaque facture
-                        montant, Facture, Fournisseur, Date = result
-                        dispatcher.utter_message(
-                            text=f"La facture {Facture} est établie au nom du {Fournisseur}, d'un montant de {montant}, et datée du {Date}."
-                        )
-                else:
-                    dispatcher.utter_message(text="Désolé, aucune information trouvée pour la facture spécifiée.")
-            else:
-                dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
-        else:
-            dispatcher.utter_message(text="Désolé, je n'ai pas compris le numéro de facture.")
-
-        return []
-
-
 # --------------------------------------------------------------------------------------------------------------------------------
 
 class ActionGetFactureJusquauMois(Action):
@@ -2126,12 +2150,88 @@ class ResetFournisseurSlot(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        return [SlotSet("fournisseur_reconnu", None)]
-
+        return [SlotSet("fournisseur_reconnu", None)] 
 # -------------------------------------------------------------------------------------------------------------------
 # from factures import factures
 
 
+class ActionObtenirFactureMontant(Action):
+    def name(self) -> Text:
+        return "action_obtenir_Facture_montant"
+    async def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> List[Dict[Text, Any]]:
+
+        # Récupérer l'input complet de l'utilisateur
+        # last_input = tracker.get_slot("last_user_message")
+        last_input=tracker.events[-3].get("value")
+        print('ll1 ',last_input)
+        if type(last_input) == type(None):
+            last_input=tracker.latest_message.get("text")
+            print("here2")
+        print('ll2 ',last_input)
+        llm = GPT4All(
+        model="C:/Users/ADMIN/AppData/Local/nomic.ai/GPT4All/mistral-7b-instruct-v0.1.Q4_0.gguf",
+        max_tokens=10,  # Réduisez ce nombre pour obtenir des réponses plus courtes
+        n_batch=50,  # Vous pouvez ajuster ce nombre selon vos besoins
+        temp=0.1,  # Réduisez cette valeur pour des réponses plus déterministes
+        top_k=50,  # Augmentez ce nombre pour des réponses plus déterministes
+        top_p=0.95,
+        )
+        prompt = """<s>[INST] 
+        context: Your task is to Extract only the Invoice name and nothing else from the French text.
+        the Invoice name could contain numbers, letters, spaces, parenthesis, slashes.
+        No additional information or instructions should be provided.
+        Here are three examples first example: Donne moi la facture  "FT/00748/2022 3/1" output :  Invoice name: FT/00748/2022 3/1.
+        Second example: Les details sur la facture "36/2022 (2/2)" output :  Invoice name: 36/2022 (2/2).
+        Third example: consulter facture "-1" output :  Invoice name: -1
+        You need to do the output exactly like this don't add anything: Invoice name:
+        Here is the text you need to work on:"""
+        # Combined system context and prompt with template
+        prompt +=   last_input+"""  [/INST]"""
+        response = llm.invoke(prompt)
+        print(response)
+        response = response.replace("Invoice name: ", "")
+        if response.startswith(" "):
+            response = response[1:]
+        print(response)
+        if response:
+            conn = se_connecter_a_ssms()  # Vous devez implémenter cette fonction
+
+            if conn:
+                # Exécuter la requête SQL pour obtenir le montant de la facture
+                cursor = conn.cursor()
+                query = """
+                    SELECT f.montant, facture.facture, fournisseur.fournisseur, date.date
+                    FROM dbo.fait f
+                    JOIN dbo.[Dimension_dates] date ON f.FK_Date = Date.DateKey
+                    JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
+                    JOIN dbo.[Dimension Fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_Fournisseur
+                    WHERE facture.facture = ?
+                """
+                cursor.execute(query, (response,))
+                results = cursor.fetchall()
+                
+                if results:
+                    for result in results:
+                        # Récupérer les détails de chaque facture
+                        montant, Facture, Fournisseur, Date = result
+                        dispatcher.utter_message(
+                            text=f"La facture {Facture} est établie au nom du {Fournisseur}, d'un montant de {montant}, et datée du {Date}."
+                        )
+                else:
+                    dispatcher.utter_message(text="Désolé, aucune information trouvée pour la facture spécifiée.")
+            else:
+                dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
+        else:
+            dispatcher.utter_message(text="Désolé, je n'ai pas compris le numéro de facture.")
+
+        return [SlotSet("last_user_message", None)
+]
+
+
+
+# -----------------------------------------------------------------------------------------------------------------
 class DefaultFallback(Action):
     def name(self) -> Text:
         return "action_default_fallback"
@@ -2139,34 +2239,73 @@ class DefaultFallback(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
+        SlotSet("last_user_message", None)
         # Récupérer l'entrée utilisateur
         user_input = tracker.latest_message.get("text")
+        print('ip: '+user_input)
         fournisseur_detecte = None
         longueur_fournisseur_detecte = 0
 
         for f in fournisseurs:
             if f.lower() in user_input.lower():
-        # Vérifier si le fournisseur courant est plus long que le fournisseur déjà détecté
+                # Vérifier si le fournisseur courant est plus long que le fournisseur déjà détecté
                 if len(f) > longueur_fournisseur_detecte:
                     fournisseur_detecte = f
                 longueur_fournisseur_detecte = len(f)
 
         if fournisseur_detecte:
-    # Si un nom de fournisseur est trouvé, invoquer l'intention de récupération
-            return [UserUtteranceReverted(), FollowupAction("Montant_Par_Fournisseur")]
+            # Stocker le dernier message de l'utilisateur dans le slot
+            return [SlotSet("last_user_message", user_input), UserUtteranceReverted(), FollowupAction("Montant_Par_Fournisseur")]
  
         if "facture" in user_input.lower():
             # Parcourir la liste des noms de facture
+            print("verif1")
             for facture in factures:
                 # Vérifier si le nom de facture est présent dans la chaîne
                 if f"facture {facture.lower()}" in user_input.lower():
-                    # Retourner le nom de la facture trouvé
-                    return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
+                    # Stocker le dernier message de l'utilisateur dans le slot
+                    print("here")
+                    return [SlotSet("last_user_message", user_input), UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
 
         # Si aucun nom de fournisseur n'est trouvé, retourner un message d'erreur par défaut
         dispatcher.utter_message(template="utter_default")
         return []
+# class DefaultFallback(Action):
+#     def name(self) -> Text:
+#         return "action_default_fallback"
+
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+#         # Récupérer l'entrée utilisateur
+#         user_input = tracker.latest_message.get("text")
+#         fournisseur_detecte = None
+#         longueur_fournisseur_detecte = 0
+
+#         for f in fournisseurs:
+#             if f.lower() in user_input.lower():
+#         # Vérifier si le fournisseur courant est plus long que le fournisseur déjà détecté
+#                 if len(f) > longueur_fournisseur_detecte:
+#                     fournisseur_detecte = f
+#                 longueur_fournisseur_detecte = len(f)
+
+#         if fournisseur_detecte:
+#     # Si un nom de fournisseur est trouvé, invoquer l'intention de récupération
+#             return [UserUtteranceReverted(), FollowupAction("Montant_Par_Fournisseur")]
+ 
+#         if "facture" in user_input.lower():
+#             # Parcourir la liste des noms de facture
+#             for facture in factures:
+#                 # Vérifier si le nom de facture est présent dans la chaîne
+#                 if f"facture {facture.lower()}" in user_input.lower():
+#                     # Retourner le nom de la facture trouvé
+#                     return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
+
+#         # Si aucun nom de fournisseur n'est trouvé, retourner un message d'erreur par défaut
+#         dispatcher.utter_message(template="utter_default")
+#         return []
+
 
  
 fournisseurs = [

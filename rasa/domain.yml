@@ -67,9 +67,16 @@ entities:
 - JourD
 - JourF
 - fournisseur_reconnu
+- last_user_message
 
 
 slots:
+  last_user_message:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: last_user_message
   fournisseur_reconnu:
     type: bool
     influence_conversation: true
