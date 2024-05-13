@@ -1,26 +1,7 @@
 version: "3.1"
-
-# rules:
-# - rule: Send email anytime the user requests
-#   steps:
-#   - intent: mail_send
-#   - action: action_send_mail
-#   - action: utter_send_email
- 
-
-# - rule: Vérifier et récupérer le fournisseur
-#   steps:
-#   - intent: '*'
-#   - action: action_verifier_fournisseur
-#   - action: Montant_Par_Fournisseur
-#   - active_loop: null
-#   - slot_was_set:
-#       - fournisseur_reconnu: true
-#   - action: action_reset_fournisseur_slot
-#   - active_loop: null
-
-
-
-  # Continuez avec d'autres actions si aucun fournisseur n'a été reconnu
+rules:
+  - rule: first action
+    steps:
+      - action: first_action
 
 

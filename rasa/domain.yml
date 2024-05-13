@@ -1,40 +1,42 @@
 version: '3.1'
 intents:
-- Montant
-- Montant_egal
-- Montant_inf
-- Montant_sup
-- Montant_total_fournisseur
-- afficher_montants_etat_Prêt_pour_paiement_date
-- afficher_montants_etat_cree_date
-- afficher_montants_etat_validees_date
-- ask_type
-- bye
-- demande_Facture
-- demande_Less_fournisseurs
-- demande_etat
-- demande_montant_fournisseur
-- demande_montant_type
-- demande_top_Type
-- demande_top_fournisseurs
-- demander_factures_deux_mois_deux_annee
-- demander_montant_total_fournisseur_mois_annee
-- inform
-- inform_Type_count
-- inform_facture_count
-- inform_fournisseur_count
-- informer_etat_cree
-- informer_etat_prêt_pour_paiement
-- informer_etat_valide
-- obtenir_montant_total_facture
-- obtenir_montant_total_pluriannuel
-- obtenir_total_Deux_mois
-- obtenir_total_Jusquau_mois
 - salutation
-- inform_facture_count_par_mois
-- inform_facture_count_par_annee
-- inform_fournisseur_count_par_mois
-- inform_fournisseur_count_par_annee
+# - bye
+# - connaitre_montant_a_partir_reference
+# - Montant_egal
+# - Montant_inferieur
+# - Montant_superieur
+# - Montant_total_fournisseur
+# - montant_total_etats
+# - montant_etat_cree
+# - montant_etat_prêt_pour_paiement
+# - montant_etat_valide
+# - montant_total_type
+# - nombre_fournisseur
+# - nombre_fournisseur_par_mois
+# - nombre_fournisseur_par_annee
+# - nombre_type
+# - nombre_facture
+# - nombre_facture_par_mois
+# - nombre_facture_par_annee
+# - demande_top_Type
+# - demande_top_fournisseurs
+# - demande_Less_fournisseurs
+# - obtenir_montant_total_facture
+# - montant_total_mois_annees
+# - obtenir_montant_total_par_annees
+# - montant_total_entre_deux_mois_pour_une_annee
+# - montant_total_Jusquau_mois_annee
+# - afficher_montants_des_factures_etat_valides_par_mois_annee
+# - afficher_montants_des_factures_etat_cree_par_mois_annee
+# - afficher_montants_des_factures_etat_prets_pour_paiement_par_mois_annee
+# - demander_montant_total_entre_mois_annee_et_mois_annee
+# - demande_details_sur_Facture
+# - demande_montant_fournisseur
+# - demande_montant_type
+# - demander_montant_total_fournisseur_mois_annee
+# - nombre_facture_par_fournisseur
+# - nombre_facture_par_etat
 # - fournisseurs_zero
 # - montant_par_date
 # - obtenir_factures_entre_dates
@@ -47,28 +49,27 @@ intents:
 # - Facture
 # - Fournisseur
 entities:
-- month
-- monthF
-- monthD
-- Annee
-- Fournisseur
-- AnneeF
-- AnneeD
-- number
-- text
-- date
-- Etat
-- type
-- start_date
-- end_date
-- Facture
-- top
-- Jour
-- JourD
-- JourF
-- fournisseur_reconnu
+# - month
+# - monthF
+# - monthD
+# - Annee
+# - Fournisseur
+# - AnneeF
+# - AnneeD
+# - number
+# - text
+# - date
+# - Etat
+# - type
+# - start_date
+# - end_date
+# - Facture
+# - top
+# - Jour
+# - JourD
+# - JourF
+# - fournisseur_reconnu
 - last_user_message
-
 
 slots:
   last_user_message:
@@ -77,124 +78,124 @@ slots:
     mappings:
     - type: from_entity
       entity: last_user_message
-  fournisseur_reconnu:
-    type: bool
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: fournisseur_reconnu
-  start_date:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: start_date
-  end_date:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: end_date
-  Etat:
-    type: categorical
-    influence_conversation: true
-    values:
-    - Valide
-    - Cree
-    - Prêt pour paiement
-    mappings:
-    - type: from_entity
-      entity: Etat
-  type:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: type
-  Montant:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: number
-  Date:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: date
-  Fournisseur:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: Fournisseur
-  Facture:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: Facture
-  top:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: number
-  Jour:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: Jour
-  JourD:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: JourD
-  JourF:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: JourF
-  month:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: month
-  monthD:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: monthD
-  monthF:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: monthF
-  Annee:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: Annee
-  AnneeD:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: AnneeD
-  AnneeF:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: AnneeF
+  # fournisseur_reconnu:
+  #   type: bool
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: fournisseur_reconnu
+  # start_date:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: start_date
+  # end_date:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: end_date
+  # Etat:
+  #   type: categorical
+  #   influence_conversation: true
+  #   values:
+  #   - Valide
+  #   - Cree
+  #   - Prêt pour paiement
+  #   mappings:
+  #   - type: from_entity
+  #     entity: Etat
+  # type:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: type
+  # Montant:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: number
+  # Date:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: date
+  # Fournisseur:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: Fournisseur
+  # Facture:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: Facture
+  # top:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: number
+  # Jour:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: Jour
+  # JourD:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: JourD
+  # JourF:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: JourF
+  # month:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: month
+  # monthD:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: monthD
+  # monthF:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: monthF
+  # Annee:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: Annee
+  # AnneeD:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: AnneeD
+  # AnneeF:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: AnneeF
 responses:
   utter_bye:
   - text: 'Au revoir, content de vous avoir aide! '
@@ -203,11 +204,11 @@ responses:
   utter_montant:
   - text: Le montant de la facture qui a une reference {Reference} est de {montant}.
   utter_inf:
-  - text: Les montants inferieurs à celui que tu as indique sont:{montant}
+  - text: Les montants inférieurs à celui que tu as indiqué pour la facture {facture} avec le fournisseur {fournisseur} sont de {montant}.
   utter_sup:
-  - text: Les montants superieur à celui que tu as indique sont:{montant}
+  - text: Les montants superieur à celui que tu as indiqué pour la facture {facture} avec le fournisseur {fournisseur} sont de {montant}.
   utter_egal:
-  - text: Les montants egal à celui que tu as indique sont:{montant}
+  - text: Les montants egal à celui que tu as indiqué pour la facture {facture} avec le fournisseur {fournisseur} sont de {montant}.
   utter_next_Montant_Total_Par_Etat:
   - text: Voudriez afficher ceux qui sont d'etat valide/Cree ou Prêt pour paiement
   utter_next_Montant_Total_Par_Type:
@@ -236,7 +237,7 @@ actions:
 - action_obtenir_montant_egal
 - action_get_Fournisseur_Mois_Annee
 - action_obtenir_montant_inf
-- action_obtenir_Fournisseur_montant
+- Action_Obtenir_Information_Par_Reference
 - action_obtenir_montant_sup
 - action_montant_total_fournisseurs
 - Montant_Total_Par_Etat
@@ -260,6 +261,8 @@ actions:
 - action_count_Facture_par_annee
 - action_count_Fournisseur_par_mois
 - action_count_Fournisseur_par_annee
-# - action_montant_entre_dates
-# - action_obtenir_montant_Date
+- action_count_Facture_par_fournisseur
+- first_action
+- action_count_Facture_Par_Etat
+- action_llm_general
 # - action_fournisseurs_zero
