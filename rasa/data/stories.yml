@@ -2,7 +2,7 @@ version: "3.1"
 
 stories:
 
-# - story: salutation
+# - story: salutation 
 #   steps:
 #   - intent: salutation
 #   - action: action_salutation
@@ -58,9 +58,9 @@ stories:
 #   steps:
 #     - intent: Montant_total_fournisseur
 #     - action: action_montant_total_fournisseurs
-#     - action: utter_next_Montant_Total_Par_Fournisseur
-#     - intent: demande_montant_fournisseur
-#     - action: Montant_Par_Fournisseur
+    # - action: utter_next_Montant_Total_Par_Fournisseur
+    # - intent: demande_montant_fournisseur
+    # - action: Montant_Par_Fournisseur
 
 # - story: Montant egal
 #   steps:
@@ -75,9 +75,9 @@ stories:
 #   steps:
 #   - intent: montant_total_etats
 #   - action: Montant_Total_Par_Etat
-#   - action: utter_next_Montant_Total_Par_Etat
-#   - intent: montant_etat_valide
-#   - action: action_afficher_montants_etat_validees
+  # - action: utter_next_Montant_Total_Par_Etat
+  # - intent: montant_etat_valide
+  # - action: action_afficher_montants_etat_validees
 
 # - story: Demande des etats validees
 #   steps:
@@ -114,19 +114,15 @@ stories:
 #   steps:
 #   - intent: montant_total_type
 #   - action: Montant_Total_Par_Type
-#   - action: utter_next_Montant_Total_Par_Type
-#   - intent: demande_montant_type
-#   - action: Montant_Par_Type
+  # - action: utter_next_Montant_Total_Par_Type
+  # - intent: demande_montant_type
+  # - action: Montant_Par_Type
 
 # - story: Obtenir le montant par type
 #   steps:
 #   - intent: demande_montant_type
 #   - action: Montant_Par_Type
 
-# - story: Demande de montant pour un fournisseur
-#   steps:
-#   - intent: demande_montant_fournisseur
-#   - action: Montant_Par_Fournisseur
 
 # - story: demande nombre de fournisseur
 #   steps:
@@ -256,29 +252,29 @@ stories:
 #   - intent: demander_montant_total_entre_mois_annee_et_mois_annee
 #   - action: action_get_Facture_deux_mois_deux_annee
 
-# # - story: Fournisseurs avec montant de 0
-# #   steps:
-# #   - intent: fournisseurs_zero
-# #   - action: action_fournisseurs_zero
+# - story: Fournisseurs avec montant de 0
+#   steps:
+#   - intent: fournisseurs_zero
+#   - action: action_fournisseurs_zero
 
-# # - story: montants get Facture entre dates
-# #   steps:
-# #   - intent: obtenir_factures_entre_dates
-# #   - action: action_montant_entre_dates
+# - story: montants get Facture entre dates
+#   steps:
+#   - intent: obtenir_factures_entre_dates
+#   - action: action_montant_entre_dates
 
-# # - story: Demande de intervalle par date
-# #   steps:
-# #   - intent: intervalle_par_date
-# #   - action: action_Recuperer_Montant_Par_Date
+# - story: Demande de intervalle par date
+#   steps:
+#   - intent: intervalle_par_date
+#   - action: action_Recuperer_Montant_Par_Date
 
-# # - story: montant par date
-# #   steps:
-# #   - intent: montant_par_date
-# #     entities:
-# #     - date
-# #   - slot_was_set:
-# #     - Date: date
-# #   - action: action_obtenir_montant_Date
+# - story: montant par date
+#   steps:
+#   - intent: montant_par_date
+#     entities:
+#     - date
+#   - slot_was_set:
+#     - Date: date
+#   - action: action_obtenir_montant_Date
 
 # - story: interactive_story_1
 #   steps:

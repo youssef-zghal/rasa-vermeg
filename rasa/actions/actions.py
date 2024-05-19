@@ -77,18 +77,16 @@ class FirstAction(Action):
         user_input = tracker.latest_message.get("text")
 
         print('user: ',user_input)
-        client = InferenceClient(model = 'mistralai/Mixtral-8x7B-Instruct-v0.1', token = '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')
+        client = InferenceClient(model = 'mistralai/Mixtral-8x7B-Instruct-v0.1', token = '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')
         result = client.text_generation("""<s>[INST] 
         Vous êtes un système de classification d'actions et tu dois être très précis. 
         Nous vous fournissons les actions et leurs descriptions:
-        action: action_count_Facture
-        Description: si l'utilisateur demande de savoir chaque fournisseur possède combien de facture 
                                         
         action: action_llm_general
         Description: si l'utilisateur posent des questions en général ou bien veux s'informer d'autres sujets de la vie ou autres et qui peuvent ne pas avoir une liaison avec les factures etc..
 
         action: action_salutation  
-        Description: quand l'utilisateur demande un salut
+        Description: quand l'utilisateur demande un salut 
                                         
         action: utter_bye  
         Description: quand l'utilisateur demande l'au revoir
@@ -106,66 +104,97 @@ class FirstAction(Action):
         Description: quand l'utilisateur demande les montants des factures qui sont égaux à des montants donnés 
         
         action: action_montant_total_fournisseurs  
-        Description: Cette action permet à l'utilisateur de récupérer le montant total des transactions pour chaque fournisseur individuel, ainsi que le montant total global cumulé de toutes les transactions fournisseurs.
+        Description: Cette action permet à l'utilisateur de récupérer le montant total des fournisseurs,le montant total de chaque fournisseur
+                                        
         action: Montant_Total_Par_Etat  
         Description: Cette action permet à l'utilisateur de récupérer le montant total des transactions pour chaque etat spécifique
+                                        
         action: action_afficher_montants_etat_validees  
         Description: Cette action permet à l'utilisateur de consulter le montant total des factures valides,en se concentrant uniquement sur les factures qui ont été valide
+                                        
         action: action_afficher_montants_etat_crees  
         Description: Cette action permet à l'utilisateur de consulter le montant total des factures créées, en se concentrant uniquement sur les factures qui ont été cree
                                         
         action: action_afficher_montants_etat_prets  
         Description: quand l'utilisateur demande à consulter le montant total pour les factures prêtes pour le paiement, en se concentrant uniquement sur les factures qui ont été pret pour paiement
+                                          
         action: Montant_Total_Par_Type  
         Description: quand l'utilisateur demande le montant total de chaque type et le montant total de tous les types
+                                        
         action: action_count_Fournisseur  
         Description: quand l'utilisateur demande de connaître le nombre de fournisseurs dans la base de données 
+                                        
         action: action_count_Fournisseur_par_mois  
         Description: quand l'utilisateur demande de connaître le nombre de fournisseurs par mois, il affiche chaque mois combien de fournisseurs il y a et on peut aussi spécifier un mois
+                                        
         action: action_count_Fournisseur_par_annee  
         Description: quand l'utilisateur demande de connaître le nombre de fournisseurs par une année particulère
+                                        
         action: action_count_Type  
         Description: quand l'utilisateur demande de connaître le nombre de types dans la base et combien de type en travail avec eux
-        action: action_count_Facture  
-        Description: quand l'utilisateur demande de connaître le nombre de factures dans la base 
+                                        
+        action: action_count_Facture_par_fournisseur  
+        Description: si l'utilisateur demande de savoir chaque fournisseur possède combien de facture  
+                                        
         action: action_count_Facture_par_mois  
         Description: quand l'utilisateur demande de connaître le nombre de factures par mois, il affiche chaque mois combien de factures il y a et on peut aussi spécifier un mois
+                                        
         action: action_count_Facture_par_annee  
         Description: quand l'utilisateur demande de connaître le nombre de factures par année, il affiche chaque année combien de factures il y a et on peut aussi spécifier une année
+                                        
         action: action_top_fournisseurs  
         Description: si l'utilisateur aurait besoin de savoir qui sont les n meilleurs fournisseurs
+                                        
         action: action_top_Type  
         Description: si l'utilisateur aurait besoin de savoir qui sont les n meilleurs types de fournisseurs
+                                        
         action: action_Less_fournisseurs  
         Description: si l'utilisateur aurait besoin de savoir qui sont les n moins fournisseurs existants dans la base
+                                        
         action: action_montant_total_facture  
         Description: pour savoir combien vaut le montant total de toutes les factures dans la base de données
+                                        
         action: action_get_Facture_mois  
         Description: quand l'utilisateur demande le montant d'achat en indiquant le mois et pouvant indiquer l'année ou même ne pas l'indiquer 
+                                        
         action: action_montant_total_pluriannuel  
         Description: demander le montant total des achats par année en mentionnant une année ou plusieurs
+                                        
         action: action_total_Deux_mois  
         Description: lorsque l'utilisateur demande les montants entre un intervalle de mois pour une année donnée
+                                        
         action: action_get_Facture_Jusquau_Mois  
         Description: demander le montant total jusqu'à un mois et une année donnée ou même on peut ne pas fournir l'année
+                                        
         action: action_afficher_montants_etat_validees_Date  
         Description: demande d'affichage des montants des factures qui ont un état validé pour un mois et une année donnés
+                                        
         action: action_afficher_montants_etat_cree_Date  
         Description: demande d'affichage des montants des factures qui ont un état créé pour un mois et une année donnés
+                                        
         action: action_afficher_montants_etat_Prêt_pour_paiement_Date  
         Description: demande d'affichage des montants des factures qui ont un état prêt pour le paiement pour un mois et une année donnés
+                                        
         action: action_get_Facture_deux_mois_deux_annee  
         Description: quand l'utilisateur demande les montants des factures figurant entre un intervalle en mentionnant le mois et l'année de début et le mois et l'année de fin
+                                        
         action: action_obtenir_Facture_montant  
         Description: si l'utilisateur voudrait savoir les détails d'une facture donnée
+                                        
         action: Montant_Par_Type  
         Description: quand l'utilisateur voudrait savoir les montants des factures pour un type de fournisseur donné et leur montant total
+                                        
         action: Montant_Par_Fournisseur  
         Description: quand l'utilisateur voudrait savoir les montants des factures pour un fournisseur donné et le montant total pour le fournisseur donné
+                                        
         action: action_get_Fournisseur_Mois_Annee  
-        Description: demander les montants total des factures pour un mois et une année donnée
+        Description: demander les montants total des fournisseur pour un mois et une année donnée
+                                        
         action: action_count_Facture_Par_Etat  
-        Description: demander nombre de facture pour chaque etats    
+        Description: demander nombre de facture pour chaque etats  
+
+        action: action_count_Facture
+        Description: si l'utilisateur demande de savoir combien de facture en possède dans la base, le nombre total des factures 
                                                                                                          
                 Vous avez une expression et vous devez la classifier selon l'action. 
                 Répondez uniquement avec l'action. 
@@ -180,8 +209,10 @@ class FirstAction(Action):
                                 top_k=50,
                                 # repetition_penalty=1.1
                             )
-        print(result.replace('\\', '').replace(" L'action est :",'').strip())
-        next_action=result.replace('\\', '').replace(" L'action est :",'').strip()
+        print(result.replace('\\', '').replace(" L'action est :",'').strip().replace('```diff',''))
+        next_action=result.replace('\\', '').replace(" L'action est :",'').replace('```diff','').strip()
+        print("debut",next_action)
+        print("fin")
         # write_variable_to_file(user_input)
         return [SlotSet("last_user_message", user_input),UserUtteranceReverted(), FollowupAction(next_action)]
 
@@ -192,20 +223,13 @@ class ActionSayHello(Action):
         user_input = tracker.events[-3].get("value")
         try:
             # Charger le modèle avec les paramètres personnalisés
-            llm = InferenceClient(model = 'mistralai/Mixtral-8x7B-Instruct-v0.1', token = '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')
-            # Appeler la méthode invoke avec le prompt et le contexte système
-            # prompt = "<s> [INST] You are a friendly chatbot and a financial advisor who answers to user greetings. At every greeting say your name and say that you are a financial advisor "
+            llm = InferenceClient(model = 'mistralai/Mixtral-8x7B-Instruct-v0.1', token = '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')
             prompt = "<s> [INST] Vous vous appelez InvoiceBot et vous êtes conçu pour fournir des réponses polies en français, repondre a ce text: [lang] fr [/lang]"
             prompt += user_input +" [/INST]"
-            
             # Call the model with the prompt and extract the answer
             result = llm.text_generation(prompt,max_new_tokens=1000,temperature=0.8,top_p=0.7,top_k=50,)
             print(result)
             answer_start=0
-            # if (response.find("Output: ")!=0):
-            #     answer_start = response.find("Output: ") + 7
-            # elif(response.find("Réponse: ")!=0):
-            #     answer_start = response.find("Réponse: ") + 8
             answer_end = len(result) 
             answer = result[answer_start:answer_end].strip()
             # Display the answer
@@ -225,7 +249,7 @@ class ActionObtenirInformationParReference(Action):
         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
     ) -> List[Dict[Text, Any]]:
         user_input = tracker.events[-3].get("value")
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
                 # Générer une réponse en utilisant le modèle
         prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter lq référence d'une facture dans une phrase souhaitée par l'utilisateur.
                 Votre réponse doit être un seul nombre, sans ajout d'informations supplémentaires.
@@ -286,7 +310,7 @@ class ActionObtenirMontantInf(Action):
         #             return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
         # Récupérer l'entité montant du tracker 
 
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
                 # Générer une réponse en utilisant le modèle
         prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter un nombre dans une phrase souhaitée par l'utilisateur.
                 Votre réponse doit être un seul nombre, sans ajout d'informations supplémentaires.
@@ -367,7 +391,7 @@ class ActionObtenirMontantSup(Action):
         #             return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
         # Récupérer l'entité montant du tracker 
 
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
                 # Générer une réponse en utilisant le modèle
         prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter un nombre dans une phrase souhaitée par l'utilisateur.
                 Votre réponse doit être un seul nombre, sans ajout d'informations supplémentaires.
@@ -441,7 +465,7 @@ class ActionObtenirMontantegal(Action):
         #             return [UserUtteranceReverted(), FollowupAction("action_obtenir_Facture_montant")]
         # Récupérer l'entité montant du tracker 
 
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
                 # Générer une réponse en utilisant le modèle
         prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter un nombre dans une phrase souhaitée par l'utilisateur.
                 Votre réponse doit être un seul nombre, sans ajout d'informations supplémentaires.
@@ -500,6 +524,56 @@ class ActionObtenirMontantegal(Action):
     
 # -----------------------------------------------------------------------------------------------------------------
 # ///mochkla
+# class ActionMontantTotalFournisseurs(Action):
+#     def name(self) -> Text:
+#         return "action_montant_total_fournisseurs"
+
+#     async def run(
+#         self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+#     ) -> List[Dict[Text, Any]]:
+#         # Obtention de user_input
+#         user_input = tracker.events[-3].get("value")
+
+#         # Se connecter à la base de données
+#         conn = se_connecter_a_ssms()  # Assurez-vous d'avoir cette fonction implémentée
+
+#         if conn:
+#             # Exécuter la requête SQL pour obtenir les montants dus par fournisseur
+#             query = f"""
+#             SELECT Fournisseur.Fournisseur, SUM(f.Montant) AS MontantTotalFournisseur
+#             FROM dbo.fait f 
+#             JOIN dbo.[Dimension fournisseur] Fournisseur ON f.FK_Fournisseur = Fournisseur.Pk_fournisseur
+#             WHERE {user_input} 
+#             GROUP BY Fournisseur.Fournisseur
+#             """  
+#             results = executer_requete(conn, query)  # Assurez-vous d'avoir cette fonction implémentée
+
+#             if results:
+#                 montants_fournisseurs = []
+#                 for row in results:
+#                     fournisseur = row[0]
+#                     montant_total = row[1]
+#                     montant_formatte = "{:,.2f}".format(montant_total)  # Formatage du montant
+#                     dispatcher.utter_message(
+#                         text=f"Le fournisseur {fournisseur} doit un montant total de {montant_formatte}."
+#                     )
+#                     montants_fournisseurs.append(montant_total)
+
+#                 somme_total_montants = sum(montants_fournisseurs)
+#                 somme_total_formattee = "{:,.2f}".format(somme_total_montants)  # Formatage de la somme totale
+#                 dispatcher.utter_message(
+#                     text=f"La somme totale des montants dus par les fournisseurs est {somme_total_formattee}."
+#                 )
+                
+#             else:
+#                 dispatcher.utter_message(text="Désolé, je n'ai pas pu trouver les informations sur les montants dus par fournisseur.")
+#         else:
+#             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
+
+#         return []
+
+
+# -----------------------------------------------------------------------------------------------------------------
 class ActionMontantTotalFournisseurs(Action):
     def name(self) -> Text:
         return "action_montant_total_fournisseurs"
@@ -543,9 +617,6 @@ class ActionMontantTotalFournisseurs(Action):
             dispatcher.utter_message(text="Désolé, je n'ai pas pu me connecter à la base de données.")
 
         return []
-
-
-# -----------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------
 # mochkla
 
@@ -586,6 +657,7 @@ class MontantTotalParEtat(Action):
 
 # -----------------------------------------------------------------------------------------------------------------
 # mochkla
+
 class ActionCountFactureParEtat(Action):
     def name(self):
         return "action_count_Facture_Par_Etat"
@@ -610,8 +682,6 @@ class ActionCountFactureParEtat(Action):
             dispatcher.utter_message(text="Une erreur s'est produite lors de la connexion à la base de données.")
 
         return []
-
-
 
 # -----------------------------------------------------------------------------------------------------------------
 #   mochkla   
@@ -742,7 +812,7 @@ class ActionAfficherMontantsEtatPret(Action):
             # Aucun montant trouvé pour l'état Prêt pour paiement
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Prêt pour paiement'.")
 
-        return [ ]
+        return []
 
 # -----------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------
@@ -805,7 +875,7 @@ class ActionCountFournisseurParAnnee(Action):
             # user_input = tracker.latest_message.get("text")
             user_input = tracker.events[-3].get("value")
 
-            llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+            llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
                     # Générer une réponse en utilisant le modèle
             prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter les années dans une phrase souhaitée par l'utilisateur.
                     Votre réponse doit être une année ou plusieurs, sans ajout d'informations supplémentaires.
@@ -883,7 +953,7 @@ class ActionCountFournisseurParMois(Action):
 
         user_input = tracker.events[-3].get("value")
 
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
                     # Générer une réponse en utilisant le modèle
         prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter les mois dans une phrase souhaitée par l'utilisateur.
                     Votre réponse doit être un mois ou plusieurs, sans ajout d'informations supplémentaires.
@@ -1072,7 +1142,7 @@ class ActionCountFactureParMois(Action):
 
             user_input = tracker.events[-3].get("value")
 
-            llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+            llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
                         # Générer une réponse en utilisant le modèle
             prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter le mois dans une phrase souhaitée par l'utilisateur.
                         Votre réponse doit être un nom pour un mois , sans ajout d'informations supplémentaires.
@@ -1139,7 +1209,7 @@ class ActionCountFactureParAnnee(Action):
 
             user_input = tracker.events[-3].get("value")
 
-            llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+            llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
                     # Générer une réponse en utilisant le modèle
             prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter les années dans une phrase souhaitée par l'utilisateur.
                     Votre réponse doit être une année ou plusieurs, sans ajout d'informations supplémentaires.
@@ -1153,7 +1223,7 @@ class ActionCountFactureParAnnee(Action):
                     Voici les message duquel tu dois extraire le nombre: """ + user_input + "[/INST]"
 
             result = llm.text_generation(prompt, max_new_tokens=100, temperature=0.1, top_p=0.95, top_k=50)
-            result = result.replace("Output: ", '').strip()
+            result = result.replace("Output: ", '').replace('```','').strip()
             print("Réponse du modèle :", result)
             year_entity=result
             if year_entity and year_entity !='None':  
@@ -1192,7 +1262,7 @@ class TopFournisseurs(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         user_input = tracker.events[-3].get("value")
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
 
         prompt = """<s> [INST] Vous êtes un chatbot conçu pour répondre à des requêtes sur le nombre de fournisseurs souhaités par l'utilisateur.
         Votre réponse doit être un seul nombre, sans ajout d'informations supplémentaires.
@@ -1242,7 +1312,7 @@ class TopType(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         user_input = tracker.events[-3].get("value")
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
 
         prompt = """<s> [INST] Vous êtes un chatbot conçu pour répondre à des requêtes sur le nombre de type souhaités par l'utilisateur.
         Votre réponse doit être un seul nombre, sans ajout d'informations supplémentaires.
@@ -1294,7 +1364,7 @@ class LessFournisseurs(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         user_input = tracker.events[-3].get("value")
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
 
         prompt = """<s> [INST] Vous êtes un chatbot conçu pour répondre à des requêtes sur le nombre de fournisseurs souhaités par l'utilisateur.
         Votre réponse doit être un seul nombre, sans ajout d'informations supplémentaires.
@@ -1429,7 +1499,7 @@ class ActionMontantTotalPluriannuel(Action):
 
         if conn:
 
-            llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+            llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
             last_input = tracker.events[-3].get("value")
             prompt = """<s> [INST] Vous êtes un chatbot conçu pour detecter l'année dans une phrase souhaitée par l'utilisateur. 
                             Votre réponse doit être nombre pour une année ou plusieurs année, sans ajout d'informations supplémentaires.
@@ -1492,7 +1562,7 @@ class ActionMontantTotalDeuxMois(Action):
         # Correspondance de motifs pour les Annees
         year_pattern = r'\b(20\d{2})\b'
         user_input = tracker.events[-3].get("value")
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         prompt = """<s> [INST] You are a date interval extractor, your task is to parse French messages containing actions between two month and one year and output them in numeric format. 
         Your output should be structured as follows: month1,month2,year and don't add anything else. 
         Here is an example: je veux avoir les factures entre juin et juillet en 2027 Output: 06,07,2027.
@@ -1560,7 +1630,7 @@ class ActionAfficherMontantsEtatValideesDate(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         last_input = tracker.events[-3].get("value")
 
         # Récupérer le mois et l'Annee spécifiés, avec des valeurs par défaut si non spécifiés
@@ -1637,7 +1707,7 @@ class ActionAfficherMontantsEtatCrééDate(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         last_input = tracker.events[-3].get("value")
 
         # Récupérer le mois et l'Annee spécifiés, avec des valeurs par défaut si non spécifiés
@@ -1709,7 +1779,7 @@ class ActionAfficherMontantsEtatPrêtPourPaiementDate(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         last_input = tracker.events[-3].get("value")
 
         # Récupérer le mois et l'Annee spécifiés, avec des valeurs par défaut si non spécifiés
@@ -1787,11 +1857,11 @@ class ActionGetFactureDeuxMoisDeuxAnnee(Action):
         
 
 
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         prompt = """<s> [INST] You are a date interval extractor, your task is to parse French messages containing actions between two dates and output them in numeric format. 
         Your output should be structured as follows: month1,year1,month2,year2 and don't add anything else. 
         Here is an example: je veux avoir les factures entre juin 2025 ET juillet 2027 Output: 06,2025,07,2027.
-        Here's the french message: """+tracker.latest_message.get("text")+"""[/INST]"""
+        Here's the french message: """+tracker.events[-3].get("value")+"""[/INST]"""
         result = llm.text_generation(prompt, max_new_tokens=1300, temperature=0.1, top_p=0.7, top_k=50)
         print(result)
 
@@ -1850,23 +1920,27 @@ class ActionGetFactureDeuxMoisDeuxAnnee(Action):
 import requests
 from datetime import datetime
 # Fonction pour envoyer les données du fournisseur à l'API Plotly
+import requests
+
 def update_plotly_filter(fournisseur):
-    url = 'http://localhost:8053/'  # URL de votre API Plotly
+    url = 'http://localhost:8053/'  # Ensure this matches your Flask app's URL
     data = {'fournisseur': fournisseur}
     try:
         response = requests.post(url, json=data)
-        response.raise_for_status()  # Raise an error for bad status codes
+        response.raise_for_status()  # Checks for HTTP request errors
+        print("Response from Flask:", response.json())  # Log response to verify
         return True
     except requests.exceptions.RequestException as e:
         print(f"Error making request: {e}")
         return False
+
 class ActionGetFournisseurMoisAnnee(Action):
     def name(self):
         return "action_get_Fournisseur_Mois_Annee"
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain):
         # Récupérer l'input complet de l'utilisateur
         last_input = tracker.events[-3].get("value")
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         prompt = """<s>[INST] 
         context: Your task is to Extract only the supplier name and nothing else from the French text.
         the supplier name could contain letters, spaces, parenthesis, slashes.
@@ -1934,10 +2008,10 @@ class ActionGetFournisseurMoisAnnee(Action):
                 dispatcher.utter_message(text=f"Aucun montant trouvé pour le fournisseur demandé pour {fournisseur} .")
             # Envoi des données du fournisseur à l'API Plotly
             response = update_plotly_filter(fournisseur)
-            if response:
-                dispatcher.utter_message(text="Données envoyées à l'API Plotly avec succès.")
-            else:
-                dispatcher.utter_message(text="Erreur lors de l'envoi des données à l'API Plotly.")
+            # if response:
+            #     dispatcher.utter_message(text="Données envoyées à l'API Plotly avec succès.")
+            # else:
+            #     dispatcher.utter_message(text="Erreur lors de l'envoi des données à l'API Plotly.")
             return []
         # Connexion à la base de données
         conn = se_connecter_a_ssms()
@@ -1971,7 +2045,7 @@ class MontantParFournisseur(Action):
             last_input = tracker.latest_message.get("text")
             print("here2")
         print('ll2 ', last_input)
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         prompt = """<s>[INST] 
         context: Your task is to Extract only the supplier name and nothing else from the French text.
         the supplier name could contain letters, spaces, parenthesis, slashes.
@@ -1985,7 +2059,7 @@ class MontantParFournisseur(Action):
         prompt += last_input + """  [/INST]"""
         result = llm.text_generation(prompt, max_new_tokens=1000, temperature=0.1, top_p=0.95, top_k=50, )
         print(result)
-        result = result.replace("supplier name: ", "").rstrip('.')
+        result = result.replace("supplier name: ", "").replace("Supplier name: ", "").rstrip('.')
         if result.startswith(" "):
             result = result[1:]
         print(result)
@@ -2021,10 +2095,10 @@ class MontantParFournisseur(Action):
 
                     # Envoi des données du fournisseur à l'API Plotly
                     response = update_plotly_filter(fournisseur)
-                    if response:
-                        dispatcher.utter_message(text="Données envoyées à l'API Plotly avec succès.")
-                    else:
-                        dispatcher.utter_message(text="Erreur lors de l'envoi des données à l'API Plotly.")
+                    # if response:
+                    #     dispatcher.utter_message(text="Données envoyées à l'API Plotly avec succès.")
+                    # else:
+                    #     dispatcher.utter_message(text="Erreur lors de l'envoi des données à l'API Plotly.")
                 else:
                     # Aucun montant trouvé pour le fournisseur demandé
                     dispatcher.utter_message(
@@ -2055,16 +2129,15 @@ class MontantParType(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         # Connexion à la base de données (assurez-vous que "conn" est correctement défini)
-        conn = se_connecter_a_ssms() 
+        conn = se_connecter_a_ssms()
 
-        # Votre code LLM
+        # Récupérer le dernier input de l'utilisateur
         last_input = tracker.events[-3].get("value")
-        print('ll1 ', last_input)
-        if type(last_input) == type(None):
+        if last_input is None:
             last_input = tracker.latest_message.get("text")
-            print("here2")
-        print('ll2 ', last_input)
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+
+        # Appel du modèle LLM
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         prompt = """<s>[INST] 
         context: Your task is to Extract only the type name and nothing else from the French text.
         the type name could contain letters, spaces, parenthesis, slashes.
@@ -2074,23 +2147,20 @@ class MontantParType(Action):
         Third example: consulter type "vente different produit" output :  type name: vente different produit
         You need to do the output exactly like this don't add anything: type name:
         Here is the text you need to work on:"""
-        # Combined system context and prompt with template
         prompt += last_input + """  [/INST]"""
-        result = llm.text_generation(prompt, max_new_tokens=1000, temperature=0.1, top_p=0.95, top_k=50, )
-        print(result)
-        result = result.replace("type name: ", "").rstrip('.')
-        if result.startswith(" "):
-            result = result[1:]
-        print(result)
+        result = llm.text_generation(prompt, max_new_tokens=1000, temperature=0.1, top_p=0.95, top_k=50)
+
+        # Extraction du type
+        result = result.replace("type name: ", "").rstrip('.').strip()
+
         if result:
-            conn = se_connecter_a_ssms()  # Vous devez implémenter cette fonction
             if conn:
                 cursor = conn.cursor()
-                query = """SELECT Fournisseur.Fournisseur, f.Montant, Fournisseur.type
+                query = """SELECT Fournisseur.Fournisseur, f.Montant, Fournisseur.type, facture.Facture
                         FROM dbo.fait f 
                         JOIN dbo.[Dimension fournisseur] fournisseur ON f.FK_Fournisseur = fournisseur.Pk_fournisseur
+                        JOIN dbo.[Dimensions facture] facture ON f.FK_facture = facture.PK_facture
                         WHERE Fournisseur.type = ?"""
-                # Exécuter la requête SQL avec le type en tant que paramètre sécurisé
                 cursor.execute(query, (result,))
                 results = cursor.fetchall()
 
@@ -2098,24 +2168,32 @@ class MontantParType(Action):
 
                 if results:
                     fournisseurs = []  # Liste pour stocker les noms des fournisseurs
-                    for result in results:
-                        # Récupérer les détails de chaque facture
-                        fournisseur, montant, _ = result
+                    for row in results:
+                        fournisseur, montant, type_fournisseur, facture = row
+                        try:
+                            montant = float(montant)  # S'assurer que le montant est un nombre
+                        except ValueError:
+                            dispatcher.utter_message(
+                                text=f"Le montant pour la facture {facture} du fournisseur {fournisseur} n'est pas un nombre valide: {montant}."
+                            )
+                            continue
+
                         total_amount += montant  # Ajouter le montant à la somme totale
                         fournisseurs.append(fournisseur)  # Ajouter le nom du fournisseur à la liste
                         dispatcher.utter_message(
-                            text=f"Le fournisseur {fournisseur} a un montant de {montant} pour le type {type}."
+                            text=f"Le fournisseur {fournisseur} pour la facture {facture} a un montant de {montant} pour le type {type_fournisseur}."
                         )
 
                     # Afficher le montant total pour le type spécifié
                     dispatcher.utter_message(
-                        text=f"Le montant total pour le type {type} est : {total_amount}."
+                        text=f"Le montant total pour le type {result} est : {total_amount}."
                     )
                 else:
                     # Aucun montant trouvé pour le type demandé
                     dispatcher.utter_message(text=f"Aucun montant trouvé pour le type demandé.")
 
-            return []
+        return []
+
 # --------------------------------------------------------------------------------------------------------------------------------
 
 class ActionGetFactureJusquauMois(Action):
@@ -2127,7 +2205,7 @@ class ActionGetFactureJusquauMois(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         user_input = tracker.events[-3].get("value")
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
 
         prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter le mois dans une phrase souhaitée par l'utilisateur.
                         Votre réponse doit être le numéro du mois seulement, sans ajout d'informations supplémentaires.
@@ -2190,7 +2268,7 @@ class ActionGetFactureParMois(Action):
 
         user_input = tracker.events[-3].get("value")
 
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         prompt = f"""<s> [INST] Vous êtes un chatbot conçu pour detecter le mois dans une phrase souhaitée par l'utilisateur.
                         Votre réponse doit être le numéro du mois seulement, sans ajout d'informations supplémentaires.
                         Exemple:
@@ -2251,7 +2329,7 @@ class ActionObtenirFactureMontant(Action):
             last_input=tracker.latest_message.get("text")
             print("here2")
         print('ll2 ',last_input)
-        llm = InferenceClient(model = 'mistralai/Mixtral-8x7B-Instruct-v0.1', token = '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')
+        llm = InferenceClient(model = 'mistralai/Mixtral-8x7B-Instruct-v0.1', token = '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')
         prompt = """<s>[INST] 
         context: Your task is to Extract only the Invoice name and nothing else from the French text.
         the Invoice name could contain numbers, letters, spaces, parenthesis, slashes.
@@ -2316,22 +2394,20 @@ class LLMGeneral(Action):
         # last_input = tracker.get_slot("last_user_message")
         last_input=tracker.events[-3].get("value")
         # Initialize your LLM inference client
-        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
+        llm = InferenceClient(model='mistralai/Mixtral-8x7B-Instruct-v0.1', token='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')
         # Get user input
         prompt = """<s> [INST] Vous êtes un chatbot qui sympathique et compétent en finances capable de répondre à une variété de questions en finances ou autres sujets. 
         Répondez aux questions en français et des faits intéressants et pertinents. 
         Voici la question a répondre: """ + last_input +"""  [/INST]"""
         # Generate response from LLM
-        result = llm.text_generation(prompt, max_new_tokens=1300, temperature=0.7, top_p=0.7, top_k=50)
+        result = llm.text_generation(prompt, max_new_tokens=1000, temperature=0.7, top_p=0.7, top_k=50)
         
         # Send the LLM response to the user
         dispatcher.utter_message(result)
 
         return []
 
-# -----------------------------------------------------------------------------------------------------------------
-
-
+# --------------------------------------------------------------------------------------------------------------------
 
 
 class DefaultFallback(Action):

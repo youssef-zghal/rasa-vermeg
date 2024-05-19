@@ -1,42 +1,44 @@
 version: '3.1'
 intents:
 - salutation
-# - bye
-# - connaitre_montant_a_partir_reference
-# - Montant_egal
-# - Montant_inferieur
-# - Montant_superieur
-# - Montant_total_fournisseur
-# - montant_total_etats
-# - montant_etat_cree
-# - montant_etat_prêt_pour_paiement
-# - montant_etat_valide
-# - montant_total_type
-# - nombre_fournisseur
-# - nombre_fournisseur_par_mois
-# - nombre_fournisseur_par_annee
-# - nombre_type
-# - nombre_facture
-# - nombre_facture_par_mois
-# - nombre_facture_par_annee
-# - demande_top_Type
-# - demande_top_fournisseurs
-# - demande_Less_fournisseurs
-# - obtenir_montant_total_facture
-# - montant_total_mois_annees
-# - obtenir_montant_total_par_annees
-# - montant_total_entre_deux_mois_pour_une_annee
-# - montant_total_Jusquau_mois_annee
-# - afficher_montants_des_factures_etat_valides_par_mois_annee
-# - afficher_montants_des_factures_etat_cree_par_mois_annee
-# - afficher_montants_des_factures_etat_prets_pour_paiement_par_mois_annee
-# - demander_montant_total_entre_mois_annee_et_mois_annee
-# - demande_details_sur_Facture
-# - demande_montant_fournisseur
-# - demande_montant_type
-# - demander_montant_total_fournisseur_mois_annee
-# - nombre_facture_par_fournisseur
-# - nombre_facture_par_etat
+- bye
+- connaitre_montant_a_partir_reference
+- Montant_egal
+- Montant_inferieur
+- Montant_superieur
+- Montant_total_fournisseur
+- montant_total_etats
+- montant_etat_cree
+- montant_etat_prêt_pour_paiement
+- montant_etat_valide
+- montant_total_type
+- nombre_fournisseur
+- nombre_fournisseur_par_mois
+- nombre_fournisseur_par_annee
+- nombre_type
+- nombre_facture
+- nombre_facture_par_mois
+- nombre_facture_par_annee
+- demande_top_Type
+- demande_top_fournisseurs
+- demande_Less_fournisseurs
+- obtenir_montant_total_facture
+- montant_total_mois_annees
+- obtenir_montant_total_par_annees
+- montant_total_entre_deux_mois_pour_une_annee
+- montant_total_Jusquau_mois_annee
+- afficher_montants_des_factures_etat_valides_par_mois_annee
+- afficher_montants_des_factures_etat_cree_par_mois_annee
+- afficher_montants_des_factures_etat_prets_pour_paiement_par_mois_annee
+- demander_montant_total_entre_mois_annee_et_mois_annee
+- demande_details_sur_Facture
+- demande_montant_fournisseur
+- demande_montant_type
+- demander_montant_total_fournisseur_mois_annee
+- nombre_facture_par_fournisseur
+- nombre_facture_par_etat
+# - montant_de_chaque_etat
+
 # - fournisseurs_zero
 # - montant_par_date
 # - obtenir_factures_entre_dates
@@ -49,6 +51,7 @@ intents:
 # - Facture
 # - Fournisseur
 entities:
+- last_user_message
 # - month
 # - monthF
 # - monthD
@@ -69,7 +72,7 @@ entities:
 # - JourD
 # - JourF
 # - fournisseur_reconnu
-- last_user_message
+
 
 slots:
   last_user_message:
@@ -241,11 +244,10 @@ actions:
 - action_obtenir_montant_sup
 - action_montant_total_fournisseurs
 - Montant_Total_Par_Etat
-- action_afficher_montants_etat
-- Montant_Total_Par_Type
 - action_afficher_montants_etat_prets
 - action_afficher_montants_etat_crees
 - action_afficher_montants_etat_validees
+- Montant_Total_Par_Type
 - Montant_Par_Type
 - Montant_Par_Fournisseur
 - action_count_Fournisseur
@@ -266,3 +268,4 @@ actions:
 - action_count_Facture_Par_Etat
 - action_llm_general
 # - action_fournisseurs_zero
+# - action_afficher_montants_etat
