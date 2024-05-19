@@ -87,8 +87,8 @@ app.layout = html.Div((
  
     html.Div([
         html.Div([
-        html.Img(src='/static/bot-removebg.png', style={'width': '100px', 'height': '100px'}),
-        # html.H1('InvoiceBot', style={'margin-top': '40px'}),
+        html.Img(src='/static/INVOICE.png', className='image-hover-effect'),
+        # html.H1('InvoiceBot', style={'margin-top': '4px'}),
         ], className="one-third column", id="title1"),
 
         html.Div([

@@ -188,6 +188,8 @@
   }
 }
 
+
+
 /* Base Styles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 /* NOTE
@@ -204,6 +206,24 @@ body {
     sans-serif;
   color: rgb(50, 50, 50);
 }
+
+
+.image-hover-effect {
+  width: 110px;
+  height: 115px;
+  padding-top: 25px;
+  padding-left: 20px;
+  transition: transform 0.3s ease; /* Smooth transition for transform */
+}
+
+.image-hover-effect:hover {
+  transform: scale(1.3); /* Double the size on hover */
+}
+.draggable {
+  position: absolute;  /* Important pour que le déplacement soit possible */
+  cursor: grab;        /* Change le curseur pour indiquer qu'on peut saisir l'élément */
+}
+
 
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
