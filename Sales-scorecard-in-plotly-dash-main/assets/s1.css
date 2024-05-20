@@ -217,8 +217,84 @@ body {
 }
 
 .image-hover-effect:hover {
-  transform: scale(1.3); /* Double the size on hover */
+  transform: scale(1); /* Double the size on hover */
+  animation: rotateAndSwap 2s infinite; /* Apply the rotation and swap animation */
 }
+
+@keyframes rotateAndSwap {
+  0% {
+    transform: scale(1.3) rotate(0deg);
+    content: url('/static/INVOICE3.png');
+  }
+  25% {
+    transform: scale(1.3) rotate(90deg);
+    content: url('/static/INVOICE4.png');
+  }
+  50% {
+    transform: scale(1.3) rotate(180deg);
+    content: url('/static/INVOICE3.png');
+  }
+  75% {
+    transform: scale(1.3) rotate(270deg);
+    content: url('/static/INVOICE4.png');
+  }
+  100% {
+    transform: scale(1.3) rotate(360deg);
+    content: url('/static/INVOICE3.png');
+  }
+}
+
+/* Container for the dropdown */
+.dropdown-container {
+  width: 200px;
+  margin: 0 auto;
+}
+
+/* Style the dropdown */
+.styled-dropdown .Select-control {
+  background-color: #f0f0f0; /* Light gray background */
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 8px; /* Padding inside the dropdown */
+  font-size: 16px; /* Font size */
+  color: #333; /* Text color */
+}
+
+/* Dropdown options */
+.styled-dropdown .Select-menu-outer {
+  background-color: #fff; /* White background for options */
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Option styles */
+.styled-dropdown .Select-option {
+  padding: 8px; /* Padding inside each option */
+  font-size: 16px; /* Font size */
+  color: #333; /* Text color */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Hover effect for options */
+.styled-dropdown .Select-option:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+}
+
+/* Selected option */
+.styled-dropdown .Select-option.is-selected {
+  background-color: #e0e0e0; /* Slightly darker gray background for selected option */
+  font-weight: bold; /* Bold font for selected option */
+}
+
+/* Focus effect */
+.styled-dropdown .Select-control:focus {
+  border-color: #007bff; /* Blue border on focus */
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.25); /* Subtle blue shadow on focus */
+}
+
+
+
 .draggable {
   position: absolute;  /* Important pour que le déplacement soit possible */
   cursor: grab;        /* Change le curseur pour indiquer qu'on peut saisir l'élément */

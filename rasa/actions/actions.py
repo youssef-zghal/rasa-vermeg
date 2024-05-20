@@ -110,13 +110,13 @@ class FirstAction(Action):
         Description: Cette action permet à l'utilisateur de récupérer le montant total des transactions pour chaque etat spécifique
                                         
         action: action_afficher_montants_etat_validees  
-        Description: Cette action permet à l'utilisateur de consulter le montant total des factures valides,en se concentrant uniquement sur les factures qui ont été valide
+        Description: Cette action permet à l'utilisateur de consulter le montant total des factures valides sans avoir à mentionner de dates, en se concentrant uniquement sur les factures qui ont été valide
                                         
-        action: action_afficher_montants_etat_crees  
-        Description: Cette action permet à l'utilisateur de consulter le montant total des factures créées, en se concentrant uniquement sur les factures qui ont été cree
+        action: action_afficher_montants_etat_crees
+        Description: Cette action permet à l'utilisateur de consulter le montant total des factures créées sans avoir à mentionner de dates, en se concentrant uniquement sur les factures qui ont été créé
                                         
         action: action_afficher_montants_etat_prets  
-        Description: quand l'utilisateur demande à consulter le montant total pour les factures prêtes pour le paiement, en se concentrant uniquement sur les factures qui ont été pret pour paiement
+        Description: quand l'utilisateur demande à consulter le montant total pour les factures prêtes pour le paiement sans avoir à mentionner de dates, en se concentrant uniquement sur les factures qui ont été pret pour paiement
                                           
         action: Montant_Total_Par_Type  
         Description: quand l'utilisateur demande le montant total de chaque type et le montant total de tous les types
@@ -185,7 +185,7 @@ class FirstAction(Action):
         Description: quand l'utilisateur voudrait savoir les montants des factures pour un type de fournisseur donné et leur montant total
                                         
         action: Montant_Par_Fournisseur  
-        Description: quand l'utilisateur voudrait savoir les montants des factures pour un fournisseur donné et le montant total pour le fournisseur donné
+        Description: quand l'utilisateur voudrait savoir les montants des factures pour un fournisseur donné ou bien si il demande d'afficher les factures d'un fournisseur et le montant total pour le fournisseur donné
                                         
         action: action_get_Fournisseur_Mois_Annee  
         Description: demander les montants total des fournisseur pour un mois et une année donnée
@@ -198,6 +198,7 @@ class FirstAction(Action):
                                                                                                          
                 Vous avez une expression et vous devez la classifier selon l'action. 
                 Répondez uniquement avec l'action. 
+                Il faut retourner une seule action même si tu doutes entre plusieurs, retourne la plus probable et sans expliquer les raisons du choix.
                 Si l'expression ne correspond à aucune des descriptions d'action, renvoyez "None".
                 Vous devez produire la sortie exactement comme suit, ne rien ajouter : L'action est : .
                 Voici le message à classer: """ + user_input + """ [/INST]""",
@@ -721,11 +722,24 @@ class ActionAfficherMontantsEtatValidees(Action):
             total_montant_formatte = "{:,.2f}".format(total_montant)
             # Affiche le montant total à la fin
             dispatcher.utter_message(text=f"Le montant total des factures validées est de : {total_montant_formatte}.")
+            response = update_plotly_filter_etat(etat)
         else:
             # Aucun montant trouvé pour l'état Validé
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Validé'.")
 
         return [ ]
+    
+def update_plotly_filter_etat(etat):
+    url = 'http://localhost:8053/'  # URL de votre API Plotly
+    data = {'etat': etat}
+    
+    try:
+        response = requests.post(url, json=data)
+        response.raise_for_status()  # Raise an error for bad status codes
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error making request: {e}")
+        return None
 
 # -----------------------------------------------------------------------------------------------------------------
          
@@ -764,11 +778,24 @@ class ActionAfficherMontantsEtatCree(Action):
             total_montant_formatte = "{:,.2f}".format(total_montant)
             # Affiche le montant total à la fin
             dispatcher.utter_message(text=f"Le montant total des factures créées est de : {total_montant_formatte}.")
+            response = update_plotly_filter_etat(etat)
         else:
             # Aucun montant trouvé pour l'état Créé
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Créé'.")
 
         return [ ]
+
+def update_plotly_filter_etat(etat):
+    url = 'http://localhost:8053/'  # URL de votre API Plotly
+    data = {'etat': etat}
+    
+    try:
+        response = requests.post(url, json=data)
+        response.raise_for_status()  # Raise an error for bad status codes
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error making request: {e}")
+        return None
 
 # -----------------------------------------------------------------------------------------------------------------
          
@@ -808,12 +835,24 @@ class ActionAfficherMontantsEtatPret(Action):
             total_montant_formatte = "{:,.2f}".format(total_montant)
             # Affiche le montant total à la fin
             dispatcher.utter_message(text=f"Le montant total des factures prêtes pour paiement est de : {total_montant_formatte}.")
+            response = update_plotly_filter_etat(etat)
         else:
             # Aucun montant trouvé pour l'état Prêt pour paiement
             dispatcher.utter_message(text=f"Aucun montant trouvé pour l'état 'Prêt pour paiement'.")
 
         return []
 
+def update_plotly_filter_etat(etat):
+    url = 'http://localhost:8053/'  # URL de votre API Plotly
+    data = {'etat': etat}
+    
+    try:
+        response = requests.post(url, json=data)
+        response.raise_for_status()  # Raise an error for bad status codes
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error making request: {e}")
+        return None
 # -----------------------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------------------
 
@@ -2094,7 +2133,7 @@ class MontantParFournisseur(Action):
                         text=f"Le montant total des factures pour le fournisseur {fournisseur} est de : {total_montant}.")
 
                     # Envoi des données du fournisseur à l'API Plotly
-                    response = update_plotly_filter(fournisseur)
+                    response = update_plotly_filter_fournisseur(fournisseur)
                     # if response:
                     #     dispatcher.utter_message(text="Données envoyées à l'API Plotly avec succès.")
                     # else:
@@ -2107,7 +2146,7 @@ class MontantParFournisseur(Action):
             return []
 
 # Fonction pour envoyer les données du fournisseur à l'API Plotly
-def update_plotly_filter(fournisseur):
+def update_plotly_filter_fournisseur(fournisseur):
     url = 'http://localhost:8053/'  # URL de votre API Plotly
     data = {'fournisseur': fournisseur}
     
@@ -2188,11 +2227,26 @@ class MontantParType(Action):
                     dispatcher.utter_message(
                         text=f"Le montant total pour le type {result} est : {total_amount}."
                     )
+                    response = update_plotly_filter_type(type_fournisseur)
+
                 else:
                     # Aucun montant trouvé pour le type demandé
                     dispatcher.utter_message(text=f"Aucun montant trouvé pour le type demandé.")
 
         return []
+    
+# Fonction pour envoyer les données du fournisseur à l'API Plotly
+def update_plotly_filter_type(type_fournisseur):
+    url = 'http://localhost:8053/'  # URL de votre API Plotly
+    data = {'type': type_fournisseur}
+    
+    try:
+        response = requests.post(url, json=data)
+        response.raise_for_status()  # Raise an error for bad status codes
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error making request: {e}")
+        return None
 
 # --------------------------------------------------------------------------------------------------------------------------------
 
@@ -2371,6 +2425,7 @@ class ActionObtenirFactureMontant(Action):
                         dispatcher.utter_message(
                             text=f"La facture {Facture} est établie au nom du {Fournisseur}, d'un montant de {montant}, et datée du {Date}."
                         )
+                    response = update_plotly_filter_facture(Facture)
                 else:
                     dispatcher.utter_message(text="Désolé, aucune information trouvée pour la facture spécifiée.")
             else:
@@ -2380,6 +2435,19 @@ class ActionObtenirFactureMontant(Action):
 
         return [SlotSet("last_user_message", None)
 ]
+    
+# Fonction pour envoyer les données du fournisseur à l'API Plotly
+def update_plotly_filter_facture(Facture):
+    url = 'http://localhost:8053/'  # URL de votre API Plotly
+    data = {'Facture': Facture}
+    
+    try:
+        response = requests.post(url, json=data)
+        response.raise_for_status()  # Raise an error for bad status codes
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error making request: {e}")
+        return None
 
 # ------------------------------------------------------------------------------------------------------
 

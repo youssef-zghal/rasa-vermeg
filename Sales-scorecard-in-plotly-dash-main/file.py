@@ -37,7 +37,7 @@ query = """SELECT [etat], [montant], [date] ,[type],[fournisseur],[Facture] FROM
 montant = pd.read_sql(query, conn)
 etat_query = "SELECT DISTINCT [Etat] FROM [dbo].[Dimensions Facture]"
 etat_df = pd.read_sql(etat_query, conn)
-options = [{'label': etat_, 'value': etat_} for etat_ in etat_df['Etat']]
+options = [{'label': str(etat_), 'value': str(etat_)} for etat_ in etat_df['Etat']]
 
 #     # Convertir la colonne 'Date' en format de date
 montant['date'] = pd.to_datetime(montant['date'])
@@ -55,34 +55,51 @@ options_fournisseurs = [{'label': str(fournisseur_), 'value': str(fournisseur_)}
 # Récupérer les types uniques depuis la base de données
 types_query = "SELECT DISTINCT [Type] FROM [dbo].[Dimension fournisseur]"
 types_df = pd.read_sql(types_query, conn)
-options_types = [{'label': type_, 'value': type_} for type_ in types_df['Type']]
+options_types = [{'label': str(type_), 'value': str(type_)} for type_ in types_df['Type']]
 
 # Récupérer les types uniques depuis la base de données
 Factures_query = "SELECT DISTINCT [facture] FROM [dbo].[Dimensions Facture]"
 Factures_df = pd.read_sql(Factures_query, conn)
-options_factures = [{'label': Facture_, 'value': Facture_} for Facture_ in Factures_df['facture']]
+options_factures = [{'label': str(Facture_), 'value': str(Facture_)} for Facture_ in Factures_df['facture']]
 
 num_invoices = len(montant)
 total_amount = montant['montant'].sum()
 total_types = montant['type'].nunique()
 total_fournisseurs = montant['fournisseur'].nunique()
-user_cleared_selection = False
+# user_cleared_selection = False
 supplier_name = None
+type_name= None
+Facture_name= None
+etat_name= None
 
 # ---------------------------------------------------------------------------------------------------------------------------------
 flask_app = Flask(__name__, static_folder='static')
 app = dash.Dash(__name__, server=flask_app, meta_tags=[{"name": "viewport", "content": "width=device-width"}], suppress_callback_exceptions=True)
 
 @flask_app.route('/', methods=['POST'])
-def update_supplier():
-    global supplier_name
+def update_supplier_or_type():
+    global supplier_name, type_name, Facture_name, etat_name
     data = request.get_json()
-    supplier_name = data.get('fournisseur')
-    print("Données reçues:", data)
-    return jsonify({'message': 'Fournisseur mis à jour'})
+    if 'fournisseur' in data:
+        supplier_name = data.get('fournisseur')
+        print("Données reçues (fournisseur):", data)
+        return jsonify({'message': 'Fournisseur mis à jour'})
+    elif 'type' in data:
+        type_name = data.get('type')
+        print("Données reçues (type):", data)
+        return jsonify({'message': 'Type mis à jour'})
+    elif 'Facture' in data:
+        Facture_name = data.get('Facture')
+        print("Données reçues (type):", data)
+        return jsonify({'message': 'facture mis à jour'})
+    elif 'etat' in data:
+        etat_name = data.get('etat')
+        print("Données reçues (etat):", data)
+        return jsonify({'message': 'etat mis à jour'})
+    return jsonify({'message': 'Aucune donnée mise à jour'})
 
 
-
+ 
 app.layout = html.Div((
  
     html.Div([
@@ -115,15 +132,18 @@ html.Div([
                  value=None,
                  multi=True,   # Valeur par défaut
                  style={'color': 'black'}, className='dcc_compon'),
-
         dcc.Store(id='supplier_store'),
-        dcc.Store(id='reset_store'),
-            dcc.Store(id='user_cleared_selection_store', data=False) ,
+        dcc.Store(id='type_store'),
+        dcc.Store(id='Facture_store'),
+        dcc.Store(id='etat_store'),
 
-  # Store component for supplier name
+        # dcc.Store(id='reset_store'),
+        # dcc.Store(id='user_cleared_selection_store', data=False) ,
+
+        # Store component for supplier name
         dcc.Interval(id='interval-component', interval=1*1000, n_intervals=0),  
         html.P('Fournisseurs', className='fix_label', style={'color': 'white','margin-left': '20px'}),
-         dcc.Dropdown(id='dropdown_fournisseurs',
+        dcc.Dropdown(id='dropdown_fournisseurs',
                  options=options_fournisseurs,
                  value=None,  # Valeur par défaut
                  multi=True,
@@ -137,7 +157,7 @@ html.Div([
         html.P('Etats', className='fix_label', style={'color': 'white','margin-left': '20px'}),
         dcc.Dropdown(id='dropdown_items',
                 options=options,
-                value=[],  # valeurs sélectionnées par défaut
+                value=None,  # valeurs sélectionnées par défaut
                 multi=True,
                 style={'color': 'black'}, className='dcc_compon',  # Permet la sélection multiple
             ),
@@ -185,7 +205,12 @@ html.Div([
     ], className='dcc_compon one columns', style={'width': '200px' , 'margin-right':'110px'}),
 
 # -----------------------------------------------------------------
+
 html.Div([
+    dcc.Loading(
+        id="loading-1",
+        type="default",
+        children=html.Div([
     dt.DataTable(id='my_datatable',
                 columns=[{'name': i, 'id': i} for i in
                         montant.loc[:, ['Facture','fournisseur','montant','etat','type', 'date_substr']]],
@@ -213,7 +238,7 @@ html.Div([
                 fixed_rows={'headers': True},
                 )
 ], className='create_container2 nine columns', style={'height': '700px'}, id='Block_div5'),
-
+)]),
 
 # -----------------------------------------------------------------
     
@@ -373,7 +398,10 @@ def update_graph(select_years, select_months, radio_items1, top_count, fournisse
     # Initialize filtered_df
     filtered_df = montant
     
-    # Filter data based on selected_invoices
+    if isinstance(selected_invoices, str):
+        selected_invoices = [selected_invoices]
+
+    # Apply filter for 'selected_invoices' if it is not empty
     if selected_invoices is not None and selected_invoices != []:
         filtered_df = filtered_df[filtered_df['Facture'].isin(selected_invoices)]
     
@@ -385,7 +413,10 @@ def update_graph(select_years, select_months, radio_items1, top_count, fournisse
     if select_months:
         filtered_df = filtered_df[filtered_df['date'].dt.month.isin(select_months)]
     
-    # Filter data based on dropdown values
+    if isinstance(dropdown_value, str):
+        dropdown_value = [dropdown_value]
+
+    # Apply filter for 'dropdown_value' if it is not empty
     if dropdown_value is not None and dropdown_value != []:
         filtered_df = filtered_df[filtered_df['etat'].isin(dropdown_value)]
     
@@ -487,6 +518,10 @@ def update_graph(select_years, select_months, radio_items1, top_count, fournisse
             )
         }
     elif radio_items1 == 'type':
+        if isinstance(type_value, str):
+            type_value = [type_value]
+
+        # Apply filter for 'type_value' if it is not empty
         if type_value is not None and type_value != []:
             filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
         sales3 = filtered_df.groupby(['type'])['montant'].sum().reset_index()
@@ -522,7 +557,7 @@ def update_graph(select_years, select_months, radio_items1, top_count, fournisse
                     'yanchor': 'top'},
                 titlefont={
                     'color': 'white',
-                    'size': 12},
+                    'size': 15},
 
                 hovermode='closest',
                 margin=dict(t=40, r=0),
@@ -594,7 +629,10 @@ def update_graph(select_year, select_month, fournisseur_value, type_value):
         if fournisseur_value is not None and fournisseur_value != []:
             filtered_df = filtered_df[filtered_df['fournisseur'].isin(fournisseur_value)]
 
-    # Si un type est sélectionné, filtrer les données en fonction de ce type
+        if isinstance(type_value, str):
+            type_value = [type_value]
+
+        # Apply filter for 'type_value' if it is not empty
         if type_value is not None and type_value != []:
             filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
     
@@ -664,9 +702,12 @@ def update_text(dropdown_value, fournisseur_value, type_value,select_year, selec
     # Filtrer les données en fonction des valeurs sélectionnées
     filtered_df = montant
 
+    if isinstance(selected_invoices, str):
+        selected_invoices = [selected_invoices]
+
+    # Apply filter for 'selected_invoices' if it is not empty
     if selected_invoices is not None and selected_invoices != []:
-        # Filter data based on selected_invoices
-        filtered_df = montant[montant['Facture'].isin(selected_invoices)]
+        filtered_df = filtered_df[filtered_df['Facture'].isin(selected_invoices)]
 
     if select_year:
         filtered_df = montant[montant['date'].dt.year.isin(select_year)]
@@ -683,12 +724,18 @@ def update_text(dropdown_value, fournisseur_value, type_value,select_year, selec
         filtered_df = filtered_df[filtered_df['fournisseur'].isin(fournisseur_value)]
 
 
-    # Si un type est sélectionné, filtrer les données en fonction de ce type
-    if type_value is not None and type_value != []:
-            filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
+    if isinstance(type_value, str):
+        type_value = [type_value]
 
-    # Si des valeurs sont sélectionnées dans la liste déroulante, filtrer les données en fonction de ces valeurs
-    if dropdown_value:
+        # Apply filter for 'type_value' if it is not empty
+    if type_value is not None and type_value != []:
+        filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
+
+    if isinstance(dropdown_value, str):
+        dropdown_value = [dropdown_value]
+
+    # Apply filter for 'dropdown_value' if it is not empty
+    if dropdown_value is not None and dropdown_value != []:
         filtered_df = filtered_df[filtered_df['etat'].isin(dropdown_value)]
 
     # Nombre de lignes dans la table "montant"
@@ -720,9 +767,12 @@ def update_text(dropdown_value, fournisseur_value, type_value,select_year, selec
     # Filtrer les données en fonction des valeurs sélectionnées
     filtered_df = montant
 
+    if isinstance(selected_invoices, str):
+        selected_invoices = [selected_invoices]
+
+    # Apply filter for 'selected_invoices' if it is not empty
     if selected_invoices is not None and selected_invoices != []:
-        # Filter data based on selected_invoices
-        filtered_df = montant[montant['Facture'].isin(selected_invoices)]
+        filtered_df = filtered_df[filtered_df['Facture'].isin(selected_invoices)]
 
     if select_year:
         filtered_df = montant[montant['date'].dt.year.isin(select_year)]
@@ -737,11 +787,18 @@ def update_text(dropdown_value, fournisseur_value, type_value,select_year, selec
     if fournisseur_value is not None and fournisseur_value != []:
         filtered_df = filtered_df[filtered_df['fournisseur'].isin(fournisseur_value)]
 
-    # Si un type est sélectionné, filtrer les données en fonction de ce type
-    if type_value is not None and type_value != []:
-            filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
+    if isinstance(type_value, str):
+        type_value = [type_value]
 
-    if dropdown_value:
+        # Apply filter for 'type_value' if it is not empty
+    if type_value is not None and type_value != []:
+        filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
+
+    if isinstance(dropdown_value, str):
+        dropdown_value = [dropdown_value]
+
+    # Apply filter for 'dropdown_value' if it is not empty
+    if dropdown_value is not None and dropdown_value != []:
         filtered_df = filtered_df[filtered_df['etat'].isin(dropdown_value)]
 
     # Montant total de toute la base
@@ -772,9 +829,12 @@ def update_text(dropdown_value, fournisseur_value, type_value,select_year, selec
     # Filtrer les données en fonction des valeurs sélectionnées
     filtered_df = montant
 
+    if isinstance(selected_invoices, str):
+        selected_invoices = [selected_invoices]
+
+    # Apply filter for 'selected_invoices' if it is not empty
     if selected_invoices is not None and selected_invoices != []:
-        # Filter data based on selected_invoices
-        filtered_df = montant[montant['Facture'].isin(selected_invoices)]
+        filtered_df = filtered_df[filtered_df['Facture'].isin(selected_invoices)]
 
     if select_year:
         filtered_df = montant[montant['date'].dt.year.isin(select_year)]
@@ -789,11 +849,18 @@ def update_text(dropdown_value, fournisseur_value, type_value,select_year, selec
     if fournisseur_value is not None and fournisseur_value != []:
         filtered_df = filtered_df[filtered_df['fournisseur'].isin(fournisseur_value)]
 
-    # Si un type est sélectionné, filtrer les données en fonction de ce type
-    if type_value is not None and type_value != []:
-            filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
+    if isinstance(type_value, str):
+        type_value = [type_value]
 
-    if dropdown_value:
+        # Apply filter for 'type_value' if it is not empty
+    if type_value is not None and type_value != []:
+        filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
+
+    if isinstance(dropdown_value, str):
+        dropdown_value = [dropdown_value]
+
+    # Apply filter for 'dropdown_value' if it is not empty
+    if dropdown_value is not None and dropdown_value != []:
         filtered_df = filtered_df[filtered_df['etat'].isin(dropdown_value)]
 
     # Nombre de types différents
@@ -825,9 +892,12 @@ def update_text(dropdown_value, fournisseur_value, type_value,select_year, selec
     # Filtrer les données en fonction des valeurs sélectionnées
     filtered_df = montant
 
+    if isinstance(selected_invoices, str):
+        selected_invoices = [selected_invoices]
+
+    # Apply filter for 'selected_invoices' if it is not empty
     if selected_invoices is not None and selected_invoices != []:
-        # Filter data based on selected_invoices
-        filtered_df = montant[montant['Facture'].isin(selected_invoices)]
+        filtered_df = filtered_df[filtered_df['Facture'].isin(selected_invoices)]
 
     if select_year:
         filtered_df = montant[montant['date'].dt.year.isin(select_year)]
@@ -842,11 +912,18 @@ def update_text(dropdown_value, fournisseur_value, type_value,select_year, selec
     if fournisseur_value is not None and fournisseur_value != []:
         filtered_df = filtered_df[filtered_df['fournisseur'].isin(fournisseur_value)]
 
-    # Si un type est sélectionné, filtrer les données en fonction de ce type
-    if type_value is not None and type_value != []:
-            filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
+    if isinstance(type_value, str):
+        type_value = [type_value]
 
-    if dropdown_value:
+        # Apply filter for 'type_value' if it is not empty
+    if type_value is not None and type_value != []:
+        filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
+
+    if isinstance(dropdown_value, str):
+        dropdown_value = [dropdown_value]
+
+    # Apply filter for 'dropdown_value' if it is not empty
+    if dropdown_value is not None and dropdown_value != []:
         filtered_df = filtered_df[filtered_df['etat'].isin(dropdown_value)]
 
     # Nombre de types différents
@@ -966,9 +1043,12 @@ def update_graph(select_year, select_month, fournisseur_value, type_value):
         filtered_df = filtered_df[filtered_df['fournisseur'].isin(fournisseur_value)]
 
 
-    # Si un type est sélectionné, filtrer les données en fonction de ce type
+    if isinstance(type_value, str):
+        type_value = [type_value]
+
+        # Apply filter for 'type_value' if it is not empty
     if type_value is not None and type_value != []:
-            filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
+        filtered_df = filtered_df[filtered_df['type'].isin(type_value)]
 
     # Regrouper les données par mois et calculer les montants mensuels
     monthly_sales = filtered_df.groupby(filtered_df['date'].dt.to_period("M"))['montant'].sum().reset_index()
@@ -1071,9 +1151,12 @@ def display_table(select_year, select_month, fournisseur_value, type_value, drop
         # Filtrer les données en fonction des années sélectionnées
         filtered_data = montant[montant['date'].dt.year.isin(select_year)]
 
+    if isinstance(selected_invoices, str):
+        selected_invoices = [selected_invoices]
+
+    # Apply filter for 'selected_invoices' if it is not empty
     if selected_invoices is not None and selected_invoices != []:
-        # Filter data based on selected_invoices
-        filtered_data = montant[montant['Facture'].isin(selected_invoices)]
+        filtered_data = filtered_data[filtered_data['Facture'].isin(selected_invoices)]
 
     # Si des mois spécifiques sont sélectionnés, filtrer les données en fonction de ces mois
     if select_month:
@@ -1088,13 +1171,18 @@ def display_table(select_year, select_month, fournisseur_value, type_value, drop
         filtered_data = filtered_data[filtered_data['fournisseur'].isin(fournisseur_value)]
 
 
-    # Si un type est sélectionné, filtrer les données en fonction de ce type
-    if type_value is not None and type_value != []:
-            filtered_data = filtered_data[filtered_data['type'].isin(type_value)]
+    if isinstance(type_value, str):
+        type_value = [type_value]
 
-    # Si un état est sélectionné, filtrer les données en fonction de cet état
-    if dropdown_value is not None and dropdown_value != []:  
-        # Filtrer les données uniquement si des valeurs sont sélectionnées dans la liste déroulante
+        # Apply filter for 'type_value' if it is not empty
+    if type_value is not None and type_value != []:
+        filtered_data = filtered_data[filtered_data['type'].isin(type_value)]
+
+    if isinstance(dropdown_value, str):
+        dropdown_value = [dropdown_value]
+
+    # Apply filter for 'dropdown_value' if it is not empty
+    if dropdown_value is not None and dropdown_value != []:
         filtered_data = filtered_data[filtered_data['etat'].isin(dropdown_value)]
     else:
         # Utiliser toutes les valeurs d'état si la liste déroulante est vide
@@ -1139,6 +1227,104 @@ def update_supplier_store_and_dropdown(n_intervals, selected_supplier, supplier_
     return supplier_store, options_fournisseurs, supplier_store
 
 
+@app.callback(
+    [Output('type_store', 'data'),
+     Output('dropdown_types', 'options'),
+     Output('dropdown_types', 'value')],
+    [Input('interval-component', 'n_intervals'),
+     Input('dropdown_types', 'value')],
+    [State('type_store', 'data')]
+)
+def update_type_store_and_dropdown(n_intervals, selected_type, type_store):
+    global type_name
+    ctx = dash.callback_context
+    triggered_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    # Si le déclencheur vient de l'intervalle, vérifier si un nouveau type doit être ajouté
+    if triggered_id == 'interval-component':
+        if type_name and (type_name != type_store):
+            # Si un nouveau type est détecté, mettre à jour le store et la sélection
+            return type_name, options_types, type_name
+        else:
+            raise PreventUpdate
+
+    # Si le déclencheur vient du dropdown, gérer la sélection/désélection
+    elif triggered_id == 'dropdown_types':
+        if selected_type:
+            # Si l'utilisateur a sélectionné un type, mettre à jour le store et garder la sélection
+            return type_store, options_types, selected_type
+        else:
+            # Si l'utilisateur a désélectionné, ne pas forcer une nouvelle sélection
+            return type_store, options_types, None
+
+    # Maintenir l'état actuel si aucune action spécifique n'est nécessaire
+    return type_store, options_types, type_store
+
+
+@app.callback(
+    [Output('Facture_store', 'data'),
+     Output('dropdown_Factures', 'options'),
+     Output('dropdown_Factures', 'value')],
+    [Input('interval-component', 'n_intervals'),
+     Input('dropdown_Factures', 'value')],
+    [State('Facture_store', 'data')]
+)
+def update_facture_store_and_dropdown(n_intervals, selected_facture, Facture_store):
+    ctx = dash.callback_context
+    triggered_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    # Si le déclencheur vient de l'intervalle, vérifier si une nouvelle facture doit être ajoutée
+    if triggered_id == 'interval-component':
+        if Facture_name and (Facture_name != Facture_store):
+            # Si une nouvelle facture est détectée, mettre à jour le store et la sélection
+            return Facture_name, options_factures, Facture_name
+        else:
+            raise PreventUpdate
+
+    # Si le déclencheur vient du dropdown, gérer la sélection/désélection
+    elif triggered_id == 'dropdown_Factures':
+        if selected_facture:
+            # Si l'utilisateur a sélectionné une facture, mettre à jour le store et garder la sélection
+            return Facture_store, options_factures, selected_facture
+        else:
+            # Si l'utilisateur a désélectionné, ne pas forcer une nouvelle sélection
+            return Facture_store, options_factures, None
+
+    # Maintenir l'état actuel si aucune action spécifique n'est nécessaire
+    return Facture_store, options_factures, Facture_store
+
+
+@app.callback(
+    [Output('etat_store', 'data'),
+     Output('dropdown_items', 'options'),
+     Output('dropdown_items', 'value')],
+    [Input('interval-component', 'n_intervals'),
+     Input('dropdown_items', 'value')],
+    [State('etat_store', 'data')]
+)
+def update_facture_store_and_dropdown(n_intervals, selected_etat, etat_store):
+    ctx = dash.callback_context
+    triggered_id = ctx.triggered[0]['prop_id'].split('.')[0]
+
+    # Si le déclencheur vient de l'intervalle, vérifier si une nouvelle facture doit être ajoutée
+    if triggered_id == 'interval-component':
+        if etat_name and (etat_name != etat_store):
+            # Si une nouvelle facture est détectée, mettre à jour le store et la sélection
+            return etat_name, options, etat_name
+        else:
+            raise PreventUpdate
+
+    # Si le déclencheur vient du dropdown, gérer la sélection/désélection
+    elif triggered_id == 'dropdown_items':
+        if selected_etat:
+            # Si l'utilisateur a sélectionné une facture, mettre à jour le store et garder la sélection
+            return etat_store, options, selected_etat
+        else:
+            # Si l'utilisateur a désélectionné, ne pas forcer une nouvelle sélection
+            return etat_store, options, None
+
+    # Maintenir l'état actuel si aucune action spécifique n'est nécessaire
+    return etat_store, options, etat_store
 
 
 if __name__ == '__main__':
